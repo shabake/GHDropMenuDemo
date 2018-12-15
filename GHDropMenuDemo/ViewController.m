@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.navigationItem.title = @"筛选菜单";
     NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"筛选"];
     NSArray *data1 = @[@"价格从高到低",@"价格从低到高"];
     NSMutableArray *dataArray1 = [NSMutableArray array];

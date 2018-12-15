@@ -106,9 +106,8 @@
 }
 - (void)configuration {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-    tap.numberOfTouchesRequired = 1; //手指数
-    tap.numberOfTapsRequired = 1; //tap次数
-    
+    tap.numberOfTouchesRequired = 1;
+    tap.numberOfTapsRequired = 1;
     [self addGestureRecognizer:tap];
 }
 - (void)tap:(UITapGestureRecognizer *)gesture {
@@ -249,6 +248,8 @@
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
 @property (nonatomic , weak) id <GHDropMenuItemDelegate> delegate;
 @property (nonatomic , strong) UIView *line;
+@property (nonatomic , strong) UIImageView *upArrow;
+@property (nonatomic , strong) UIImageView *downArrow;
 
 @end
 @implementation GHDropMenuItem
@@ -258,6 +259,15 @@
     self.title.font = dropMenuModel.titleFont;
     self.title.textColor = dropMenuModel.titleSeleted ?[UIColor orangeColor]:[UIColor darkGrayColor];
     self.line.backgroundColor = self.title.textColor ;
+    
+//    NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString: self.title.text];
+//    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+//    attch.image = [UIImage imageNamed:@"down_normal"];
+//    attch.bounds = CGRectMake(5, 5, 10, 5);
+//    // 创建带有图片的富文本
+//    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+//    [attriStr appendAttributedString:string];
+//    self.title.attributedText = attriStr;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -272,7 +282,9 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = self.bounds;
+    self.title.frame = CGRectMake(5, 0, self.frame.size.width - 5, self.frame.size.height);
+    self.upArrow.frame = CGRectMake(self.frame.size.width, CGRectGetMidY(self.title.frame ), 10, 5);
+
     self.line.frame = CGRectMake(self.frame.size.width - 1, (self.frame.size.height -self.frame.size.height * 0.2) * 0.5, 1, self.frame.size.height * 0.2);
 }
 
@@ -280,6 +292,20 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuItem:dropMenuModel:)]) {
         [self.delegate dropMenuItem:self dropMenuModel:self.dropMenuModel];
     }
+}
+- (UIImageView *)downArrow {
+    if (_downArrow == nil) {
+        _downArrow = [[UIImageView alloc]init];
+        _downArrow.backgroundColor = [UIColor redColor];
+    }
+    return _downArrow;
+}
+- (UIImageView *)upArrow {
+    if (_upArrow == nil) {
+        _upArrow = [[UIImageView alloc]init];
+        _upArrow.backgroundColor = [UIColor redColor];
+    }
+    return _upArrow;
 }
 - (UIView *)line {
     if (_line == nil) {
@@ -296,6 +322,7 @@
         _title.userInteractionEnabled = YES;
         _title.font = [UIFont systemFontOfSize:13];
         _title.textColor = [UIColor darkGrayColor];
+        _title.lineBreakMode = NSLineBreakByTruncatingMiddle;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
         tap.numberOfTouchesRequired = 1; //手指数
         tap.numberOfTapsRequired = 1; //tap次数
