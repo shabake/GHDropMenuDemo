@@ -19,6 +19,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
     GHDropMenuTypeFilter,
 };
 @interface GHDropMenuModel :NSObject
+@property (nonatomic , assign) BOOL cellSeleted;
+
 @property (nonatomic , strong) NSArray *sections;
 @property (nonatomic , assign) NSInteger tagIdentifier;
 
@@ -42,7 +44,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 /** 标题被选中 */
 @property (nonatomic , assign) BOOL titleSeleted;
 /** 标题数组 */
-@property (nonatomic , copy) NSString *titles;
+@property (nonatomic , strong) NSArray *titles;
 /** 数据源数组 */
 @property (nonatomic , strong) NSArray *dataArray;
 

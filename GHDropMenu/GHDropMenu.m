@@ -20,6 +20,8 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.title;
+    self.title.textColor = dropMenuModel.cellSeleted ? [UIColor orangeColor]:[UIColor darkGrayColor];
+
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -87,8 +89,6 @@
     self.details.frame = CGRectMake(self.frame.size.width - 100, 0, 100, self.frame.size.height);
 
 }
-
-
 - (UILabel *)details {
     if (_details == nil) {
         _details = [[UILabel alloc]init];
@@ -105,6 +105,7 @@
         _title.textAlignment = NSTextAlignmentLeft;
         _title.userInteractionEnabled = YES;
         _title.font = [UIFont systemFontOfSize:14];
+        _title.textColor = [UIColor darkGrayColor];
     }
     return _title;
 }
@@ -128,7 +129,7 @@
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.tagName;
     self.title.backgroundColor = dropMenuModel.tagSeleted ? [UIColor orangeColor]:[UIColor whiteColor];
-    self.title.textColor = dropMenuModel.tagSeleted ?[UIColor whiteColor]:[UIColor blackColor];
+    self.title.textColor = dropMenuModel.tagSeleted ?[UIColor whiteColor]:[UIColor darkGrayColor];
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -137,6 +138,16 @@
     return self;
 }
 
+- (void)changeColor {
+    if (self.dropMenuModel.tagSeleted) {
+//        [UIView animateWithDuration:.3 animations:^{
+//            self.title.backgroundColor =  [UIColor orangeColor];
+//            self.title.textColor = [UIColor whiteColor];
+//        } completion:^(BOOL finished) {
+//
+//        }];
+    }
+}
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.title.frame = CGRectMake(10, 0, self.frame.size.width - 20, self.frame.size.height);
@@ -244,7 +255,6 @@
         tap.numberOfTouchesRequired = 1; //手指数
         tap.numberOfTapsRequired = 1; //tap次数
         [_title addGestureRecognizer:tap];
-
     }
     return _title;
 }
@@ -481,9 +491,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         }
     }
     GHDropMenuModel *dropMenuModel = self.titles[seletedIndexPath.row];
+    for (GHDropMenuModel *dropMenuContentModel  in dropMenuModel.dataArray) {
+        dropMenuContentModel.cellSeleted = NO;
+    }
     GHDropMenuModel *contentModel = dropMenuModel.dataArray[indexPath.row];
     dropMenuModel.title = contentModel.title;
- 
+    contentModel.cellSeleted = !contentModel.cellSeleted;
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:tagArray:)]) {
         [self.delegate dropMenu:self dropMenuModel:contentModel tagArray:@[]];
     }
