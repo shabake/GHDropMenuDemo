@@ -5,7 +5,8 @@
 
 超级简单好用的电商筛选菜单 
 
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0ce48e808c865eb4.gif?imageMogr2/auto-orient/strip)
+![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-9e03badbbbf5cb08.gif?imageMogr2/auto-orient/strip)
+
 
 * 自定义标题,自定义标题内容
 * 动画展开,移除

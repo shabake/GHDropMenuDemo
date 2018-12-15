@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"时间"];
+    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"筛选"];
     NSArray *data1 = @[@"价格从高到低",@"价格从低到高"];
     NSMutableArray *dataArray1 = [NSMutableArray array];
     for (NSInteger index = 0 ; index < data1.count; index++) {
@@ -42,19 +42,48 @@
         dropMenuModel.title = data3[index];
         [dataArray3 addObject:dropMenuModel];
     }
-    
-    NSArray *data4 = @[@"上午"];
+  
+    NSArray *data4 = @[@"上午",@"下午",@"早上",@"晚上"];
     NSMutableArray *dataArray4 = [NSMutableArray array];
     for (NSInteger index = 0 ; index < data4.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = data4[index];
+        dropMenuModel.tagName = data4[index];
         [dataArray4 addObject:dropMenuModel];
     }
     
+    NSArray *data5 = @[@"呵呵",@"哈哈",@"嘿嘿",@"哦哦"];
+    NSMutableArray *dataArray5 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < data5.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = data5[index];
+        [dataArray5 addObject:dropMenuModel];
+    }
+    NSArray *sectionHeaderTitles = @[@"第一行",@"呵呵哒"];
+    NSMutableArray *sections = [NSMutableArray array];
+    
+    for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.sectionHeaderTitle = sectionHeaderTitles[index];
+        if (index == 0) {
+            dropMenuModel.dataArray = dataArray4;
+        } else if (index == 1) {
+            dropMenuModel.dataArray = dataArray5;
+        }
+        [sections addObject:dropMenuModel];
+    }
     NSMutableArray *titlesArray = [NSMutableArray array];
+    NSArray *types = @[
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeFilter),
+                       ];
+    
     for (NSInteger index = 0 ; index < titles.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.title = titles[index];
+        NSNumber *typeNum = types[index];
+        dropMenuModel.dropMenuType = typeNum.integerValue;
         if (index == 0) {
             dropMenuModel.dataArray = dataArray1;
         } else if (index == 1) {
@@ -63,6 +92,7 @@
             dropMenuModel.dataArray = dataArray3;
         } else if (index == 3) {
             dropMenuModel.dataArray = dataArray4;
+            dropMenuModel.sections = sections;
         }
         dropMenuModel.identifier = index;
         [titlesArray addObject:dropMenuModel];
@@ -87,8 +117,18 @@
 - (void)clickButton {
     [self.dropMenu resetMenuStatus];
 }
-- (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    NSLog(@"%@",dropMenuModel.title);
+- (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel tagArray:(NSArray *)tagArray {
+    NSMutableString *string = [NSMutableString string];
+    if (tagArray.count) {
+        for (GHDropMenuModel *dropMenuTagModel in tagArray) {
+            [string appendFormat:@"%@",dropMenuTagModel.tagName];
+        }
+    } else {
+        [string appendFormat:@"%@",dropMenuModel.title];
+    }
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"回调数据" message:string  delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+    [alertView show];
+
 }
 
 @end

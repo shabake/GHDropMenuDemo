@@ -11,9 +11,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-
+/** 菜单类型 */
+typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
+    /** 标题 */
+    GHDropMenuTypeTitle = 1,
+    /** 筛选菜单 */
+    GHDropMenuTypeFilter,
+};
 @interface GHDropMenuModel :NSObject
+@property (nonatomic , strong) NSArray *sections;
+@property (nonatomic , assign) NSInteger tagIdentifier;
+
+@property (nonatomic , strong) GHDropMenuModel *dropMenuTagModel;
+/** sectionHeaderTitle */
+@property (nonatomic , copy) NSString *sectionHeaderTitle;
+@property (nonatomic , copy) NSString *sectionHeaderDetails;
+
+/** 标签名称 */
+@property (nonatomic , copy) NSString *tagName;
+/** 标签选中状态 */
+@property (nonatomic , assign) BOOL tagSeleted;
+
+@property (nonatomic , assign) GHDropMenuType dropMenuType;
 /** 标题 */
 @property (nonatomic , copy) NSString *title;
 @property (nonatomic , assign) NSInteger identifier;
@@ -37,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class GHDropMenu,GHDropMenuModel;
 @protocol GHDropMenuDelegate <NSObject>
-- (void)dropMenu: (GHDropMenu *)dropMenu dropMenuModel: (GHDropMenuModel *)dropMenuModel;
+- (void)dropMenu: (GHDropMenu *)dropMenu dropMenuModel: (nullable GHDropMenuModel *)dropMenuModel tagArray: (NSArray *)tagArray;
 @end
 @interface GHDropMenu : UIView
 
