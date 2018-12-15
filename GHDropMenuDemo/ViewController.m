@@ -128,7 +128,7 @@
     }
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"回调数据" message:string  delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
     [alertView show];
-
+    /** do someting */
 }
 
 @end
