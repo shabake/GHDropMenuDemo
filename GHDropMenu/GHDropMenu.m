@@ -351,7 +351,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
     self.backgroundColor = [UIColor clearColor];
-    
+    self.cover.backgroundColor = [UIColor clearColor];
+
     [UIView animateWithDuration:0.5 animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, 0);
@@ -364,7 +365,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     } completion:^(BOOL finished) {
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             [UIView animateWithDuration:0.1 animations:^{
-                self.cover.backgroundColor = [UIColor clearColor];
             } completion:^(BOOL finished) {
                 
             }];
@@ -692,6 +692,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         _filter.delegate = self;
         _filter.dataSource = self;
         _filter.backgroundColor = [UIColor whiteColor];
+        _filter.layer.shadowColor = [UIColor redColor].CGColor;
+        _filter.layer.shadowOffset = CGSizeMake(-100,3);
+        _filter.layer.shadowOpacity = 0.9;
         [_filter registerClass:[GHDropMenuFilterItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterItemID"];
         [_filter registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellID"];
         _filter.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
