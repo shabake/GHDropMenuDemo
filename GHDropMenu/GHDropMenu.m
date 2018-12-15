@@ -311,8 +311,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     _configuration = configuration;
     self.titles = configuration.titles.copy;
     if (configuration.menuHeight) {
-        [UIView animateWithDuration:.5 animations:^{
-            self.collectionView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, configuration.menuHeight);
+        [UIView animateWithDuration:.3 animations:^{
+            self.collectionView.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, configuration.menuHeight);
             self.topLine.frame = CGRectMake(0, 0, kScreenWidth, 1);
             self.bottomLine.frame = CGRectMake(0, configuration.menuHeight - 1, kScreenWidth, 1);
         } completion:^(BOOL finished) {
@@ -461,7 +461,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     } else {
         [self dismiss];
     }
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
 
 }
 
@@ -698,7 +698,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 }
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 0) collectionViewLayout:self.flowLayout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth, 0, kScreenWidth, 0) collectionViewLayout:self.flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
