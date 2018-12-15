@@ -359,11 +359,16 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
-            self.cover.backgroundColor = [UIColor clearColor];
         }
 
     } completion:^(BOOL finished) {
-
+        if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.cover.backgroundColor = [UIColor clearColor];
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
         [self.tableView reloadData];
     }];
     
@@ -386,10 +391,16 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.cover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
         }
 
     } completion:^(BOOL finished) {
+        if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
     }];
  
 }
