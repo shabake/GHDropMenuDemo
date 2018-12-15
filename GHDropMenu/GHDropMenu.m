@@ -313,8 +313,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     _configuration = configuration;
     self.titles = configuration.titles.copy;
     if (configuration.menuHeight) {
-        [UIView animateWithDuration:.5 animations:^{
-            self.collectionView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, configuration.menuHeight);
+        [UIView animateWithDuration:.3 animations:^{
+            self.collectionView.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, configuration.menuHeight);
             self.topLine.frame = CGRectMake(0, 0, kScreenWidth, 1);
             self.bottomLine.frame = CGRectMake(0, configuration.menuHeight - 1, kScreenWidth, 1);
         } completion:^(BOOL finished) {
@@ -351,17 +351,23 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (void)dismiss {
     
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
-
-    [UIView animateWithDuration:0.5 animations:^{
+    self.backgroundColor = [UIColor clearColor];
+    
+    if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
+        self.cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
+        self.cover.backgroundColor = [UIColor clearColor];
+    }
+    
+    [UIView animateWithDuration:0.3 animations:^{
     
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, 0);
-            self.backgroundColor = [UIColor clearColor];
+//            self.backgroundColor = [UIColor clearColor];
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
 //            self.filter.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
-            self.cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
-            self.cover.backgroundColor = [UIColor clearColor];
+//            self.cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
+//            self.cover.backgroundColor = [UIColor clearColor];
 
         }
 
@@ -371,6 +377,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     }];
     
 }
+
 #pragma mark - 弹出菜单
 - (void)show {
     [self.tableView reloadData];
@@ -379,14 +386,22 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
     
     self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, 0);
-    [UIView animateWithDuration:0.5 animations:^{
+    self.backgroundColor = [UIColor clearColor];
+
+    if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
+        self.cover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+        self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
+    }
+    
+    [UIView animateWithDuration:0.3 animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
             self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
-            self.cover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
+//            self.filter.frame = CGRectMake(kScreenWidth * 0.2, 0, kScreenWidth * 0.8, kScreenHeight - kFilterButtonHeight);
+//            self.cover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+//            self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
         }
 
     } completion:^(BOOL finished) {
@@ -448,7 +463,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     } else {
         [self dismiss];
     }
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
 
 }
 
@@ -685,7 +700,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 }
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 0) collectionViewLayout:self.flowLayout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth, 0, kScreenWidth, 0) collectionViewLayout:self.flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
