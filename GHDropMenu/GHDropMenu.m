@@ -8,6 +8,53 @@
 
 #import "GHDropMenu.h"
 
+@interface  GHDropMenuCell : UITableViewCell
+@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
+@end
+@interface GHDropMenuCell()
+@property (nonatomic , strong) UILabel *title;
+@property (nonatomic , strong) UIView *line;
+
+@end
+@implementation GHDropMenuCell
+- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    _dropMenuModel = dropMenuModel;
+    self.title.text = dropMenuModel.title;
+}
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self setupUI];
+    }
+    return self;
+}
+- (void)setupUI {
+    [self addSubview:self.title];
+    [self addSubview:self.line];
+}
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.title.frame = CGRectMake(20, 0, self.frame.size.width - 40, self.frame.size.height);
+    self.line.frame = CGRectMake(20, self.frame.size.height - 1, self.frame.size.width - 40, 1);
+    
+}
+
+- (UIView *)line {
+    if (_line == nil) {
+        _line = [[UIView alloc]init];
+        _line.backgroundColor = [UIColor darkGrayColor];
+        _line.alpha = .1;
+    }
+    return _line;
+}
+- (UILabel *)title {
+    if (_title == nil) {
+        _title = [[UILabel alloc]init];
+        _title.textAlignment = NSTextAlignmentLeft;
+        _title.font = [UIFont systemFontOfSize:13];
+    }
+    return _title;
+}
+@end
 @interface GHDropMenuFilterHeader : UICollectionReusableView
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
 @end
@@ -33,13 +80,15 @@
 - (void)setupUI {
     [self addSubview:self.title];
     [self addSubview:self.details];
-
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = CGRectMake(0, 0, 100, self.frame.size.height);
+    self.title.frame = CGRectMake(10, 0, 100, self.frame.size.height);
     self.details.frame = CGRectMake(self.frame.size.width - 100, 0, 100, self.frame.size.height);
+
 }
+
+
 - (UILabel *)details {
     if (_details == nil) {
         _details = [[UILabel alloc]init];
@@ -56,12 +105,6 @@
         _title.textAlignment = NSTextAlignmentLeft;
         _title.userInteractionEnabled = YES;
         _title.font = [UIFont systemFontOfSize:14];
-
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-//        tap.numberOfTouchesRequired = 1; //手指数
-//        tap.numberOfTapsRequired = 1; //tap次数
-//        [_title addGestureRecognizer:tap];
-        
     }
     return _title;
 }
@@ -77,6 +120,8 @@
 @end
 @interface GHDropMenuFilterItem()
 @property (nonatomic , strong) UILabel *title;
+@property (nonatomic , strong) UIView *line;
+
 @end
 @implementation GHDropMenuFilterItem
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
@@ -94,16 +139,28 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = self.bounds;
+    self.title.frame = CGRectMake(10, 0, self.frame.size.width - 20, self.frame.size.height);
+    self.line.frame = CGRectMake(10, self.frame.size.height - 1, self.frame.size.width - 20, 1);
+
 }
 
 - (void)setupUI {
     [self addSubview:self.title];
+    [self addSubview:self.line];
+
 }
 - (void)tap:(UITapGestureRecognizer *)gesture {
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuFilterItem:dropMenuModel:)]) {
         [self.delegate dropMenuFilterItem:self dropMenuModel:self.dropMenuModel];
     }
+}
+- (UIView *)line {
+    if (_line == nil) {
+        _line = [[UIView alloc]init];
+        _line.backgroundColor = [UIColor darkGrayColor];
+        _line.alpha = .1;
+    }
+    return _line;
 }
 - (UILabel *)title {
     if (_title == nil) {
@@ -115,6 +172,7 @@
         _title.layer.cornerRadius = 10;
         _title.layer.borderColor = [UIColor lightGrayColor].CGColor;
         _title.layer.borderWidth = 0.5;
+        _title.font = [UIFont systemFontOfSize:13];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
         tap.numberOfTouchesRequired = 1; //手指数
         tap.numberOfTapsRequired = 1; //tap次数
@@ -142,7 +200,7 @@
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.title;
     self.title.font = dropMenuModel.titleFont;
-    self.title.textColor = dropMenuModel.titleSeleted ?[UIColor orangeColor]:[UIColor blackColor];
+    self.title.textColor = dropMenuModel.titleSeleted ?[UIColor orangeColor]:[UIColor darkGrayColor];
     self.line.backgroundColor = self.title.textColor ;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -171,6 +229,7 @@
     if (_line == nil) {
         _line = [[UIView alloc]init];
         _line.backgroundColor = [UIColor lightGrayColor];
+        _line.alpha = 0.1;
     }
     return _line;
 }
@@ -179,6 +238,8 @@
         _title = [[UILabel alloc]init];
         _title.textAlignment = NSTextAlignmentCenter;
         _title.userInteractionEnabled = YES;
+        _title.font = [UIFont systemFontOfSize:13];
+        _title.textColor = [UIColor darkGrayColor];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
         tap.numberOfTouchesRequired = 1; //手指数
         tap.numberOfTapsRequired = 1; //tap次数
@@ -394,8 +455,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     GHDropMenuModel *dropMenuTitleModel = self.titles[seletedIndexPath.row];
 
     GHDropMenuModel *dropMenuModel = dropMenuTitleModel.dataArray[indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellID"];
-    cell.textLabel.text = dropMenuModel.title;
+    GHDropMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHDropMenuCellID"];
+    cell.dropMenuModel = dropMenuModel;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -570,8 +631,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.bounces = NO;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.tableFooterView = [[UIView alloc]init];
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCellID"];
+        [_tableView registerClass:[GHDropMenuCell class] forCellReuseIdentifier:@"GHDropMenuCellID"];
     }
     return _tableView;
 }
@@ -633,14 +695,16 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (UIView *)bottomLine {
     if (_bottomLine == nil) {
         _bottomLine = [[UIView alloc]init];
-        _bottomLine.backgroundColor = [UIColor blackColor];
+        _bottomLine.backgroundColor = [UIColor darkGrayColor];
+        _bottomLine.alpha = .1;
     }
     return _bottomLine;
 }
 - (UIView *)topLine {
     if (_topLine == nil) {
         _topLine = [[UIView alloc]init];
-        _topLine.backgroundColor = [UIColor blackColor];
+        _topLine.backgroundColor = [UIColor darkGrayColor];
+        _topLine.alpha = .1;
     }
     return _topLine;
 }
