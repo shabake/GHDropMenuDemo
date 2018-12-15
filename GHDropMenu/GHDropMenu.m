@@ -20,11 +20,8 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.title;
-    for (GHDropMenuModel *dropMenuTitleModel in dropMenuModel.titles) {
-        if ([dropMenuTitleModel.title isEqualToString:self.title.text]) {
-            self.title.textColor = [UIColor orangeColor];
-        }
-    }
+    self.title.textColor = dropMenuModel.cellSeleted ? [UIColor orangeColor]:[UIColor darkGrayColor];
+
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -479,9 +476,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         }
     }
     GHDropMenuModel *dropMenuModel = self.titles[seletedIndexPath.row];
+    for (GHDropMenuModel *dropMenuContentModel  in dropMenuModel.dataArray) {
+        dropMenuContentModel.cellSeleted = NO;
+    }
     GHDropMenuModel *contentModel = dropMenuModel.dataArray[indexPath.row];
     dropMenuModel.title = contentModel.title;
- 
+    contentModel.cellSeleted = !contentModel.cellSeleted;
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:tagArray:)]) {
         [self.delegate dropMenu:self dropMenuModel:contentModel tagArray:@[]];
     }
