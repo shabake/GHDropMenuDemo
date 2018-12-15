@@ -414,6 +414,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (void)resetMenuStatus {
     for (GHDropMenuModel *dropMenuModel in self.titles) {
         dropMenuModel.titleSeleted = NO;
+//        for (GHDropMenuModel *dropMenuCellModel in dropMenuModel.dataArray) {
+//            dropMenuCellModel.cellSeleted = NO;
+//        }
+//        for (GHDropMenuModel *dropMenuSectionlModel in dropMenuModel.sections) {
+//            for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionlModel.dataArray) {
+//                dropMenuTagModel.tagSeleted = NO;
+//            }
+//        }
     }
     [self.collectionView reloadData];
     [self dismiss];
