@@ -7,6 +7,7 @@
 //
 
 #import "GHDropMenu.h"
+#import "NSArray+Bounds.h"
 
 @interface  GHDropMenuCell : UITableViewCell
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
@@ -384,7 +385,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
             self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
-//            self.filter.frame = CGRectMake(kScreenWidth * 0.2, 0, kScreenWidth * 0.8, kScreenHeight - kFilterButtonHeight);
             self.cover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
             self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
         }
@@ -415,14 +415,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (void)resetMenuStatus {
     for (GHDropMenuModel *dropMenuModel in self.titles) {
         dropMenuModel.titleSeleted = NO;
-//        for (GHDropMenuModel *dropMenuCellModel in dropMenuModel.dataArray) {
-//            dropMenuCellModel.cellSeleted = NO;
-//        }
-//        for (GHDropMenuModel *dropMenuSectionlModel in dropMenuModel.sections) {
-//            for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionlModel.dataArray) {
-//                dropMenuTagModel.tagSeleted = NO;
-//            }
-//        }
     }
     [self.collectionView reloadData];
     [self dismiss];
@@ -498,16 +490,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     [self resetMenuStatus];
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
-    if (self.filter == collectionView) {
-        return dropMenuTitleModel.sections.count;
-    } else if (collectionView == self.collectionView){
-        return 1;
-    } else {
-        return 0;
-    }
-}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (self.filter == collectionView) {
         return CGSizeMake(kScreenWidth * 0.8, 44);
@@ -533,10 +516,20 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == self.collectionView) {
         return CGSizeMake(kScreenWidth /self.titles.count, self.menuHeight - 0.01f);
-    } else if ( collectionView == self.filter) {
+    } else if (collectionView == self.filter) {
         return CGSizeMake((kScreenWidth * 0.8 - 4 * 10) / 3.01f, 30.01f);
     } else {
         return CGSizeZero;
+    }
+}
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
+    if (self.filter == collectionView) {
+        return dropMenuTitleModel.sections.count;
+    } else if (collectionView == self.collectionView){
+        return 1;
+    } else {
+        return 0;
     }
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -562,9 +555,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         return cell;
     } else if (collectionView == self.filter) {
         GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
-
-        GHDropMenuModel *dropMenuSectionModel = dropMenuTitleModel.sections[indexPath.section];
-        GHDropMenuModel *dropMenuTagModel = dropMenuSectionModel.dataArray[indexPath.row];
+        GHDropMenuModel *dropMenuSectionModel = [dropMenuTitleModel.sections by_ObjectAtIndex:indexPath.section];
+        GHDropMenuModel *dropMenuTagModel = [dropMenuSectionModel.dataArray by_ObjectAtIndex:indexPath.row];
         dropMenuTagModel.indexPath = indexPath;
         GHDropMenuFilterItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GHDropMenuFilterItemID" forIndexPath:indexPath];
         cell.dropMenuModel = dropMenuTagModel;

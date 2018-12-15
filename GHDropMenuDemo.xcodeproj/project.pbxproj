@@ -16,6 +16,7 @@
 		D650CD9821C35E0E00EC004A /* GHDropMenuDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD9721C35E0E00EC004A /* GHDropMenuDemoTests.m */; };
 		D650CDA321C35E0E00EC004A /* GHDropMenuDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDA221C35E0E00EC004A /* GHDropMenuDemoUITests.m */; };
 		D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
+		D6AC771221C549BE00232954 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771121C549BE00232954 /* NSArray+Bounds.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		D650CDB121C35E6D00EC004A /* GHDropMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenu.h; sourceTree = "<group>"; };
 		D650CDB221C35E6D00EC004A /* GHDropMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenu.m; sourceTree = "<group>"; };
 		D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuHeader.h; sourceTree = "<group>"; };
+		D6AC771021C549BD00232954 /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
+		D6AC771121C549BE00232954 /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 		D650CDB021C35E1F00EC004A /* GHDropMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D6AC771021C549BD00232954 /* NSArray+Bounds.h */,
+				D6AC771121C549BE00232954 /* NSArray+Bounds.m */,
 				D650CDB121C35E6D00EC004A /* GHDropMenu.h */,
 				D650CDB221C35E6D00EC004A /* GHDropMenu.m */,
 				D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */,
@@ -277,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6AC771221C549BE00232954 /* NSArray+Bounds.m in Sources */,
 				D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */,
 				D650CD8321C35E0D00EC004A /* ViewController.m in Sources */,
 				D650CD8E21C35E0E00EC004A /* main.m in Sources */,

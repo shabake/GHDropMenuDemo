@@ -53,7 +53,7 @@
         [dataArray4 addObject:dropMenuModel];
     }
     
-    NSArray *data5 = @[@"呵呵",@"哈哈",@"嘿嘿",@"哦哦"];
+    NSArray *data5 = @[@"呵呵",@"哈哈",@"嘿嘿",@"呵呵",@"哈哈",@"嘿嘿"];
     NSMutableArray *dataArray5 = [NSMutableArray array];
     for (NSInteger index = 0 ; index < data5.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
@@ -112,7 +112,6 @@
     [self.view addSubview:dropMenu];
     
     self.view.backgroundColor = [UIColor orangeColor];
-    
     
     UITextView *textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 400, kScreenWidth, 100)];
     textView.font = [UIFont systemFontOfSize:20];
