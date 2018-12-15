@@ -11,6 +11,8 @@
 
 @interface ViewController ()<GHDropMenuDelegate>
 @property (nonatomic , strong)GHDropMenu *dropMenu;
+@property (nonatomic , strong)UITextView *textView;
+
 @end
 
 @implementation ViewController
@@ -111,12 +113,13 @@
     
     self.view.backgroundColor = [UIColor orangeColor];
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithTitle:@"重置" style:UIBarButtonItemStylePlain target:self action:@selector(clickButton)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    UITextView *textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 400, kScreenWidth, 100)];
+    textView.font = [UIFont systemFontOfSize:20];
+    [self.view addSubview:textView];
+    self.textView = textView;
 }
-- (void)clickButton {
-    [self.dropMenu resetMenuStatus];
-}
+
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel tagArray:(NSArray *)tagArray {
     NSMutableString *string = [NSMutableString string];
     if (tagArray.count) {
@@ -126,9 +129,8 @@
     } else {
         [string appendFormat:@"%@",dropMenuModel.title];
     }
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"回调数据" message:string  delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
-    [alertView show];
-    /** do someting */
+    self.textView.text = [NSString stringWithFormat:@"筛选结果 : %@",string];
+    /** do someting your word... */
 }
 
 @end

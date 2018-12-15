@@ -14,6 +14,7 @@
 @interface GHDropMenuCell()
 @property (nonatomic , strong) UILabel *title;
 @property (nonatomic , strong) UIView *line;
+@property (nonatomic , strong) UIImageView *imgView;
 
 @end
 @implementation GHDropMenuCell
@@ -21,6 +22,7 @@
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.title;
     self.title.textColor = dropMenuModel.cellSeleted ? [UIColor orangeColor]:[UIColor darkGrayColor];
+    self.imgView.hidden = !dropMenuModel.cellSeleted;
 
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -32,14 +34,23 @@
 - (void)setupUI {
     [self addSubview:self.title];
     [self addSubview:self.line];
+    [self addSubview:self.imgView];
+
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = CGRectMake(20, 0, self.frame.size.width - 40, self.frame.size.height);
+    self.title.frame = CGRectMake(20, 0, 100, self.frame.size.height);
     self.line.frame = CGRectMake(20, self.frame.size.height - 1, self.frame.size.width - 40, 1);
-    
+    self.imgView.frame = CGRectMake(self.frame.size.width - 20 - 15, (self.frame.size.height - 15 ) * 0.5, 15, 15);
 }
-
+- (UIImageView *)imgView {
+    if (_imgView == nil) {
+        _imgView = [[UIImageView alloc]init];
+        _imgView.image = [UIImage imageNamed:@"check_selected"];
+        _imgView.hidden = YES;
+    }
+    return _imgView;
+}
 - (UIView *)line {
     if (_line == nil) {
         _line = [[UIView alloc]init];
@@ -94,7 +105,7 @@
         _details = [[UILabel alloc]init];
         _details.textAlignment = NSTextAlignmentRight;
         _details.userInteractionEnabled = YES;
-        _details.font = [UIFont systemFontOfSize:11];
+        _details.font = [UIFont boldSystemFontOfSize:11];
         _details.textColor = [UIColor orangeColor];
     }
     return _details;
@@ -104,7 +115,7 @@
         _title = [[UILabel alloc]init];
         _title.textAlignment = NSTextAlignmentLeft;
         _title.userInteractionEnabled = YES;
-        _title.font = [UIFont systemFontOfSize:14];
+        _title.font = [UIFont boldSystemFontOfSize:14];
         _title.textColor = [UIColor darkGrayColor];
     }
     return _title;
@@ -121,7 +132,6 @@
 @end
 @interface GHDropMenuFilterItem()
 @property (nonatomic , strong) UILabel *title;
-@property (nonatomic , strong) UIView *line;
 
 @end
 @implementation GHDropMenuFilterItem
@@ -163,14 +173,7 @@
         [self.delegate dropMenuFilterItem:self dropMenuModel:self.dropMenuModel];
     }
 }
-- (UIView *)line {
-    if (_line == nil) {
-        _line = [[UIView alloc]init];
-        _line.backgroundColor = [UIColor darkGrayColor];
-        _line.alpha = .1;
-    }
-    return _line;
-}
+
 - (UILabel *)title {
     if (_title == nil) {
         _title = [[UILabel alloc]init];
