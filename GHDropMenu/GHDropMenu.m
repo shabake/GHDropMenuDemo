@@ -339,17 +339,23 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (void)dismiss {
     
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
-
-    [UIView animateWithDuration:0.5 animations:^{
+    self.backgroundColor = [UIColor clearColor];
+    
+    if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
+        self.cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
+        self.cover.backgroundColor = [UIColor clearColor];
+    }
+    
+    [UIView animateWithDuration:0.3 animations:^{
     
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, 0);
-            self.backgroundColor = [UIColor clearColor];
+//            self.backgroundColor = [UIColor clearColor];
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
 //            self.filter.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
-            self.cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
-            self.cover.backgroundColor = [UIColor clearColor];
+//            self.cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
+//            self.cover.backgroundColor = [UIColor clearColor];
 
         }
 
@@ -359,6 +365,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     }];
     
 }
+
 #pragma mark - 弹出菜单
 - (void)show {
     [self.tableView reloadData];
@@ -367,15 +374,22 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
     
     self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, 0);
-    [UIView animateWithDuration:0.5 animations:^{
+    self.backgroundColor = [UIColor clearColor];
+
+    if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
+        self.cover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+        self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
+    }
+    
+    [UIView animateWithDuration:0.3 animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
             self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
 //            self.filter.frame = CGRectMake(kScreenWidth * 0.2, 0, kScreenWidth * 0.8, kScreenHeight - kFilterButtonHeight);
-            self.cover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-            self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
+//            self.cover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+//            self.cover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
         }
 
     } completion:^(BOOL finished) {
