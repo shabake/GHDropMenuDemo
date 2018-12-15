@@ -219,7 +219,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 /** 确定 */
 @property (nonatomic , strong) UIButton *sure;
 /** 遮罩 */
-@property (nonatomic , strong) UIView *cover;
+@property (nonatomic , strong) UIControl *cover;
 
 @end
 @implementation GHDropMenu
@@ -451,7 +451,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     if (collectionView == self.collectionView) {
         return CGSizeMake(kScreenWidth /self.titles.count, self.menuHeight - 0.01f);
     } else if ( collectionView == self.filter) {
-        return CGSizeMake((kScreenWidth * 0.8 - 4 * 10) / 3.01f, 40.01f);
+        return CGSizeMake((kScreenWidth * 0.8 - 4 * 10) / 3.01f, 30.01f);
     } else {
         return CGSizeZero;
     }
@@ -521,13 +521,16 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         [self.filter reloadData];
     }
 }
+- (void)clickControl {
+    [self resetMenuStatus];
+}
 #pragma mark - 懒加载
-- (UIView *)cover {
+- (UIControl *)cover {
     if (_cover == nil) {
-        _cover = [[UIView alloc]init];
+        _cover = [[UIControl alloc]init];
         _cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        [_cover addGestureRecognizer:tap];
+        [_cover addTarget:self action:@selector(clickControl) forControlEvents:UIControlEventTouchUpInside];
+
     }
     return _cover;
 }
