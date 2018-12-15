@@ -7,8 +7,6 @@
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-258fa2903330d49d.gif?imageMogr2/auto-orient/strip)
 
-
-
 * 自定义标题,自定义标题内容
 * 动画展开,移除
 * 可以重新传入模型,刷新数据源

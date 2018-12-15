@@ -150,14 +150,12 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = CGRectMake(10, 0, self.frame.size.width - 20, self.frame.size.height);
-    self.line.frame = CGRectMake(10, self.frame.size.height - 1, self.frame.size.width - 20, 1);
+    self.title.frame = CGRectMake(0, 0, self.frame.size.width , self.frame.size.height);
 
 }
 
 - (void)setupUI {
     [self addSubview:self.title];
-    [self addSubview:self.line];
 
 }
 - (void)tap:(UITapGestureRecognizer *)gesture {
