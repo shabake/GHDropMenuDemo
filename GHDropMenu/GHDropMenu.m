@@ -105,6 +105,7 @@
         _title.textAlignment = NSTextAlignmentLeft;
         _title.userInteractionEnabled = YES;
         _title.font = [UIFont systemFontOfSize:14];
+        _title.textColor = [UIColor darkGrayColor];
     }
     return _title;
 }
@@ -128,7 +129,7 @@
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.tagName;
     self.title.backgroundColor = dropMenuModel.tagSeleted ? [UIColor orangeColor]:[UIColor whiteColor];
-    self.title.textColor = dropMenuModel.tagSeleted ?[UIColor whiteColor]:[UIColor blackColor];
+    self.title.textColor = dropMenuModel.tagSeleted ?[UIColor whiteColor]:[UIColor darkGrayColor];
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
