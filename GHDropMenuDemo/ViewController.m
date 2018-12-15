@@ -66,6 +66,8 @@
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.sectionHeaderTitle = sectionHeaderTitles[index];
+        dropMenuModel.sectionHeaderDetails = @"全部";
+
         if (index == 0) {
             dropMenuModel.dataArray = dataArray4;
         } else if (index == 1) {

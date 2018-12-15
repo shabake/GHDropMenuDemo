@@ -7,7 +7,7 @@
 //
 
 #import "GHDropMenu.h"
-
+#pragma mark - - - - GHDropMenuCell
 @interface  GHDropMenuCell : UITableViewCell
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
 @end
@@ -67,13 +67,26 @@
     }
     return _title;
 }
+
+#pragma mark - - - - GHDropMenuCell
+
 @end
+
+#pragma mark - - - - GHDropMenuFilterHeader
+@class GHDropMenuFilterHeader;
+@protocol GHDropMenuFilterHeaderDelegate <NSObject>
+- (void)dropMenuFilterHeader: (GHDropMenuFilterHeader *)header dropMenuModel: (GHDropMenuModel *)dropMenuModel;
+@end
+
 @interface GHDropMenuFilterHeader : UICollectionReusableView
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
+@property (nonatomic , weak) id <GHDropMenuFilterHeaderDelegate> delegate;
+
 @end
 @interface GHDropMenuFilterHeader()
 @property (nonatomic , strong) UILabel *title;
 @property (nonatomic , strong) UILabel *details;
+@property (nonatomic , strong) UIImageView *imageView;
 
 @end
 @implementation GHDropMenuFilterHeader
@@ -82,23 +95,46 @@
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.sectionHeaderTitle;
     self.details.text = dropMenuModel.sectionHeaderDetails;
-
+    self.imageView.highlighted = dropMenuModel.sectionSeleted ? YES:NO;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         [self setupUI];
+        [self configuration];
     }
     return self;
+}
+- (void)configuration {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
+    tap.numberOfTouchesRequired = 1; //手指数
+    tap.numberOfTapsRequired = 1; //tap次数
+    
+    [self addGestureRecognizer:tap];
+}
+- (void)tap:(UITapGestureRecognizer *)gesture {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuFilterHeader:dropMenuModel:)]) {
+        [self.delegate dropMenuFilterHeader:self dropMenuModel:self.dropMenuModel];
+    }
 }
 - (void)setupUI {
     [self addSubview:self.title];
     [self addSubview:self.details];
+    [self addSubview:self.imageView];
+
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.title.frame = CGRectMake(10, 0, 100, self.frame.size.height);
-    self.details.frame = CGRectMake(self.frame.size.width - 100, 0, 100, self.frame.size.height);
-
+    self.imageView.frame = CGRectMake(self.frame.size.width - 10 - 10, (self.frame.size.height - 5 ) * 0.5, 10, 5);
+    self.details.frame = CGRectMake(self.frame.size.width - 10 - 15 - 100, 0, 100, self.frame.size.height);
+}
+- (UIImageView *)imageView {
+    if (_imageView == nil) {
+        _imageView = [[UIImageView alloc]init];
+        _imageView.image = [UIImage imageNamed:@"expand_down"];
+        _imageView.highlightedImage = [UIImage imageNamed:@"expand_up"];
+    }
+    return _imageView;
 }
 - (UILabel *)details {
     if (_details == nil) {
@@ -107,6 +143,7 @@
         _details.userInteractionEnabled = YES;
         _details.font = [UIFont boldSystemFontOfSize:11];
         _details.textColor = [UIColor orangeColor];
+        _details.text = @"全部";
     }
     return _details;
 }
@@ -120,7 +157,12 @@
     }
     return _title;
 }
+#pragma mark - - - - GHDropMenuFilterHeader
+
 @end
+
+#pragma mark - - - - GHDropMenuFilterItem
+
 @class GHDropMenuFilterItem,GHDropMenuModel;
 @protocol GHDropMenuFilterItemDelegate <NSObject>
 - (void)dropMenuFilterItem: (GHDropMenuFilterItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel;
@@ -193,6 +235,8 @@
     }
     return _title;
 }
+#pragma mark - - - - GHDropMenuFilterItem
+
 @end
 #pragma mark - - - - GHDropMenuItem
 @class GHDropMenuItem,GHDropMenuModel;
@@ -272,7 +316,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     GHDropMenuButtonTypeSure = 1,
     GHDropMenuButtonTypeReset,
 };
-@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate>
+@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate>
 
 @property (nonatomic , strong) NSMutableArray *titles;
 @property (nonatomic , strong) UICollectionView *collectionView;
@@ -433,6 +477,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self resetMenuStatus];
 }
+- (void)dropMenuFilterHeader:(GHDropMenuFilterHeader *)header dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    dropMenuModel.sectionSeleted = !dropMenuModel.sectionSeleted;
+    [self.filter reloadData];
+}
 - (void)dropMenuFilterItem: (GHDropMenuFilterItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
     GHDropMenuModel *dropMenuSectionModel = dropMenuTitleModel.sections[dropMenuModel.indexPath.section];
@@ -518,6 +566,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader] && self.filter == collectionView) {
         GHDropMenuFilterHeader *header  = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"GHDropMenuFilterHeaderID" forIndexPath:indexPath];
         header.dropMenuModel = dropMenuSectionModel;
+        header.delegate = self;
         return header;
     } else {
         return [UICollectionReusableView new];
@@ -551,7 +600,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         GHDropMenuModel *dropMenuModel = self.titles[self.currentIndex];
         GHDropMenuModel *dropMenuSectionModel = dropMenuModel.sections[section];
 
-        return dropMenuSectionModel.dataArray.count;
+        return dropMenuSectionModel.sectionSeleted ?  dropMenuSectionModel.dataArray.count:3;
     } else {
         return 10;
     }

@@ -20,6 +20,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 };
 @interface GHDropMenuModel :NSObject
 @property (nonatomic , assign) BOOL cellSeleted;
+@property (nonatomic , assign) BOOL sectionSeleted;
 
 @property (nonatomic , strong) NSArray *sections;
 @property (nonatomic , assign) NSInteger tagIdentifier;
