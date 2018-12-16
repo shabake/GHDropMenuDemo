@@ -719,6 +719,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         }
     } else if (button.tag == GHDropMenuButtonTypeReset){
         for (GHDropMenuModel *dropMenuSectionModel in dropMenuTitleModel.sections) {
+            dropMenuSectionModel.sectionHeaderDetails = nil;
             for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionModel.dataArray) {
                 dropMenuTagModel.tagSeleted = NO;
             }
