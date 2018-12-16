@@ -75,8 +75,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
         tagArray: (NSArray *)tagArray;
 @end
 @interface GHDropMenu : UIView
-
-
 /**
  初始化方法
  
