@@ -123,9 +123,9 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = CGRectMake(10, 0, 100, self.frame.size.height);
+    self.title.frame = CGRectMake(10, 0, 40, self.frame.size.height);
     self.imageView.frame = CGRectMake(self.frame.size.width - 10 - 10, (self.frame.size.height - 5 ) * 0.5, 10, 5);
-    self.details.frame = CGRectMake(self.frame.size.width - 10 - 15 - 100, 0, 100, self.frame.size.height);
+    self.details.frame = CGRectMake(self.frame.size.width - 10 - 15 - (self.frame.size.width - 10 - 15 - 40), 0,self.frame.size.width - 10 - 15 - 40, self.frame.size.height);
 }
 - (UIImageView *)imageView {
     if (_imageView == nil) {

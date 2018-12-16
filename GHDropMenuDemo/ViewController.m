@@ -132,7 +132,9 @@
     } else {
         [string appendFormat:@"%@",dropMenuModel.title];
     }
+    
     self.textView.text = [NSString stringWithFormat:@"筛选结果 : %@",string];
+    
     /** do someting your word... */
 }
 
