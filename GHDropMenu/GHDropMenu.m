@@ -870,7 +870,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
                 dropMenuTagModel.tagSeleted = NO;
                 dropMenuTagModel.minPrice = @"";
                 dropMenuTagModel.maxPrice = @"";
-
             }
         }
         [self.filter reloadData];
