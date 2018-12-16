@@ -61,7 +61,7 @@
         dropMenuModel.tagName = data5[index];
         [dataArray5 addObject:dropMenuModel];
     }
-    NSArray *sectionHeaderTitles = @[@"第一行",@"呵呵哒"];
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选"];
     NSMutableArray *sections = [NSMutableArray array];
     
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {

@@ -5,9 +5,11 @@
 
 **超级简单好用的电商筛选菜单** 
 
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-79cfe537c8639ba0.gif?imageMogr2/auto-orient/strip)
+![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-68f5e003ba76355c.gif?imageMogr2/auto-orient/strip)
 
 * **自定义筛选标题,自定义筛选内容,自定义筛选标签,自定义筛选头部内容**
+* **实现tag标签,单选,多选,取消选中效果**
+* **保留上次选中选项**
 * **动画展开,移除**
 * **可以重新传入模型,重新刷新数据源**
 * **选中内容通过代理的方式回调**
