@@ -12,6 +12,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /** 菜单类型 */
+typedef NS_ENUM (NSUInteger,GHDropMenuFilterCellType ) {
+    /** 标签 */
+    GHDropMenuFilterCellTypeTag = 1,
+    /** 输入 */
+    GHDropMenuFilterCellTypeInput,
+};
+/** 菜单类型 */
 typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
     /** 标题 */
     GHDropMenuTypeTitle = 1,
@@ -19,6 +26,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
     GHDropMenuTypeFilter,
 };
 @interface GHDropMenuModel :NSObject
+/** 筛选菜单类型 */
+@property (nonatomic , assign) GHDropMenuFilterCellType filterCellType;
+/** 最小价格 */
+@property (nonatomic , copy) NSString *minPrice;
+/** 最大价格 */
+@property (nonatomic , copy) NSString *maxPrice;
 /** 是否是多选  NO 单选 YES 多选 */
 @property (nonatomic , assign) BOOL isMultiple;
 /** cell是否被选中 */

@@ -61,7 +61,17 @@
         dropMenuModel.tagName = data5[index];
         [dataArray5 addObject:dropMenuModel];
     }
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选"];
+    
+    NSArray *data6 = @[@"呵呵11"];
+    NSMutableArray *dataArray6 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < data6.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+//        dropMenuModel.tagName = data6[index];
+        dropMenuModel.tagSeleted = YES;
+
+        [dataArray6 addObject:dropMenuModel];
+    }
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格"];
     NSMutableArray *sections = [NSMutableArray array];
     
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
@@ -71,9 +81,17 @@
         if (index == 0) {
             dropMenuModel.dataArray = dataArray4;
             dropMenuModel.isMultiple = NO;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
         } else if (index == 1) {
             dropMenuModel.dataArray = dataArray5;
             dropMenuModel.isMultiple = YES;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+
+        } else if (index == 2) {
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeInput;
+            dropMenuModel.dataArray = dataArray6;
+        } else {
+            
         }
         [sections addObject:dropMenuModel];
     }
@@ -127,7 +145,19 @@
     NSMutableString *string = [NSMutableString string];
     if (tagArray.count) {
         for (GHDropMenuModel *dropMenuTagModel in tagArray) {
-            [string appendFormat:@"%@",dropMenuTagModel.tagName];
+            if (dropMenuTagModel.tagSeleted) {
+                if (dropMenuTagModel.tagName.length) {
+                    [string appendFormat:@"%@",dropMenuTagModel.tagName];
+                }
+            }
+    
+            if (dropMenuTagModel.maxPrice.length) {
+                NSLog(@"%@",dropMenuTagModel.maxPrice);
+                [string appendFormat:@"最大价格%@",dropMenuTagModel.maxPrice];
+            }
+            if (dropMenuTagModel.minPrice.length) {
+                [string appendFormat:@"最小价格%@",dropMenuTagModel.minPrice];
+            }
         }
     } else {
         [string appendFormat:@"%@",dropMenuModel.title];
