@@ -94,7 +94,7 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.sectionHeaderTitle;
-    self.details.text = dropMenuModel.sectionHeaderDetails;
+    self.details.text = dropMenuModel.sectionHeaderDetails.length?dropMenuModel.sectionHeaderDetails:@"全部";
     self.imageView.highlighted = dropMenuModel.sectionSeleted ? YES:NO;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -502,20 +502,62 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
     GHDropMenuModel *dropMenuSectionModel = dropMenuTitleModel.sections[dropMenuModel.indexPath.section];
     
-    /** 处理单选 */
-    NSString *currentSeletedStr = [NSString string];
-    for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionModel.dataArray) {
-        if (dropMenuTagModel.tagSeleted) {
-            currentSeletedStr = dropMenuTagModel.tagName;
-        }
-        dropMenuTagModel.tagSeleted = NO;
-    }
-    self.currentIndexPath = self.currentIndexPath != dropMenuModel.indexPath ?dropMenuModel.indexPath:nil;
-    dropMenuModel.tagSeleted = [currentSeletedStr isEqualToString:dropMenuModel.tagName] ? NO:YES;
-    dropMenuSectionModel.sectionHeaderDetails = dropMenuModel.tagSeleted ? dropMenuModel.tagName:nil;
+    /** 处理多选 单选*/
+    [self actionMultipleWithDropMenuModel:dropMenuModel dropMenuSectionModel:dropMenuSectionModel];
+    /** 处理sectionDetails */
+    [self actionSectionHeaderDetailsWithDropMenuModel:dropMenuModel dropMenuSectionModel:dropMenuSectionModel];
     [self.filter reloadData];
 }
-
+#pragma mark - 处理sectionHeaderDetails
+- (void)actionSectionHeaderDetailsWithDropMenuModel: (GHDropMenuModel *)dropMenuModel dropMenuSectionModel: (GHDropMenuModel *)dropMenuSectionModel {
+    
+    NSMutableString *details = [NSMutableString string];
+    for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionModel.dataArray) {
+        if (dropMenuTagModel.tagSeleted) {
+            [details appendFormat:@"%@,", dropMenuTagModel.tagName];
+        }
+    }
+    if (details.length) {
+        [details deleteCharactersInRange:NSMakeRange(details.length - 1, 1)];
+    }
+    dropMenuSectionModel.sectionHeaderDetails = details;
+}
+#pragma mark - 处理单选 多选
+- (void)actionMultipleWithDropMenuModel: (GHDropMenuModel *)dropMenuModel dropMenuSectionModel: (GHDropMenuModel *)dropMenuSectionModel {
+    /** 处理单选 */
+    NSString *currentSeletedStr = [NSString string];
+    if (dropMenuSectionModel.isMultiple) {
+        
+    } else {
+        for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionModel.dataArray) {
+            if (dropMenuTagModel.tagSeleted) {
+                currentSeletedStr = dropMenuTagModel.tagName;
+            }
+            dropMenuTagModel.tagSeleted = NO;
+        }
+    }
+    
+    if (self.currentIndexPath != dropMenuModel.indexPath /** 不是第一次选中 */) {
+        if ([currentSeletedStr isEqualToString:dropMenuModel.tagName]) {
+            dropMenuModel.tagSeleted = NO;
+        } else {
+            dropMenuModel.tagSeleted = !dropMenuModel.tagSeleted ;
+        }
+        self.currentIndexPath = dropMenuModel.indexPath;
+    } else {
+        if ([currentSeletedStr isEqualToString:dropMenuModel.tagName]) {
+            if (dropMenuSectionModel.isMultiple) {
+                dropMenuModel.tagSeleted = YES;
+            } else {
+                dropMenuModel.tagSeleted = NO;
+            }
+        } else {
+            dropMenuModel.tagSeleted = !dropMenuModel.tagSeleted ;
+        }
+        self.currentIndexPath = nil;
+    }
+    
+}
 - (void)dropMenuItem:(GHDropMenuItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;

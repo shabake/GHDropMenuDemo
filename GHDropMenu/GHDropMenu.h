@@ -19,6 +19,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
     GHDropMenuTypeFilter,
 };
 @interface GHDropMenuModel :NSObject
+/** 是否是多选  NO 单选 YES 多选 */
+@property (nonatomic , assign) BOOL isMultiple;
 /** cell是否被选中 */
 @property (nonatomic , assign) BOOL cellSeleted;
 /** section是否被选中 */
