@@ -19,22 +19,25 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
     GHDropMenuTypeFilter,
 };
 @interface GHDropMenuModel :NSObject
+/** cell是否被选中 */
 @property (nonatomic , assign) BOOL cellSeleted;
+/** section是否被选中 */
 @property (nonatomic , assign) BOOL sectionSeleted;
-
+/** 存放tag section数组 */
 @property (nonatomic , strong) NSArray *sections;
+/** tag id */
 @property (nonatomic , assign) NSInteger tagIdentifier;
-
+/** tag 模型 */
 @property (nonatomic , strong) GHDropMenuModel *dropMenuTagModel;
 /** sectionHeaderTitle */
 @property (nonatomic , copy) NSString *sectionHeaderTitle;
+/** sectionHeaderDetails */
 @property (nonatomic , copy) NSString *sectionHeaderDetails;
-
 /** 标签名称 */
 @property (nonatomic , copy) NSString *tagName;
 /** 标签选中状态 */
 @property (nonatomic , assign) BOOL tagSeleted;
-
+/** 菜单类型 */
 @property (nonatomic , assign) GHDropMenuType dropMenuType;
 /** 标题 */
 @property (nonatomic , copy) NSString *title;
@@ -48,18 +51,26 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , strong) NSArray *titles;
 /** 数据源数组 */
 @property (nonatomic , strong) NSArray *dataArray;
-
 @property (nonatomic , assign) CGRect frame;
-
-/** 顶部颜色 */
+/** titleVie背景颜色 */
 @property (nonatomic , strong) UIColor *titleViewBackGroundColor;
+/** 记录indexPath */
 @property (nonatomic , strong) NSIndexPath *indexPath;
 
 @end
 
 @class GHDropMenu,GHDropMenuModel;
 @protocol GHDropMenuDelegate <NSObject>
-- (void)dropMenu: (GHDropMenu *)dropMenu dropMenuModel: (nullable GHDropMenuModel *)dropMenuModel tagArray: (NSArray *)tagArray;
+/**
+ 代理回调
+
+ @param dropMenu dropMenu本身
+ @param dropMenuModel 标题模型
+ @param tagArray tag数组
+ */
+- (void)dropMenu: (GHDropMenu *)dropMenu
+   dropMenuModel: (nullable GHDropMenuModel *)dropMenuModel
+        tagArray: (NSArray *)tagArray;
 @end
 @interface GHDropMenu : UIView
 

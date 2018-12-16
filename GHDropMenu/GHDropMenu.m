@@ -191,12 +191,6 @@
 
 - (void)changeColor {
     if (self.dropMenuModel.tagSeleted) {
-//        [UIView animateWithDuration:.3 animations:^{
-//            self.title.backgroundColor =  [UIColor orangeColor];
-//            self.title.textColor = [UIColor whiteColor];
-//        } completion:^(BOOL finished) {
-//
-//        }];
     }
 }
 - (void)layoutSubviews {
@@ -260,14 +254,6 @@
     self.title.textColor = dropMenuModel.titleSeleted ?[UIColor orangeColor]:[UIColor darkGrayColor];
     self.line.backgroundColor = self.title.textColor ;
     
-//    NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString: self.title.text];
-//    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-//    attch.image = [UIImage imageNamed:@"down_normal"];
-//    attch.bounds = CGRectMake(5, 5, 10, 5);
-//    // 创建带有图片的富文本
-//    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-//    [attriStr appendAttributedString:string];
-//    self.title.attributedText = attriStr;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -363,6 +349,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 @property (nonatomic , strong) UIButton *sure;
 /** 遮罩 */
 @property (nonatomic , strong) UIControl *cover;
+
+@property (nonatomic , strong) NSIndexPath *currentIndexPath;
 
 @end
 @implementation GHDropMenu
@@ -508,14 +496,23 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     dropMenuModel.sectionSeleted = !dropMenuModel.sectionSeleted;
     [self.filter reloadData];
 }
+#pragma mark - tag标签点击方法
 - (void)dropMenuFilterItem: (GHDropMenuFilterItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
     GHDropMenuModel *dropMenuSectionModel = dropMenuTitleModel.sections[dropMenuModel.indexPath.section];
+    
+    /** 处理单选 */
+    NSString *currentSeletedStr = [NSString string];
     for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionModel.dataArray) {
+        if (dropMenuTagModel.tagSeleted) {
+            currentSeletedStr = dropMenuTagModel.tagName;
+        }
         dropMenuTagModel.tagSeleted = NO;
     }
-    dropMenuModel.tagSeleted = !dropMenuModel.tagSeleted;
-    dropMenuSectionModel.sectionHeaderDetails = dropMenuModel.tagName;
+    self.currentIndexPath = self.currentIndexPath != dropMenuModel.indexPath ?dropMenuModel.indexPath:nil;
+    dropMenuModel.tagSeleted = [currentSeletedStr isEqualToString:dropMenuModel.tagName] ? NO:YES;
+    dropMenuSectionModel.sectionHeaderDetails = dropMenuModel.tagSeleted ? dropMenuModel.tagName:nil;
     [self.filter reloadData];
 }
 
@@ -534,8 +531,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     } else {
         [self dismiss];
     }
-//    [self.collectionView reloadData];
-
+    [self.collectionView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
