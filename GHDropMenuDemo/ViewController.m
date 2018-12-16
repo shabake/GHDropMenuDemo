@@ -67,8 +67,6 @@
     for (NSInteger index = 0 ; index < data6.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
 //        dropMenuModel.tagName = data6[index];
-        dropMenuModel.tagSeleted = YES;
-
         [dataArray6 addObject:dropMenuModel];
     }
     NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格"];

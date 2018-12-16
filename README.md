@@ -6,8 +6,8 @@
 **超级简单好用的电商筛选菜单** 
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-68f5e003ba76355c.gif?imageMogr2/auto-orient/strip)
-
 * **自定义筛选标题,自定义筛选内容,自定义筛选标签,自定义筛选头部内容**
+* **价格输入筛选**
 * **实现tag标签,单选,多选,取消选中效果**
 * **保留上次选中选项**
 * **动画展开,移除**

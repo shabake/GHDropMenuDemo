@@ -593,6 +593,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     for (GHDropMenuModel *dropMenuModel in self.titles) {
         dropMenuModel.titleSeleted = NO;
     }
+    [self.filter reloadData];
     [self.collectionView reloadData];
     [self dismiss];
 }
@@ -606,16 +607,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     GHDropMenuModel *dropMenuTagModel = dropMenuSectionModel.dataArray[dropMenuModel.indexPath.row];
     dropMenuTagModel.minPrice = dropMenuModel.minPrice;
     dropMenuTagModel.maxPrice = dropMenuModel.maxPrice;
-
-    for ( GHDropMenuModel *d in self.titles) {
-        for (GHDropMenuModel *s in d.sections) {
-            for (GHDropMenuModel *n in s.dataArray) {
-                NSLog(@"minPriceminPriceminPrice%@",n.minPrice);
-                NSLog(@"minPriceminPriceminPrice%@",n.maxPrice);
-            }
-        }
-    }
-//    [self.filter reloadData];
 }
 - (void)dropMenuFilterHeader:(GHDropMenuFilterHeader *)header dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     dropMenuModel.sectionSeleted = !dropMenuModel.sectionSeleted;
@@ -844,7 +835,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         } else  {
             return [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellID" forIndexPath:indexPath];
         }
-        
     } else {
         return [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellID" forIndexPath:indexPath];
     }
@@ -865,6 +855,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
                 if (dropMenuTagModel.tagSeleted) {
                     [dataArray addObject:dropMenuTagModel];
                 }
+                if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
+                    [dataArray addObject:dropMenuTagModel];
+                }
             }
         }
         if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:tagArray:)]) {
@@ -875,6 +868,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
             dropMenuSectionModel.sectionHeaderDetails = @"";
             for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionModel.dataArray) {
                 dropMenuTagModel.tagSeleted = NO;
+                dropMenuTagModel.minPrice = @"";
+                dropMenuTagModel.maxPrice = @"";
+
             }
         }
         [self.filter reloadData];
