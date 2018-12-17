@@ -238,6 +238,7 @@
         _rightTextField.textColor = [UIColor darkGrayColor];
         _rightTextField.placeholder = @"请输入最高价";
         _rightTextField.keyboardType = UIKeyboardTypeNamePhonePad;
+        _rightTextField.tintColor = [UIColor orangeColor];
     }
     return _rightTextField;
 }
@@ -253,6 +254,7 @@
         _leftTextField.textColor = [UIColor darkGrayColor];
         _leftTextField.placeholder = @"请输入最低价";
         _leftTextField.keyboardType = UIKeyboardTypeNamePhonePad;
+        _leftTextField.tintColor = [UIColor orangeColor];
     }
     return _leftTextField;
 }
