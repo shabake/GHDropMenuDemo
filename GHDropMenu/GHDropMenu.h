@@ -25,7 +25,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
     /** 筛选菜单 */
     GHDropMenuTypeFilter,
 };
+/** 筛选菜单模型 */
 @interface GHDropMenuModel :NSObject
+/** 标题菜单是否记录用户菜单选择 默认是NO */
+@property (nonatomic , assign) BOOL recordSeleted;
 /** 筛选菜单类型 */
 @property (nonatomic , assign) GHDropMenuFilterCellType filterCellType;
 /** 最小价格 */
@@ -57,7 +60,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 /** 标题 */
 @property (nonatomic , copy) NSString *title;
 @property (nonatomic , assign) NSInteger identifier;
-
 @property (nonatomic , strong) UIFont *titleFont;
 @property (nonatomic , assign) CGFloat menuHeight;
 /** 标题被选中 */
@@ -72,6 +74,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 /** 记录indexPath */
 @property (nonatomic , strong) NSIndexPath *indexPath;
 
+/** 构造筛选菜单数据 */
+- (NSArray *)creaDropMenuData;
 @end
 
 @class GHDropMenu,GHDropMenuModel;
@@ -87,6 +91,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
    dropMenuModel: (nullable GHDropMenuModel *)dropMenuModel
         tagArray: (NSArray *)tagArray;
 @end
+
+
 @interface GHDropMenu : UIView
 /**
  初始化方法
@@ -95,7 +101,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 
  @return GHDropMenu
  */
-- (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration;
+- (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration frame: (CGRect)frame;
 /** set方法 */
 @property (nonatomic , strong) GHDropMenuModel *configuration;
 

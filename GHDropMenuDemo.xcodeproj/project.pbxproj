@@ -17,6 +17,8 @@
 		D650CDA321C35E0E00EC004A /* GHDropMenuDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDA221C35E0E00EC004A /* GHDropMenuDemoUITests.m */; };
 		D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
 		D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
+		D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
+		D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,9 @@
 		D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuHeader.h; sourceTree = "<group>"; };
 		D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
 		D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
+		D6DF1F8A21CFA76C003D8C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		D6DF1FBB21D1948E003D8C39 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
+		D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Size.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +123,7 @@
 				D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */,
 				D650CD8C21C35E0E00EC004A /* Info.plist */,
 				D650CD8D21C35E0E00EC004A /* main.m */,
+				D6DF1F8A21CFA76C003D8C39 /* README.md */,
 			);
 			path = GHDropMenuDemo;
 			sourceTree = "<group>";
@@ -147,6 +153,8 @@
 				D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */,
 				D650CDB121C35E6D00EC004A /* GHDropMenu.h */,
 				D650CDB221C35E6D00EC004A /* GHDropMenu.m */,
+				D6DF1FBB21D1948E003D8C39 /* NSString+Size.h */,
+				D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */,
 				D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */,
 			);
 			path = GHDropMenu;
@@ -257,6 +265,7 @@
 			files = (
 				D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */,
 				D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */,
+				D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */,
 				D650CD8621C35E0E00EC004A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +295,7 @@
 				D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */,
 				D650CD8321C35E0D00EC004A /* ViewController.m in Sources */,
 				D650CD8E21C35E0E00EC004A /* main.m in Sources */,
+				D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */,
 				D650CD8021C35E0D00EC004A /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

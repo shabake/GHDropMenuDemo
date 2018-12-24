@@ -9,16 +9,16 @@
 #ifndef GHDropMenuHeader_h
 #define GHDropMenuHeader_h
 
-
 // ScreenWidth & kScreenHeight
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
+#define iPhoneXRAndXSMAX (kScreenWidth == 414.f && kScreenHeight == 896.f ? YES : NO)
 // iPhoneX
-#define iPhoneX (kScreenWidth == 375.f && kScreenHeight == 812.f ? YES : NO)
-#define kSafeAreaBottomHeight (iPhoneX ? 34 : 0)
+#define iPhoneXAndXS (kScreenWidth == 375.f && kScreenHeight == 812.f ? YES : NO)
+#define kSafeAreaBottomHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX) ?34 : 0)
 // StatusbarH + NavigationH
-#define kSafeAreaTopHeight (iPhoneX ? 88.f : 64.f)
+#define kSafeAreaTopHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX) ? 88.f : 64.f)
 // StatusBarHeight
 #define kStatusBarHeight (iPhoneX ? 44.f : 20.f)
 // NavigationBarHeigth
@@ -38,6 +38,7 @@
 
 #define kAutoHeightSize(r) r*kScreenHeight / 667.0
 
-
+#define kFilterButtonHeight 44
+#define kFilterButtonWidth 44
 
 #endif /* GHDropMenuHeader_h */

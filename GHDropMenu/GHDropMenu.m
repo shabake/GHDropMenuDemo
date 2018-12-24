@@ -8,7 +8,7 @@
 
 #import "GHDropMenu.h"
 #import "NSArray+Bounds.h"
-
+#import "NSString+Size.h"
 #pragma mark - - - -- - - -- - - - GHDropMenuCell
 @interface  GHDropMenuCell : UITableViewCell
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
@@ -41,7 +41,7 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = CGRectMake(20, 0, 100, self.frame.size.height);
+    self.title.frame = CGRectMake(20, 0, 200, self.frame.size.height);
     self.line.frame = CGRectMake(20, self.frame.size.height - 1, self.frame.size.width - 40, 1);
     self.imgView.frame = CGRectMake(self.frame.size.width - 20 - 15, (self.frame.size.height - 15 ) * 0.5, 15, 15);
 }
@@ -197,6 +197,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.leftTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.rightTextField];
 }
+
 - (void)textChange: (NSNotification *)noti {
     
     if (self.leftTextField.text.length) {
@@ -299,10 +300,6 @@
     return self;
 }
 
-- (void)changeColor {
-    if (self.dropMenuModel.tagSeleted) {
-    }
-}
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.title.frame = CGRectMake(0, 0, self.frame.size.width , self.frame.size.height);
@@ -326,12 +323,13 @@
         _title.text = @"1";
         _title.layer.masksToBounds = YES;
         _title.layer.cornerRadius = 10;
+
         _title.layer.borderColor = [UIColor lightGrayColor].CGColor;
         _title.layer.borderWidth = 0.5;
         _title.font = [UIFont systemFontOfSize:13];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        tap.numberOfTouchesRequired = 1; //手指数
-        tap.numberOfTapsRequired = 1; //tap次数
+        tap.numberOfTouchesRequired = 1;
+        tap.numberOfTapsRequired = 1;
         [_title addGestureRecognizer:tap];
         
     }
@@ -340,29 +338,90 @@
 #pragma mark - - - - - - - - GHDropMenuFilterItem
 
 @end
-#pragma mark - - - - GHDropMenuItem
+#pragma mark - - - - GHDropMenuTitle 自定义view
+
+@interface GHDropMenuTitle : UIView
+@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
+@end
+@interface GHDropMenuTitle()
+@property (nonatomic , strong) UILabel *label;
+@property (nonatomic , strong) UIImageView *imageView;
+
+@end
+@implementation GHDropMenuTitle
+- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    _dropMenuModel = dropMenuModel;
+    self.label.text = dropMenuModel.title;
+    CGSize labelSize = [self.label.text sizeWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.bounds.size.height)];
+    self.label.frame = CGRectMake((self.bounds.size.width -labelSize.width) * 0.5 , 0, labelSize.width >  0 ?labelSize.width:80, self.bounds.size.height > 0 ?self.bounds.size.height :44);
+    self.imageView.frame = CGRectMake(self.label.frame.size.width + self.label.frame.origin.x + 5, (self.bounds.size.height - 8 ) *.5, 10, 8);
+}
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self == [super initWithFrame:frame]) {
+        [self setupUI];
+    }
+    return self;
+}
+- (instancetype)init {
+    if (self == [super init]) {
+        [self setupUI];
+    }
+    return self;
+}
+- (void)setupUI {
+    [self addSubview:self.label];
+//    [self addSubview:self.imageView];
+}
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGSize labelSize = [self.label.text sizeWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.bounds.size.height)];
+    self.label.frame = CGRectMake((self.bounds.size.width -labelSize.width) * 0.5 , 0, labelSize.width >  0 ?labelSize.width:80, self.bounds.size.height > 0 ?self.bounds.size.height :44);
+    self.imageView.frame = CGRectMake(self.label.frame.size.width + self.label.frame.origin.x + 5, (self.bounds.size.height - 8 ) *.5, 10, 8);
+}
+
+- (UIImageView *)imageView {
+    if (_imageView == nil) {
+        _imageView = [[UIImageView alloc]init];
+        _imageView.frame = CGRectMake(CGRectGetMaxX(self.label.frame), 0, 10, 8);
+        _imageView.image = [UIImage imageNamed:@"up_normal"];
+        _imageView.highlightedImage = [UIImage imageNamed:@"down_normal"];
+    }
+    return _imageView;
+}
+- (UILabel *)label {
+    if (_label == nil) {
+        _label = [[UILabel alloc]init];
+        _label.frame = CGRectMake(10, 0, 80, 44);
+        _label.textAlignment = NSTextAlignmentCenter;
+        _label.font = [UIFont systemFontOfSize:14];
+        _label.textColor = [UIColor darkGrayColor];
+        _label.backgroundColor = [UIColor whiteColor];
+        _label.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    }
+    return _label;
+}
+
+@end
+
+#pragma mark - - - - GHDropMenuItem 顶部title item
 @class GHDropMenuItem,GHDropMenuModel;
 @protocol GHDropMenuItemDelegate <NSObject>
 - (void)dropMenuItem: (GHDropMenuItem *)item dropMenuModel: (GHDropMenuModel *)dropMenuModel;
 @end
 
 @interface GHDropMenuItem : UICollectionViewCell
-@property (nonatomic , strong) UILabel *title;
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
 @property (nonatomic , weak) id <GHDropMenuItemDelegate> delegate;
-@property (nonatomic , strong) UIView *line;
-@property (nonatomic , strong) UIImageView *upArrow;
-@property (nonatomic , strong) UIImageView *downArrow;
+
+@end
+@interface GHDropMenuItem()
+@property (nonatomic , strong) GHDropMenuTitle *dropMenuTitle;
 
 @end
 @implementation GHDropMenuItem
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
-    self.title.text = dropMenuModel.title;
-    self.title.font = dropMenuModel.titleFont;
-    self.title.textColor = dropMenuModel.titleSeleted ?[UIColor orangeColor]:[UIColor darkGrayColor];
-    self.line.backgroundColor = self.title.textColor ;
-    
+    self.dropMenuTitle.dropMenuModel = dropMenuModel;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -372,15 +431,11 @@
 }
 
 - (void)setupUI {
-    [self addSubview:self.title];
-    [self.title addSubview:self.line];
+    [self addSubview:self.dropMenuTitle];
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = CGRectMake(5, 0, self.frame.size.width - 5, self.frame.size.height);
-    self.upArrow.frame = CGRectMake(self.frame.size.width, CGRectGetMidY(self.title.frame ), 10, 5);
-
-    self.line.frame = CGRectMake(self.frame.size.width - 1, (self.frame.size.height -self.frame.size.height * 0.2) * 0.5, 1, self.frame.size.height * 0.2);
+    self.dropMenuTitle.frame = CGRectMake(5, 0, self.frame.size.width - 10, self.frame.size.height);
 }
 
 - (void)tap:(UITapGestureRecognizer *)gesture {
@@ -388,42 +443,16 @@
         [self.delegate dropMenuItem:self dropMenuModel:self.dropMenuModel];
     }
 }
-- (UIImageView *)downArrow {
-    if (_downArrow == nil) {
-        _downArrow = [[UIImageView alloc]init];
-        _downArrow.backgroundColor = [UIColor redColor];
-    }
-    return _downArrow;
-}
-- (UIImageView *)upArrow {
-    if (_upArrow == nil) {
-        _upArrow = [[UIImageView alloc]init];
-        _upArrow.backgroundColor = [UIColor redColor];
-    }
-    return _upArrow;
-}
-- (UIView *)line {
-    if (_line == nil) {
-        _line = [[UIView alloc]init];
-        _line.backgroundColor = [UIColor lightGrayColor];
-        _line.alpha = 0.1;
-    }
-    return _line;
-}
-- (UILabel *)title {
-    if (_title == nil) {
-        _title = [[UILabel alloc]init];
-        _title.textAlignment = NSTextAlignmentCenter;
-        _title.userInteractionEnabled = YES;
-        _title.font = [UIFont systemFontOfSize:13];
-        _title.textColor = [UIColor darkGrayColor];
-        _title.lineBreakMode = NSLineBreakByTruncatingMiddle;
+
+- (GHDropMenuTitle *)dropMenuTitle {
+    if (_dropMenuTitle == nil) {
+        _dropMenuTitle = [[GHDropMenuTitle alloc]init];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        tap.numberOfTouchesRequired = 1; //手指数
-        tap.numberOfTapsRequired = 1; //tap次数
-        [_title addGestureRecognizer:tap];
+        tap.numberOfTouchesRequired = 1;
+        tap.numberOfTapsRequired = 1;
+        [_dropMenuTitle addGestureRecognizer:tap];
     }
-    return _title;
+    return _dropMenuTitle;
 }
 @end
 
@@ -431,23 +460,145 @@
 
 @implementation GHDropMenuModel
 
+- (NSArray *)creaDropMenuData {
+  
+    /** 构造第一列数据 */
+    NSArray *line1 = @[@"价格从高到低",@"价格从低到高",@"距离从远到近",@"销量从低到高",@"信用从高到低"];
+    NSMutableArray *dataArray1 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < line1.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = [line1 by_ObjectAtIndex:index];
+        [dataArray1 addObject:dropMenuModel];
+    }
+    
+    /** 构造第二列数据 */
+    NSArray *line2 = @[@"0 - 10 元",@"10-20 元",@"20-50 元",@"50-100 元",@"100 - 1000元",@"1000 - 10000 元",@"10000-100000 元",@"100000-500000 元",@"500000-1000000 元",@"1000000以上"];
+    NSMutableArray *dataArray2 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < line2.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = [line2 by_ObjectAtIndex:index];
+        [dataArray2 addObject:dropMenuModel];
+    }
+    
+    /** 构造第三列数据 */
+    NSArray *line3 = @[@"psp",@"psv",@"nswitch",@"gba",@"gbc",@"gbp",@"ndsl",@"3ds"];
+    NSMutableArray *dataArray3 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < line3.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = [line3 by_ObjectAtIndex:index];
+        [dataArray3 addObject:dropMenuModel];
+    }
+    
+    /** 构造右侧弹出筛选菜单第一行数据 */
+    NSArray *row1 = @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
+    NSMutableArray *dataArray4 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < row1.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = [row1 by_ObjectAtIndex:index];
+        [dataArray4 addObject:dropMenuModel];
+    }
+    /** 构造右侧弹出筛选菜单第二行数据 */
+    NSArray *row2 = @[@"呵呵",@"哈哈",@"嘿嘿",@"呵呵",@"哈哈",@"嘿嘿"];
+    NSMutableArray *dataArray5 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < row2.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = [row2 by_ObjectAtIndex:index];
+        [dataArray5 addObject:dropMenuModel];
+    }
+    
+    /** 构造右侧弹出筛选菜单第三行数据 */
+    NSMutableArray *dataArray6 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < 1; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        [dataArray6 addObject:dropMenuModel];
+    }
+    
+    /** 设置构造右侧弹出筛选菜单每行的标题 */
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格"];
+    NSMutableArray *sections = [NSMutableArray array];
+    
+    for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.sectionHeaderTitle = sectionHeaderTitles[index];
+        
+        if (index == 0) {
+            dropMenuModel.dataArray = dataArray4;
+            /** 单选 */
+            dropMenuModel.isMultiple = NO;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 1) {
+            dropMenuModel.dataArray = dataArray5;
+            /** 多选 */
+            dropMenuModel.isMultiple = YES;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+            
+        } else if (index == 2) {
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeInput;
+            dropMenuModel.dataArray = dataArray6;
+        } else {
+            
+        }
+        [sections addObject:dropMenuModel];
+    }
+    NSMutableArray *titlesArray = [NSMutableArray array];
+    NSArray *types = @[
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeFilter),
+                       ];
+    /** 菜单标题 */
+    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"筛选"];
+    
+    for (NSInteger index = 0 ; index < titles.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = titles[index];
+        NSNumber *typeNum = types[index];
+        dropMenuModel.dropMenuType = typeNum.integerValue;
+        if (index == 0) {
+            dropMenuModel.dataArray = dataArray1;
+        } else if (index == 1) {
+            dropMenuModel.dataArray = dataArray2;
+        } else if (index == 2) {
+            dropMenuModel.dataArray = dataArray3;
+        } else if (index == 3) {
+            dropMenuModel.dataArray = dataArray4;
+            dropMenuModel.sections = sections;
+        }
+        dropMenuModel.identifier = index;
+        [titlesArray addObject:dropMenuModel];
+    }
+    return titlesArray;
+}
+
 @end
 
-#pragma mark - - - - GHDropMenu
+#pragma mark - - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - - GHDropMenu 筛选菜单开始
+/** 按钮类型 */
 typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
+    /** 确定 */
     GHDropMenuButtonTypeSure = 1,
+    /** 重置 */
     GHDropMenuButtonTypeReset,
 };
+
 @interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate>
 
+/** 装顶部菜单的数组 */
 @property (nonatomic , strong) NSMutableArray *titles;
+/** 顶部菜单 */
 @property (nonatomic , strong) UICollectionView *collectionView;
+/** 顶部菜单布局 */
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
+/** 弹出菜单 */
 @property (nonatomic , strong) UITableView *tableView;
+/** 弹出菜单内容数组 */
 @property (nonatomic , strong) NSMutableArray *contents;
+/** 菜单的高度 */
 @property (nonatomic , assign) CGFloat menuHeight;
 @property (nonatomic , strong) UIView *topLine;
 @property (nonatomic , strong) UIView *bottomLine;
+/** 弹出菜单选中index */
 @property (nonatomic , assign) NSInteger currentIndex;
 /** 筛选器 */
 @property (nonatomic , strong) UICollectionView *filter;
@@ -464,12 +615,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 @end
 @implementation GHDropMenu
 
-#define kFilterButtonHeight 44
-#define kFilterButtonWidth 44
-
 #pragma mark - 初始化
-- (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration {
-    GHDropMenu *dropMenu = [[GHDropMenu alloc]initWithFrame:CGRectMake(0, configuration.frame.origin.y, configuration.frame.size.width, kScreenHeight - configuration.frame.origin.y - kSafeAreaBottomHeight)];
+- (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration frame: (CGRect)frame {
+    GHDropMenu *dropMenu = [[GHDropMenu alloc]initWithFrame:CGRectMake(0, frame.origin.y, frame.size.width, kScreenHeight - frame.origin.y - kSafeAreaBottomHeight)];
     dropMenu.configuration = configuration;
     return dropMenu;
 }
@@ -480,8 +628,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     _configuration = configuration;
     self.titles = configuration.titles.copy;
     if (configuration.menuHeight) {
+        self.collectionView.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, configuration.menuHeight);
+
         [UIView animateWithDuration:.3 animations:^{
-            self.collectionView.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, configuration.menuHeight);
             self.topLine.frame = CGRectMake(0, 0, kScreenWidth, 1);
             self.bottomLine.frame = CGRectMake(0, configuration.menuHeight - 1, kScreenWidth, 1);
         } completion:^(BOOL finished) {
@@ -523,7 +672,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 
     [UIView animateWithDuration:0.5 animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
-            self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, 0);
+            self.tableView.frame = CGRectMake(0, self.menuHeight, self.frame.size.width, 0);
             self.backgroundColor = [UIColor clearColor];
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
@@ -549,12 +698,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     
     GHDropMenuModel *dropMenuTitleModel = self.titles[self.currentIndex];
     
-    self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, 0);
+    self.tableView.frame = CGRectMake(0, self.menuHeight, self.frame.size.width, 0);
     self.backgroundColor = [UIColor clearColor];
 
     [UIView animateWithDuration:0.5 animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
-            self.tableView.frame = CGRectMake(0, self.menuHeight, self.configuration.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
+            self.tableView.frame = CGRectMake(0, self.menuHeight, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
             self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
 
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
@@ -724,7 +873,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         dropMenuContentModel.cellSeleted = NO;
     }
     GHDropMenuModel *contentModel = dropMenuModel.dataArray[indexPath.row];
-    dropMenuModel.title = contentModel.title;
+    if (self.configuration.recordSeleted) {
+        dropMenuModel.title = contentModel.title;
+    }
     contentModel.cellSeleted = !contentModel.cellSeleted;
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:tagArray:)]) {
         [self.delegate dropMenu:self dropMenuModel:contentModel tagArray:@[]];
@@ -886,7 +1037,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         _cover = [[UIControl alloc]init];
         _cover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
         [_cover addTarget:self action:@selector(clickControl) forControlEvents:UIControlEventTouchUpInside];
-
     }
     return _cover;
 }
@@ -953,13 +1103,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 
 - (UICollectionView *)filter {
     if (_filter == nil) {
-        _filter = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth * 0.2, 0, kScreenWidth * 0.8, kScreenHeight - kFilterButtonHeight) collectionViewLayout:self.filterFlowLayout];
+        _filter = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth * 0.2, 0, kScreenWidth * 0.8, kScreenHeight - kFilterButtonHeight - kSafeAreaBottomHeight) collectionViewLayout:self.filterFlowLayout];
         _filter.delegate = self;
         _filter.dataSource = self;
         _filter.backgroundColor = [UIColor whiteColor];
-        _filter.layer.shadowColor = [UIColor redColor].CGColor;
-        _filter.layer.shadowOffset = CGSizeMake(-100,3);
-        _filter.layer.shadowOpacity = 0.9;
         [_filter registerClass:[GHDropMenuFilterItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterItemID"];
         [_filter registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellID"];
         _filter.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
@@ -970,7 +1117,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 }
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth, 0, kScreenWidth, 0) collectionViewLayout:self.flowLayout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth, 0, kScreenWidth, self.menuHeight) collectionViewLayout:self.flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
