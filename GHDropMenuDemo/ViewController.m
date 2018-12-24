@@ -42,7 +42,6 @@
     
     
     
-    
     self.view.backgroundColor = [UIColor orangeColor];
     
     UITextView *textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 400, kScreenWidth, 100)];
