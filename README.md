@@ -6,6 +6,14 @@
 **超级简单好用的电商筛选菜单** 
 <br/>项目截图<br/>
 
+###2018.12.25更新
+* dropMenu的title自适应宽度
+* 增加适量注释,模型封装
+* 外部模型控制内部用户点击筛选是否记录
+* 适配x,xs,xr,xsmax
+* 去掉刚开始创建的动画
+
+--
 ![image.png](https://upload-images.jianshu.io/upload_images/1419035-0ca99960ec7aa25e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240)
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-5392ec271c8ed736.gif?imageMogr2/auto-orient/strip)
