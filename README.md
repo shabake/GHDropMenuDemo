@@ -33,6 +33,23 @@
 ```
 #import "GHDropMenu.h"
 ```
+
+```
+    /** 配置筛选菜单模型 */
+    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
+    /** 配置筛选菜单是否记录用户选中 默认NO */
+    configuration.recordSeleted = NO;
+    /** 设置数据源 */
+    configuration.titles = [configuration creaDropMenuData];
+    
+    /** 创建dropMenu 配置模型 &&frame */
+    GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+    dropMenu.delegate = self;
+    
+    [self.view addSubview:dropMenu];
+    
+```
+
 * 需要构造json数据
 ```
 详见demo
