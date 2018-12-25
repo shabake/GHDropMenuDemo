@@ -598,6 +598,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 @property (nonatomic , assign) CGFloat menuHeight;
 @property (nonatomic , strong) UIView *topLine;
 @property (nonatomic , strong) UIView *bottomLine;
+@property (nonatomic , strong) UIView *bottomView;
+
 /** 弹出菜单选中index */
 @property (nonatomic , assign) NSInteger currentIndex;
 /** 筛选器 */
@@ -732,6 +734,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     [self addSubview:self.collectionView];
     [kKeyWindow addSubview:self.cover];
     [self.cover addSubview:self.filter];
+    [self.cover addSubview:self.bottomView];
     [self.cover addSubview:self.sure];
     [self.cover addSubview:self.reset];
     [self.collectionView addSubview:self.topLine];
@@ -1032,6 +1035,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     [self resetMenuStatus];
 }
 #pragma mark - 懒加载
+- (UIView *)bottomView {
+    if (_bottomView == nil) {
+        _bottomView = [[UIView alloc]init];
+        _bottomView.backgroundColor = [UIColor whiteColor];
+        _bottomView.frame = CGRectMake(kScreenWidth * 0.2, self.filter.frame.size.height + self.filter.frame.origin.y + kFilterButtonHeight,self.filter.frame.size.width , kSafeAreaBottomHeight);
+    }
+    return _bottomView;
+}
 - (UIControl *)cover {
     if (_cover == nil) {
         _cover = [[UIControl alloc]init];
