@@ -45,19 +45,21 @@
     
     
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 44 , kScreenWidth, 100)];
-    [button addTarget:self action:@selector(clickButton) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor redColor];
     [self.view addSubview:button];
     
-    UITextView *textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 400, kScreenWidth, 100)];
+    UITextView *textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 500, kScreenWidth, 100)];
     textView.font = [UIFont systemFontOfSize:20];
     [self.view addSubview:textView];
     self.textView = textView;
 }
 
-
-- (void)clickButton {
-    NSLog(@"1111");
+- (void)clickButton: (UIButton *)button {
+    int R = (arc4random() % 256) ;
+    int G = (arc4random() % 256) ;
+    int B = (arc4random() % 256) ;
+    [button setBackgroundColor:[UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]];
 }
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel tagArray:(NSArray *)tagArray {
     NSMutableString *string = [NSMutableString string];
