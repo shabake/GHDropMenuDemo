@@ -20,7 +20,7 @@
 // StatusbarH + NavigationH
 #define kSafeAreaTopHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX) ? 88.f : 64.f)
 // StatusBarHeight
-#define kStatusBarHeight (iPhoneX ? 44.f : 20.f)
+#define kStatusBarHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX)  ? 44.f : 20.f)
 // NavigationBarHeigth
 #define kNavBarHeight 44.f
 // TabBarHeight

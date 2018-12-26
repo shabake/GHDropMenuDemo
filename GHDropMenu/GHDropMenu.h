@@ -111,6 +111,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 
 @property (nonatomic , weak) id <GHDropMenuDelegate>delegate;
 
+/** 动画时间 等于0 不开启动画 默认是0 */
+@property (nonatomic , assign) NSTimeInterval durationTime;
+/** 重置所有状态 */
 - (void)resetMenuStatus;
 @end
 

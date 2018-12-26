@@ -35,14 +35,19 @@
     configuration.titles = [configuration creaDropMenuData];
     
     /** 创建dropMenu 配置模型 &&frame */
-    GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-    dropMenu.delegate = self;
+    GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kScreenWidth, 44)];
     
+    dropMenu.delegate = self;
+    dropMenu.durationTime = 0.25;
     [self.view addSubview:dropMenu];
     
-    
-    
     self.view.backgroundColor = [UIColor orangeColor];
+    
+    
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 44 , kScreenWidth, 100)];
+    [button addTarget:self action:@selector(clickButton) forControlEvents:UIControlEventTouchUpInside];
+    button.backgroundColor = [UIColor redColor];
+    [self.view addSubview:button];
     
     UITextView *textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 400, kScreenWidth, 100)];
     textView.font = [UIFont systemFontOfSize:20];
@@ -50,6 +55,10 @@
     self.textView = textView;
 }
 
+
+- (void)clickButton {
+    NSLog(@"1111");
+}
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel tagArray:(NSArray *)tagArray {
     NSMutableString *string = [NSMutableString string];
     if (tagArray.count) {
