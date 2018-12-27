@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D6141E0A21D59C4300DC7B2F /* GHDropMenuDemoDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6141E0921D59C4300DC7B2F /* GHDropMenuDemoDebug.plist */; };
 		D650CD8021C35E0D00EC004A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD7F21C35E0D00EC004A /* AppDelegate.m */; };
 		D650CD8321C35E0D00EC004A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8221C35E0D00EC004A /* ViewController.m */; };
 		D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D6141E0921D59C4300DC7B2F /* GHDropMenuDemoDebug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GHDropMenuDemoDebug.plist; sourceTree = "<group>"; };
 		D650CD7B21C35E0D00EC004A /* GHDropMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHDropMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D650CD7E21C35E0D00EC004A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D650CD7F21C35E0D00EC004A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -50,7 +52,6 @@
 		D6DF249B21D4B85E003D8C39 /* GHDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDebugViewController.h; sourceTree = "<group>"; };
 		D6DF249C21D4B85E003D8C39 /* GHDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDebugViewController.m; sourceTree = "<group>"; };
 		D6DF24B021D4B865003D8C39 /* GHDropMenuDemoDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHDropMenuDemoDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6DF24B121D4B866003D8C39 /* GHDropMenuDemoDebug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = GHDropMenuDemoDebug.plist; path = /Users/zhaozhiwei/Desktop/demo/GHDropMenuDemo/GHDropMenuDemoDebug.plist; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +104,7 @@
 				D650CD8C21C35E0E00EC004A /* Info.plist */,
 				D650CD8D21C35E0E00EC004A /* main.m */,
 				D6DF1F8A21CFA76C003D8C39 /* README.md */,
-				D6DF24B121D4B866003D8C39 /* GHDropMenuDemoDebug.plist */,
+				D6141E0921D59C4300DC7B2F /* GHDropMenuDemoDebug.plist */,
 			);
 			path = GHDropMenuDemo;
 			sourceTree = "<group>";
@@ -197,6 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6141E0A21D59C4300DC7B2F /* GHDropMenuDemoDebug.plist in Resources */,
 				D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */,
 				D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */,
 				D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */,
@@ -423,7 +425,7 @@
 					"$(inherited)",
 					DEVELOPMENT1,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/GHDropMenuDemoDebug.plist";
+				INFOPLIST_FILE = GHDropMenuDemo/GHDropMenuDemoDebug.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -442,7 +444,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ9JB9ZT4S;
 				GCC_PREPROCESSOR_DEFINITIONS = DEVELOPMENT1;
-				INFOPLIST_FILE = "$(SRCROOT)/GHDropMenuDemoDebug.plist";
+				INFOPLIST_FILE = GHDropMenuDemo/GHDropMenuDemoDebug.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
