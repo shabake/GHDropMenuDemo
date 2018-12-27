@@ -642,9 +642,24 @@
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         [dataArray6 addObject:dropMenuModel];
     }
-
+    /** ... */
+    NSArray *row4 = @[@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录"];
+    NSMutableArray *dataArray7 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < row4.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = [row4 by_ObjectAtIndex:index];
+        [dataArray7 addObject:dropMenuModel];
+    }
+    
+    NSArray *row5 = @[@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录"];
+    NSMutableArray *dataArray8 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < row5.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = [row5 by_ObjectAtIndex:index];
+        [dataArray8 addObject:dropMenuModel];
+    }
     /** 设置构造右侧弹出筛选菜单每行的标题 */
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格"];
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选"];
     NSMutableArray *sections = [NSMutableArray array];
     
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
@@ -665,8 +680,13 @@
         } else if (index == 2) {
             dropMenuModel.filterCellType = GHDropMenuFilterCellTypeInput;
             dropMenuModel.dataArray = dataArray6;
-        } else {
-            
+        }  else if (index == 3){
+            dropMenuModel.dataArray = dataArray7;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 4) {
+            dropMenuModel.dataArray = dataArray8;
+            dropMenuModel.isMultiple = YES;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
         }
         [sections addObject:dropMenuModel];
     }
@@ -679,7 +699,7 @@
     
     for (NSInteger index = 0 ; index < 1; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = titles[index];
+//        dropMenuModel.title = titles[index];
         NSNumber *typeNum = types[index];
         dropMenuModel.dropMenuType = typeNum.integerValue;
 
