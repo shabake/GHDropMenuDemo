@@ -30,6 +30,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
+        
     }
     return self;
 }
@@ -735,14 +736,20 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 
 @property (nonatomic , strong) UIControl *titleCover;
 
+@property (nonatomic , strong) DropMenuTitleBlock dropMenuTitleBlock;
+
+@property (nonatomic , strong) DropMenuTagArrayBlock dropMenuTagArrayBlock;
+
 @end
 @implementation GHDropMenu
 
 #pragma mark - 初始化
-- (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration frame: (CGRect)frame {
++ (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration frame: (CGRect)frame dropMenuTitleBlock: (DropMenuTitleBlock)dropMenuTitleBlock dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock {
     GHDropMenu *dropMenu = [[GHDropMenu alloc]initWithFrame:CGRectMake(0, frame.origin.y, frame.size.width, frame.size.height)];
     dropMenu.configuration = configuration;
     dropMenu.menuHeight = frame.size.height;
+    dropMenu.dropMenuTitleBlock = dropMenuTitleBlock;
+    dropMenu.dropMenuTagArrayBlock = dropMenuTagArrayBlock;
     return dropMenu;
 }
 - (void)showWidthConfiguration: (GHDropMenuModel *)configuration {
@@ -1007,6 +1014,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:tagArray:)]) {
         [self.delegate dropMenu:self dropMenuModel:contentModel tagArray:@[]];
     }
+    
+    if (self.dropMenuTitleBlock) {
+        self.dropMenuTitleBlock(dropMenuModel);
+    }
+
     [self resetMenuStatus];
 }
 
@@ -1050,7 +1062,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         GHDropMenuModel *dropMenuSectionModel = dropMenuModel.sections[indexPath.section];
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
             return CGSizeMake((kScreenWidth * 0.8 - 4 * 10) / 3.01f, 30.01f);
-
         } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
             return CGSizeMake(kScreenWidth * 0.8 - 2 * 10,30.01f);
         } else {
@@ -1063,7 +1074,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
     if (self.filter == collectionView) {
-        
         return dropMenuTitleModel.sections.count;
     } else if (collectionView == self.collectionView){
         return 1;
@@ -1079,8 +1089,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
         GHDropMenuModel *dropMenuSectionModel = [dropMenuModel.sections by_ObjectAtIndex: section];
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
-            return dropMenuSectionModel.sectionSeleted ?  dropMenuSectionModel.dataArray.count:3;
-
+            return dropMenuSectionModel.sectionSeleted ? dropMenuSectionModel.dataArray.count:3;
         } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
             return 1;
         } else {
@@ -1126,7 +1135,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     } else {
         return [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellID" forIndexPath:indexPath];
     }
- 
 }
 
 - (void)tap: (UITapGestureRecognizer *)gesture {
@@ -1150,6 +1158,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         }
         if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:tagArray:)]) {
             [self.delegate dropMenu:self dropMenuModel:nil tagArray:dataArray.copy];
+        }
+        if (self.dropMenuTagArrayBlock) {
+            self.dropMenuTagArrayBlock(dataArray.copy);
         }
     } else if (button.tag == GHDropMenuButtonTypeReset){
         for (GHDropMenuModel *dropMenuSectionModel in dropMenuTitleModel.sections) {
@@ -1260,6 +1271,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         _filter = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth * 0.2, 0, kScreenWidth * 0.8, kScreenHeight - kFilterButtonHeight - kSafeAreaBottomHeight) collectionViewLayout:self.filterFlowLayout];
         _filter.delegate = self;
         _filter.dataSource = self;
+        _filter.layer.shadowColor = [UIColor redColor].CGColor;
+        _filter.layer.shadowOffset = CGSizeMake(1000, 10);
+        _filter.layer.shadowOpacity = 0.8;
         _filter.contentInset = UIEdgeInsetsMake(20, 10, 0, 10);
         _filter.backgroundColor = [UIColor whiteColor];
         [_filter registerClass:[GHDropMenuFilterItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterItemID"];

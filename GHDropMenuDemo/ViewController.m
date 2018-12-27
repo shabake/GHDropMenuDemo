@@ -34,8 +34,13 @@
     /** 设置数据源 */
     configuration.titles = [configuration creaDropMenuData];
     /** 创建dropMenu 配置模型 && frame */
-    GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kScreenWidth, 44)];
-    
+    GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
+        NSLog(@"%@",dropMenuModel.title);
+
+    } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
+        NSLog(@"%@",tagArray);
+    }];
+
     dropMenu.delegate = self;
 
     [self.view addSubview:dropMenu];
@@ -49,6 +54,7 @@
 
 }
 
+#pragma mark - 代理方法;
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel tagArray:(NSArray *)tagArray {
     NSMutableString *string = [NSMutableString string];
     if (tagArray.count) {

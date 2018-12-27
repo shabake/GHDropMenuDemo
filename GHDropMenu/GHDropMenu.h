@@ -94,16 +94,22 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
         tagArray: (NSArray *)tagArray;
 @end
 
+typedef void(^DropMenuTitleBlock)(GHDropMenuModel *dropMenuModel);
+typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 
 @interface GHDropMenu : UIView
-/**
- 初始化方法
- 
- @param configuration GHDropMenuModel模型
 
- @return GHDropMenu
+
+/**
+ 构造GHDropMenu
+
+ @param configuration 配置模型
+ @param frame 设置约束
+ @param dropMenuTitleBlock 顶部菜单选择回调
+ @param dropMenuTagArrayBlock 右侧筛选菜单回调
  */
-- (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration frame: (CGRect)frame;
++ (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration frame: (CGRect)frame dropMenuTitleBlock: (DropMenuTitleBlock)dropMenuTitleBlock dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock;
+
 /** set方法 */
 @property (nonatomic , strong) GHDropMenuModel *configuration;
 
@@ -115,6 +121,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 
 /** 动画时间 等于0 不开启动画 默认是0 */
 @property (nonatomic , assign) NSTimeInterval durationTime;
+
 /** 重置所有状态 */
 - (void)resetMenuStatus;
 
