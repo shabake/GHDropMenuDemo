@@ -1010,7 +1010,13 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     [self resetMenuStatus];
 }
 
-
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section  {
+    if (self.filter == collectionView) {
+        return CGSizeMake(kScreenWidth * 0.8, 10);
+    } else {
+        return CGSizeZero;
+    }
+}
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (self.filter == collectionView) {
         return CGSizeMake(kScreenWidth * 0.8, 44);
@@ -1029,6 +1035,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         header.dropMenuModel = dropMenuSectionModel;
         header.delegate = self;
         return header;
+    } else if ([kind isEqualToString:UICollectionElementKindSectionFooter] && self.filter == collectionView) {
+        return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"UICollectionReusableViewID" forIndexPath:indexPath];
     } else {
         return [UICollectionReusableView new];
     }
@@ -1258,6 +1266,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         [_filter registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellID"];
         [_filter registerClass:[GHDropMenuFilterHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"GHDropMenuFilterHeaderID"];
         [_filter registerClass:[GHDropMenuFilterInputItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterInputItemID"];
+        [_filter registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"UICollectionReusableViewID"];
     }
     return _filter;
 }
