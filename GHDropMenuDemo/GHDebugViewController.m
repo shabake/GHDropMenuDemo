@@ -18,9 +18,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor yellowColor];
-    
 }
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
     button.backgroundColor = [UIColor redColor];

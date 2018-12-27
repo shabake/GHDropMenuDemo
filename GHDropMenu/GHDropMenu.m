@@ -225,7 +225,6 @@
     self.leftTextField.frame = CGRectMake(0, 0, width, self.frame.size.height);
     self.line.frame = CGRectMake(width + 10, (self.frame.size.height - 1) * 0.5, 10, 1);
     self.rightTextField.frame = CGRectMake(self.line.frame.origin.x+ self.line.frame.size.width + 10, 0, width, self.frame.size.height);
-
 }
 - (UITextField *)rightTextField {
     if (_rightTextField == nil) {
@@ -238,7 +237,7 @@
         _rightTextField.font = [UIFont systemFontOfSize:13];
         _rightTextField.textColor = [UIColor darkGrayColor];
         _rightTextField.placeholder = @"请输入最高价";
-        _rightTextField.keyboardType = UIKeyboardTypeNamePhonePad;
+        _rightTextField.keyboardType = UIKeyboardTypeNumberPad;
         _rightTextField.tintColor = [UIColor orangeColor];
     }
     return _rightTextField;
@@ -254,7 +253,7 @@
         _leftTextField.font = [UIFont systemFontOfSize:13];
         _leftTextField.textColor = [UIColor darkGrayColor];
         _leftTextField.placeholder = @"请输入最低价";
-        _leftTextField.keyboardType = UIKeyboardTypeNamePhonePad;
+        _leftTextField.keyboardType = UIKeyboardTypeNumberPad;
         _leftTextField.tintColor = [UIColor orangeColor];
     }
     return _leftTextField;
@@ -1018,7 +1017,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
             return CGSizeMake((kScreenWidth * 0.8 - 4 * 10) / 3.01f, 30.01f);
 
         } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
-            return CGSizeMake(kScreenWidth * 0.8 - 3 * 10,30.01f);
+            return CGSizeMake(kScreenWidth * 0.8 - 2 * 10,30.01f);
         } else {
             return CGSizeZero;
         }
