@@ -100,6 +100,8 @@
     self.imageView.highlighted = dropMenuModel.sectionSeleted ? YES:NO;
     self.details.hidden = dropMenuModel.filterCellType == GHDropMenuFilterCellTypeInput ? YES:NO;
     self.imageView.hidden = self.details.hidden ;
+    CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
+    self.title.frame = CGRectMake(10, 0, titleSize.width, self.frame.size.height);
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -127,9 +129,13 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = CGRectMake(10, 0, 40, self.frame.size.height);
+    CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
+    CGSize detailsSize = [self.details.text sizeWithFont:[UIFont boldSystemFontOfSize:11] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
+
+    self.title.frame = CGRectMake(10, 0, titleSize.width, self.frame.size.height);
     self.imageView.frame = CGRectMake(self.frame.size.width - 10 - 10, (self.frame.size.height - 5 ) * 0.5, 10, 5);
-    self.details.frame = CGRectMake(self.frame.size.width - 10 - 15 - (self.frame.size.width - 10 - 15 - 40), 0,self.frame.size.width - 10 - 15 - 40, self.frame.size.height);
+    
+    self.details.frame = CGRectMake(self.frame.size.width - 10 - 15 - (self.frame.size.width - 10 - 15 - detailsSize.width), 0,self.frame.size.width - 10 - 15 - detailsSize.width, self.frame.size.height);
 }
 - (UIImageView *)imageView {
     if (_imageView == nil) {
@@ -528,8 +534,24 @@
         [dataArray6 addObject:dropMenuModel];
     }
     
+    /** ... */
+    NSArray *row4 = @[@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录"];
+    NSMutableArray *dataArray7 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < row4.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = [row4 by_ObjectAtIndex:index];
+        [dataArray7 addObject:dropMenuModel];
+    }
+    
+    NSArray *row5 = @[@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录"];
+    NSMutableArray *dataArray8 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < row5.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = [row5 by_ObjectAtIndex:index];
+        [dataArray8 addObject:dropMenuModel];
+    }
     /** 设置构造右侧弹出筛选菜单每行的标题 */
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格"];
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选"];
     NSMutableArray *sections = [NSMutableArray array];
     
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
@@ -550,8 +572,13 @@
         } else if (index == 2) {
             dropMenuModel.filterCellType = GHDropMenuFilterCellTypeInput;
             dropMenuModel.dataArray = dataArray6;
-        } else {
-            
+        } else if (index == 3){
+            dropMenuModel.dataArray = dataArray7;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 4) {
+            dropMenuModel.dataArray = dataArray8;
+            dropMenuModel.isMultiple = YES;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
         }
         [sections addObject:dropMenuModel];
     }
@@ -614,7 +641,7 @@
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         [dataArray6 addObject:dropMenuModel];
     }
-    
+
     /** 设置构造右侧弹出筛选菜单每行的标题 */
     NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格"];
     NSMutableArray *sections = [NSMutableArray array];
