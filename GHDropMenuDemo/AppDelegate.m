@@ -4,7 +4,7 @@
 //
 //  Created by zhaozhiwei on 2018/12/14.
 //  Copyright © 2018年 GHome. All rights reserved.
-//
+//  gitHub:https://github.com/shabake/GHDropMenuDemo
 
 #import "AppDelegate.h"
 #import "ViewController.h"
@@ -15,7 +15,6 @@
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
@@ -29,7 +28,7 @@
     GHDebugViewController *debugVc = [[GHDebugViewController alloc]init];
     window.rootViewController = debugVc;
 #else
-    
+
 #endif
     self.window = window;
     [window makeKeyAndVisible];

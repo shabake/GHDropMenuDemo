@@ -4,7 +4,7 @@
 //
 //  Created by zhaozhiwei on 2018/12/14.
 //  Copyright © 2018年 GHome. All rights reserved.
-//
+//  gitHub:https://github.com/shabake/GHDropMenuDemo
 
 #import "ViewController.h"
 #import "GHDropMenu.h"
@@ -33,11 +33,11 @@
     configuration.recordSeleted = NO;
     /** 设置数据源 */
     configuration.titles = [configuration creaDropMenuData];
-    /** 创建dropMenu 配置模型 &&frame */
+    /** 创建dropMenu 配置模型 && frame */
     GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kScreenWidth, 44)];
     
     dropMenu.delegate = self;
-    dropMenu.durationTime = 0.25;
+
     [self.view addSubview:dropMenu];
     
     self.view.backgroundColor = [UIColor orangeColor];
