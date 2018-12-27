@@ -702,6 +702,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     GHDropMenuButtonTypeReset,
 };
 
+typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
+    GHDropMenuShowTypeCommon = 1,
+    GHDropMenuShowTypeOnlyFilter,
+
+};
 @interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate>
 
 /** 装顶部菜单的数组 */
@@ -740,8 +745,23 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 
 @property (nonatomic , strong) DropMenuTagArrayBlock dropMenuTagArrayBlock;
 
+@property (nonatomic , assign) GHDropMenuShowType dropMenuShowType;
+
 @end
 @implementation GHDropMenu
+#pragma mark - 初始化
+
++ (instancetype)creatDropFilterMenuWidthConfiguration: (GHDropMenuModel *)configuration
+                                dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock {
+    GHDropMenu *dropMenu = [[GHDropMenu alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight)];
+    dropMenu.dropMenuShowType = GHDropMenuShowTypeOnlyFilter;
+    dropMenu.titles = configuration.titles.mutableCopy;
+    dropMenu.dropMenuTagArrayBlock = dropMenuTagArrayBlock;
+    [dropMenu setupFilterUI];
+    [dropMenu show];
+    return dropMenu;
+
+}
 
 #pragma mark - 初始化
 + (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration frame: (CGRect)frame dropMenuTitleBlock: (DropMenuTitleBlock)dropMenuTitleBlock dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock {
@@ -750,16 +770,15 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     dropMenu.menuHeight = frame.size.height;
     dropMenu.dropMenuTitleBlock = dropMenuTitleBlock;
     dropMenu.dropMenuTagArrayBlock = dropMenuTagArrayBlock;
+    dropMenu.dropMenuShowType = GHDropMenuShowTypeCommon;
+    [dropMenu setupUI];
     return dropMenu;
-}
-- (void)showWidthConfiguration: (GHDropMenuModel *)configuration {
-    self.titles = configuration.dataArray.mutableCopy;
-    [self show];
 }
 
 - (void)setTitleViewBackGroundColor:(UIColor *)titleViewBackGroundColor {
-    self.backgroundColor = titleViewBackGroundColor;
+    self.collectionView.backgroundColor = titleViewBackGroundColor;
 }
+
 - (void)setConfiguration:(GHDropMenuModel *)configuration {
     _configuration = configuration;
     self.titles = configuration.titles.copy;
@@ -791,13 +810,13 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        [self setupUI];
+      
+        
         [self defaultConfiguration];
     }
     return self;
 }
 - (void)defaultConfiguration {
-    self.backgroundColor = [UIColor blueColor];
     self.menuHeight = 44;
     self.currentIndex = 0;
 }
@@ -816,6 +835,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         }
       
     } completion:^(BOOL finished) {
+        if (self.dropMenuShowType == GHDropMenuShowTypeOnlyFilter) {
+            [self.layer setOpacity:0.0];
+        }
         [self.tableView reloadData];
     }];
     
@@ -824,7 +846,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 - (void)show {
     [self.tableView reloadData];
     [self.filter reloadData];
-    self.backgroundColor = [UIColor blueColor];
+    if (self.dropMenuShowType == GHDropMenuShowTypeOnlyFilter) {
+        [self.layer setOpacity:1];
+    }
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
     if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
         self.titleCover.backgroundColor = [UIColor clearColor];
@@ -848,7 +872,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
                 self.titleCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
             }
         } completion:^(BOOL finished) {
-            
         }];
     }];
 }
@@ -861,6 +884,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 }
 #pragma mark - 创建UI 添加控件
 - (void)setupUI {
+
     [self addSubview:self.collectionView];
     [kKeyWindow addSubview:self.filterCover];
     [kKeyWindow addSubview:self.titleCover];
@@ -872,6 +896,16 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     [kKeyWindow addSubview:self.tableView];
 }
 
+- (void)setupFilterUI {
+    [kKeyWindow addSubview:self];
+    
+    [self addSubview:self.filterCover];
+    [self.filterCover addSubview:self.filter];
+    [self.filterCover addSubview:self.bottomView];
+    [self.filterCover addSubview:self.sure];
+    [self.filterCover addSubview:self.reset];
+
+}
 /** 重置menu 状态 */
 - (void)resetMenuStatus {
     for (GHDropMenuModel *dropMenuModel in self.titles) {
@@ -1011,8 +1045,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         dropMenuModel.title = contentModel.title;
     }
     contentModel.cellSeleted = !contentModel.cellSeleted;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:tagArray:)]) {
-        [self.delegate dropMenu:self dropMenuModel:contentModel tagArray:@[]];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuTitleModel:)]) {
+        [self.delegate dropMenu:self dropMenuTitleModel:dropMenuModel];
     }
     
     if (self.dropMenuTitleBlock) {
@@ -1156,8 +1190,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
                 }
             }
         }
-        if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:tagArray:)]) {
-            [self.delegate dropMenu:self dropMenuModel:nil tagArray:dataArray.copy];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:tagArray:)]) {
+            [self.delegate dropMenu:self tagArray:dataArray.copy];
         }
         if (self.dropMenuTagArrayBlock) {
             self.dropMenuTagArrayBlock(dataArray.copy);

@@ -8,6 +8,7 @@
 
 #ifndef GHDropMenuHeader_h
 #define GHDropMenuHeader_h
+#define weakself(self)  __weak __typeof(self) weakSelf = self
 
 // ScreenWidth & kScreenHeight
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width

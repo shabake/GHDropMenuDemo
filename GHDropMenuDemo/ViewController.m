@@ -26,7 +26,7 @@
     
     /** 导航条名称 */
     self.navigationItem.title = @"筛选菜单";
-    
+#pragma mark - 创建普通筛选菜单
     /** 配置筛选菜单模型 */
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
     /** 配置筛选菜单是否记录用户选中 默认NO */
@@ -34,11 +34,11 @@
     /** 设置数据源 */
     configuration.titles = [configuration creaDropMenuData];
     /** 创建dropMenu 配置模型 && frame */
+    weakself(self);
     GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
-        NSLog(@"%@",dropMenuModel.title);
-
+        weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果 : %@",dropMenuModel.title];
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
-        NSLog(@"%@",tagArray);
+        [weakSelf getStrWith:tagArray];
     }];
 
     dropMenu.delegate = self;
@@ -47,15 +47,36 @@
     
     self.view.backgroundColor = [UIColor orangeColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(clickItem)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"只创建侧滑筛选菜单" style:UIBarButtonItemStylePlain target:self action:@selector(clickItem)];
     
 }
 - (void)clickItem {
+    #pragma mark - 单独创建右侧侧滑筛选菜单
+    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
+    /** 配置筛选菜单是否记录用户选中 默认NO */
+    configuration.titles = [configuration creaFilterDropMenuData];
 
+    configuration.recordSeleted = NO;
+    
+    weakself(self);
+    GHDropMenu *dropMenu = [GHDropMenu creatDropFilterMenuWidthConfiguration:configuration dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
+        [weakSelf getStrWith:tagArray];
+
+    }];
+    dropMenu.delegate = self;
 }
 
 #pragma mark - 代理方法;
-- (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel tagArray:(NSArray *)tagArray {
+- (void)dropMenu:(GHDropMenu *)dropMenu dropMenuTitleModel:(GHDropMenuModel *)dropMenuTitleModel {
+    self.navigationItem.title = [NSString stringWithFormat:@"筛选结果 : %@",dropMenuTitleModel.title];
+}
+- (void)dropMenu:(GHDropMenu *)dropMenu tagArray:(NSArray *)tagArray {
+    [self getStrWith:tagArray];
+}
+
+
+
+- (void)getStrWith: (NSArray *)tagArray {
     NSMutableString *string = [NSMutableString string];
     if (tagArray.count) {
         for (GHDropMenuModel *dropMenuTagModel in tagArray) {
@@ -64,22 +85,17 @@
                     [string appendFormat:@"%@",dropMenuTagModel.tagName];
                 }
             }
-    
+            
             if (dropMenuTagModel.maxPrice.length) {
-                NSLog(@"%@",dropMenuTagModel.maxPrice);
                 [string appendFormat:@"最大价格%@",dropMenuTagModel.maxPrice];
             }
             if (dropMenuTagModel.minPrice.length) {
                 [string appendFormat:@"最小价格%@",dropMenuTagModel.minPrice];
             }
         }
-    } else {
-        [string appendFormat:@"%@",dropMenuModel.title];
     }
-    
     self.navigationItem.title = [NSString stringWithFormat:@"筛选结果 : %@",string];
-    
-    /** do someting your word... */
 }
+
 
 @end

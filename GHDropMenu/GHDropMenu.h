@@ -86,12 +86,21 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
  代理回调
 
  @param dropMenu dropMenu本身
- @param dropMenuModel 标题模型
- @param tagArray tag数组
+ @param dropMenuTitleModel 标题弹出筛选结果
  */
 - (void)dropMenu: (GHDropMenu *)dropMenu
-   dropMenuModel: (nullable GHDropMenuModel *)dropMenuModel
-        tagArray: (NSArray *)tagArray;
+dropMenuTitleModel: (nullable GHDropMenuModel *)dropMenuTitleModel;
+
+/**
+ 代理回调
+ 
+ @param dropMenu dropMenu本身
+ @param tagArray 侧边弹出筛选结果
+ */
+
+- (void)dropMenu: (GHDropMenu *)dropMenu
+tagArray: (nullable NSArray *)tagArray;
+
 @end
 
 typedef void(^DropMenuTitleBlock)(GHDropMenuModel *dropMenuModel);
@@ -108,7 +117,18 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
  @param dropMenuTitleBlock 顶部菜单选择回调
  @param dropMenuTagArrayBlock 右侧筛选菜单回调
  */
-+ (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration frame: (CGRect)frame dropMenuTitleBlock: (DropMenuTitleBlock)dropMenuTitleBlock dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock;
++ (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration
+                                         frame: (CGRect)frame
+                            dropMenuTitleBlock: (DropMenuTitleBlock)dropMenuTitleBlock
+                         dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock;
+
+/**
+ 构造GHDropFilterMenu
+ @param configuration 配置模型
+ @param dropMenuTagArrayBlock 右侧筛选菜单回调
+ */
++ (instancetype)creatDropFilterMenuWidthConfiguration: (GHDropMenuModel *)configuration
+         dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock;
 
 /** set方法 */
 @property (nonatomic , strong) GHDropMenuModel *configuration;
@@ -125,7 +145,8 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 /** 重置所有状态 */
 - (void)resetMenuStatus;
 
-- (void)showWidthConfiguration: (GHDropMenuModel *)configuration;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
