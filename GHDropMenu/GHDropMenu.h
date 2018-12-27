@@ -74,8 +74,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 /** 记录indexPath */
 @property (nonatomic , strong) NSIndexPath *indexPath;
 
+
 /** 构造筛选菜单数据 */
 - (NSArray *)creaDropMenuData;
+- (NSArray *)creaFilterDropMenuData;
 @end
 
 @class GHDropMenu,GHDropMenuModel;
@@ -115,6 +117,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , assign) NSTimeInterval durationTime;
 /** 重置所有状态 */
 - (void)resetMenuStatus;
+
+- (void)showWidthConfiguration: (GHDropMenuModel *)configuration;
 @end
 
 NS_ASSUME_NONNULL_END

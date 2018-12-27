@@ -587,6 +587,83 @@
     return titlesArray;
 }
 
+
+
+- (NSArray *)creaFilterDropMenuData {
+    
+
+    /** 构造右侧弹出筛选菜单第一行数据 */
+    NSArray *row1 = @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
+    NSMutableArray *dataArray4 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < row1.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = [row1 by_ObjectAtIndex:index];
+        [dataArray4 addObject:dropMenuModel];
+    }
+    /** 构造右侧弹出筛选菜单第二行数据 */
+    NSArray *row2 = @[@"呵呵",@"哈哈",@"嘿嘿",@"呵呵",@"哈哈",@"嘿嘿"];
+    NSMutableArray *dataArray5 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < row2.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.tagName = [row2 by_ObjectAtIndex:index];
+        [dataArray5 addObject:dropMenuModel];
+    }
+    
+    /** 构造右侧弹出筛选菜单第三行数据 */
+    NSMutableArray *dataArray6 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < 1; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        [dataArray6 addObject:dropMenuModel];
+    }
+    
+    /** 设置构造右侧弹出筛选菜单每行的标题 */
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格"];
+    NSMutableArray *sections = [NSMutableArray array];
+    
+    for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.sectionHeaderTitle = sectionHeaderTitles[index];
+        
+        if (index == 0) {
+            dropMenuModel.dataArray = dataArray4;
+            /** 单选 */
+            dropMenuModel.isMultiple = NO;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 1) {
+            dropMenuModel.dataArray = dataArray5;
+            /** 多选 */
+            dropMenuModel.isMultiple = YES;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+            
+        } else if (index == 2) {
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeInput;
+            dropMenuModel.dataArray = dataArray6;
+        } else {
+            
+        }
+        [sections addObject:dropMenuModel];
+    }
+    NSMutableArray *titlesArray = [NSMutableArray array];
+    NSArray *types = @[
+                       @(GHDropMenuTypeFilter),
+                       ];
+    /** 菜单标题 */
+    NSArray *titles = @[@"智能排序"];
+    
+    for (NSInteger index = 0 ; index < 1; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = titles[index];
+        NSNumber *typeNum = types[index];
+        dropMenuModel.dropMenuType = typeNum.integerValue;
+
+        dropMenuModel.dataArray = dataArray4;
+        dropMenuModel.sections = sections;
+        
+        dropMenuModel.identifier = index;
+        [titlesArray addObject:dropMenuModel];
+    }
+    return titlesArray;
+}
 @end
 
 #pragma mark - - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - - GHDropMenu 筛选菜单开始
@@ -642,6 +719,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     dropMenu.menuHeight = frame.size.height;
     return dropMenu;
 }
+- (void)showWidthConfiguration: (GHDropMenuModel *)configuration {
+    self.titles = configuration.dataArray.mutableCopy;
+    [self show];
+}
+
 - (void)setTitleViewBackGroundColor:(UIColor *)titleViewBackGroundColor {
     self.backgroundColor = titleViewBackGroundColor;
 }
@@ -659,6 +741,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         }];
         self.menuHeight = configuration.menuHeight;
     }
+    
     if (configuration.titleFont) {
         for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
             dropMenuTitleModel.titleFont = configuration.titleFont;
@@ -704,12 +787,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     }];
     
 }
-
 #pragma mark - 弹出
 - (void)show {
     [self.tableView reloadData];
     [self.filter reloadData];
-    
+    self.backgroundColor = [UIColor blueColor];
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
     if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
         self.titleCover.backgroundColor = [UIColor clearColor];
@@ -719,18 +801,16 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
             self.titleCover.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, kScreenWidth, kScreenHeight - self.menuHeight - kSafeAreaTopHeight);
-
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.tableView.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, self.frame.size.width, 0);
             self.titleCover.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, self.frame.size.width, 0);
-
             self.filterCover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
         }
-
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.1 animations:^{
             if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
                 self.filterCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
+
             } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle) {
                 self.titleCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
             }
@@ -738,7 +818,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
             
         }];
     }];
- 
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -812,6 +891,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 }
 #pragma mark - 处理单选 多选
 - (void)actionMultipleWithDropMenuModel: (GHDropMenuModel *)dropMenuModel dropMenuSectionModel: (GHDropMenuModel *)dropMenuSectionModel {
+    
     /** 处理单选 */
     NSString *currentSeletedStr = [NSString string];
     if (dropMenuSectionModel.isMultiple) {
@@ -1050,6 +1130,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
     }
 }
 - (void)clickControl {
+    
     [self resetMenuStatus];
 }
 #pragma mark - 懒加载

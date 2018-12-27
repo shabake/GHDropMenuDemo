@@ -33,7 +33,6 @@
     configuration.recordSeleted = NO;
     /** 设置数据源 */
     configuration.titles = [configuration creaDropMenuData];
-    
     /** 创建dropMenu 配置模型 &&frame */
     GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kScreenWidth, 44)];
     
@@ -43,24 +42,13 @@
     
     self.view.backgroundColor = [UIColor orangeColor];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(clickItem)];
     
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 44 , kScreenWidth, 100)];
-    [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor redColor];
-    [self.view addSubview:button];
-    
-    UITextView *textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 500, kScreenWidth, 100)];
-    textView.font = [UIFont systemFontOfSize:20];
-    [self.view addSubview:textView];
-    self.textView = textView;
+}
+- (void)clickItem {
+
 }
 
-- (void)clickButton: (UIButton *)button {
-    int R = (arc4random() % 256) ;
-    int G = (arc4random() % 256) ;
-    int B = (arc4random() % 256) ;
-    [button setBackgroundColor:[UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]];
-}
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel tagArray:(NSArray *)tagArray {
     NSMutableString *string = [NSMutableString string];
     if (tagArray.count) {
@@ -83,7 +71,7 @@
         [string appendFormat:@"%@",dropMenuModel.title];
     }
     
-    self.textView.text = [NSString stringWithFormat:@"筛选结果 : %@",string];
+    self.navigationItem.title = [NSString stringWithFormat:@"筛选结果 : %@",string];
     
     /** do someting your word... */
 }

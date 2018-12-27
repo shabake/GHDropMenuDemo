@@ -9,34 +9,25 @@
 /* Begin PBXBuildFile section */
 		D650CD8021C35E0D00EC004A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD7F21C35E0D00EC004A /* AppDelegate.m */; };
 		D650CD8321C35E0D00EC004A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8221C35E0D00EC004A /* ViewController.m */; };
-		D650CD8621C35E0E00EC004A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8421C35E0E00EC004A /* Main.storyboard */; };
 		D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
 		D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */; };
 		D650CD8E21C35E0E00EC004A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8D21C35E0E00EC004A /* main.m */; };
-		D650CD9821C35E0E00EC004A /* GHDropMenuDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD9721C35E0E00EC004A /* GHDropMenuDemoTests.m */; };
-		D650CDA321C35E0E00EC004A /* GHDropMenuDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDA221C35E0E00EC004A /* GHDropMenuDemoUITests.m */; };
 		D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
 		D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
 		D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
 		D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
+		D6DF249D21D4B85E003D8C39 /* GHDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF249C21D4B85E003D8C39 /* GHDebugViewController.m */; };
+		D6DF24A021D4B865003D8C39 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
+		D6DF24A121D4B865003D8C39 /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
+		D6DF24A221D4B865003D8C39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8221C35E0D00EC004A /* ViewController.m */; };
+		D6DF24A321D4B865003D8C39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8D21C35E0E00EC004A /* main.m */; };
+		D6DF24A421D4B865003D8C39 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
+		D6DF24A521D4B865003D8C39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD7F21C35E0D00EC004A /* AppDelegate.m */; };
+		D6DF24A621D4B865003D8C39 /* GHDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF249C21D4B85E003D8C39 /* GHDebugViewController.m */; };
+		D6DF24A921D4B865003D8C39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */; };
+		D6DF24AA21D4B865003D8C39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
+		D6DF24AB21D4B865003D8C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D650CD9421C35E0E00EC004A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D650CD7321C35E0D00EC004A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D650CD7A21C35E0D00EC004A;
-			remoteInfo = GHDropMenuDemo;
-		};
-		D650CD9F21C35E0E00EC004A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D650CD7321C35E0D00EC004A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D650CD7A21C35E0D00EC004A;
-			remoteInfo = GHDropMenuDemo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D650CD7B21C35E0D00EC004A /* GHDropMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHDropMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,17 +35,10 @@
 		D650CD7F21C35E0D00EC004A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D650CD8121C35E0D00EC004A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D650CD8221C35E0D00EC004A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D650CD8521C35E0E00EC004A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D650CD8721C35E0E00EC004A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D650CD8A21C35E0E00EC004A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D650CD8C21C35E0E00EC004A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D650CD8D21C35E0E00EC004A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D650CD9321C35E0E00EC004A /* GHDropMenuDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GHDropMenuDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D650CD9721C35E0E00EC004A /* GHDropMenuDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuDemoTests.m; sourceTree = "<group>"; };
-		D650CD9921C35E0E00EC004A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D650CD9E21C35E0E00EC004A /* GHDropMenuDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GHDropMenuDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D650CDA221C35E0E00EC004A /* GHDropMenuDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuDemoUITests.m; sourceTree = "<group>"; };
-		D650CDA421C35E0E00EC004A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D650CDB121C35E6D00EC004A /* GHDropMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenu.h; sourceTree = "<group>"; };
 		D650CDB221C35E6D00EC004A /* GHDropMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenu.m; sourceTree = "<group>"; };
 		D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuHeader.h; sourceTree = "<group>"; };
@@ -63,6 +47,10 @@
 		D6DF1F8A21CFA76C003D8C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D6DF1FBB21D1948E003D8C39 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
 		D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Size.m"; sourceTree = "<group>"; };
+		D6DF249B21D4B85E003D8C39 /* GHDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDebugViewController.h; sourceTree = "<group>"; };
+		D6DF249C21D4B85E003D8C39 /* GHDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDebugViewController.m; sourceTree = "<group>"; };
+		D6DF24B021D4B865003D8C39 /* GHDropMenuDemoDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHDropMenuDemoDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6DF24B121D4B866003D8C39 /* GHDropMenuDemoDebug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = GHDropMenuDemoDebug.plist; path = /Users/zhaozhiwei/Desktop/demo/GHDropMenuDemo/GHDropMenuDemoDebug.plist; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,14 +61,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D650CD9021C35E0E00EC004A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D650CD9B21C35E0E00EC004A /* Frameworks */ = {
+		D6DF24A721D4B865003D8C39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -95,8 +76,6 @@
 			children = (
 				D650CDB021C35E1F00EC004A /* GHDropMenu */,
 				D650CD7D21C35E0D00EC004A /* GHDropMenuDemo */,
-				D650CD9621C35E0E00EC004A /* GHDropMenuDemoTests */,
-				D650CDA121C35E0E00EC004A /* GHDropMenuDemoUITests */,
 				D650CD7C21C35E0D00EC004A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,8 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				D650CD7B21C35E0D00EC004A /* GHDropMenuDemo.app */,
-				D650CD9321C35E0E00EC004A /* GHDropMenuDemoTests.xctest */,
-				D650CD9E21C35E0E00EC004A /* GHDropMenuDemoUITests.xctest */,
+				D6DF24B021D4B865003D8C39 /* GHDropMenuDemoDebug.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,32 +96,16 @@
 				D650CD7F21C35E0D00EC004A /* AppDelegate.m */,
 				D650CD8121C35E0D00EC004A /* ViewController.h */,
 				D650CD8221C35E0D00EC004A /* ViewController.m */,
-				D650CD8421C35E0E00EC004A /* Main.storyboard */,
+				D6DF249B21D4B85E003D8C39 /* GHDebugViewController.h */,
+				D6DF249C21D4B85E003D8C39 /* GHDebugViewController.m */,
 				D650CD8721C35E0E00EC004A /* Assets.xcassets */,
 				D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */,
 				D650CD8C21C35E0E00EC004A /* Info.plist */,
 				D650CD8D21C35E0E00EC004A /* main.m */,
 				D6DF1F8A21CFA76C003D8C39 /* README.md */,
+				D6DF24B121D4B866003D8C39 /* GHDropMenuDemoDebug.plist */,
 			);
 			path = GHDropMenuDemo;
-			sourceTree = "<group>";
-		};
-		D650CD9621C35E0E00EC004A /* GHDropMenuDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				D650CD9721C35E0E00EC004A /* GHDropMenuDemoTests.m */,
-				D650CD9921C35E0E00EC004A /* Info.plist */,
-			);
-			path = GHDropMenuDemoTests;
-			sourceTree = "<group>";
-		};
-		D650CDA121C35E0E00EC004A /* GHDropMenuDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D650CDA221C35E0E00EC004A /* GHDropMenuDemoUITests.m */,
-				D650CDA421C35E0E00EC004A /* Info.plist */,
-			);
-			path = GHDropMenuDemoUITests;
 			sourceTree = "<group>";
 		};
 		D650CDB021C35E1F00EC004A /* GHDropMenu */ = {
@@ -180,41 +142,22 @@
 			productReference = D650CD7B21C35E0D00EC004A /* GHDropMenuDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D650CD9221C35E0E00EC004A /* GHDropMenuDemoTests */ = {
+		D6DF249E21D4B865003D8C39 /* GHDropMenuDemoDebug */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D650CDAA21C35E0E00EC004A /* Build configuration list for PBXNativeTarget "GHDropMenuDemoTests" */;
+			buildConfigurationList = D6DF24AD21D4B865003D8C39 /* Build configuration list for PBXNativeTarget "GHDropMenuDemoDebug" */;
 			buildPhases = (
-				D650CD8F21C35E0E00EC004A /* Sources */,
-				D650CD9021C35E0E00EC004A /* Frameworks */,
-				D650CD9121C35E0E00EC004A /* Resources */,
+				D6DF249F21D4B865003D8C39 /* Sources */,
+				D6DF24A721D4B865003D8C39 /* Frameworks */,
+				D6DF24A821D4B865003D8C39 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D650CD9521C35E0E00EC004A /* PBXTargetDependency */,
 			);
-			name = GHDropMenuDemoTests;
-			productName = GHDropMenuDemoTests;
-			productReference = D650CD9321C35E0E00EC004A /* GHDropMenuDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		D650CD9D21C35E0E00EC004A /* GHDropMenuDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D650CDAD21C35E0E00EC004A /* Build configuration list for PBXNativeTarget "GHDropMenuDemoUITests" */;
-			buildPhases = (
-				D650CD9A21C35E0E00EC004A /* Sources */,
-				D650CD9B21C35E0E00EC004A /* Frameworks */,
-				D650CD9C21C35E0E00EC004A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D650CDA021C35E0E00EC004A /* PBXTargetDependency */,
-			);
-			name = GHDropMenuDemoUITests;
-			productName = GHDropMenuDemoUITests;
-			productReference = D650CD9E21C35E0E00EC004A /* GHDropMenuDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
+			name = GHDropMenuDemoDebug;
+			productName = GHDropMenuDemo;
+			productReference = D6DF24B021D4B865003D8C39 /* GHDropMenuDemoDebug.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -227,14 +170,6 @@
 				TargetAttributes = {
 					D650CD7A21C35E0D00EC004A = {
 						CreatedOnToolsVersion = 10.1;
-					};
-					D650CD9221C35E0E00EC004A = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = D650CD7A21C35E0D00EC004A;
-					};
-					D650CD9D21C35E0E00EC004A = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = D650CD7A21C35E0D00EC004A;
 					};
 				};
 			};
@@ -252,8 +187,7 @@
 			projectRoot = "";
 			targets = (
 				D650CD7A21C35E0D00EC004A /* GHDropMenuDemo */,
-				D650CD9221C35E0E00EC004A /* GHDropMenuDemoTests */,
-				D650CD9D21C35E0E00EC004A /* GHDropMenuDemoUITests */,
+				D6DF249E21D4B865003D8C39 /* GHDropMenuDemoDebug */,
 			);
 		};
 /* End PBXProject section */
@@ -266,21 +200,16 @@
 				D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */,
 				D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */,
 				D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */,
-				D650CD8621C35E0E00EC004A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D650CD9121C35E0E00EC004A /* Resources */ = {
+		D6DF24A821D4B865003D8C39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D650CD9C21C35E0E00EC004A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				D6DF24A921D4B865003D8C39 /* LaunchScreen.storyboard in Resources */,
+				D6DF24AA21D4B865003D8C39 /* Assets.xcassets in Resources */,
+				D6DF24AB21D4B865003D8C39 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,49 +226,27 @@
 				D650CD8E21C35E0E00EC004A /* main.m in Sources */,
 				D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */,
 				D650CD8021C35E0D00EC004A /* AppDelegate.m in Sources */,
+				D6DF249D21D4B85E003D8C39 /* GHDebugViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D650CD8F21C35E0E00EC004A /* Sources */ = {
+		D6DF249F21D4B865003D8C39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D650CD9821C35E0E00EC004A /* GHDropMenuDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D650CD9A21C35E0E00EC004A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D650CDA321C35E0E00EC004A /* GHDropMenuDemoUITests.m in Sources */,
+				D6DF24A021D4B865003D8C39 /* NSArray+Bounds.m in Sources */,
+				D6DF24A121D4B865003D8C39 /* GHDropMenu.m in Sources */,
+				D6DF24A221D4B865003D8C39 /* ViewController.m in Sources */,
+				D6DF24A321D4B865003D8C39 /* main.m in Sources */,
+				D6DF24A421D4B865003D8C39 /* NSString+Size.m in Sources */,
+				D6DF24A521D4B865003D8C39 /* AppDelegate.m in Sources */,
+				D6DF24A621D4B865003D8C39 /* GHDebugViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		D650CD9521C35E0E00EC004A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D650CD7A21C35E0D00EC004A /* GHDropMenuDemo */;
-			targetProxy = D650CD9421C35E0E00EC004A /* PBXContainerItemProxy */;
-		};
-		D650CDA021C35E0E00EC004A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D650CD7A21C35E0D00EC004A /* GHDropMenuDemo */;
-			targetProxy = D650CD9F21C35E0E00EC004A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		D650CD8421C35E0E00EC004A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D650CD8521C35E0E00EC004A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -469,6 +376,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ9JB9ZT4S;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					DEVELOPMENT0,
+				);
 				INFOPLIST_FILE = GHDropMenuDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -487,6 +399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ9JB9ZT4S;
+				GCC_PREPROCESSOR_DEFINITIONS = DEVELOPMENT0;
 				INFOPLIST_FILE = GHDropMenuDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -499,73 +412,45 @@
 			};
 			name = Release;
 		};
-		D650CDAB21C35E0E00EC004A /* Debug */ = {
+		D6DF24AE21D4B865003D8C39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GHDropMenuDemoTests/Info.plist;
+				DEVELOPMENT_TEAM = KZ9JB9ZT4S;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					DEVELOPMENT1,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/GHDropMenuDemoDebug.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GHome.GHDropMenuDemoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = GHome.GHDropMenuDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GHDropMenuDemo.app/GHDropMenuDemo";
 			};
 			name = Debug;
 		};
-		D650CDAC21C35E0E00EC004A /* Release */ = {
+		D6DF24AF21D4B865003D8C39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GHDropMenuDemoTests/Info.plist;
+				DEVELOPMENT_TEAM = KZ9JB9ZT4S;
+				GCC_PREPROCESSOR_DEFINITIONS = DEVELOPMENT1;
+				INFOPLIST_FILE = "$(SRCROOT)/GHDropMenuDemoDebug.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GHome.GHDropMenuDemoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = GHome.GHDropMenuDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GHDropMenuDemo.app/GHDropMenuDemo";
-			};
-			name = Release;
-		};
-		D650CDAE21C35E0E00EC004A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GHDropMenuDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = GHome.GHDropMenuDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GHDropMenuDemo;
-			};
-			name = Debug;
-		};
-		D650CDAF21C35E0E00EC004A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = GHDropMenuDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = GHome.GHDropMenuDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GHDropMenuDemo;
 			};
 			name = Release;
 		};
@@ -590,20 +475,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D650CDAA21C35E0E00EC004A /* Build configuration list for PBXNativeTarget "GHDropMenuDemoTests" */ = {
+		D6DF24AD21D4B865003D8C39 /* Build configuration list for PBXNativeTarget "GHDropMenuDemoDebug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D650CDAB21C35E0E00EC004A /* Debug */,
-				D650CDAC21C35E0E00EC004A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D650CDAD21C35E0E00EC004A /* Build configuration list for PBXNativeTarget "GHDropMenuDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D650CDAE21C35E0E00EC004A /* Debug */,
-				D650CDAF21C35E0E00EC004A /* Release */,
+				D6DF24AE21D4B865003D8C39 /* Debug */,
+				D6DF24AF21D4B865003D8C39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
