@@ -1056,7 +1056,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
             seletedIndexPath = dropMenuModel.indexPath;
         }
     }
-    GHDropMenuModel *dropMenuModel = self.titles[seletedIndexPath.row];
+    GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: seletedIndexPath.row];
     for (GHDropMenuModel *dropMenuContentModel in dropMenuModel.dataArray) {
         dropMenuContentModel.cellSeleted = NO;
     }
@@ -1066,11 +1066,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     }
     contentModel.cellSeleted = !contentModel.cellSeleted;
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuTitleModel:)]) {
-        [self.delegate dropMenu:self dropMenuTitleModel:dropMenuModel];
+        [self.delegate dropMenu:self dropMenuTitleModel:contentModel];
     }
     
     if (self.dropMenuTitleBlock) {
-        self.dropMenuTitleBlock(dropMenuModel);
+        self.dropMenuTitleBlock(contentModel);
     }
 
     [self resetMenuStatus];
