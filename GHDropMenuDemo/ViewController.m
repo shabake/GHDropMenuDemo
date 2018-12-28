@@ -51,13 +51,14 @@
     
 }
 - (void)clickItem {
+    
     #pragma mark - 单独创建右侧侧滑筛选菜单
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
     /** 配置筛选菜单是否记录用户选中 默认NO */
     configuration.titles = [configuration creaFilterDropMenuData];
 
     configuration.recordSeleted = NO;
-    
+
     weakself(self);
     GHDropMenu *dropMenu = [GHDropMenu creatDropFilterMenuWidthConfiguration:configuration dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         [weakSelf getStrWith:tagArray];

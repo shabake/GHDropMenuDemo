@@ -821,17 +821,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     }
     [self resetMenuStatus];
 }
+- (instancetype)new {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Must use creatDropMenuWithConfiguration or creatDropFilterMenuWidthConfiguration: instead" userInfo:nil];
+}
 - (instancetype)init {
-    if (self == [super init]) {
-        [self setupUI];
-        [self defaultConfiguration];
-    }
-    return self;
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Must use creatDropMenuWithConfiguration or creatDropFilterMenuWidthConfiguration: instead" userInfo:nil];
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-      
-        
         [self defaultConfiguration];
     }
     return self;
@@ -918,7 +915,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 
 - (void)setupFilterUI {
     [kKeyWindow addSubview:self];
-    
     [self addSubview:self.filterCover];
     [self.filterCover addSubview:self.filter];
     [self.filterCover addSubview:self.bottomView];
@@ -1072,7 +1068,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     if (self.dropMenuTitleBlock) {
         self.dropMenuTitleBlock(contentModel);
     }
-
     [self resetMenuStatus];
 }
 
