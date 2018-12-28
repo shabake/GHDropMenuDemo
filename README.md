@@ -8,11 +8,11 @@
 ### 2018.12.28更新
 * 增加单独侧滑菜单筛选
 
---
+---
 ### 2018.12.26更新
 * 修复无法响应事件bug
 
---
+---
 ### 2018.12.25更新
 
 * dropMenu的title自适应宽度
@@ -21,13 +21,13 @@
 * 适配x,xs,xr,xsmax
 * 去掉刚开始创建的动画
 
---
+---
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1419035-0ca99960ec7aa25e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240)
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-a9780ab228b09427.gif?imageMogr2/auto-orient/strip)
 
--- 
+---
 
 * **自定义筛选标题,自定义筛选内容,自定义筛选标签,自定义筛选头部内容**
 * **数组越界处理**
@@ -75,5 +75,5 @@
 ### 博客
 **简书:https://www.jianshu.com/u/884a67907187**
 
---
+---
 
