@@ -22,9 +22,13 @@
 * 去掉刚开始创建的动画
 
 --
+
 ![image.png](https://upload-images.jianshu.io/upload_images/1419035-0ca99960ec7aa25e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240)
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-a9780ab228b09427.gif?imageMogr2/auto-orient/strip)
+
+-- 
+
 * **自定义筛选标题,自定义筛选内容,自定义筛选标签,自定义筛选头部内容**
 * **数组越界处理**
 * **价格输入筛选**
@@ -36,7 +40,7 @@
 * **对原有项目无污染,直接拖进项目即可使用**<br/>
 
 
-###使用方法
+### 使用方法
 * 导入
 ```
 #import "GHDropMenu.h"
@@ -63,12 +67,12 @@
 详见demo
 ```
 
-###在使用中如有任何问题欢迎骚扰我,如果对你有帮助请点帮我一个✨,小弟感激不尽
+### 在使用中如有任何问题欢迎骚扰我,如果对你有帮助请点帮我一个✨,小弟感激不尽
 
-###联系我
+### 联系我
 **邮箱:45329453@qq.com**
 
-###博客
+### 博客
 **简书:https://www.jianshu.com/u/884a67907187**
 
 --
