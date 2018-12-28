@@ -41,6 +41,7 @@
 
 
 ### 使用方法
+* GHDropMenu 拖入项目中
 * 导入
 ```
 #import "GHDropMenu.h"
