@@ -8,8 +8,7 @@
 * 增加吸附效果的筛选菜单
 
 
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-4620dd3a74439c25.gif?imageMogr2/auto-orient/strip)
-
+![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-44ce9acb70a2b67f.gif?imageMogr2/auto-orient/strip)
 ---
 ### 2018.12.28更新
 * 增加单独侧滑菜单筛选
