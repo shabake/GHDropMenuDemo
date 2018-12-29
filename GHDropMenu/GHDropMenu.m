@@ -348,12 +348,13 @@
 
 @interface GHDropMenuTitle : UIView
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
+
 @end
 @interface GHDropMenuTitle()
 @property (nonatomic , strong) UILabel *label;
-@property (nonatomic , strong) UIImageView *imageView;
 @property (nonatomic , strong) UIView *topLine;
 @property (nonatomic , strong) UIView *bottomLine;
+@property (nonatomic , strong) UIImageView *imageView;
 
 @end
 @implementation GHDropMenuTitle
@@ -363,6 +364,12 @@
     CGSize labelSize = [self.label.text sizeWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.bounds.size.height)];
     self.label.frame = CGRectMake((self.bounds.size.width -labelSize.width) * 0.5 , 0, labelSize.width >  0 ?labelSize.width:80, self.bounds.size.height > 0 ?self.bounds.size.height :44);
     self.imageView.frame = CGRectMake(self.label.frame.size.width + self.label.frame.origin.x + 5, (self.bounds.size.height - 8 ) *.5, 10, 8);
+    
+    if (dropMenuModel.titleSeleted) {
+        self.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+    } else {
+        self.imageView.transform = CGAffineTransformMakeRotation(0);
+    }
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -378,7 +385,7 @@
 }
 - (void)setupUI {
     [self addSubview:self.label];
-//    [self addSubview:self.imageView];
+    [self addSubview:self.imageView];
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -548,8 +555,6 @@
     }
     return titlesArray;
 }
-
-
 - (NSArray *)creaDropMenuData {
   
     /** 构造第一列数据 */
@@ -681,9 +686,6 @@
     }
     return titlesArray;
 }
-
-
-
 - (NSArray *)creaFilterDropMenuData {
     
 
@@ -1078,12 +1080,13 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     }
     
 }
+#pragma mark - 点击顶部titleView 代理回调
 - (void)dropMenuItem:(GHDropMenuItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;
     if (dropMenuModel.titleSeleted) {
-        self.contents = dropMenuModel.dataArray.copy;
         /** 取出数组 展示*/
+        self.contents = dropMenuModel.dataArray.copy;
         for (GHDropMenuModel *model in self.titles) {
             if (model.identifier != dropMenuModel.identifier) {
                 model.titleSeleted = NO;
@@ -1096,6 +1099,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [self.collectionView reloadData];
 }
 
+#pragma mark - tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.contents.count;
 }
@@ -1139,6 +1143,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     }
     [self resetMenuStatus];
 }
+#pragma mark - collectionViewDelegate
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section  {
     if (self.filter == collectionView) {
@@ -1217,7 +1222,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         return 0;
     }
 }
-#pragma mark - 返回collectionView item
+#pragma mark - - - 返回collectionView item
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
     if (collectionView == self.collectionView) {
