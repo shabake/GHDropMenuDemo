@@ -6,11 +6,11 @@
 //  Copyright © 2018年 GHome. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "GHBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GHSlipMenuViewController : UIViewController
+@interface GHSlipMenuViewController : GHBaseViewController
 
 @end
 

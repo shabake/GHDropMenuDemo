@@ -48,7 +48,8 @@
     }];
     
     dropMenu.delegate = self;
-    
+    dropMenu.durationTime = 0.5;
+
     [self.view addSubview:dropMenu];
 }
 

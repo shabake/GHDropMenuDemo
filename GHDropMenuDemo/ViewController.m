@@ -10,6 +10,7 @@
 #import "GHComplexMenuViewController.h"
 #import "GHSlipMenuViewController.h"
 #import "GHNormalMenuViewController.h"
+#import "GHSuspendViewController.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) UITableView *tableView;
@@ -23,6 +24,7 @@
     [super viewDidLoad];
     
     self.view = self.tableView;
+    self.navigationItem.title = @"封装筛选菜单";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
@@ -35,14 +37,25 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *navTitle = self.dataArray[indexPath.row];
     if (indexPath.row == 0) {
         GHComplexMenuViewController *vc = [[GHComplexMenuViewController alloc]init];
+        vc.navTitle = navTitle;
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 1) {
         GHSlipMenuViewController *vc = [[GHSlipMenuViewController alloc]init];
+        vc.navTitle = navTitle;
+
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 2) {
         GHNormalMenuViewController *vc = [[GHNormalMenuViewController alloc]init];
+        vc.navTitle = navTitle;
+
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 3) {
+        GHSuspendViewController *vc = [[GHSuspendViewController alloc]init];
+        vc.navTitle = navTitle;
+
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -52,6 +65,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCellID"];
+        _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }
@@ -59,7 +73,7 @@
 
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = [NSArray arrayWithObjects:@"复杂筛选菜单",@"只有侧滑筛选菜单",@"普通筛选菜单", nil];
+        _dataArray = [NSArray arrayWithObjects:@"复杂筛选菜单",@"只有侧滑筛选菜单",@"普通筛选菜单",@"悬浮筛选菜单", nil];
     }
     return _dataArray;
 }

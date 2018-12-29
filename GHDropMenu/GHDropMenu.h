@@ -140,13 +140,15 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 
 @property (nonatomic , weak) id <GHDropMenuDelegate>delegate;
 
+@property (nonatomic , assign) CGFloat tableY;
+
 /** 动画时间 等于0 不开启动画 默认是0 */
 @property (nonatomic , assign) NSTimeInterval durationTime;
 
 /** 重置所有状态 */
 - (void)resetMenuStatus;
 
-
+- (void)show;
 
 @end
 

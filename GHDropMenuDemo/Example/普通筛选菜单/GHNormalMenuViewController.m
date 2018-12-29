@@ -46,7 +46,7 @@
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         [weakSelf getStrWith:tagArray];
     }];
-    
+    dropMenu.durationTime = 0.5;
     dropMenu.delegate = self;
     
     [self.view addSubview:dropMenu];

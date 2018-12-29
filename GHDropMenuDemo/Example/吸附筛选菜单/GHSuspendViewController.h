@@ -1,5 +1,5 @@
 //
-//  GHNormalMenuViewController.h
+//  GHSuspendViewController.h
 //  GHDropMenuDemo
 //
 //  Created by zhaozhiwei on 2018/12/29.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GHNormalMenuViewController : GHBaseViewController
+@interface GHSuspendViewController : GHBaseViewController
 
 @end
 

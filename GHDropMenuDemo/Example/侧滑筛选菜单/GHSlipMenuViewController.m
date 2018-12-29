@@ -41,7 +41,9 @@
         
     }];
     dropMenu.delegate = self;
-    
+    dropMenu.durationTime = 0.5;
+    [dropMenu show];
+
 }
 
 
