@@ -481,6 +481,74 @@
 #pragma mark - - - - GHDropMenuModel
 
 @implementation GHDropMenuModel
+- (NSArray *)creatNormalDropMenuData {
+    
+    /** 构造第一列数据 */
+    NSArray *line1 = @[@"价格从高到低",@"价格从低到高",@"距离从远到近",@"销量从低到高",@"信用从高到低"];
+    NSMutableArray *dataArray1 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < line1.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = [line1 by_ObjectAtIndex:index];
+        [dataArray1 addObject:dropMenuModel];
+    }
+    
+    /** 构造第二列数据 */
+    NSArray *line2 = @[@"0 - 10 元",@"10-20 元",@"20-50 元",@"50-100 元",@"100 - 1000元",@"1000 - 10000 元",@"10000-100000 元",@"100000-500000 元",@"500000-1000000 元",@"1000000以上"];
+    NSMutableArray *dataArray2 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < line2.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = [line2 by_ObjectAtIndex:index];
+        [dataArray2 addObject:dropMenuModel];
+    }
+    
+    /** 构造第三列数据 */
+    NSArray *line3 = @[@"psp",@"psv",@"nswitch",@"gba",@"gbc",@"gbp",@"ndsl",@"3ds"];
+    NSMutableArray *dataArray3 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < line3.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = [line3 by_ObjectAtIndex:index];
+        [dataArray3 addObject:dropMenuModel];
+    }
+    
+    /** 构造第四列数据 */
+    NSArray *line4 = @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
+    NSMutableArray *dataArray4 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < line4.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = [line4 by_ObjectAtIndex:index];
+        [dataArray4 addObject:dropMenuModel];
+    }
+  
+    NSMutableArray *titlesArray = [NSMutableArray array];
+    NSArray *types = @[
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeTitle),
+                       ];
+    /** 菜单标题 */
+    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"筛选"];
+    
+    for (NSInteger index = 0 ; index < titles.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = titles[index];
+        NSNumber *typeNum = types[index];
+        dropMenuModel.dropMenuType = typeNum.integerValue;
+        if (index == 0) {
+            dropMenuModel.dataArray = dataArray1;
+        } else if (index == 1) {
+            dropMenuModel.dataArray = dataArray2;
+        } else if (index == 2) {
+            dropMenuModel.dataArray = dataArray3;
+        } else if (index == 3) {
+            dropMenuModel.dataArray = dataArray4;
+        }
+        dropMenuModel.identifier = index;
+        [titlesArray addObject:dropMenuModel];
+    }
+    return titlesArray;
+}
+
 
 - (NSArray *)creaDropMenuData {
   
@@ -767,10 +835,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 
 @property (nonatomic , assign) GHDropMenuShowType dropMenuShowType;
 
+/** 弹出菜单的 y */
+@property (nonatomic , assign) CGFloat tabeleY;
+
 @end
 @implementation GHDropMenu
 #pragma mark - 初始化
-
 + (instancetype)creatDropFilterMenuWidthConfiguration: (GHDropMenuModel *)configuration
                                 dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock {
     GHDropMenu *dropMenu = [[GHDropMenu alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight)];
@@ -788,6 +858,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     GHDropMenu *dropMenu = [[GHDropMenu alloc]initWithFrame:CGRectMake(0, frame.origin.y, frame.size.width, frame.size.height)];
     dropMenu.configuration = configuration;
     dropMenu.menuHeight = frame.size.height;
+    dropMenu.tabeleY = frame.origin.y + frame.size.height;
     dropMenu.dropMenuTitleBlock = dropMenuTitleBlock;
     dropMenu.dropMenuTagArrayBlock = dropMenuTagArrayBlock;
     dropMenu.dropMenuShowType = GHDropMenuShowTypeCommon;
@@ -822,10 +893,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [self resetMenuStatus];
 }
 - (instancetype)new {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Must use creatDropMenuWithConfiguration or creatDropFilterMenuWidthConfiguration: instead" userInfo:nil];
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"请使用方法 creatDropMenuWithConfiguration: or creatDropFilterMenuWidthConfiguration: 代替初始化" userInfo:nil];
 }
 - (instancetype)init {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Must use creatDropMenuWithConfiguration or creatDropFilterMenuWidthConfiguration: instead" userInfo:nil];
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"请使用方法 creatDropMenuWithConfiguration: or creatDropFilterMenuWidthConfiguration: 代替初始化" userInfo:nil];
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -845,8 +916,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     self.titleCover.backgroundColor = [UIColor clearColor];
     [UIView animateWithDuration:0.5 animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
-            self.tableView.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight , self.frame.size.width, 0);
-            self.titleCover.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, kScreenWidth, 0);
+            self.tableView.frame = CGRectMake(0, self.tabeleY , self.frame.size.width, 0);
+            self.titleCover.frame = CGRectMake(0, self.tabeleY , kScreenWidth, 0);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.filterCover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
         }
@@ -873,11 +944,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     
     [UIView animateWithDuration:0.5 animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
-            self.tableView.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
-            self.titleCover.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, kScreenWidth, kScreenHeight - self.menuHeight - kSafeAreaTopHeight);
+            self.tableView.frame = CGRectMake(0, self.tabeleY, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
+            self.titleCover.frame = CGRectMake(0, self.tabeleY, kScreenWidth, kScreenHeight - self.menuHeight - kSafeAreaTopHeight);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
-            self.tableView.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, self.frame.size.width, 0);
-            self.titleCover.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, self.frame.size.width, 0);
+            self.tableView.frame = CGRectMake(0, self.tabeleY, self.frame.size.width, 0);
+            self.titleCover.frame = CGRectMake(0, self.tabeleY, self.frame.size.width, 0);
             self.filterCover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
         }
     } completion:^(BOOL finished) {
@@ -897,7 +968,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, self.menuHeight);
     self.topLine.frame = CGRectMake(0, 0, kScreenWidth, 1);
     self.bottomLine.frame = CGRectMake(0, self.menuHeight - 1, kScreenWidth, 1);
-    self.tableView.frame = CGRectMake(0, self.menuHeight + kSafeAreaTopHeight, self.frame.size.width, 0);
+    self.tableView.frame = CGRectMake(0, self.tabeleY, self.frame.size.width, 0);
 }
 #pragma mark - 创建UI 添加控件
 - (void)setupUI {
@@ -1110,9 +1181,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
         GHDropMenuModel *dropMenuSectionModel = dropMenuModel.sections[indexPath.section];
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
-            return CGSizeMake((kScreenWidth * 0.8 - 4 * 10) / 3.01f, 30.01f);
+            return CGSizeMake((kScreenWidth * 0.9 - 4 * 10) / 3.01f, 30.01f);
         } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
-            return CGSizeMake(kScreenWidth * 0.8 - 2 * 10,30.01f);
+            return CGSizeMake(kScreenWidth * 0.9 - 2 * 10,30.01f);
         } else {
             return CGSizeZero;
         }
@@ -1232,7 +1303,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     if (_bottomView == nil) {
         _bottomView = [[UIView alloc]init];
         _bottomView.backgroundColor = [UIColor whiteColor];
-        _bottomView.frame = CGRectMake(kScreenWidth * 0.2, self.filter.frame.size.height + self.filter.frame.origin.y + kFilterButtonHeight,self.filter.frame.size.width , kSafeAreaBottomHeight);
+        _bottomView.frame = CGRectMake(self.filter.frame.origin.x, self.filter.frame.size.height + self.filter.frame.origin.y + kFilterButtonHeight,self.filter.frame.size.width , kSafeAreaBottomHeight);
     }
     return _bottomView;
 }
@@ -1286,7 +1357,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 }
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.tabeleY, 0, 0) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.bounces = NO;
@@ -1314,10 +1385,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     }
     return _flowLayout;
 }
-
 - (UICollectionView *)filter {
     if (_filter == nil) {
-        _filter = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth * 0.2, 0, kScreenWidth * 0.8, kScreenHeight - kFilterButtonHeight - kSafeAreaBottomHeight) collectionViewLayout:self.filterFlowLayout];
+        _filter = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth * 0.1, 0, kScreenWidth * 0.9, kScreenHeight - kFilterButtonHeight - kSafeAreaBottomHeight) collectionViewLayout:self.filterFlowLayout];
         _filter.delegate = self;
         _filter.dataSource = self;
         _filter.layer.shadowColor = [UIColor redColor].CGColor;

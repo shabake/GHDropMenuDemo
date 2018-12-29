@@ -14,6 +14,9 @@
 		D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */; };
 		D650CD8E21C35E0E00EC004A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8D21C35E0E00EC004A /* main.m */; };
 		D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
+		D6A4ECD721D7902F0053D14F /* GHComplexMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */; };
+		D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDC21D7909E0053D14F /* GHSlipMenuViewController.m */; };
+		D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDF21D791F70053D14F /* GHNormalMenuViewController.m */; };
 		D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
 		D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
 		D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
@@ -44,6 +47,12 @@
 		D650CDB121C35E6D00EC004A /* GHDropMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenu.h; sourceTree = "<group>"; };
 		D650CDB221C35E6D00EC004A /* GHDropMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenu.m; sourceTree = "<group>"; };
 		D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuHeader.h; sourceTree = "<group>"; };
+		D6A4ECD521D7902F0053D14F /* GHComplexMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHComplexMenuViewController.h; sourceTree = "<group>"; };
+		D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHComplexMenuViewController.m; sourceTree = "<group>"; };
+		D6A4ECDB21D7909E0053D14F /* GHSlipMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHSlipMenuViewController.h; sourceTree = "<group>"; };
+		D6A4ECDC21D7909E0053D14F /* GHSlipMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHSlipMenuViewController.m; sourceTree = "<group>"; };
+		D6A4ECDE21D791F70053D14F /* GHNormalMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHNormalMenuViewController.h; sourceTree = "<group>"; };
+		D6A4ECDF21D791F70053D14F /* GHNormalMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHNormalMenuViewController.m; sourceTree = "<group>"; };
 		D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
 		D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
 		D6DF1F8A21CFA76C003D8C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -93,6 +102,7 @@
 		D650CD7D21C35E0D00EC004A /* GHDropMenuDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D6A4ECD121D790160053D14F /* Example */,
 				D650CD7E21C35E0D00EC004A /* AppDelegate.h */,
 				D650CD7F21C35E0D00EC004A /* AppDelegate.m */,
 				D650CD8121C35E0D00EC004A /* ViewController.h */,
@@ -121,6 +131,43 @@
 				D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */,
 			);
 			path = GHDropMenu;
+			sourceTree = "<group>";
+		};
+		D6A4ECD121D790160053D14F /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				D6A4ECD221D790160053D14F /* 复杂筛选菜单 */,
+				D6A4ECD321D790160053D14F /* 侧滑筛选菜单 */,
+				D6A4ECD421D790160053D14F /* 普通筛选菜单 */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		D6A4ECD221D790160053D14F /* 复杂筛选菜单 */ = {
+			isa = PBXGroup;
+			children = (
+				D6A4ECD521D7902F0053D14F /* GHComplexMenuViewController.h */,
+				D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */,
+			);
+			path = "复杂筛选菜单";
+			sourceTree = "<group>";
+		};
+		D6A4ECD321D790160053D14F /* 侧滑筛选菜单 */ = {
+			isa = PBXGroup;
+			children = (
+				D6A4ECDB21D7909E0053D14F /* GHSlipMenuViewController.h */,
+				D6A4ECDC21D7909E0053D14F /* GHSlipMenuViewController.m */,
+			);
+			path = "侧滑筛选菜单";
+			sourceTree = "<group>";
+		};
+		D6A4ECD421D790160053D14F /* 普通筛选菜单 */ = {
+			isa = PBXGroup;
+			children = (
+				D6A4ECDE21D791F70053D14F /* GHNormalMenuViewController.h */,
+				D6A4ECDF21D791F70053D14F /* GHNormalMenuViewController.m */,
+			);
+			path = "普通筛选菜单";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,8 +272,11 @@
 				D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */,
 				D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */,
 				D650CD8321C35E0D00EC004A /* ViewController.m in Sources */,
+				D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */,
 				D650CD8E21C35E0E00EC004A /* main.m in Sources */,
+				D6A4ECD721D7902F0053D14F /* GHComplexMenuViewController.m in Sources */,
 				D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */,
+				D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */,
 				D650CD8021C35E0D00EC004A /* AppDelegate.m in Sources */,
 				D6DF249D21D4B85E003D8C39 /* GHDebugViewController.m in Sources */,
 			);
