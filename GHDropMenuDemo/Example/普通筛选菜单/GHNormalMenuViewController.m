@@ -29,7 +29,7 @@
 }
 #pragma mark - 样式1
 - (void)style1 {
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kGHScreenWidth, 44)];
     label.text = @"样式1";
     label.textColor = [UIColor whiteColor];
     [self.view addSubview:label];
@@ -41,7 +41,7 @@
     configuration.titles = [configuration creatNormalDropMenuData];
     /** 创建dropMenu 配置模型 && frame */
     weakself(self);
-    GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, kSafeAreaTopHeight,kScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
+    GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
         weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         [weakSelf getStrWith:tagArray];

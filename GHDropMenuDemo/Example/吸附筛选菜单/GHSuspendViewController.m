@@ -66,9 +66,9 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat contentOffsetY = scrollView.contentOffset.y;
     
-    [self.header changeY:-contentOffsetY +kSafeAreaTopHeight - kHeaderHeight];
+    [self.header changeY:-contentOffsetY +kGHSafeAreaTopHeight - kHeaderHeight];
     if (contentOffsetY >=(kHeaderHeight - 44) - kHeaderHeight) {
-        [self.header changeY:-(kHeaderHeight - 44)+ kSafeAreaTopHeight];
+        [self.header changeY:-(kHeaderHeight - 44)+ kGHSafeAreaTopHeight];
     }
     self.dropMenu.tableY = CGRectGetMaxY(self.header.frame);
 
@@ -135,7 +135,7 @@
     if (_flowLayout == nil) {
         _flowLayout = [[UICollectionViewFlowLayout alloc]init];
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _flowLayout.itemSize = CGSizeMake(kScreenWidth, 44);
+        _flowLayout.itemSize = CGSizeMake(kGHScreenWidth, 44);
         _flowLayout.minimumLineSpacing = 0.01f;
         _flowLayout.minimumInteritemSpacing = 0.01f;
 
@@ -144,7 +144,7 @@
 }
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0 + kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight) collectionViewLayout:self.flowLayout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0 + kGHSafeAreaTopHeight, kGHScreenWidth, kGHScreenHeight - kGHSafeAreaTopHeight) collectionViewLayout:self.flowLayout];
         _collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -155,7 +155,7 @@
 }
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0 + kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0 + kGHSafeAreaTopHeight, kGHScreenWidth, kGHScreenHeight - kGHSafeAreaTopHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.contentInset = UIEdgeInsetsMake(kHeaderHeight, 0, 0, 0);
         _tableView.dataSource = self;
@@ -175,7 +175,7 @@
 - (GHSuspendHeader *)header {
     if (_header == nil) {
         _header = [[GHSuspendHeader alloc]init];
-        _header.frame = CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kHeaderHeight);
+        _header.frame = CGRectMake(0, kGHSafeAreaTopHeight, kGHScreenWidth, kHeaderHeight);
         GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
         /** 配置筛选菜单是否记录用户选中 默认NO */
         configuration.recordSeleted = NO;
@@ -183,7 +183,7 @@
         configuration.titles = [configuration creatNormalDropMenuData];
         /** 创建dropMenu 配置模型 && frame */
         weakself(self);
-        GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, kHeaderHeight - 44,kScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
+        GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, kHeaderHeight - 44,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
             weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
         } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
             

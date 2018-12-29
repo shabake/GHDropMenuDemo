@@ -9,6 +9,7 @@
 #import "GHDropMenu.h"
 #import "NSArray+Bounds.h"
 #import "NSString+Size.h"
+
 #pragma mark - - - -- - - -- - - - GHDropMenuCell
 @interface  GHDropMenuCell : UITableViewCell
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
@@ -841,7 +842,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 #pragma mark - 初始化
 + (instancetype)creatDropFilterMenuWidthConfiguration: (GHDropMenuModel *)configuration
                                 dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock {
-    GHDropMenu *dropMenu = [[GHDropMenu alloc]initWithFrame:CGRectMake(0,0, kScreenWidth, kScreenHeight)];
+    GHDropMenu *dropMenu = [[GHDropMenu alloc]initWithFrame:CGRectMake(0,0, kGHScreenWidth, kGHScreenHeight)];
     dropMenu.dropMenuShowType = GHDropMenuShowTypeOnlyFilter;
     dropMenu.titles = configuration.titles.mutableCopy;
     dropMenu.dropMenuTagArrayBlock = dropMenuTagArrayBlock;
@@ -874,11 +875,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     _configuration = configuration;
     self.titles = configuration.titles.copy;
     if (configuration.menuHeight) {
-        self.collectionView.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, configuration.menuHeight);
+        self.collectionView.frame = CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, configuration.menuHeight);
 
         [UIView animateWithDuration:0.0 animations:^{
-            self.topLine.frame = CGRectMake(0, 0, kScreenWidth, 1);
-            self.bottomLine.frame = CGRectMake(0, configuration.menuHeight - 1, kScreenWidth, 1);
+            self.topLine.frame = CGRectMake(0, 0, kGHScreenWidth, 1);
+            self.bottomLine.frame = CGRectMake(0, configuration.menuHeight - 1, kGHScreenWidth, 1);
         } completion:^(BOOL finished) {
             
         }];
@@ -917,9 +918,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [UIView animateWithDuration:self.durationTime animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY , self.frame.size.width, 0);
-            self.titleCover.frame = CGRectMake(0, self.tableY, kScreenWidth, 0);
+            self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, 0);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
-            self.filterCover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
+            self.filterCover.frame = CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, kGHScreenHeight);
         }
       
     } completion:^(BOOL finished) {
@@ -945,11 +946,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [UIView animateWithDuration:self.durationTime animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
-            self.titleCover.frame = CGRectMake(0, self.tableY, kScreenWidth, kScreenHeight - self.menuHeight - kSafeAreaTopHeight);
+            self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, kGHScreenHeight - self.menuHeight - kGHSafeAreaTopHeight);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
             self.titleCover.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
-            self.filterCover.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+            self.filterCover.frame = CGRectMake(0, 0, kGHScreenWidth, kGHScreenHeight);
         }
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.1 animations:^{
@@ -965,9 +966,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, self.menuHeight);
-    self.topLine.frame = CGRectMake(0, 0, kScreenWidth, 1);
-    self.bottomLine.frame = CGRectMake(0, self.menuHeight - 1, kScreenWidth, 1);
+    self.collectionView.frame = CGRectMake(0, 0, kGHScreenWidth, self.menuHeight);
+    self.topLine.frame = CGRectMake(0, 0, kGHScreenWidth, 1);
+    self.bottomLine.frame = CGRectMake(0, self.menuHeight - 1, kGHScreenWidth, 1);
     self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
 }
 #pragma mark - 创建UI 添加控件
@@ -1147,14 +1148,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section  {
     if (self.filter == collectionView) {
-        return CGSizeMake(kScreenWidth * 0.8, 10);
+        return CGSizeMake(kGHScreenWidth * 0.8, 10);
     } else {
         return CGSizeZero;
     }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (self.filter == collectionView) {
-        return CGSizeMake(kScreenWidth * 0.8, 44);
+        return CGSizeMake(kGHScreenWidth * 0.8, 44);
     } else {
         return CGSizeZero;
     }
@@ -1179,14 +1180,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == self.collectionView) {
-        return CGSizeMake(kScreenWidth /self.titles.count, self.menuHeight - 0.01f);
+        return CGSizeMake(kGHScreenWidth /self.titles.count, self.menuHeight - 0.01f);
     } else if (collectionView == self.filter) {
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
         GHDropMenuModel *dropMenuSectionModel = dropMenuModel.sections[indexPath.section];
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
-            return CGSizeMake((kScreenWidth * 0.9 - 4 * 10) / 3.01f, 30.01f);
+            return CGSizeMake((kGHScreenWidth * 0.9 - 4 * 10) / 3.01f, 30.01f);
         } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
-            return CGSizeMake(kScreenWidth * 0.9 - 2 * 10,30.01f);
+            return CGSizeMake(kGHScreenWidth * 0.9 - 2 * 10,30.01f);
         } else {
             return CGSizeZero;
         }
@@ -1306,14 +1307,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     if (_bottomView == nil) {
         _bottomView = [[UIView alloc]init];
         _bottomView.backgroundColor = [UIColor whiteColor];
-        _bottomView.frame = CGRectMake(self.filter.frame.origin.x, self.filter.frame.size.height + self.filter.frame.origin.y + kFilterButtonHeight,self.filter.frame.size.width , kSafeAreaBottomHeight);
+        _bottomView.frame = CGRectMake(self.filter.frame.origin.x, self.filter.frame.size.height + self.filter.frame.origin.y + kFilterButtonHeight,self.filter.frame.size.width , kGHSafeAreaBottomHeight);
     }
     return _bottomView;
 }
 - (UIControl *)titleCover {
     if (_titleCover == nil) {
         _titleCover = [[UIControl alloc]init];
-        _titleCover.frame = CGRectMake(0, self.frame.size.height + kSafeAreaTopHeight, kScreenWidth, 0);
+        _titleCover.frame = CGRectMake(0, self.frame.size.height + kGHSafeAreaTopHeight, kGHScreenWidth, 0);
         [_titleCover addTarget:self action:@selector(clickControl) forControlEvents:UIControlEventTouchUpInside];
         _titleCover.backgroundColor = [UIColor clearColor];
     }
@@ -1322,7 +1323,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 - (UIControl *)filterCover {
     if (_filterCover == nil) {
         _filterCover = [[UIControl alloc]init];
-        _filterCover.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
+        _filterCover.frame = CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, kGHScreenHeight);
         [_filterCover addTarget:self action:@selector(clickControl) forControlEvents:UIControlEventTouchUpInside];
         _filterCover.backgroundColor = [UIColor clearColor];
     }
@@ -1348,7 +1349,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 - (UIButton *)sure {
     if (_sure == nil) {
         _sure = [[UIButton alloc]init];
-        _sure.frame = CGRectMake(kScreenWidth - self.filter.frame.size.width * 0.5, self.filter.frame.size.height, self.filter.frame.size.width * 0.5, kFilterButtonHeight);
+        _sure.frame = CGRectMake(kGHScreenWidth - self.filter.frame.size.width * 0.5, self.filter.frame.size.height, self.filter.frame.size.width * 0.5, kFilterButtonHeight);
         _sure.backgroundColor = [UIColor orangeColor];
         [_sure setTitle:@"确定" forState:UIControlStateNormal];
         [_sure setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -1390,7 +1391,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 }
 - (UICollectionView *)filter {
     if (_filter == nil) {
-        _filter = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth * 0.1, 0, kScreenWidth * 0.9, kScreenHeight - kFilterButtonHeight - kSafeAreaBottomHeight) collectionViewLayout:self.filterFlowLayout];
+        _filter = [[UICollectionView alloc]initWithFrame:CGRectMake(kGHScreenWidth * 0.1, 0, kGHScreenWidth * 0.9, kGHScreenHeight - kFilterButtonHeight - kGHSafeAreaBottomHeight) collectionViewLayout:self.filterFlowLayout];
         _filter.delegate = self;
         _filter.dataSource = self;
         _filter.layer.shadowColor = [UIColor redColor].CGColor;
@@ -1408,7 +1409,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 }
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(kScreenWidth, 0, kScreenWidth, self.menuHeight) collectionViewLayout:self.flowLayout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, self.menuHeight) collectionViewLayout:self.flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];

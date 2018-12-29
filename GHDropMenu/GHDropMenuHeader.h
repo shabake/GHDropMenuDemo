@@ -11,15 +11,15 @@
 #define weakself(self)  __weak __typeof(self) weakSelf = self
 
 // ScreenWidth & kScreenHeight
-#define kScreenWidth  [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kGHScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define kGHScreenHeight [UIScreen mainScreen].bounds.size.height
 
-#define iPhoneXRAndXSMAX (kScreenWidth == 414.f && kScreenHeight == 896.f ? YES : NO)
+#define iPhoneXRAndXSMAX (kGHScreenWidth == 414.f && kGHScreenHeight == 896.f ? YES : NO)
 // iPhoneX
-#define iPhoneXAndXS (kScreenWidth == 375.f && kScreenHeight == 812.f ? YES : NO)
-#define kSafeAreaBottomHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX) ?34 : 0)
+#define iPhoneXAndXS (kGHScreenWidth == 375.f && kGHScreenHeight == 812.f ? YES : NO)
+#define kGHSafeAreaBottomHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX) ?34 : 0)
 // StatusbarH + NavigationH
-#define kSafeAreaTopHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX) ? 88.f : 64.f)
+#define kGHSafeAreaTopHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX) ? 88.f : 64.f)
 // StatusBarHeight
 #define kStatusBarHeight ((iPhoneXAndXS || iPhoneXRAndXSMAX)  ? 44.f : 20.f)
 // NavigationBarHeigth
