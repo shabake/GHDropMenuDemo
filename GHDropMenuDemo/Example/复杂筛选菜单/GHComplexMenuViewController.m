@@ -20,11 +20,6 @@
     
     [super viewDidLoad];
     
-    /** 导航条名称 */
-    self.navigationItem.title = @"筛选菜单";
-    
-    self.view.backgroundColor = [UIColor orangeColor];
-    
     [self style1];
 }
 #pragma mark - 样式1

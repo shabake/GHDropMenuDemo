@@ -19,11 +19,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-        /** 导航条名称 */
-    self.navigationItem.title = @"筛选菜单";
     
-    self.view.backgroundColor = [UIColor orangeColor];
-        
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(clickItem)];
 }
 
@@ -45,11 +41,6 @@
     [dropMenu show];
 
 }
-
-
-
-
-
 
 
 #pragma mark - 代理方法;

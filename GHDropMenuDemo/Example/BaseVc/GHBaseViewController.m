@@ -19,6 +19,8 @@
     // Do any additional setup after loading the view.
     
     self.navigationItem.title = self.navTitle;
+    
+    self.view.backgroundColor = [UIColor orangeColor];
 }
 
 /*
