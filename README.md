@@ -6,7 +6,7 @@
 #### **超级简单好用的电商筛选菜单** 
 ### 2018.12.29更新
 * 增加吸附效果的筛选菜单
-
+* 分别可选tableView悬浮菜单和collectionView悬浮菜单
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-44ce9acb70a2b67f.gif?imageMogr2/auto-orient/strip)
 ---
