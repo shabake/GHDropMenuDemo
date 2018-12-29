@@ -4,7 +4,12 @@
 #### **自由定制电商筛选菜单**
 
 #### **超级简单好用的电商筛选菜单** 
+### 2018.12.29更新
+* 增加吸附效果的筛选菜单
 
+![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-4620dd3a74439c25.gif?imageMogr2/auto-orient/strip)
+
+---
 ### 2018.12.28更新
 * 增加单独侧滑菜单筛选
 
