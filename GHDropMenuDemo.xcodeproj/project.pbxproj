@@ -20,6 +20,7 @@
 		D6A4ECE421D793720053D14F /* GHSuspendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE321D793720053D14F /* GHSuspendViewController.m */; };
 		D6A4ECE721D79F750053D14F /* GHSuspendHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */; };
 		D6A4ECEB21D7AD760053D14F /* GHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECEA21D7AD760053D14F /* GHBaseViewController.m */; };
+		D6A4ECEE21D7B2E30053D14F /* GHSuspendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECED21D7B2E30053D14F /* GHSuspendItem.m */; };
 		D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
 		D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
 		D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
@@ -62,6 +63,8 @@
 		D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHSuspendHeader.m; sourceTree = "<group>"; };
 		D6A4ECE921D7AD760053D14F /* GHBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHBaseViewController.h; sourceTree = "<group>"; };
 		D6A4ECEA21D7AD760053D14F /* GHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHBaseViewController.m; sourceTree = "<group>"; };
+		D6A4ECEC21D7B2E30053D14F /* GHSuspendItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHSuspendItem.h; sourceTree = "<group>"; };
+		D6A4ECED21D7B2E30053D14F /* GHSuspendItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHSuspendItem.m; sourceTree = "<group>"; };
 		D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
 		D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
 		D6DF1F8A21CFA76C003D8C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -188,6 +191,8 @@
 				D6A4ECE321D793720053D14F /* GHSuspendViewController.m */,
 				D6A4ECE521D79F750053D14F /* GHSuspendHeader.h */,
 				D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */,
+				D6A4ECEC21D7B2E30053D14F /* GHSuspendItem.h */,
+				D6A4ECED21D7B2E30053D14F /* GHSuspendItem.m */,
 			);
 			path = "吸附筛选菜单";
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				D6A4ECD721D7902F0053D14F /* GHComplexMenuViewController.m in Sources */,
 				D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */,
 				D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */,
+				D6A4ECEE21D7B2E30053D14F /* GHSuspendItem.m in Sources */,
 				D6A4ECE421D793720053D14F /* GHSuspendViewController.m in Sources */,
 				D650CD8021C35E0D00EC004A /* AppDelegate.m in Sources */,
 				D6DF249D21D4B85E003D8C39 /* GHDebugViewController.m in Sources */,
