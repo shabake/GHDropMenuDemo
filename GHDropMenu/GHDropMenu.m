@@ -9,6 +9,7 @@
 #import "GHDropMenu.h"
 #import "NSArray+Bounds.h"
 #import "NSString+Size.h"
+#import "UIView+Extension.h"
 
 #pragma mark - - - -- - - -- - - - GHDropMenuCell
 @interface  GHDropMenuCell : UITableViewCell
@@ -909,6 +910,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     self.menuHeight = 44;
     self.currentIndex = 0;
 }
+
 #pragma mark - 消失
 - (void)dismiss {
     

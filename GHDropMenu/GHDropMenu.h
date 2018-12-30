@@ -83,6 +83,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 
 @class GHDropMenu,GHDropMenuModel;
 @protocol GHDropMenuDelegate <NSObject>
+@optional
 /**
  代理回调
 
@@ -102,6 +103,8 @@ dropMenuTitleModel: (nullable GHDropMenuModel *)dropMenuTitleModel;
 - (void)dropMenu: (GHDropMenu *)dropMenu
 tagArray: (nullable NSArray *)tagArray;
 
+- (void)dropMenu: (GHDropMenu *)dropMenu
+        distance: (CGFloat)distance;
 @end
 
 typedef void(^DropMenuTitleBlock)(GHDropMenuModel *dropMenuModel);

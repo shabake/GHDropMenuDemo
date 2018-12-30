@@ -42,4 +42,7 @@
 #define kFilterButtonHeight 44
 #define kFilterButtonWidth 44
 
+
+#import "UIView+Extension.h"
+
 #endif /* GHDropMenuHeader_h */

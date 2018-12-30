@@ -63,6 +63,7 @@
     [self.dropMenu resetMenuStatus];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat contentOffsetY = scrollView.contentOffset.y;
     
@@ -167,7 +168,18 @@
 
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = [NSArray arrayWithObjects:@"学习iOS",@"一定要",@"眼高手低",@"纸上谈兵",@"夸夸二滩",@"多学少练",@"开开心心",@"学习iOS",@"一定要",@"眼高手低",@"纸上谈兵",@"夸夸二滩",@"多学少练",@"开开心心",@"学习iOS",@"一定要",@"眼高手低",@"纸上谈兵",@"夸夸二滩",@"多学少练",@"开开心心" ,nil];
+        _dataArray = [NSArray arrayWithObjects:@"学习iOS",@"一定要",@"眼高手低",@"纸上谈兵",@"不思进取",@"多学少练",@"开开心心",@"惠而不倦",@"2019",@"行尸走",
+                      @"金蝉脱壳",
+                      @"百里挑一",
+                      @"金玉满堂",
+                      @"背水一战",
+                      @"霸王别姬",
+                      @"天上人间",
+                      @"不吐不快",
+                      @"海阔天空",
+                      @"情非得已",
+                      @"满腹经纶",
+                      @"兵临城下" ,nil];
     }
     return _dataArray;
 }
