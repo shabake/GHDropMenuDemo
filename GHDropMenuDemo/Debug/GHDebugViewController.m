@@ -17,17 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor yellowColor];
+    self.navigationItem.title = @"debug";
+    self.view.backgroundColor = [UIColor whiteColor];
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-    button.backgroundColor = [UIColor redColor];
-    [button addTarget:self action:@selector(clickButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    [[UIApplication sharedApplication].keyWindow addSubview:button];
-}
-- (void)clickButton {
-    NSLog(@"测试打印");
-}
+
 
 @end

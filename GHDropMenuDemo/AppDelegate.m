@@ -18,11 +18,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+#ifdef DEVELOPMENT0
     /** 筛选菜单 */
     ViewController *vc = [[ViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     window.rootViewController = nav;
+#elif DEVELOPMENT1
+    /** debug模式 */
+    GHDebugViewController *debugVc = [[GHDebugViewController alloc]init];
+    window.rootViewController = debugVc;
+#else
 
+#endif
     self.window = window;
     [window makeKeyAndVisible];
     return YES;
