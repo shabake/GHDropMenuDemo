@@ -5,7 +5,10 @@
 
 #### **超级简单好用的电商筛选菜单** 
 ---
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-44ce9acb70a2b67f.gif?imageMogr2/auto-orient/strip)
+
+![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0da7858245c4693a.gif?imageMogr2/auto-orient/strip)
+
+
 
 ---
 
@@ -26,9 +29,6 @@
 * **选中内容通过代理的方式回调**
 * **对原有项目无污染,直接拖进项目即可使用**
 
-
-
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0da7858245c4693a.gif?imageMogr2/auto-orient/strip)
 
 
 
