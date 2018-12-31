@@ -14,8 +14,8 @@
 ---
 
 ### 2018.12.20更新
-* 增加吸附效果的筛选菜单
-* 分别可选tableView悬浮菜单和collectionView悬浮菜单
+* +增加吸附效果的筛选菜单
+* +分别可选tableView悬浮菜单和collectionView悬浮菜单
 * **增加单独侧滑菜单筛选**
 * **dropMenu的title自适应宽度**
 * **适配x,xs,xr,xsmax**
