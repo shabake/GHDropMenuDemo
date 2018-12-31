@@ -10,31 +10,15 @@
 * 分别可选tableView悬浮菜单和collectionView悬浮菜单
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-44ce9acb70a2b67f.gif?imageMogr2/auto-orient/strip)
----
-### 2018.12.28更新
-* 增加单独侧滑菜单筛选
-
----
-### 2018.12.26更新
-* 修复无法响应事件bug
-
----
-### 2018.12.25更新
-
-* dropMenu的title自适应宽度
-* 增加适量注释,模型封装
-* 外部模型控制内部用户点击筛选是否记录
-* 适配x,xs,xr,xsmax
-* 去掉刚开始创建的动画
 
 ---
 
-![image.png](https://upload-images.jianshu.io/upload_images/1419035-0ca99960ec7aa25e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/240)
-
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-a9780ab228b09427.gif?imageMogr2/auto-orient/strip)
-
----
-
+### 2018.12.30更新
+* **增加悬浮筛选菜单**
+* **增加单独侧滑菜单筛选**
+* **dropMenu的title自适应宽度**
+* **适配x,xs,xr,xsmax**
+* **去掉刚开始创建的动画**
 * **自定义筛选标题,自定义筛选内容,自定义筛选标签,自定义筛选头部内容**
 * **数组越界处理**
 * **价格输入筛选**
@@ -43,7 +27,12 @@
 * **动画展开,移除**
 * **可以重新传入模型,重新刷新数据源**
 * **选中内容通过代理的方式回调**
-* **对原有项目无污染,直接拖进项目即可使用**<br/>
+* **对原有项目无污染,直接拖进项目即可使用**
+
+
+
+![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0da7858245c4693a.gif?imageMogr2/auto-orient/strip)
+
 
 
 ### 使用方法
