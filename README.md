@@ -2,6 +2,7 @@
 ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg) 
 ![](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)
 ![](https://img.shields.io/vscode-marketplace/d/:repo.svg)
+![](https://img.shields.io/cocoapods/l/:packageName.svg)
 # GHDropMenuDemo
 #### **自由定制电商筛选菜单**
 
