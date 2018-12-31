@@ -45,7 +45,7 @@
 * GHDropMenu 拖入项目中
 * 导入 #import "GHDropMenu.h"
 
-```
+```Objective-C
     /** 配置筛选菜单模型 */
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
     /** 配置筛选菜单是否记录用户选中 默认NO */
