@@ -4,9 +4,9 @@
 ![](https://img.shields.io/vscode-marketplace/d/repo.svg)
 ![](https://img.shields.io/cocoapods/l/packageName.svg)
 # GHDropMenuDemo
-#### **自由定制电商筛选菜单**
 
-#### **超级简单好用的电商筛选菜单** 
+`筛选菜单` `京东筛选菜单` `美团筛选菜单` 电商通用筛选菜单
+
 ---
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0da7858245c4693a.gif?imageMogr2/auto-orient/strip)
