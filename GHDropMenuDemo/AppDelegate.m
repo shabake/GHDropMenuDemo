@@ -26,7 +26,9 @@
 #elif DEVELOPMENT1
     /** debug模式 */
     GHDebugViewController *debugVc = [[GHDebugViewController alloc]init];
-    window.rootViewController = debugVc;
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:debugVc];
+
+    window.rootViewController = nav;
 #else
 
 #endif
