@@ -10,7 +10,6 @@
 		D650CD8321C35E0D00EC004A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8221C35E0D00EC004A /* ViewController.m */; };
 		D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
 		D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */; };
-		D650CD8E21C35E0E00EC004A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8D21C35E0E00EC004A /* main.m */; };
 		D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
 		D6A4ECD721D7902F0053D14F /* GHComplexMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */; };
 		D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDC21D7909E0053D14F /* GHSlipMenuViewController.m */; };
@@ -22,7 +21,6 @@
 		D6A4ECF121D841850053D14F /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECF021D841850053D14F /* UIView+Extension.m */; };
 		D6A4ECF821DA2E5C0053D14F /* GHMeituanFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECF721DA2E5C0053D14F /* GHMeituanFoodViewController.m */; };
 		D6A4ECFC21DA2E9F0053D14F /* GHDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECFA21DA2E9F0053D14F /* GHDebugViewController.m */; };
-		D6A4ED0E21DA66670053D14F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD7F21C35E0D00EC004A /* AppDelegate.m */; };
 		D6A4ED1121DA66FD0053D14F /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECF021D841850053D14F /* UIView+Extension.m */; };
 		D6A4ED1221DA66FD0053D14F /* GHMeituanFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECF721DA2E5C0053D14F /* GHMeituanFoodViewController.m */; };
 		D6A4ED1321DA66FD0053D14F /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
@@ -33,7 +31,6 @@
 		D6A4ED1821DA66FD0053D14F /* GHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECEA21D7AD760053D14F /* GHBaseViewController.m */; };
 		D6A4ED1921DA66FD0053D14F /* GHDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECFA21DA2E9F0053D14F /* GHDebugViewController.m */; };
 		D6A4ED1A21DA66FD0053D14F /* GHNormalMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDF21D791F70053D14F /* GHNormalMenuViewController.m */; };
-		D6A4ED1B21DA66FD0053D14F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8D21C35E0E00EC004A /* main.m */; };
 		D6A4ED1C21DA66FD0053D14F /* GHComplexMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */; };
 		D6A4ED1D21DA66FD0053D14F /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
 		D6A4ED1E21DA66FD0053D14F /* GHSlipMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDC21D7909E0053D14F /* GHSlipMenuViewController.m */; };
@@ -43,6 +40,9 @@
 		D6A4ED2421DA66FD0053D14F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
 		D6A4ED2521DA66FD0053D14F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
 		D6A4ED2C21DA6A570053D14F /* GHDropMenuDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6A4ED2B21DA6A570053D14F /* GHDropMenuDebug.plist */; };
+		D6A4ED3121DA6B950053D14F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED3021DA6B950053D14F /* main.m */; };
+		D6A4ED3221DA6BE30053D14F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED3021DA6B950053D14F /* main.m */; };
+		D6A4ED3321DA6C720053D14F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD7F21C35E0D00EC004A /* AppDelegate.m */; };
 		D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
 		D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
 		D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
@@ -57,7 +57,6 @@
 		D650CD8721C35E0E00EC004A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D650CD8A21C35E0E00EC004A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D650CD8C21C35E0E00EC004A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D650CD8D21C35E0E00EC004A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D650CDB121C35E6D00EC004A /* GHDropMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenu.h; sourceTree = "<group>"; };
 		D650CDB221C35E6D00EC004A /* GHDropMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenu.m; sourceTree = "<group>"; };
 		D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuHeader.h; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		D6A4ECFB21DA2E9F0053D14F /* GHDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHDebugViewController.h; sourceTree = "<group>"; };
 		D6A4ED2921DA66FD0053D14F /* GHDropMenuDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHDropMenuDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6A4ED2B21DA6A570053D14F /* GHDropMenuDebug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GHDropMenuDebug.plist; sourceTree = "<group>"; };
+		D6A4ED3021DA6B950053D14F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
 		D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
 		D6DF1F8A21CFA76C003D8C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -111,6 +111,7 @@
 		D650CD7221C35E0D00EC004A = {
 			isa = PBXGroup;
 			children = (
+				D6DF1F8A21CFA76C003D8C39 /* README.md */,
 				D650CDB021C35E1F00EC004A /* GHDropMenu */,
 				D650CD7D21C35E0D00EC004A /* GHDropMenuDemo */,
 				D650CD7C21C35E0D00EC004A /* Products */,
@@ -129,17 +130,14 @@
 		D650CD7D21C35E0D00EC004A /* GHDropMenuDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D6A4ED2D21DA6B160053D14F /* Other */,
 				D6A4ECF921DA2E9F0053D14F /* Debug */,
 				D6A4ECD121D790160053D14F /* Example */,
 				D650CD7E21C35E0D00EC004A /* AppDelegate.h */,
 				D650CD7F21C35E0D00EC004A /* AppDelegate.m */,
+				D6A4ED3021DA6B950053D14F /* main.m */,
 				D650CD8121C35E0D00EC004A /* ViewController.h */,
 				D650CD8221C35E0D00EC004A /* ViewController.m */,
-				D650CD8721C35E0E00EC004A /* Assets.xcassets */,
-				D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */,
-				D650CD8C21C35E0E00EC004A /* Info.plist */,
-				D650CD8D21C35E0E00EC004A /* main.m */,
-				D6DF1F8A21CFA76C003D8C39 /* README.md */,
 			);
 			path = GHDropMenuDemo;
 			sourceTree = "<group>";
@@ -249,6 +247,16 @@
 			path = Debug;
 			sourceTree = "<group>";
 		};
+		D6A4ED2D21DA6B160053D14F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */,
+				D650CD8721C35E0E00EC004A /* Assets.xcassets */,
+				D650CD8C21C35E0E00EC004A /* Info.plist */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -352,13 +360,13 @@
 				D6A4ECF821DA2E5C0053D14F /* GHMeituanFoodViewController.m in Sources */,
 				D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */,
 				D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */,
-				D6A4ED0E21DA66670053D14F /* AppDelegate.m in Sources */,
+				D6A4ED3321DA6C720053D14F /* AppDelegate.m in Sources */,
 				D6A4ECE721D79F750053D14F /* GHSuspendHeader.m in Sources */,
+				D6A4ED3121DA6B950053D14F /* main.m in Sources */,
 				D650CD8321C35E0D00EC004A /* ViewController.m in Sources */,
 				D6A4ECEB21D7AD760053D14F /* GHBaseViewController.m in Sources */,
 				D6A4ECFC21DA2E9F0053D14F /* GHDebugViewController.m in Sources */,
 				D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */,
-				D650CD8E21C35E0E00EC004A /* main.m in Sources */,
 				D6A4ECD721D7902F0053D14F /* GHComplexMenuViewController.m in Sources */,
 				D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */,
 				D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */,
@@ -377,11 +385,11 @@
 				D6A4ED1421DA66FD0053D14F /* GHDropMenu.m in Sources */,
 				D6A4ED1521DA66FD0053D14F /* AppDelegate.m in Sources */,
 				D6A4ED1621DA66FD0053D14F /* GHSuspendHeader.m in Sources */,
+				D6A4ED3221DA6BE30053D14F /* main.m in Sources */,
 				D6A4ED1721DA66FD0053D14F /* ViewController.m in Sources */,
 				D6A4ED1821DA66FD0053D14F /* GHBaseViewController.m in Sources */,
 				D6A4ED1921DA66FD0053D14F /* GHDebugViewController.m in Sources */,
 				D6A4ED1A21DA66FD0053D14F /* GHNormalMenuViewController.m in Sources */,
-				D6A4ED1B21DA66FD0053D14F /* main.m in Sources */,
 				D6A4ED1C21DA66FD0053D14F /* GHComplexMenuViewController.m in Sources */,
 				D6A4ED1D21DA66FD0053D14F /* NSString+Size.m in Sources */,
 				D6A4ED1E21DA66FD0053D14F /* GHSlipMenuViewController.m in Sources */,
@@ -520,6 +528,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ9JB9ZT4S;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -527,7 +536,7 @@
 					"$(inherited)",
 					DEVELOPMENT0,
 				);
-				INFOPLIST_FILE = GHDropMenuDemo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GHDropMenuDemo/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -543,10 +552,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZ9JB9ZT4S;
 				GCC_PREPROCESSOR_DEFINITIONS = DEVELOPMENT0;
-				INFOPLIST_FILE = GHDropMenuDemo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GHDropMenuDemo/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
