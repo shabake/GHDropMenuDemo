@@ -1,5 +1,7 @@
 ![](https://img.shields.io/badge/platform-iOS-red.svg) ![](https://img.shields.io/badge/language-Objective--C-orange.svg) 
 ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg) 
+![](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)
+![](https://img.shields.io/vscode-marketplace/d/:repo.svg)
 # GHDropMenuDemo
 #### **自由定制电商筛选菜单**
 
@@ -7,8 +9,6 @@
 ---
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0da7858245c4693a.gif?imageMogr2/auto-orient/strip)
-
-
 
 ---
 
