@@ -331,7 +331,6 @@
         _title.text = @"1";
         _title.layer.masksToBounds = YES;
         _title.layer.cornerRadius = 10;
-
         _title.layer.borderColor = [UIColor lightGrayColor].CGColor;
         _title.layer.borderWidth = 0.5;
         _title.font = [UIFont systemFontOfSize:13];
@@ -414,8 +413,8 @@
     if (_imageView == nil) {
         _imageView = [[UIImageView alloc]init];
         _imageView.frame = CGRectMake(CGRectGetMaxX(self.label.frame), 0, 10, 8);
-        _imageView.image = [UIImage imageNamed:@"up_normal"];
-        _imageView.highlightedImage = [UIImage imageNamed:@"down_normal"];
+        _imageView.highlightedImage = [UIImage imageNamed:@"up_normal"];
+        _imageView.image = [UIImage imageNamed:@"down_normal"];
     }
     return _imageView;
 }

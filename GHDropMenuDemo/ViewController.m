@@ -24,7 +24,7 @@
     [super viewDidLoad];
     
     self.view = self.tableView;
-    self.navigationItem.title = @"封装筛选菜单";
+    self.navigationItem.title = @"筛选菜单";
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
