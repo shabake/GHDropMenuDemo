@@ -5,16 +5,13 @@
 
 #### **超级简单好用的电商筛选菜单** 
 ---
-### 2018.12.29更新
-* 增加吸附效果的筛选菜单
-* 分别可选tableView悬浮菜单和collectionView悬浮菜单
-
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-44ce9acb70a2b67f.gif?imageMogr2/auto-orient/strip)
 
 ---
 
-### 2018.12.30更新
-* **增加悬浮筛选菜单**
+### 2018.12.20更新
+* 增加吸附效果的筛选菜单
+* 分别可选tableView悬浮菜单和collectionView悬浮菜单
 * **增加单独侧滑菜单筛选**
 * **dropMenu的title自适应宽度**
 * **适配x,xs,xr,xsmax**
