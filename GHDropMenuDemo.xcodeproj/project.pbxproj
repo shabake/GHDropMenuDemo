@@ -85,7 +85,7 @@
 		D6A4ED3021DA6B950053D14F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
 		D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
-		D6DF1F8A21CFA76C003D8C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		D6DF1F8A21CFA76C003D8C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = GHDropMenu/README.md; sourceTree = SOURCE_ROOT; };
 		D6DF1FBB21D1948E003D8C39 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
 		D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Size.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,7 +111,6 @@
 		D650CD7221C35E0D00EC004A = {
 			isa = PBXGroup;
 			children = (
-				D6DF1F8A21CFA76C003D8C39 /* README.md */,
 				D650CDB021C35E1F00EC004A /* GHDropMenu */,
 				D650CD7D21C35E0D00EC004A /* GHDropMenuDemo */,
 				D650CD7C21C35E0D00EC004A /* Products */,
@@ -145,6 +144,7 @@
 		D650CDB021C35E1F00EC004A /* GHDropMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D6DF1F8A21CFA76C003D8C39 /* README.md */,
 				D6A4ECEF21D841850053D14F /* UIView+Extension.h */,
 				D6A4ECF021D841850053D14F /* UIView+Extension.m */,
 				D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */,
