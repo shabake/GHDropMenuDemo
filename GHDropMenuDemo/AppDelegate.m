@@ -27,7 +27,6 @@
     /** debug模式 */
     GHDebugViewController *debugVc = [[GHDebugViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:debugVc];
-
     window.rootViewController = nav;
 #else
 
