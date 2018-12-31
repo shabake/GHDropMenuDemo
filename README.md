@@ -7,9 +7,6 @@
 
 `筛选菜单` `京东筛选菜单` `美团筛选菜单` 电商通用筛选菜单
 
----
-
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0da7858245c4693a.gif?imageMogr2/auto-orient/strip)
 
 ---
 
@@ -38,6 +35,12 @@
 
 
 
+| 图片 | 描述 |
+| ---- | ---- |
+|![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-d18ad53edae0691e.gif?imageMogr2/auto-orient/strip) | 普通筛选菜单|
+|![baidu][baidu-logo] | 复杂筛选菜单|
+|![baidu][baidu-logo] | 侧滑筛选菜单|
+|![baidu][baidu-logo] | 悬浮筛选菜单|
 
 
 
