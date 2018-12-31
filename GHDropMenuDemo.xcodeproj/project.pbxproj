@@ -38,13 +38,12 @@
 		D6A4ED2021DA66FD0053D14F /* GHSuspendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE321D793720053D14F /* GHSuspendViewController.m */; };
 		D6A4ED2321DA66FD0053D14F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */; };
 		D6A4ED2421DA66FD0053D14F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
-		D6A4ED2521DA66FD0053D14F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
 		D6A4ED2C21DA6A570053D14F /* GHDropMenuDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6A4ED2B21DA6A570053D14F /* GHDropMenuDebug.plist */; };
 		D6A4ED3121DA6B950053D14F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED3021DA6B950053D14F /* main.m */; };
 		D6A4ED3221DA6BE30053D14F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED3021DA6B950053D14F /* main.m */; };
 		D6A4ED3321DA6C720053D14F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD7F21C35E0D00EC004A /* AppDelegate.m */; };
+		D6A4ED3521DA6ED70053D14F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6A4ED3421DA6ED70053D14F /* README.md */; };
 		D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
-		D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DF1F8A21CFA76C003D8C39 /* README.md */; };
 		D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
 /* End PBXBuildFile section */
 
@@ -83,9 +82,9 @@
 		D6A4ED2921DA66FD0053D14F /* GHDropMenuDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHDropMenuDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6A4ED2B21DA6A570053D14F /* GHDropMenuDebug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GHDropMenuDebug.plist; sourceTree = "<group>"; };
 		D6A4ED3021DA6B950053D14F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D6A4ED3421DA6ED70053D14F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
 		D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
-		D6DF1F8A21CFA76C003D8C39 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = GHDropMenu/README.md; sourceTree = SOURCE_ROOT; };
 		D6DF1FBB21D1948E003D8C39 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
 		D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Size.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,7 +143,7 @@
 		D650CDB021C35E1F00EC004A /* GHDropMenu */ = {
 			isa = PBXGroup;
 			children = (
-				D6DF1F8A21CFA76C003D8C39 /* README.md */,
+				D6A4ED3421DA6ED70053D14F /* README.md */,
 				D6A4ECEF21D841850053D14F /* UIView+Extension.h */,
 				D6A4ECF021D841850053D14F /* UIView+Extension.m */,
 				D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */,
@@ -334,7 +333,7 @@
 			files = (
 				D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */,
 				D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */,
-				D6DF1F8B21CFA76D003D8C39 /* README.md in Resources */,
+				D6A4ED3521DA6ED70053D14F /* README.md in Resources */,
 				D6A4ED2C21DA6A570053D14F /* GHDropMenuDebug.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,7 +344,6 @@
 			files = (
 				D6A4ED2321DA66FD0053D14F /* LaunchScreen.storyboard in Resources */,
 				D6A4ED2421DA66FD0053D14F /* Assets.xcassets in Resources */,
-				D6A4ED2521DA66FD0053D14F /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
