@@ -72,6 +72,9 @@
             if (dropMenuTagModel.minPrice.length) {
                 [string appendFormat:@"最小价格%@",dropMenuTagModel.minPrice];
             }
+            if (dropMenuTagModel.singleInput.length) {
+                [string appendFormat:@"%@",dropMenuTagModel.singleInput];
+            }
         }
     }
     self.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",string];

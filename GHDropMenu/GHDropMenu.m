@@ -100,7 +100,8 @@
     self.title.text = dropMenuModel.sectionHeaderTitle;
     self.details.text = dropMenuModel.sectionHeaderDetails.length?dropMenuModel.sectionHeaderDetails:@"全部";
     self.imageView.highlighted = dropMenuModel.sectionSeleted ? YES:NO;
-    self.details.hidden = dropMenuModel.filterCellType == GHDropMenuFilterCellTypeInput ? YES:NO;
+    self.details.hidden = (dropMenuModel.filterCellType == GHDropMenuFilterCellTypeInput  ||
+    dropMenuModel.filterCellType == GHDropMenuFilterCellTypeSingleInput )? YES:NO;
     self.imageView.hidden = self.details.hidden ;
     CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
     self.title.frame = CGRectMake(10, 0, titleSize.width, self.frame.size.height);
@@ -171,6 +172,73 @@
 #pragma mark - - - - - - - - GHDropMenuFilterHeader
 
 @end
+@class GHDropMenuFilterSingleInputItem;
+@protocol GHDropMenuFilterSingleInputItemDelegate <NSObject>
+- (void)dropMenuFilterSingleInputItem: (GHDropMenuFilterSingleInputItem *)item dropMenuModel: (GHDropMenuModel *)dropMenuModel;
+@end
+
+@interface GHDropMenuFilterSingleInputItem : UICollectionViewCell
+@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
+@property (nonatomic , weak) id <GHDropMenuFilterSingleInputItemDelegate> delegate;
+
+@end
+@interface GHDropMenuFilterSingleInputItem()
+@property (nonatomic , strong)UITextField *textField;
+@end
+@implementation GHDropMenuFilterSingleInputItem
+- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    _dropMenuModel = dropMenuModel;
+    self.textField.text = dropMenuModel.singleInput;
+}
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self == [super initWithFrame:frame]) {
+        [self setupUI];
+        [self configuration];
+    }
+    return self;
+}
+- (void)configuration {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.textField];
+}
+
+- (void)textChange: (NSNotification *)noti {
+    self.dropMenuModel.singleInput = self.textField.text;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuFilterSingleInputItem:dropMenuModel:)]) {
+        [self.delegate dropMenuFilterSingleInputItem:self dropMenuModel:self.dropMenuModel];
+    }
+}
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)setupUI {
+    [self addSubview:self.textField];
+    
+}
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGFloat width = (self.frame.size.width - 2 * 10 - 10) / 2;
+    self.textField.frame = CGRectMake(0, 0, width, self.frame.size.height);
+    
+}
+- (UITextField *)textField {
+    if (_textField == nil) {
+        _textField = [[UITextField alloc]init];
+        _textField.layer.cornerRadius = 10;
+        _textField.layer.masksToBounds = YES;
+        _textField.layer.borderWidth = 0.5;
+        _textField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        _textField.textAlignment = NSTextAlignmentCenter;
+        _textField.font = [UIFont systemFontOfSize:13];
+        _textField.textColor = [UIColor darkGrayColor];
+        _textField.keyboardType = UIKeyboardTypeNumberPad;
+        _textField.tintColor = [UIColor orangeColor];
+        _textField.placeholder = @"请输入";
+    }
+    return _textField;
+}
+
+@end
+
 #pragma mark - - - - - - - - GHDropMenuFilterInputItem
 @class GHDropMenuFilterInputItem;
 @protocol GHDropMenuFilterInputItemDelegate <NSObject>
@@ -278,8 +346,6 @@
 
 @end
 #pragma mark - - - - - - - - GHDropMenuFilterItem
-
-
 @class GHDropMenuFilterItem,GHDropMenuModel;
 @protocol GHDropMenuFilterItemDelegate <NSObject>
 - (void)dropMenuFilterItem: (GHDropMenuFilterItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel;
@@ -624,8 +690,15 @@
         dropMenuModel.tagName = [row5 by_ObjectAtIndex:index];
         [dataArray8 addObject:dropMenuModel];
     }
+    
+    NSMutableArray *dataArray9 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < 1; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        [dataArray9 addObject:dropMenuModel];
+    }
+    
     /** 设置构造右侧弹出筛选菜单每行的标题 */
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选"];
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框"];
     NSMutableArray *sections = [NSMutableArray array];
     
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
@@ -653,6 +726,9 @@
             dropMenuModel.dataArray = dataArray8;
             dropMenuModel.isMultiple = YES;
             dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 5) {
+            dropMenuModel.dataArray = dataArray9;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeSingleInput;
         }
         [sections addObject:dropMenuModel];
     }
@@ -728,8 +804,16 @@
         dropMenuModel.tagName = [row5 by_ObjectAtIndex:index];
         [dataArray8 addObject:dropMenuModel];
     }
+    
+    
+    NSMutableArray *dataArray9 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < 1; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        [dataArray9 addObject:dropMenuModel];
+    }
+    
     /** 设置构造右侧弹出筛选菜单每行的标题 */
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选"];
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框"];
     NSMutableArray *sections = [NSMutableArray array];
     
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
@@ -756,6 +840,9 @@
             dropMenuModel.dataArray = dataArray8;
             dropMenuModel.isMultiple = YES;
             dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 5) {
+            dropMenuModel.dataArray = dataArray9;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeSingleInput;
         }
         [sections addObject:dropMenuModel];
     }
@@ -795,7 +882,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     GHDropMenuShowTypeOnlyFilter,
 
 };
-@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate>
+@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate>
 
 /** 装顶部菜单的数组 */
 @property (nonatomic , strong) NSMutableArray *titles;
@@ -1041,6 +1128,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self resetMenuStatus];
 }
+- (void)dropMenuFilterSingleInputItem:(GHDropMenuFilterSingleInputItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
+    GHDropMenuModel *dropMenuSectionModel = [dropMenuTitleModel.sections by_ObjectAtIndex: dropMenuModel.indexPath.section];
+    GHDropMenuModel *dropMenuTagModel = [dropMenuSectionModel.dataArray by_ObjectAtIndex:dropMenuModel.indexPath.row];
+    dropMenuTagModel.singleInput = dropMenuModel.singleInput;
+}
 - (void)dropMenuFilterInputItem:(GHDropMenuFilterInputItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
@@ -1221,7 +1314,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         GHDropMenuModel *dropMenuSectionModel = dropMenuModel.sections[indexPath.section];
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
             return CGSizeMake((kGHScreenWidth * 0.9 - 4 * 10) / 3.01f, 30.01f);
-        } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
+        } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput ||
+                   dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput) {
             return CGSizeMake(kGHScreenWidth * 0.9 - 2 * 10,30.01f);
         } else {
             return CGSizeZero;
@@ -1249,7 +1343,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         GHDropMenuModel *dropMenuSectionModel = [dropMenuModel.sections by_ObjectAtIndex: section];
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
             return dropMenuSectionModel.sectionSeleted ? dropMenuSectionModel.dataArray.count:3;
-        } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
+        } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput ||
+                   dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput) {
             return 1;
         } else {
             return 0;
@@ -1288,6 +1383,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
             cell.dropMenuModel = dropMenuTagModel;
             cell.delegate = self;
             return cell;
+        } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput) {
+            GHDropMenuFilterSingleInputItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GHDropMenuFilterSingleInputItemID" forIndexPath:indexPath];
+            cell.dropMenuModel = dropMenuTagModel;
+            cell.delegate = self;
+            return cell;
         } else  {
             return [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellID" forIndexPath:indexPath];
         }
@@ -1310,7 +1410,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
                 if (dropMenuTagModel.tagSeleted) {
                     [dataArray addObject:dropMenuTagModel];
                 }
-                if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput) {
+                if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput ||
+                    dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput) {
                     [dataArray addObject:dropMenuTagModel];
                 }
             }
@@ -1439,6 +1540,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         [_filter registerClass:[GHDropMenuFilterHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"GHDropMenuFilterHeaderID"];
         [_filter registerClass:[GHDropMenuFilterInputItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterInputItemID"];
         [_filter registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"UICollectionReusableViewID"];
+        [_filter registerClass:[GHDropMenuFilterSingleInputItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterSingleInputItemID"];
+
     }
     return _filter;
 }

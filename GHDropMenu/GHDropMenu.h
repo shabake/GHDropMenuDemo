@@ -17,6 +17,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuFilterCellType ) {
     GHDropMenuFilterCellTypeTag = 1,
     /** 输入 */
     GHDropMenuFilterCellTypeInput,
+    /** 输入 */
+    GHDropMenuFilterCellTypeSingleInput,
 };
 /** 菜单类型 */
 typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
@@ -31,6 +33,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , assign) BOOL recordSeleted;
 /** 筛选菜单类型 */
 @property (nonatomic , assign) GHDropMenuFilterCellType filterCellType;
+@property (nonatomic , copy) NSString *singleInput;
+
 /** 最小价格 */
 @property (nonatomic , copy) NSString *minPrice;
 /** 最大价格 */
@@ -83,7 +87,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 
 @class GHDropMenu,GHDropMenuModel;
 @protocol GHDropMenuDataSource <NSObject>
-
+@required
 /** 配置筛选菜单标题 */
 - (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu;
 /** 配置筛选菜单标题选项 */

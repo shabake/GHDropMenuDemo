@@ -25,7 +25,6 @@
 #pragma mark - 样式1
 - (void)style1 {
 
-
     /** 创建dropMenu 配置模型 && frame */
     weakself(self);
     GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
