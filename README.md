@@ -19,6 +19,7 @@
 + 增加数据源
 
 ```
+#### 使用方法:
 
 ```Objective-C
 GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
@@ -31,7 +32,7 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
     dropMenu.dataSource = self;
     [self.view addSubview:dropMenu];
 ```
-
+#### 实现数据源方法:
 ```Objective-C
 // 返回筛选菜单标题的个数
 - (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu {
