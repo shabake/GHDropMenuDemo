@@ -28,15 +28,10 @@
     label.text = @"样式1";
     label.textColor = [UIColor whiteColor];
     [self.view addSubview:label];
-    /** 配置筛选菜单模型 */
-    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
-    /** 配置筛选菜单是否记录用户选中 默认NO */
-    configuration.recordSeleted = NO;
-    /** 设置数据源 */
-    configuration.titles = [configuration creatNormalDropMenuData];
+
     /** 创建dropMenu 配置模型 && frame */
     weakself(self);
-    GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
+    GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
         weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         [weakSelf getStrWith:tagArray];

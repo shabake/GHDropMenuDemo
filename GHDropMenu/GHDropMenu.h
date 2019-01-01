@@ -125,7 +125,7 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
  @param dropMenuTitleBlock 顶部菜单选择回调
  @param dropMenuTagArrayBlock 右侧筛选菜单回调
  */
-+ (instancetype)creatDropMenuWithConfiguration: (GHDropMenuModel *)configuration
++ (instancetype)creatDropMenuWithConfiguration: (nullable GHDropMenuModel *)configuration
                                          frame: (CGRect)frame
                             dropMenuTitleBlock: (DropMenuTitleBlock)dropMenuTitleBlock
                          dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock;
