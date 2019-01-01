@@ -32,7 +32,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupUI];
-        
     }
     return self;
 }
@@ -736,7 +735,6 @@
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.sectionHeaderTitle = sectionHeaderTitles[index];
-        
         if (index == 0) {
             dropMenuModel.dataArray = dataArray4;
             /** 单选 */
@@ -864,6 +862,42 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     return dropMenu;
 }
 
+- (void)setDataSource:(id<GHDropMenuDataSource>)dataSource {
+    _dataSource = dataSource;
+    if (dataSource == nil) {
+        return;
+    }
+    NSArray *tempArray = nil;
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(columnTitlesInMeun:)]) {
+        tempArray = [self.dataSource columnTitlesInMeun:self];
+    }
+    NSMutableArray *titles = [NSMutableArray array];
+    for (NSInteger index = 0; index < tempArray.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.title = [tempArray by_ObjectAtIndex:index];
+        dropMenuModel.dropMenuType = GHDropMenuTypeTitle;
+        [titles addObject:dropMenuModel];
+    }
+    self.titles = titles.copy;
+
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(menu:numberOfColumns:)]) {
+        for (NSInteger index = 0; index < titles.count; index++) {
+            GHDropMenuModel *dropMenuTitleModel = [titles by_ObjectAtIndex:index];
+            NSArray *temp = [self.dataSource menu:self numberOfColumns:index];
+
+            NSMutableArray *dataArray = [NSMutableArray array];
+            for (NSInteger j = 0; j < temp.count; j++) {
+                GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+                dropMenuModel.title = [temp by_ObjectAtIndex:j];
+                [dataArray addObject: dropMenuModel];
+            }
+            dropMenuTitleModel.dataArray = dataArray;
+        }
+
+    }
+    [self.collectionView reloadData];
+    
+}
 - (void)setTableY:(CGFloat)tableY {
     _tableY = tableY;
 }

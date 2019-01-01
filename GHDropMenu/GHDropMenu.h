@@ -82,6 +82,13 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @end
 
 @class GHDropMenu,GHDropMenuModel;
+@protocol GHDropMenuDataSource <NSObject>
+
+- (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu;
+
+- (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns;
+
+@end
 @protocol GHDropMenuDelegate <NSObject>
 @optional
 /**
@@ -99,7 +106,6 @@ dropMenuTitleModel: (nullable GHDropMenuModel *)dropMenuTitleModel;
  @param dropMenu dropMenu本身
  @param tagArray 侧边弹出筛选结果
  */
-
 - (void)dropMenu: (GHDropMenu *)dropMenu
 tagArray: (nullable NSArray *)tagArray;
 
@@ -111,8 +117,6 @@ typedef void(^DropMenuTitleBlock)(GHDropMenuModel *dropMenuModel);
 typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 
 @interface GHDropMenu : UIView
-
-
 /**
  构造GHDropMenu
 
@@ -141,7 +145,8 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 
 @property (nonatomic , strong) UIFont *titleFont;
 
-@property (nonatomic , weak) id <GHDropMenuDelegate>delegate;
+@property (nonatomic , weak) id <GHDropMenuDelegate> delegate;
+@property (nonatomic , weak) id <GHDropMenuDataSource> dataSource;
 
 @property (nonatomic , assign) CGFloat tableY;
 

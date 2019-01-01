@@ -9,7 +9,7 @@
 #import "GHNormalMenuViewController.h"
 #import "GHDropMenu.h"
 
-@interface GHNormalMenuViewController ()<GHDropMenuDelegate>
+@interface GHNormalMenuViewController ()<GHDropMenuDelegate,GHDropMenuDataSource>
 @property (nonatomic , strong)GHDropMenu *dropMenu;
 
 @end
@@ -43,7 +43,7 @@
     }];
     dropMenu.durationTime = 0.5;
     dropMenu.delegate = self;
-    
+    dropMenu.dataSource = self;
     [self.view addSubview:dropMenu];
 }
 
@@ -76,5 +76,22 @@
     self.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",string];
 }
 
+- (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu {
+    return @[@"呵呵",@"嘿嘿",@"哈哈",@"嘻嘻"];
+}
+- (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns {
+    if (columns == 0) {
+        return @[@"第一列",@"嘿33嘿",@"哈哈",@"嘻嘻"];
 
+    } else if (columns == 1){
+        return @[@"第二列",@"嘿33嘿",@"哈哈",@"嘻嘻",@"嘿33嘿",@"哈哈",@"嘻嘻",@"嘿33嘿",@"哈哈",@"嘻嘻"];
+
+    } else if (columns== 2){
+        return @[@"第三列",@"嘿33嘿",@"哈哈",@"嘻嘻",@"哈哈",@"嘻嘻",@"哈哈",@"嘻嘻",@"哈哈",@"嘻嘻"];
+        
+    } else {
+        return @[@"第四列",@"嘿33嘿",@"哈哈",@"嘻嘻asdsadadad",@"嘻嘻asdsadadad"];
+    }
+
+}
 @end
