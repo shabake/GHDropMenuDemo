@@ -12,6 +12,23 @@
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0da7858245c4693a.gif?imageMogr2/auto-orient/strip)
 
 ---
+### 2019.1.1更新
+
+```diff
++ 增加代理方法创建菜单
+
+```
+
+```Objective-C
+// 返回筛选菜单标题的个数
+- (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu {
+}
+
+// 返回每列筛选菜单的选项
+- (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns {
+}
+```
+--- 
 
 ### 2018.12.30更新
 

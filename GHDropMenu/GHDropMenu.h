@@ -84,8 +84,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @class GHDropMenu,GHDropMenuModel;
 @protocol GHDropMenuDataSource <NSObject>
 
+/** 配置筛选菜单标题 */
 - (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu;
-
+/** 配置筛选菜单标题选项 */
 - (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns;
 
 @end

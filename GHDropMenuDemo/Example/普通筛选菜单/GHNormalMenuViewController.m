@@ -24,10 +24,7 @@
 }
 #pragma mark - 样式1
 - (void)style1 {
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kGHScreenWidth, 44)];
-    label.text = @"样式1";
-    label.textColor = [UIColor whiteColor];
-    [self.view addSubview:label];
+
 
     /** 创建dropMenu 配置模型 && frame */
     weakself(self);
@@ -43,7 +40,7 @@
 }
 
 
-#pragma mark - 代理方法;
+#pragma mark - 代理回调
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuTitleModel:(GHDropMenuModel *)dropMenuTitleModel {
     self.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuTitleModel.title];
 }
@@ -72,20 +69,20 @@
 }
 
 - (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu {
-    return @[@"呵呵",@"嘿嘿",@"哈哈",@"嘻嘻"];
+    return @[@"智能筛选",@"价格",@"品牌",@"时间"];
 }
 - (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns {
     if (columns == 0) {
-        return @[@"第一列",@"嘿33嘿",@"哈哈",@"嘻嘻"];
+        return @[@"价格从高到低",@"价格从低到高",@"距离从远到近",@"销量从低到高",@"信用从高到低"];
 
     } else if (columns == 1){
-        return @[@"第二列",@"嘿33嘿",@"哈哈",@"嘻嘻",@"嘿33嘿",@"哈哈",@"嘻嘻",@"嘿33嘿",@"哈哈",@"嘻嘻"];
+        return @[@"0 - 10 元",@"10-20 元",@"20-50 元",@"50-100 元",@"100 - 1000元",@"1000 - 10000 元",@"10000-100000 元",@"100000-500000 元",@"500000-1000000 元",@"1000000以上"];
 
     } else if (columns== 2){
-        return @[@"第三列",@"嘿33嘿",@"哈哈",@"嘻嘻",@"哈哈",@"嘻嘻",@"哈哈",@"嘻嘻",@"哈哈",@"嘻嘻"];
+        return @[@"psp",@"psv",@"nswitch",@"gba",@"gbc",@"gbp",@"ndsl",@"3ds"];
         
     } else {
-        return @[@"第四列",@"嘿33嘿",@"哈哈",@"嘻嘻asdsadadad",@"嘻嘻asdsadadad"];
+        return @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
     }
 
 }
