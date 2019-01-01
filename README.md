@@ -16,13 +16,11 @@
 
 ```diff
 + 增加代理方法创建菜单
-
++ 增加数据源
 
 ```
-```diff
-+ 需要设置数据源和代理
-```
-```  Objective-C
+
+```Objective-C
 	 GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
         weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
