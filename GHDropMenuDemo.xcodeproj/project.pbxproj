@@ -44,6 +44,7 @@
 		D6A4ED3321DA6C720053D14F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD7F21C35E0D00EC004A /* AppDelegate.m */; };
 		D6A4ED3521DA6ED70053D14F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6A4ED3421DA6ED70053D14F /* README.md */; };
 		D6A4ED3821DA7E090053D14F /* GHBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED3721DA7E090053D14F /* GHBaseNavigationController.m */; };
+		D6A4ED6321DCB8DA0053D14F /* GHCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED6221DCB8DA0053D14F /* GHCollectionReusableView.m */; };
 		D6AC771521C5FBFF00232954 /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */; };
 		D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF1FBC21D1948E003D8C39 /* NSString+Size.m */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,8 @@
 		D6A4ED3421DA6ED70053D14F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D6A4ED3621DA7E090053D14F /* GHBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHBaseNavigationController.h; sourceTree = "<group>"; };
 		D6A4ED3721DA7E090053D14F /* GHBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHBaseNavigationController.m; sourceTree = "<group>"; };
+		D6A4ED6121DCB8DA0053D14F /* GHCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHCollectionReusableView.h; sourceTree = "<group>"; };
+		D6A4ED6221DCB8DA0053D14F /* GHCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHCollectionReusableView.m; sourceTree = "<group>"; };
 		D6AC771321C5FBFF00232954 /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
 		D6AC771421C5FBFF00232954 /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
 		D6DF1FBB21D1948E003D8C39 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */,
 				D6A4ECEC21D7B2E30053D14F /* GHSuspendItem.h */,
 				D6A4ECED21D7B2E30053D14F /* GHSuspendItem.m */,
+				D6A4ED6121DCB8DA0053D14F /* GHCollectionReusableView.h */,
+				D6A4ED6221DCB8DA0053D14F /* GHCollectionReusableView.m */,
 			);
 			path = "吸附筛选菜单";
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				D6DF1FBD21D1948E003D8C39 /* NSString+Size.m in Sources */,
 				D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */,
 				D6A4ECEE21D7B2E30053D14F /* GHSuspendItem.m in Sources */,
+				D6A4ED6321DCB8DA0053D14F /* GHCollectionReusableView.m in Sources */,
 				D6A4ECE421D793720053D14F /* GHSuspendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

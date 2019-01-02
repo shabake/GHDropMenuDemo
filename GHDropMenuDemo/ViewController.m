@@ -73,7 +73,7 @@
 
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = [NSArray arrayWithObjects:@"复杂筛选菜单",@"只有侧滑筛选菜单",@"普通筛选菜单",@"悬浮筛选菜单(tableView && collectionView)", nil];
+        _dataArray = [NSArray arrayWithObjects:@"复杂筛选菜单",@"只有侧滑筛选菜单",@"普通筛选菜单",@"悬浮筛选菜单(tableView)", nil];
     }
     return _dataArray;
 }

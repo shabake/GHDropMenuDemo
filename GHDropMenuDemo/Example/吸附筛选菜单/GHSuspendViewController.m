@@ -10,6 +10,7 @@
 #import "GHDropMenu.h"
 #import "GHSuspendHeader.h"
 #import "GHSuspendItem.h"
+#import "GHCollectionReusableView.h"
 
 #define kHeaderHeight 400
 
@@ -31,21 +32,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.header;
-//    [self.view addSubview:self.collectionView];
-//    [self.view addSubview:self.header];
-//    [self.view bringSubviewToFront:self.header];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    
-    UIButton *change = [[UIButton alloc]init];
-    [change setTitle:@"tableView" forState:UIControlStateNormal];
-    [change setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [change setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
-    [change setTitle:@"collectionView" forState:UIControlStateSelected];
-    [change addTarget:self action:@selector(clickChange:) forControlEvents:UIControlEventTouchUpInside];
-    change.selected = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:change];
-    [self clickChange:change];
 }
 - (void)clickChange : (UIButton *)button {
     button.selected = !button.selected;
@@ -72,13 +58,26 @@
     
     CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
   
-    CGFloat contentOffsetY = scrollView.contentOffset.y;
-    NSLog(@"contentOffsetY%f",contentOffsetY);
+    CGFloat contentOffsetY = scrollView.contentOffset.y; 
+    self.dropMenu.tableY = rect.origin.y;
     if (contentOffsetY >= kHeaderHeight) {
         self.dropMenu.tableY =  kGHSafeAreaTopHeight + 44;
-
+    }
+    
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(kGHScreenWidth, 44);
+   
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath {
+  
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        GHCollectionReusableView *header  = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"GHCollectionReusableViewID" forIndexPath:indexPath];
+        return header;
     } else {
-        self.dropMenu.tableY = rect.origin.y;
+        return [UICollectionReusableView new];
     }
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -180,11 +179,13 @@
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0 + kGHSafeAreaTopHeight, kGHScreenWidth, kGHScreenHeight - kGHSafeAreaTopHeight) collectionViewLayout:self.flowLayout];
-        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView registerClass:[GHSuspendItem class] forCellWithReuseIdentifier:@"GHSuspendItemID"];
+        [_collectionView registerClass:[GHCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"GHCollectionReusableViewID"];
+        //GHCollectionReusableView
     }
     return _collectionView;
 }

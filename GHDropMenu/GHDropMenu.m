@@ -987,6 +987,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 }
 - (void)setTableY:(CGFloat)tableY {
     _tableY = tableY;
+    self.tableView.y = tableY;
+    self.titleCover.y = self.tableView.y;
 }
 - (void)setTitleViewBackGroundColor:(UIColor *)titleViewBackGroundColor {
     self.collectionView.backgroundColor = titleViewBackGroundColor;
