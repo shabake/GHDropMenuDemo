@@ -80,12 +80,6 @@
     } else {
         self.dropMenu.tableY = rect.origin.y;
     }
-//
-//    [self.header changeY:-contentOffsetY +kGHSafeAreaTopHeight - kHeaderHeight];
-//    if (contentOffsetY >=(kHeaderHeight - 44) - kHeaderHeight) {
-//        [self.header changeY:-(kHeaderHeight - 44)+ kGHSafeAreaTopHeight];
-//    }
-
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
@@ -123,6 +117,11 @@
     
     dropMenu.delegate = self;
     self.dropMenu = dropMenu;
+    
+    CGRect rectInTableView = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
+    dropMenu.tableY = rect.origin.y;
+    
     return dropMenu;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
