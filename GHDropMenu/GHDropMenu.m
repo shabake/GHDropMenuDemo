@@ -1068,6 +1068,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [UIView animateWithDuration:self.durationTime animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
+            NSLog(@"%@",NSStringFromCGRect(self.tableView.frame));
             self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, kGHScreenHeight - self.menuHeight - kGHSafeAreaTopHeight);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);

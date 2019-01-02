@@ -30,9 +30,10 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
-    [self.view  addSubview:self.collectionView];
-    [self.view addSubview:self.header];
-    [self.view bringSubviewToFront:self.header];
+    self.tableView.tableHeaderView = self.header;
+//    [self.view addSubview:self.collectionView];
+//    [self.view addSubview:self.header];
+//    [self.view bringSubviewToFront:self.header];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
@@ -42,6 +43,7 @@
     [change setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
     [change setTitle:@"collectionView" forState:UIControlStateSelected];
     [change addTarget:self action:@selector(clickChange:) forControlEvents:UIControlEventTouchUpInside];
+    change.selected = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:change];
     [self clickChange:change];
 }
@@ -65,13 +67,24 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat contentOffsetY = scrollView.contentOffset.y;
     
-    [self.header changeY:-contentOffsetY +kGHSafeAreaTopHeight - kHeaderHeight];
-    if (contentOffsetY >=(kHeaderHeight - 44) - kHeaderHeight) {
-        [self.header changeY:-(kHeaderHeight - 44)+ kGHSafeAreaTopHeight];
+    CGRect rectInTableView = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
+  
+    CGFloat contentOffsetY = scrollView.contentOffset.y;
+    NSLog(@"contentOffsetY%f",contentOffsetY);
+    if (contentOffsetY >= kHeaderHeight) {
+        self.dropMenu.tableY =  kGHSafeAreaTopHeight + 44;
+
+    } else {
+        self.dropMenu.tableY = rect.origin.y;
     }
-    self.dropMenu.tableY = CGRectGetMaxY(self.header.frame);
+//
+//    [self.header changeY:-contentOffsetY +kGHSafeAreaTopHeight - kHeaderHeight];
+//    if (contentOffsetY >=(kHeaderHeight - 44) - kHeaderHeight) {
+//        [self.header changeY:-(kHeaderHeight - 44)+ kGHSafeAreaTopHeight];
+//    }
 
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -89,6 +102,28 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"点击collectionView");
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 44;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
+    /** 配置筛选菜单是否记录用户选中 默认NO */
+    configuration.recordSeleted = YES;
+    /** 设置数据源 */
+    configuration.titles = [configuration creatNormalDropMenuData];
+    /** 创建dropMenu 配置模型 && frame */
+    weakself(self);
+    GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
+        weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
+    } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
+        
+    }];
+    
+    dropMenu.delegate = self;
+    self.dropMenu = dropMenu;
+    return dropMenu;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
@@ -146,7 +181,7 @@
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0 + kGHSafeAreaTopHeight, kGHScreenWidth, kGHScreenHeight - kGHSafeAreaTopHeight) collectionViewLayout:self.flowLayout];
-        _collectionView.contentInset = UIEdgeInsetsMake(kHeaderHeight, 0, 0, 0);
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
@@ -158,7 +193,7 @@
     if (_tableView == nil) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0 + kGHSafeAreaTopHeight, kGHScreenWidth, kGHScreenHeight - kGHSafeAreaTopHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
-        _tableView.contentInset = UIEdgeInsetsMake(kHeaderHeight, 0, 0, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCellID"];
@@ -190,7 +225,7 @@
         _header.frame = CGRectMake(0, kGHSafeAreaTopHeight, kGHScreenWidth, kHeaderHeight);
         GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
         /** 配置筛选菜单是否记录用户选中 默认NO */
-        configuration.recordSeleted = NO;
+        configuration.recordSeleted = YES;
         /** 设置数据源 */
         configuration.titles = [configuration creatNormalDropMenuData];
         /** 创建dropMenu 配置模型 && frame */
@@ -203,7 +238,7 @@
     
         dropMenu.delegate = self;
         self.dropMenu = dropMenu;
-        [_header addSubview:dropMenu];
+//        [_header addSubview:dropMenu];
     }
     return _header;
 }

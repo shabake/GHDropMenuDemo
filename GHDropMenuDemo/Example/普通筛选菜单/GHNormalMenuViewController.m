@@ -73,16 +73,13 @@
 - (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns {
     if (columns == 0) {
         return @[@"价格从高到低",@"价格从低到高",@"距离从远到近",@"销量从低到高",@"信用从高到低"];
-
     } else if (columns == 1){
         return @[@"0 - 10 元",@"10-20 元",@"20-50 元",@"50-100 元",@"100 - 1000元",@"1000 - 10000 元",@"10000-100000 元",@"100000-500000 元",@"500000-1000000 元",@"1000000以上"];
-
     } else if (columns== 2){
         return @[@"psp",@"psv",@"nswitch",@"gba",@"gbc",@"gbp",@"ndsl",@"3ds"];
         
     } else {
         return @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
     }
-
 }
 @end
