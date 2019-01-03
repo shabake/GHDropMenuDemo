@@ -5,7 +5,7 @@
 ![](https://img.shields.io/cocoapods/l/packageName.svg)
 # GHDropMenuDemo
 
-`筛选菜单` `京东筛选菜单` `美团筛选菜单` 电商通用筛选菜单
+`筛选菜单` `京东筛选菜单` `美团筛选菜单` `电商通用筛选菜单`
 
 ---
 
