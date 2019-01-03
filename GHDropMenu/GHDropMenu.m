@@ -774,7 +774,7 @@
         [dataArray4 addObject:dropMenuModel];
     }
     /** 构造右侧弹出筛选菜单第二行数据 */
-    NSArray *row2 = @[@"呵呵",@"哈哈",@"嘿嘿",@"呵呵",@"哈哈",@"嘿嘿"];
+    NSArray *row2 = @[@"呵呵",@"哈哈"];
     NSMutableArray *dataArray5 = [NSMutableArray array];
     for (NSInteger index = 0 ; index < row2.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
@@ -851,7 +851,6 @@
                        @(GHDropMenuTypeFilter),
                        ];
     /** 菜单标题 */
-    
     for (NSInteger index = 0 ; index < 1; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
 //        dropMenuModel.title = titles[index];
@@ -1008,7 +1007,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         }];
         self.menuHeight = configuration.menuHeight;
     }
-    
     if (configuration.titleFont) {
         for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
             dropMenuTitleModel.titleFont = configuration.titleFont;
@@ -1070,7 +1068,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [UIView animateWithDuration:self.durationTime animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
-            NSLog(@"%@",NSStringFromCGRect(self.tableView.frame));
             self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, kGHScreenHeight - self.menuHeight - kGHSafeAreaTopHeight);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
@@ -1345,7 +1342,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
         GHDropMenuModel *dropMenuSectionModel = [dropMenuModel.sections by_ObjectAtIndex: section];
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
-            return dropMenuSectionModel.sectionSeleted ? dropMenuSectionModel.dataArray.count:3;
+            return dropMenuSectionModel.sectionSeleted ? dropMenuSectionModel.dataArray.count:dropMenuSectionModel.dataArray.count > 3 ? 3:dropMenuSectionModel.dataArray.count;
         } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput ||
                    dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput) {
             return 1;

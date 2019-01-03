@@ -32,6 +32,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.header;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 - (void)clickChange : (UIButton *)button {
     button.selected = !button.selected;
@@ -101,6 +103,7 @@
     return 44;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+   
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
     /** 配置筛选菜单是否记录用户选中 默认NO */
     configuration.recordSeleted = YES;
@@ -113,14 +116,14 @@
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         
     }];
-    
-    dropMenu.delegate = self;
-    self.dropMenu = dropMenu;
-    
     CGRect rectInTableView = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
     dropMenu.tableY = rect.origin.y;
     
+    dropMenu.delegate = self;
+    self.dropMenu = dropMenu;
+    
+
     return dropMenu;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
