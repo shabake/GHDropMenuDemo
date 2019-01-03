@@ -34,7 +34,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 /** 筛选菜单类型 */
 @property (nonatomic , assign) GHDropMenuFilterCellType filterCellType;
 @property (nonatomic , copy) NSString *singleInput;
-
 /** 最小价格 */
 @property (nonatomic , copy) NSString *minPrice;
 /** 最大价格 */
@@ -77,7 +76,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , strong) UIColor *titleViewBackGroundColor;
 /** 记录indexPath */
 @property (nonatomic , strong) NSIndexPath *indexPath;
-
 
 /** 构造筛选菜单数据 */
 - (NSArray *)creaDropMenuData;

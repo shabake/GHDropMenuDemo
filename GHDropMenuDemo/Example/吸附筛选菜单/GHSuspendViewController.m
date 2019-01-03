@@ -29,7 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.header;
     
@@ -56,16 +55,15 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    CGRect rectInTableView = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    CGRect rectInTableView = [self.tableView rectForHeaderInSection:0];
     
     CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
   
     CGFloat contentOffsetY = scrollView.contentOffset.y; 
-    self.dropMenu.tableY = rect.origin.y;
+    self.dropMenu.tableY = rect.origin.y + rect.size.height;
     if (contentOffsetY >= kHeaderHeight) {
-        self.dropMenu.tableY =  kGHSafeAreaTopHeight + 44;
+        self.dropMenu.tableY = kGHSafeAreaTopHeight + 44;
     }
-    
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     return CGSizeMake(kGHScreenWidth, 44);
@@ -116,9 +114,10 @@
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         
     }];
-    CGRect rectInTableView = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    CGRect rectInTableView = [self.tableView rectForHeaderInSection:0];
     CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
-    dropMenu.tableY = rect.origin.y;
+    dropMenu.tableY = rect.origin.y + rect.size.height;
     
     dropMenu.delegate = self;
     self.dropMenu = dropMenu;

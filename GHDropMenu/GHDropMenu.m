@@ -1148,10 +1148,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 }
 #pragma mark - tag标签点击方法
 - (void)dropMenuFilterItem: (GHDropMenuFilterItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
     GHDropMenuModel *dropMenuSectionModel = [dropMenuTitleModel.sections by_ObjectAtIndex: dropMenuModel.indexPath.section];
-    
     /** 处理多选 单选*/
     [self actionMultipleWithDropMenuModel:dropMenuModel dropMenuSectionModel:dropMenuSectionModel];
     /** 处理sectionDetails */
@@ -1583,5 +1581,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         _topLine.alpha = .1;
     }
     return _topLine;
+}
+
+- (void)dealloc {
+    NSLog(@"释放了");
 }
 @end
