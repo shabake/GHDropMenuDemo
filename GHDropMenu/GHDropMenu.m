@@ -417,8 +417,6 @@
 @end
 @interface GHDropMenuTitle()
 @property (nonatomic , strong) UILabel *label;
-@property (nonatomic , strong) UIView *topLine;
-@property (nonatomic , strong) UIView *bottomLine;
 @property (nonatomic , strong) UIImageView *imageView;
 
 @end
@@ -426,10 +424,7 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.label.text = dropMenuModel.title;
-    CGSize labelSize = [self.label.text sizeWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.bounds.size.height)];
-    self.label.frame = CGRectMake((self.bounds.size.width -labelSize.width) * 0.5 , 0, labelSize.width >  0 ?labelSize.width:80, self.bounds.size.height > 0 ?self.bounds.size.height :44);
-    self.imageView.frame = CGRectMake(self.label.frame.size.width + self.label.frame.origin.x + 5, (self.bounds.size.height - 8 ) *.5, 10, 8);
-    
+
     if (dropMenuModel.titleSeleted) {
         self.imageView.transform = CGAffineTransformMakeRotation(M_PI);
     } else {
@@ -456,25 +451,9 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGSize labelSize = [self.label.text sizeWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.bounds.size.height)];
-    self.label.frame = CGRectMake((self.bounds.size.width -labelSize.width) * 0.5 , 0, labelSize.width >  0 ?labelSize.width:80, self.bounds.size.height > 0 ?self.bounds.size.height :44);
-    self.imageView.frame = CGRectMake(self.label.frame.size.width + self.label.frame.origin.x + 5, (self.bounds.size.height - 8 ) *.5, 10, 8);
+    self.imageView.frame = CGRectMake(self.label.frame.size.width + 3, (self.bounds.size.height - 8 ) *.5, 10, 8);
 }
 
-- (UIView *)bottomLine {
-    if (_bottomLine == nil) {
-        _bottomLine = [[UIView alloc]init];
-        _bottomLine.backgroundColor = [UIColor darkGrayColor];
-    }
-    return _bottomLine;
-}
-- (UIView *)topLine {
-    if (_topLine == nil) {
-        _topLine = [[UIView alloc]init];
-        _topLine.backgroundColor = [UIColor darkGrayColor];
-    }
-    return _topLine;
-}
 - (UIImageView *)imageView {
     if (_imageView == nil) {
         _imageView = [[UIImageView alloc]init];
@@ -522,6 +501,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         [self setupUI];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -544,8 +524,7 @@
     if (_dropMenuTitle == nil) {
         _dropMenuTitle = [[GHDropMenuTitle alloc]init];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        tap.numberOfTouchesRequired = 1;
-        tap.numberOfTapsRequired = 1;
+        _dropMenuTitle.backgroundColor = [UIColor clearColor];
         [_dropMenuTitle addGestureRecognizer:tap];
     }
     return _dropMenuTitle;
@@ -1304,6 +1283,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == self.collectionView) {
+        GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:indexPath.row];
         return CGSizeMake(kGHScreenWidth /self.titles.count, self.menuHeight - 0.01f);
     } else if (collectionView == self.filter) {
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];

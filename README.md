@@ -50,7 +50,6 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 + 增加吸附效果的筛选菜单
 + 分别可选tableView悬浮菜单和collectionView悬浮菜单
 + 增加单独侧滑菜单筛选
-+ dropMenu的title自适应宽度
 + 适配x,xs,xr,xsmax
 + 去掉刚开始创建的动画
 + 自定义筛选标题,自定义筛选内容,自定义筛选标签,自定义筛选头部内容
@@ -65,6 +64,8 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 
 - 去掉titleView初始化动画
 - 修复无法点击bug
+- dropMenu的title自适应宽度
+
 ```
 
 
