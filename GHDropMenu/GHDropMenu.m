@@ -501,6 +501,7 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.dropMenuTitle.dropMenuModel = dropMenuModel;
+    self.backgroundColor =dropMenuModel.titleViewBackGroundColor ? dropMenuModel.titleViewBackGroundColor:[UIColor clearColor];
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -1035,7 +1036,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [self.collectionView reloadData];
 }
 - (void)setTitleViewBackGroundColor:(UIColor *)titleViewBackGroundColor {
-    self.collectionView.backgroundColor = titleViewBackGroundColor;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        dropMenuTitleModel.titleViewBackGroundColor = titleViewBackGroundColor;
+    }
+    [self.collectionView reloadData];
 }
 
 - (void)setConfiguration:(GHDropMenuModel *)configuration {

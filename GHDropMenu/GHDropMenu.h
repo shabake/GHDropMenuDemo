@@ -29,6 +29,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 };
 /** 筛选菜单模型 */
 @interface GHDropMenuModel :NSObject
+@property (nonatomic , strong) UIColor *titleViewBackGroundColor;
 /** 选项正常文字颜色 */
 @property (nonatomic , strong) UIColor *optionNormalColor;
 /** 选项选中文字颜色 */
@@ -86,8 +87,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 /** 数据源数组 */
 @property (nonatomic , strong) NSArray *dataArray;
 @property (nonatomic , assign) CGRect frame;
-/** titleVie背景颜色 */
-@property (nonatomic , strong) UIColor *titleViewBackGroundColor;
+
 /** 记录indexPath */
 @property (nonatomic , strong) NSIndexPath *indexPath;
 

@@ -121,7 +121,6 @@
     dropMenu.optionFont = [UIFont systemFontOfSize:20];
     dropMenu.optionSeletedColor = [UIColor redColor];
     dropMenu.optionNormalColor = [UIColor blueColor];
-
     CGRect rectInTableView = [self.tableView rectForHeaderInSection:0];
     CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
     dropMenu.tableY = rect.origin.y + rect.size.height;
@@ -129,7 +128,6 @@
     dropMenu.delegate = self;
     self.dropMenu = dropMenu;
     
-
     return dropMenu;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
