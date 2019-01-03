@@ -29,6 +29,20 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 };
 /** 筛选菜单模型 */
 @interface GHDropMenuModel :NSObject
+/** 选项正常文字颜色 */
+@property (nonatomic , strong) UIColor *optionNormalColor;
+/** 选项选中文字颜色 */
+@property (nonatomic , strong) UIColor *optionSeletedColor;
+/** 选项文字大小 */
+@property (nonatomic , strong) UIFont *optionFont;
+/** 标题菜单标题正常图片 */
+@property (nonatomic , copy) NSString *titleNormalImageName;
+/** 标题菜单标题选中图片 */
+@property (nonatomic , copy) NSString *titleSeletedImageName;
+/** 标题菜单标题正常文字颜色 */
+@property (nonatomic , strong) UIColor *titleNormalColor;
+/** 标题菜单标题选中文字颜色 */
+@property (nonatomic , strong) UIColor *titleSeletedColor;
 /** 标题菜单是否记录用户菜单选择 默认是NO */
 @property (nonatomic , assign) BOOL recordSeleted;
 /** 筛选菜单类型 */
@@ -145,8 +159,22 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 @property (nonatomic , strong) GHDropMenuModel *configuration;
 
 @property (nonatomic , strong) UIColor *titleViewBackGroundColor;
-
+/** 标题菜单标题文字大小 */
 @property (nonatomic , strong) UIFont *titleFont;
+/** 标题菜单标题正常文字颜色 */
+@property (nonatomic , strong) UIColor *titleNormalColor;
+/** 标题菜单标题选中文字颜色 */
+@property (nonatomic , strong) UIColor *titleSeletedColor;
+/** 标题菜单标题正常图片 */
+@property (nonatomic , copy) NSString *titleNormalImageName;
+/** 标题菜单标题选中图片 */
+@property (nonatomic , copy) NSString *titleSeletedImageName;
+/** 选项文字大小 */
+@property (nonatomic , strong) UIFont *optionFont;
+/** 选项正常文字颜色 */
+@property (nonatomic , strong) UIColor *optionNormalColor;
+/** 选项选中文字颜色 */
+@property (nonatomic , strong) UIColor *optionSeletedColor;
 
 @property (nonatomic , weak) id <GHDropMenuDelegate> delegate;
 @property (nonatomic , weak) id <GHDropMenuDataSource> dataSource;

@@ -25,9 +25,9 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.title;
-    self.title.textColor = dropMenuModel.cellSeleted ? [UIColor orangeColor]:[UIColor darkGrayColor];
+    self.title.textColor = dropMenuModel.cellSeleted ? dropMenuModel.optionSeletedColor:dropMenuModel.optionNormalColor;
     self.imgView.hidden = !dropMenuModel.cellSeleted;
-
+    self.title.font = dropMenuModel.optionFont > 0 ?dropMenuModel.optionFont :[UIFont systemFontOfSize:13];
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -424,11 +424,16 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.label.text = dropMenuModel.title;
-
+    self.label.font = dropMenuModel.titleFont;
     if (dropMenuModel.titleSeleted) {
+        self.imageView.image = [UIImage imageNamed:dropMenuModel.titleSeletedImageName];
         self.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+        self.label.textColor = dropMenuModel.titleSeletedColor;
     } else {
+        self.imageView.image = [UIImage imageNamed:dropMenuModel.titleNormalImageName];
+
         self.imageView.transform = CGAffineTransformMakeRotation(0);
+        self.label.textColor = dropMenuModel.titleNormalColor;
     }
 }
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -966,6 +971,68 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     _tableY = tableY;
     self.tableView.y = tableY;
     self.titleCover.y = self.tableView.y;
+}
+- (void)setOptionNormalColor:(UIColor *)optionNormalColor {
+    _optionNormalColor = optionNormalColor;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        for (GHDropMenuModel *dropMenuOptionModel  in dropMenuTitleModel.dataArray) {
+            dropMenuOptionModel.optionNormalColor = optionNormalColor;
+        }
+    }
+    [self.tableView reloadData];
+}
+- (void)setOptionSeletedColor:(UIColor *)optionSeletedColor {
+    _optionSeletedColor = optionSeletedColor;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        for (GHDropMenuModel *dropMenuOptionModel  in dropMenuTitleModel.dataArray) {
+            dropMenuOptionModel.optionSeletedColor = optionSeletedColor;
+        }
+    }
+    [self.tableView reloadData];
+}
+- (void)setOptionFont:(UIFont *)optionFont {
+    _optionFont = optionFont;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        for (GHDropMenuModel *dropMenuOptionModel  in dropMenuTitleModel.dataArray) {
+            dropMenuOptionModel.optionFont = optionFont;
+        }
+    }
+    [self.tableView reloadData];
+}
+- (void)setTitleNormalImageName:(NSString *)titleNormalImageName {
+    _titleNormalImageName = titleNormalImageName;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        dropMenuTitleModel.titleNormalImageName = titleNormalImageName;
+    }
+    [self.collectionView reloadData];
+}
+- (void)setTitleSeletedImageName:(NSString *)titleSeletedImageName {
+    _titleSeletedImageName = titleSeletedImageName;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        dropMenuTitleModel.titleSeletedImageName = titleSeletedImageName;
+    }
+    [self.collectionView reloadData];
+}
+- (void)setTitleSeletedColor:(UIColor *)titleSeletedColor {
+    _titleSeletedColor = titleSeletedColor;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        dropMenuTitleModel.titleSeletedColor = titleSeletedColor;
+    }
+    [self.collectionView reloadData];
+}
+- (void)setTitleNormalColor:(UIColor *)titleNormalColor {
+    _titleNormalColor = titleNormalColor;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        dropMenuTitleModel.titleNormalColor = titleNormalColor;
+    }
+    [self.collectionView reloadData];
+}
+- (void)setTitleFont:(UIFont *)titleFont {
+    _titleFont = titleFont;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        dropMenuTitleModel.titleFont = titleFont;
+    }
+    [self.collectionView reloadData];
 }
 - (void)setTitleViewBackGroundColor:(UIColor *)titleViewBackGroundColor {
     self.collectionView.backgroundColor = titleViewBackGroundColor;

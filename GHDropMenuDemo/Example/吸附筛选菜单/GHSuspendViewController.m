@@ -108,12 +108,20 @@
     /** 设置数据源 */
     configuration.titles = [configuration creatNormalDropMenuData];
     /** 创建dropMenu 配置模型 && frame */
-    weakself(self);
     GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         
     }];
-    
+
+    dropMenu.titleSeletedColor = [UIColor redColor];
+    dropMenu.titleNormalColor = [UIColor orangeColor];
+    dropMenu.titleSeletedImageName = @"";
+    dropMenu.titleNormalImageName = @"";
+    dropMenu.titleFont = [UIFont systemFontOfSize:11];
+    dropMenu.optionFont = [UIFont systemFontOfSize:20];
+    dropMenu.optionSeletedColor = [UIColor redColor];
+    dropMenu.optionNormalColor = [UIColor blueColor];
+
     CGRect rectInTableView = [self.tableView rectForHeaderInSection:0];
     CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
     dropMenu.tableY = rect.origin.y + rect.size.height;
@@ -224,20 +232,7 @@
     if (_header == nil) {
         _header = [[GHSuspendHeader alloc]init];
         _header.frame = CGRectMake(0, kGHSafeAreaTopHeight, kGHScreenWidth, kHeaderHeight);
-        GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
-        /** 配置筛选菜单是否记录用户选中 默认NO */
-        configuration.recordSeleted = YES;
-        /** 设置数据源 */
-        configuration.titles = [configuration creatNormalDropMenuData];
-        /** 创建dropMenu 配置模型 && frame */
-        GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, kHeaderHeight - 44,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
-        } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
-            
-        }];
-    
-        dropMenu.delegate = self;
-        self.dropMenu = dropMenu;
-//        [_header addSubview:dropMenu];
+
     }
     return _header;
 }
