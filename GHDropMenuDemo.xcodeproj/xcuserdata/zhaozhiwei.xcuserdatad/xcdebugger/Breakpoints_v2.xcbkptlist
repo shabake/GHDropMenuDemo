@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GHDropMenu/GHDropMenu.m"
-            timestampString = "568174951.23343"
+            timestampString = "568192582.963371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1058"
-            endingLineNumber = "1058"
+            startingLineNumber = "1057"
+            endingLineNumber = "1057"
             landmarkName = "-show"
             landmarkType = "7">
          </BreakpointContent>

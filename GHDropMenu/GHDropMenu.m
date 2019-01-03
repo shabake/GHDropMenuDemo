@@ -414,7 +414,6 @@
 
 @interface GHDropMenuTitle : UIView
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
-
 @end
 @interface GHDropMenuTitle()
 @property (nonatomic , strong) UILabel *label;
@@ -440,12 +439,14 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         [self setupUI];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 - (instancetype)init {
     if (self == [super init]) {
         [self setupUI];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -491,7 +492,7 @@
         _label.font = [UIFont systemFontOfSize:14];
         _label.textColor = [UIColor darkGrayColor];
         _label.backgroundColor = [UIColor whiteColor];
-        _label.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        _label.layer.borderColor = [UIColor clearColor].CGColor;
     }
     return _label;
 }
@@ -1062,7 +1063,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
         self.titleCover.backgroundColor = [UIColor clearColor];
     }
-    
     [UIView animateWithDuration:self.durationTime animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
@@ -1547,6 +1547,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.layer.borderColor = [UIColor clearColor].CGColor;
         [_collectionView registerClass:[GHDropMenuItem class] forCellWithReuseIdentifier:@"GHDropMenuItemID"];
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellID"];
     }
