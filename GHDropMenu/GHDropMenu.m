@@ -879,7 +879,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
 typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     GHDropMenuShowTypeCommon = 1,
     GHDropMenuShowTypeOnlyFilter,
-
 };
 @interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate>
 
@@ -898,7 +897,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 @property (nonatomic , strong) UIView *topLine;
 @property (nonatomic , strong) UIView *bottomLine;
 @property (nonatomic , strong) UIView *bottomView;
-
 /** 弹出菜单选中index */
 @property (nonatomic , assign) NSInteger currentIndex;
 /** 筛选器 */
