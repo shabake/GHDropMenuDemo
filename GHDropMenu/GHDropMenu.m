@@ -483,7 +483,6 @@
 @protocol GHDropMenuItemDelegate <NSObject>
 - (void)dropMenuItem: (GHDropMenuItem *)item dropMenuModel: (GHDropMenuModel *)dropMenuModel;
 @end
-
 @interface GHDropMenuItem : UICollectionViewCell
 @property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
 @property (nonatomic , weak) id <GHDropMenuItemDelegate> delegate;
@@ -580,11 +579,12 @@
                        @(GHDropMenuTypeTitle),
                        ];
     /** 菜单标题 */
-    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"时间"];
+    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"时间1"];
     
     for (NSInteger index = 0 ; index < titles.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.title = titles[index];
+        dropMenuModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
         NSNumber *typeNum = types[index];
         dropMenuModel.dropMenuType = typeNum.integerValue;
         if (index == 0) {
@@ -1218,6 +1218,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: seletedIndexPath.row];
 
     GHDropMenuModel *dropMenuModel = [dropMenuTitleModel.dataArray by_ObjectAtIndex: indexPath.row];
+    dropMenuModel.indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:dropMenuTitleModel.indexPath.row];
+
     GHDropMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHDropMenuCellID"];
     cell.dropMenuModel = dropMenuModel;
     return cell;
@@ -1237,7 +1239,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     if (self.configuration.recordSeleted) {
         dropMenuModel.title = contentModel.title;
     }
+    
     contentModel.cellSeleted = !contentModel.cellSeleted;
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuTitleModel:)]) {
         [self.delegate dropMenu:self dropMenuTitleModel:contentModel];
     }
@@ -1283,7 +1287,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == self.collectionView) {
-        GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:indexPath.row];
         return CGSizeMake(kGHScreenWidth /self.titles.count, self.menuHeight - 0.01f);
     } else if (collectionView == self.filter) {
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];

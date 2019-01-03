@@ -110,7 +110,6 @@
     /** 创建dropMenu 配置模型 && frame */
     weakself(self);
     GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
-        weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         
     }];
@@ -141,7 +140,7 @@
 }
 #pragma mark - 代理方法;
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuTitleModel:(GHDropMenuModel *)dropMenuTitleModel {
-    self.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuTitleModel.title];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@第%ld列%ld行",dropMenuTitleModel.title,(long)dropMenuTitleModel.indexPath.section,(long)dropMenuTitleModel.indexPath.row];
 }
 - (void)dropMenu:(GHDropMenu *)dropMenu tagArray:(NSArray *)tagArray {
     [self getStrWith:tagArray];
@@ -231,9 +230,7 @@
         /** 设置数据源 */
         configuration.titles = [configuration creatNormalDropMenuData];
         /** 创建dropMenu 配置模型 && frame */
-        weakself(self);
         GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, kHeaderHeight - 44,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
-            weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
         } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
             
         }];
