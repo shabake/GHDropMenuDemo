@@ -33,18 +33,11 @@
     self.tableView.tableHeaderView = self.header;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(refresh)];
+
 }
-- (void)clickChange : (UIButton *)button {
-    button.selected = !button.selected;
-    if (button.selected) {
-        self.collectionView.hidden = NO;
-        
-    } else {
-        self.collectionView.hidden = YES;
-    }
-    self.tableView.hidden = !self.collectionView.hidden;
+- (void)refresh {
     [self.tableView reloadData];
-    [self.collectionView reloadData];
 
 }
 - (void)back {
@@ -67,8 +60,8 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     return CGSizeMake(kGHScreenWidth, 44);
-   
 }
+
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath {
@@ -128,7 +121,7 @@
     dropMenu.delegate = self;
     self.dropMenu = dropMenu;
     
-    return dropMenu;
+    return dropMenu ;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
@@ -144,13 +137,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"点击tableView");
 }
-#pragma mark - 代理方法;
+#pragma mark - 代理方法
+
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     
-    self.dropMenu.configuration = dropMenuModel;
-
-    [self.tableView reloadData];
-
 }
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuTitleModel:(GHDropMenuModel *)dropMenuTitleModel {
     self.navigationItem.title = [NSString stringWithFormat:@"%@第%ld列%ld行",dropMenuTitleModel.title,(long)dropMenuTitleModel.indexPath.section,(long)dropMenuTitleModel.indexPath.row];

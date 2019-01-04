@@ -162,6 +162,8 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 + (instancetype)creatDropFilterMenuWidthConfiguration: (GHDropMenuModel *)configuration
          dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock;
 
+@property (nonatomic , strong) NSArray *titles;
+
 /** set方法 */
 @property (nonatomic , strong) GHDropMenuModel *configuration;
 
@@ -184,11 +186,12 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 @property (nonatomic , strong) UIColor *optionSeletedColor;
 /** 选项菜单y值 */
 @property (nonatomic , assign) CGFloat tableY;
-
 @property (nonatomic , weak) id <GHDropMenuDelegate> delegate;
 @property (nonatomic , weak) id <GHDropMenuDataSource> dataSource;
 /** 动画时间 等于0 不开启动画 默认是0 */
 @property (nonatomic , assign) NSTimeInterval durationTime;
+/** 标题菜单是否记录用户菜单选择 默认是NO */
+@property (nonatomic , assign) BOOL recordSeleted;
 
 /** 重置所有状态 */
 - (void)resetMenuStatus;

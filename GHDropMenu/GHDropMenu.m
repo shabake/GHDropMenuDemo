@@ -25,7 +25,6 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.title;
-    NSLog(@"dropMenuModel.cellSeleted%d",dropMenuModel.cellSeleted);
     self.title.textColor = dropMenuModel.cellSeleted ? dropMenuModel.optionSeletedColor:dropMenuModel.optionNormalColor;
     self.imgView.hidden = !dropMenuModel.cellSeleted;
     self.title.font = dropMenuModel.optionFont > 0 ?dropMenuModel.optionFont :[UIFont systemFontOfSize:13];
@@ -870,8 +869,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 };
 @interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate>
 
-/** 装顶部菜单的数组 */
-@property (nonatomic , strong) NSMutableArray *titles;
+
 /** 顶部菜单 */
 @property (nonatomic , strong) UICollectionView *collectionView;
 /** 顶部菜单布局 */
@@ -968,7 +966,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 
     }
     [self.collectionView reloadData];
-    
+}
+- (void)setTitles:(NSArray *)titles {
+    _titles = titles.copy;
+    [self.collectionView reloadData];
+
 }
 - (void)setTableY:(CGFloat)tableY {
     _tableY = tableY;
@@ -1288,13 +1290,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSIndexPath *seletedIndexPath = nil;
-    for (GHDropMenuModel *dropMenuModel in self.titles) {
-        if (dropMenuModel.titleSeleted) {
-            seletedIndexPath = dropMenuModel.indexPath;
-        }
-    }
-    GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: seletedIndexPath.row];
+  
+    GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
     for (GHDropMenuModel *dropMenuContentModel in dropMenuModel.dataArray) {
         dropMenuContentModel.cellSeleted = NO;
     }
@@ -1317,7 +1314,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         [self.delegate dropMenu:self dropMenuModel:self.configuration];
     }
 
-    [self dismiss];
+    [self resetMenuStatus];
 }
 #pragma mark - collectionViewDelegate
 
@@ -1610,12 +1607,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     }
     return _contents;
 }
-- (NSMutableArray *)titles {
-    if (_titles == nil) {
-        _titles = [NSMutableArray array];
-    }
-    return _titles;
-}
+
 - (UIView *)bottomLine {
     if (_bottomLine == nil) {
         _bottomLine = [[UIView alloc]init];
