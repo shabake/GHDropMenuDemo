@@ -25,7 +25,11 @@
 }
 #pragma mark - 样式1
 - (void)style1 {
-
+    
+//    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
+//
+//    /** 设置数据源 */
+//    configuration.titles = [configuration creatNormalDropMenuData];
     /** 创建dropMenu 配置模型 && frame */
     weakself(self);
     GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
@@ -78,7 +82,6 @@
         return @[@"0 - 10 元",@"10-20 元",@"20-50 元",@"50-100 元",@"100 - 1000元",@"1000 - 10000 元",@"10000-100000 元",@"100000-500000 元",@"500000-1000000 元",@"1000000以上"];
     } else if (columns== 2){
         return @[@"psp",@"psv",@"nswitch",@"gba",@"gbc",@"gbp",@"ndsl",@"3ds"];
-        
     } else {
         return @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
     }

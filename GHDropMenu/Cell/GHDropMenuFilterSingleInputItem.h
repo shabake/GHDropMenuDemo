@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class GHDropMenuFilterSingleInputItem,GHDropMenuModel;
 
 @protocol GHDropMenuFilterSingleInputItemDelegate <NSObject>
-- (void)dropMenuFilterSingleInputItem: (GHDropMenuFilterSingleInputItem *)item dropMenuModel: (GHDropMenuModel *)dropMenuModel;
+- (void)dropMenuFilterSingleInputItem: (GHDropMenuFilterSingleInputItem *)item
+                        dropMenuModel: (GHDropMenuModel *)dropMenuModel;
 @end
 
 @interface GHDropMenuFilterSingleInputItem : UICollectionViewCell

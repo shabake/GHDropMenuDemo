@@ -25,7 +25,6 @@
         self.label.textColor = dropMenuModel.titleSeletedColor;
     } else {
         self.imageView.image = [UIImage imageNamed:dropMenuModel.titleNormalImageName];
-        
         self.imageView.transform = CGAffineTransformMakeRotation(0);
         self.label.textColor = dropMenuModel.titleNormalColor;
     }
@@ -37,6 +36,7 @@
     }
     return self;
 }
+
 - (instancetype)init {
     if (self == [super init]) {
         [self setupUI];

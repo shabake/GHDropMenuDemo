@@ -41,7 +41,6 @@
 }
 - (void)setupUI {
     [self addSubview:self.textField];
-    
 }
 - (void)layoutSubviews {
     [super layoutSubviews];

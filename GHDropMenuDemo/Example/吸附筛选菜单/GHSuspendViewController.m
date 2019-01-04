@@ -97,8 +97,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
    
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
-    /** 配置筛选菜单是否记录用户选中 默认NO */
-    configuration.recordSeleted = YES;
+
     /** 设置数据源 */
     configuration.titles = [configuration creatNormalDropMenuData];
     /** 创建dropMenu 配置模型 && frame */
