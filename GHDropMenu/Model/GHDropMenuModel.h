@@ -75,6 +75,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , assign) GHDropMenuType dropMenuType;
 /** 标题 */
 @property (nonatomic , copy) NSString *title;
+/** 唯一标识符 */
 @property (nonatomic , assign) NSInteger identifier;
 @property (nonatomic , strong) UIFont *titleFont;
 @property (nonatomic , assign) CGFloat menuHeight;
