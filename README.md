@@ -96,7 +96,7 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 
 ### 在使用中如有任何问题欢迎骚扰我,如果对你有帮助请点帮我一个✨,小弟感激不尽:blush:
 
-### qq群 `621286914 `
+### 邮箱 `45329453@qq.com `
 
 [关注我的博客 没事写点小东西](https://www.jianshu.com/u/884a67907187)
 

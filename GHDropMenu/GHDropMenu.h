@@ -104,10 +104,17 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 - (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu;
 /** 配置筛选菜单标题选项 */
 - (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns;
-
 @end
 @protocol GHDropMenuDelegate <NSObject>
 @optional
+/**
+ 代理回调
+ 
+ @param dropMenu dropMenu本身
+ @param dropMenuModel 默认配置
+ */
+- (void)dropMenu: (GHDropMenu *)dropMenu
+dropMenuModel: (nullable GHDropMenuModel *)dropMenuModel;
 /**
  代理回调
 
@@ -175,12 +182,11 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 @property (nonatomic , strong) UIColor *optionNormalColor;
 /** 选项选中文字颜色 */
 @property (nonatomic , strong) UIColor *optionSeletedColor;
+/** 选项菜单y值 */
+@property (nonatomic , assign) CGFloat tableY;
 
 @property (nonatomic , weak) id <GHDropMenuDelegate> delegate;
 @property (nonatomic , weak) id <GHDropMenuDataSource> dataSource;
-
-@property (nonatomic , assign) CGFloat tableY;
-
 /** 动画时间 等于0 不开启动画 默认是0 */
 @property (nonatomic , assign) NSTimeInterval durationTime;
 

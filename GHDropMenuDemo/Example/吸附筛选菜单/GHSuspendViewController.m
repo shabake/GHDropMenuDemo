@@ -42,7 +42,7 @@
     } else {
         self.collectionView.hidden = YES;
     }
-    self.tableView.hidden = ! self.collectionView.hidden;
+    self.tableView.hidden = !self.collectionView.hidden;
     [self.tableView reloadData];
     [self.collectionView reloadData];
 
@@ -145,6 +145,13 @@
     NSLog(@"点击tableView");
 }
 #pragma mark - 代理方法;
+- (void)dropMenu:(GHDropMenu *)dropMenu dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    
+    self.dropMenu.configuration = dropMenuModel;
+
+    [self.tableView reloadData];
+
+}
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuTitleModel:(GHDropMenuModel *)dropMenuTitleModel {
     self.navigationItem.title = [NSString stringWithFormat:@"%@第%ld列%ld行",dropMenuTitleModel.title,(long)dropMenuTitleModel.indexPath.section,(long)dropMenuTitleModel.indexPath.row];
 }
@@ -233,5 +240,7 @@
 
     }
     return _header;
+}
+- (void)dealloc {
 }
 @end

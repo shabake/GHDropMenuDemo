@@ -25,6 +25,7 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.title.text = dropMenuModel.title;
+    NSLog(@"dropMenuModel.cellSeleted%d",dropMenuModel.cellSeleted);
     self.title.textColor = dropMenuModel.cellSeleted ? dropMenuModel.optionSeletedColor:dropMenuModel.optionNormalColor;
     self.imgView.hidden = !dropMenuModel.cellSeleted;
     self.title.font = dropMenuModel.optionFont > 0 ?dropMenuModel.optionFont :[UIFont systemFontOfSize:13];
@@ -501,6 +502,7 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
     self.dropMenuTitle.dropMenuModel = dropMenuModel;
+    NSLog(@"走了");
     self.backgroundColor =dropMenuModel.titleViewBackGroundColor ? dropMenuModel.titleViewBackGroundColor:[UIColor clearColor];
 }
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -1045,23 +1047,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
 - (void)setConfiguration:(GHDropMenuModel *)configuration {
     _configuration = configuration;
     self.titles = configuration.titles.copy;
-    if (configuration.menuHeight) {
-        self.collectionView.frame = CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, configuration.menuHeight);
-
-        [UIView animateWithDuration:0.0 animations:^{
-            self.topLine.frame = CGRectMake(0, 0, kGHScreenWidth, 1);
-            self.bottomLine.frame = CGRectMake(0, configuration.menuHeight - 1, kGHScreenWidth, 1);
-        } completion:^(BOOL finished) {
-            
-        }];
-        self.menuHeight = configuration.menuHeight;
-    }
-    if (configuration.titleFont) {
-        for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
-            dropMenuTitleModel.titleFont = configuration.titleFont;
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        for (GHDropMenuModel *dropMenuCellModel in dropMenuTitleModel.dataArray) {
+            NSLog(@"titleSeleted%d",dropMenuCellModel.cellSeleted);
         }
     }
-    [self resetMenuStatus];
+    [self.collectionView reloadData];
+    self.currentIndex = 0;
+//    [self resetMenuStatus];
 }
 - (instancetype)new {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"请使用方法 creatDropMenuWithConfiguration: or creatDropFilterMenuWidthConfiguration: 代替初始化" userInfo:nil];
@@ -1162,7 +1155,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [self.filterCover addSubview:self.bottomView];
     [self.filterCover addSubview:self.sure];
     [self.filterCover addSubview:self.reset];
-
 }
 /** 重置menu 状态 */
 - (void)resetMenuStatus {
@@ -1320,7 +1312,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     if (self.dropMenuTitleBlock) {
         self.dropMenuTitleBlock(contentModel);
     }
-    [self resetMenuStatus];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:)]) {
+        [self.delegate dropMenu:self dropMenuModel:self.configuration];
+    }
+
+    [self dismiss];
 }
 #pragma mark - collectionViewDelegate
 
