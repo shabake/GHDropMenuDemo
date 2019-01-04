@@ -51,6 +51,7 @@
 		D6A4ED8821DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8721DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m */; };
 		D6A4ED8B21DF84560053D14F /* GHDropMenuFilterInputItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8A21DF84560053D14F /* GHDropMenuFilterInputItem.m */; };
 		D6A4ED8E21DF84ED0053D14F /* GHDropMenuFilterTagItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */; };
+		D6A4ED9121DF97B50053D14F /* NSString+Arc4random.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED9021DF97B40053D14F /* NSString+Arc4random.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +112,8 @@
 		D6A4ED8A21DF84560053D14F /* GHDropMenuFilterInputItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuFilterInputItem.m; sourceTree = "<group>"; };
 		D6A4ED8C21DF84ED0053D14F /* GHDropMenuFilterTagItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuFilterTagItem.h; sourceTree = "<group>"; };
 		D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuFilterTagItem.m; sourceTree = "<group>"; };
+		D6A4ED8F21DF97B40053D14F /* NSString+Arc4random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Arc4random.h"; sourceTree = "<group>"; };
+		D6A4ED9021DF97B40053D14F /* NSString+Arc4random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Arc4random.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +305,8 @@
 		D6A4ED6E21DF7B060053D14F /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D6A4ED8F21DF97B40053D14F /* NSString+Arc4random.h */,
+				D6A4ED9021DF97B40053D14F /* NSString+Arc4random.m */,
 				D6A4ED7221DF7B550053D14F /* NSArray+Bounds.h */,
 				D6A4ED7421DF7B550053D14F /* NSArray+Bounds.m */,
 				D6A4ED6F21DF7B550053D14F /* NSString+Size.h */,
@@ -428,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6A4ED9121DF97B50053D14F /* NSString+Arc4random.m in Sources */,
 				D6A4ED3821DA7E090053D14F /* GHBaseNavigationController.m in Sources */,
 				D6A4ECF821DA2E5C0053D14F /* GHMeituanFoodViewController.m in Sources */,
 				D6A4ED8121DF801D0053D14F /* GHDropMenuOptionCell.m in Sources */,

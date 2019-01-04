@@ -77,7 +77,6 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
          dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock;
 
 @property (nonatomic , strong) NSArray *titles;
-
 /** set方法 */
 @property (nonatomic , strong) GHDropMenuModel *configuration;
 

@@ -38,7 +38,11 @@
 
 }
 - (void)refresh {
-    [self.tableView reloadData];
+
+    UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[self.tableView headerViewForSection:0];
+    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];    
+    GHDropMenu *dropMenu = view.subviews.lastObject;
+    dropMenu.titles = [configuration creatRandomDropMenuData];
 
 }
 - (void)back {
@@ -53,10 +57,14 @@
     
     CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
   
-    CGFloat contentOffsetY = scrollView.contentOffset.y; 
-    self.dropMenu.tableY = rect.origin.y + rect.size.height;
+    CGFloat contentOffsetY = scrollView.contentOffset.y;
+    UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[self.tableView headerViewForSection:0];
+ 
+    GHDropMenu *dropMenu = view.subviews.lastObject;
+    
+    dropMenu.tableY = rect.origin.y + rect.size.height;
     if (contentOffsetY >= kHeaderHeight) {
-        self.dropMenu.tableY = kGHSafeAreaTopHeight + 44;
+        dropMenu.tableY = kGHSafeAreaTopHeight + 44;
     }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -97,15 +105,14 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
    
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
-
+    configuration.recordSeleted = YES;
     /** 设置数据源 */
     configuration.titles = [configuration creatNormalDropMenuData];
     /** 创建dropMenu 配置模型 && frame */
     GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
-        
-    }];
 
+    }];
     dropMenu.titleSeletedColor = [UIColor redColor];
     dropMenu.titleNormalColor = [UIColor orangeColor];
     dropMenu.titleSeletedImageName = @"";
@@ -117,11 +124,12 @@
     CGRect rectInTableView = [self.tableView rectForHeaderInSection:0];
     CGRect rect = [self.tableView convertRect:rectInTableView toView:[self.tableView superview]];
     dropMenu.tableY = rect.origin.y + rect.size.height;
-    
+
     dropMenu.delegate = self;
-    self.dropMenu = dropMenu;
-    
-    return dropMenu ;
+    UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"UITableViewHeaderFooterViewID"];
+    view.frame = CGRectMake(0, 0, kGHScreenWidth, 44);
+    [view addSubview: dropMenu];
+    return view ;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
@@ -201,6 +209,7 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCellID"];
+        [_tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"UITableViewHeaderFooterViewID"];
     }
     return _tableView;
 }
@@ -227,7 +236,6 @@
     if (_header == nil) {
         _header = [[GHSuspendHeader alloc]init];
         _header.frame = CGRectMake(0, kGHSafeAreaTopHeight, kGHScreenWidth, kHeaderHeight);
-
     }
     return _header;
 }

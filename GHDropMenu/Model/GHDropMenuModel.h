@@ -94,6 +94,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 - (NSArray *)creaDropMenuData;
 - (NSArray *)creaFilterDropMenuData;
 - (NSArray *)creatNormalDropMenuData;
+- (NSArray *)creatRandomDropMenuData;
+
 @end
 
 NS_ASSUME_NONNULL_END
