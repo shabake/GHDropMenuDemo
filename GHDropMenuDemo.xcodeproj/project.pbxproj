@@ -44,6 +44,8 @@
 		D6A4ED7521DF7B550053D14F /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7021DF7B550053D14F /* UIView+Extension.m */; };
 		D6A4ED7621DF7B550053D14F /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7121DF7B550053D14F /* NSString+Size.m */; };
 		D6A4ED7721DF7B550053D14F /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7421DF7B550053D14F /* NSArray+Bounds.m */; };
+		D6A4ED7A21DF7C120053D14F /* GHDropMenuTitleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7921DF7C120053D14F /* GHDropMenuTitleItem.m */; };
+		D6A4ED7E21DF7CFB0053D14F /* GHDropMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7D21DF7CFB0053D14F /* GHDropMenuModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,10 @@
 		D6A4ED7221DF7B550053D14F /* NSArray+Bounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Bounds.h"; sourceTree = "<group>"; };
 		D6A4ED7321DF7B550053D14F /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		D6A4ED7421DF7B550053D14F /* NSArray+Bounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Bounds.m"; sourceTree = "<group>"; };
+		D6A4ED7821DF7C120053D14F /* GHDropMenuTitleItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuTitleItem.h; sourceTree = "<group>"; };
+		D6A4ED7921DF7C120053D14F /* GHDropMenuTitleItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuTitleItem.m; sourceTree = "<group>"; };
+		D6A4ED7C21DF7CFB0053D14F /* GHDropMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuModel.h; sourceTree = "<group>"; };
+		D6A4ED7D21DF7CFB0053D14F /* GHDropMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,7 @@
 		D650CDB021C35E1F00EC004A /* GHDropMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D6A4ED7B21DF7CE50053D14F /* Model */,
 				D6A4ED6E21DF7B060053D14F /* Category */,
 				D6A4ED6D21DF7ADA0053D14F /* Cell */,
 				D6A4ED3421DA6ED70053D14F /* README.md */,
@@ -262,6 +269,8 @@
 		D6A4ED6D21DF7ADA0053D14F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				D6A4ED7821DF7C120053D14F /* GHDropMenuTitleItem.h */,
+				D6A4ED7921DF7C120053D14F /* GHDropMenuTitleItem.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -277,6 +286,15 @@
 				D6A4ED7021DF7B550053D14F /* UIView+Extension.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		D6A4ED7B21DF7CE50053D14F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D6A4ED7C21DF7CFB0053D14F /* GHDropMenuModel.h */,
+				D6A4ED7D21DF7CFB0053D14F /* GHDropMenuModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,6 +404,7 @@
 				D650CD8321C35E0D00EC004A /* ViewController.m in Sources */,
 				D6A4ECEB21D7AD760053D14F /* GHBaseViewController.m in Sources */,
 				D6A4ECFC21DA2E9F0053D14F /* GHDebugViewController.m in Sources */,
+				D6A4ED7A21DF7C120053D14F /* GHDropMenuTitleItem.m in Sources */,
 				D6A4ED7721DF7B550053D14F /* NSArray+Bounds.m in Sources */,
 				D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */,
 				D6A4ED7621DF7B550053D14F /* NSString+Size.m in Sources */,
@@ -394,6 +413,7 @@
 				D6A4ECEE21D7B2E30053D14F /* GHSuspendItem.m in Sources */,
 				D6A4ED6321DCB8DA0053D14F /* GHCollectionReusableView.m in Sources */,
 				D6A4ED7521DF7B550053D14F /* UIView+Extension.m in Sources */,
+				D6A4ED7E21DF7CFB0053D14F /* GHDropMenuModel.m in Sources */,
 				D6A4ECE421D793720053D14F /* GHSuspendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

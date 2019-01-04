@@ -8,6 +8,7 @@
 
 #import "GHSlipMenuViewController.h"
 #import "GHDropMenu.h"
+#import "GHDropMenuModel.h"
 
 @interface GHSlipMenuViewController ()<GHDropMenuDelegate>
 @property (nonatomic , strong)GHDropMenu *dropMenu;

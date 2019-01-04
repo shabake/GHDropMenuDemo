@@ -8,6 +8,7 @@
 
 #import "GHComplexMenuViewController.h"
 #import "GHDropMenu.h"
+#import "GHDropMenuModel.h"
 
 @interface GHComplexMenuViewController ()<GHDropMenuDelegate>
 @property (nonatomic , strong)GHDropMenu *dropMenu;

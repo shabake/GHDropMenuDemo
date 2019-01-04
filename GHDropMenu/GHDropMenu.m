@@ -10,6 +10,8 @@
 #import "NSArray+Bounds.h"
 #import "NSString+Size.h"
 #import "UIView+Extension.h"
+#import "GHDropMenuModel.h"
+#import "GHDropMenuTitleItem.h"
 
 #pragma mark - - - -- - - -- - - - GHDropMenuCell
 @interface  GHDropMenuCell : UITableViewCell
@@ -412,448 +414,6 @@
 @end
 #pragma mark - - - - GHDropMenuTitle 自定义view
 
-@interface GHDropMenuTitle : UIView
-@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
-@end
-@interface GHDropMenuTitle()
-@property (nonatomic , strong) UILabel *label;
-@property (nonatomic , strong) UIImageView *imageView;
-
-@end
-@implementation GHDropMenuTitle
-- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    _dropMenuModel = dropMenuModel;
-    self.label.text = dropMenuModel.title;
-    self.label.font = dropMenuModel.titleFont;
-    if (dropMenuModel.titleSeleted) {
-        self.imageView.image = [UIImage imageNamed:dropMenuModel.titleSeletedImageName];
-        self.imageView.transform = CGAffineTransformMakeRotation(M_PI);
-        self.label.textColor = dropMenuModel.titleSeletedColor;
-    } else {
-        self.imageView.image = [UIImage imageNamed:dropMenuModel.titleNormalImageName];
-
-        self.imageView.transform = CGAffineTransformMakeRotation(0);
-        self.label.textColor = dropMenuModel.titleNormalColor;
-    }
-}
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        [self setupUI];
-        self.backgroundColor = [UIColor clearColor];
-    }
-    return self;
-}
-- (instancetype)init {
-    if (self == [super init]) {
-        [self setupUI];
-        self.backgroundColor = [UIColor clearColor];
-    }
-    return self;
-}
-- (void)setupUI {
-    [self addSubview:self.label];
-    [self addSubview:self.imageView];
-}
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.imageView.frame = CGRectMake(self.label.frame.size.width + 3, (self.bounds.size.height - 8 ) *.5, 10, 8);
-}
-
-- (UIImageView *)imageView {
-    if (_imageView == nil) {
-        _imageView = [[UIImageView alloc]init];
-        _imageView.frame = CGRectMake(CGRectGetMaxX(self.label.frame), 0, 10, 8);
-        _imageView.highlightedImage = [UIImage imageNamed:@"up_normal"];
-        _imageView.image = [UIImage imageNamed:@"down_normal"];
-    }
-    return _imageView;
-}
-- (UILabel *)label {
-    if (_label == nil) {
-        _label = [[UILabel alloc]init];
-        _label.frame = CGRectMake(10, 0, 80, 44);
-        _label.textAlignment = NSTextAlignmentCenter;
-        _label.font = [UIFont systemFontOfSize:14];
-        _label.textColor = [UIColor darkGrayColor];
-        _label.backgroundColor = [UIColor whiteColor];
-        _label.layer.borderColor = [UIColor clearColor].CGColor;
-    }
-    return _label;
-}
-
-@end
-
-#pragma mark - - - - GHDropMenuItem 顶部title item
-@class GHDropMenuItem,GHDropMenuModel;
-@protocol GHDropMenuItemDelegate <NSObject>
-- (void)dropMenuItem: (GHDropMenuItem *)item dropMenuModel: (GHDropMenuModel *)dropMenuModel;
-@end
-@interface GHDropMenuItem : UICollectionViewCell
-@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
-@property (nonatomic , weak) id <GHDropMenuItemDelegate> delegate;
-
-@end
-@interface GHDropMenuItem()
-@property (nonatomic , strong) GHDropMenuTitle *dropMenuTitle;
-
-@end
-@implementation GHDropMenuItem
-- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    _dropMenuModel = dropMenuModel;
-    self.dropMenuTitle.dropMenuModel = dropMenuModel;
-    NSLog(@"走了");
-    self.backgroundColor =dropMenuModel.titleViewBackGroundColor ? dropMenuModel.titleViewBackGroundColor:[UIColor clearColor];
-}
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        [self setupUI];
-        self.backgroundColor = [UIColor clearColor];
-    }
-    return self;
-}
-
-- (void)setupUI {
-    [self addSubview:self.dropMenuTitle];
-}
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.dropMenuTitle.frame = CGRectMake(5, 0, self.frame.size.width - 10, self.frame.size.height);
-}
-
-- (void)tap:(UITapGestureRecognizer *)gesture {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuItem:dropMenuModel:)]) {
-        [self.delegate dropMenuItem:self dropMenuModel:self.dropMenuModel];
-    }
-}
-
-- (GHDropMenuTitle *)dropMenuTitle {
-    if (_dropMenuTitle == nil) {
-        _dropMenuTitle = [[GHDropMenuTitle alloc]init];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        _dropMenuTitle.backgroundColor = [UIColor clearColor];
-        [_dropMenuTitle addGestureRecognizer:tap];
-    }
-    return _dropMenuTitle;
-}
-@end
-
-#pragma mark - - - - GHDropMenuModel
-
-@implementation GHDropMenuModel
-- (NSArray *)creatNormalDropMenuData {
-    
-    /** 构造第一列数据 */
-    NSArray *line1 = @[@"价格从高到低",@"价格从低到高",@"距离从远到近",@"销量从低到高",@"信用从高到低"];
-    NSMutableArray *dataArray1 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < line1.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [line1 by_ObjectAtIndex:index];
-        [dataArray1 addObject:dropMenuModel];
-    }
-    
-    /** 构造第二列数据 */
-    NSArray *line2 = @[@"0 - 10 元",@"10-20 元",@"20-50 元",@"50-100 元",@"100 - 1000元",@"1000 - 10000 元",@"10000-100000 元",@"100000-500000 元",@"500000-1000000 元",@"1000000以上"];
-    NSMutableArray *dataArray2 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < line2.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [line2 by_ObjectAtIndex:index];
-        [dataArray2 addObject:dropMenuModel];
-    }
-    
-    /** 构造第三列数据 */
-    NSArray *line3 = @[@"psp",@"psv",@"nswitch",@"gba",@"gbc",@"gbp",@"ndsl",@"3ds"];
-    NSMutableArray *dataArray3 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < line3.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [line3 by_ObjectAtIndex:index];
-        [dataArray3 addObject:dropMenuModel];
-    }
-    
-    /** 构造第四列数据 */
-    NSArray *line4 = @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
-    NSMutableArray *dataArray4 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < line4.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [line4 by_ObjectAtIndex:index];
-        [dataArray4 addObject:dropMenuModel];
-    }
-  
-    NSMutableArray *titlesArray = [NSMutableArray array];
-    NSArray *types = @[
-                       @(GHDropMenuTypeTitle),
-                       @(GHDropMenuTypeTitle),
-                       @(GHDropMenuTypeTitle),
-                       @(GHDropMenuTypeTitle),
-                       ];
-    /** 菜单标题 */
-    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"时间1"];
-    
-    for (NSInteger index = 0 ; index < titles.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = titles[index];
-        dropMenuModel.indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
-        NSNumber *typeNum = types[index];
-        dropMenuModel.dropMenuType = typeNum.integerValue;
-        if (index == 0) {
-            dropMenuModel.dataArray = dataArray1;
-        } else if (index == 1) {
-            dropMenuModel.dataArray = dataArray2;
-        } else if (index == 2) {
-            dropMenuModel.dataArray = dataArray3;
-        } else if (index == 3) {
-            dropMenuModel.dataArray = dataArray4;
-        }
-        dropMenuModel.identifier = index;
-        [titlesArray addObject:dropMenuModel];
-    }
-    return titlesArray;
-}
-- (NSArray *)creaDropMenuData {
-  
-    /** 构造第一列数据 */
-    NSArray *line1 = @[@"价格从高到低",@"价格从低到高",@"距离从远到近",@"销量从低到高",@"信用从高到低"];
-    NSMutableArray *dataArray1 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < line1.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [line1 by_ObjectAtIndex:index];
-        [dataArray1 addObject:dropMenuModel];
-    }
-    
-    /** 构造第二列数据 */
-    NSArray *line2 = @[@"0 - 10 元",@"10-20 元",@"20-50 元",@"50-100 元",@"100 - 1000元",@"1000 - 10000 元",@"10000-100000 元",@"100000-500000 元",@"500000-1000000 元",@"1000000以上"];
-    NSMutableArray *dataArray2 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < line2.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [line2 by_ObjectAtIndex:index];
-        [dataArray2 addObject:dropMenuModel];
-    }
-    
-    /** 构造第三列数据 */
-    NSArray *line3 = @[@"psp",@"psv",@"nswitch",@"gba",@"gbc",@"gbp",@"ndsl",@"3ds"];
-    NSMutableArray *dataArray3 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < line3.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [line3 by_ObjectAtIndex:index];
-        [dataArray3 addObject:dropMenuModel];
-    }
-    
-    /** 构造右侧弹出筛选菜单第一行数据 */
-    NSArray *row1 = @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
-    NSMutableArray *dataArray4 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < row1.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.tagName = [row1 by_ObjectAtIndex:index];
-        [dataArray4 addObject:dropMenuModel];
-    }
-    /** 构造右侧弹出筛选菜单第二行数据 */
-    NSArray *row2 = @[@"呵呵",@"哈哈",@"嘿嘿",@"呵呵",@"哈哈",@"嘿嘿"];
-    NSMutableArray *dataArray5 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < row2.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.tagName = [row2 by_ObjectAtIndex:index];
-        [dataArray5 addObject:dropMenuModel];
-    }
-    
-    /** 构造右侧弹出筛选菜单第三行数据 */
-    NSMutableArray *dataArray6 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < 1; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        [dataArray6 addObject:dropMenuModel];
-    }
-    
-    /** ... */
-    NSArray *row4 = @[@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录"];
-    NSMutableArray *dataArray7 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < row4.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.tagName = [row4 by_ObjectAtIndex:index];
-        [dataArray7 addObject:dropMenuModel];
-    }
-    
-    NSArray *row5 = @[@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录"];
-    NSMutableArray *dataArray8 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < row5.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.tagName = [row5 by_ObjectAtIndex:index];
-        [dataArray8 addObject:dropMenuModel];
-    }
-    
-    NSMutableArray *dataArray9 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < 1; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        [dataArray9 addObject:dropMenuModel];
-    }
-    
-    /** 设置构造右侧弹出筛选菜单每行的标题 */
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框"];
-    NSMutableArray *sections = [NSMutableArray array];
-    
-    for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.sectionHeaderTitle = sectionHeaderTitles[index];
-        
-        if (index == 0) {
-            dropMenuModel.dataArray = dataArray4;
-            /** 单选 */
-            dropMenuModel.isMultiple = NO;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
-        } else if (index == 1) {
-            dropMenuModel.dataArray = dataArray5;
-            /** 多选 */
-            dropMenuModel.isMultiple = YES;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
-            
-        } else if (index == 2) {
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeInput;
-            dropMenuModel.dataArray = dataArray6;
-        } else if (index == 3){
-            dropMenuModel.dataArray = dataArray7;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
-        } else if (index == 4) {
-            dropMenuModel.dataArray = dataArray8;
-            dropMenuModel.isMultiple = YES;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
-        } else if (index == 5) {
-            dropMenuModel.dataArray = dataArray9;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeSingleInput;
-        }
-        [sections addObject:dropMenuModel];
-    }
-    NSMutableArray *titlesArray = [NSMutableArray array];
-    NSArray *types = @[
-                       @(GHDropMenuTypeTitle),
-                       @(GHDropMenuTypeTitle),
-                       @(GHDropMenuTypeTitle),
-                       @(GHDropMenuTypeFilter),
-                       ];
-    /** 菜单标题 */
-    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"筛选"];
-    
-    for (NSInteger index = 0 ; index < titles.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = titles[index];
-        NSNumber *typeNum = types[index];
-        dropMenuModel.dropMenuType = typeNum.integerValue;
-        if (index == 0) {
-            dropMenuModel.dataArray = dataArray1;
-        } else if (index == 1) {
-            dropMenuModel.dataArray = dataArray2;
-        } else if (index == 2) {
-            dropMenuModel.dataArray = dataArray3;
-        } else if (index == 3) {
-            dropMenuModel.dataArray = dataArray4;
-            dropMenuModel.sections = sections;
-        }
-        dropMenuModel.identifier = index;
-        [titlesArray addObject:dropMenuModel];
-    }
-    return titlesArray;
-}
-- (NSArray *)creaFilterDropMenuData {
-    
-
-    /** 构造右侧弹出筛选菜单第一行数据 */
-    NSArray *row1 = @[@"上午",@"下午",@"早上",@"晚上",@"清晨",@"黄昏"];
-    NSMutableArray *dataArray4 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < row1.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.tagName = [row1 by_ObjectAtIndex:index];
-        [dataArray4 addObject:dropMenuModel];
-    }
-    /** 构造右侧弹出筛选菜单第二行数据 */
-    NSArray *row2 = @[@"呵呵",@"哈哈"];
-    NSMutableArray *dataArray5 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < row2.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.tagName = [row2 by_ObjectAtIndex:index];
-        [dataArray5 addObject:dropMenuModel];
-    }
-    
-    /** 构造右侧弹出筛选菜单第三行数据 */
-    NSMutableArray *dataArray6 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < 1; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        [dataArray6 addObject:dropMenuModel];
-    }
-    /** ... */
-    NSArray *row4 = @[@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录"];
-    NSMutableArray *dataArray7 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < row4.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.tagName = [row4 by_ObjectAtIndex:index];
-        [dataArray7 addObject:dropMenuModel];
-    }
-    
-    NSArray *row5 = @[@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录",@"注",@"册用",@"户登",@"录后",@"才能首页",@"发表",@"评论录"];
-    NSMutableArray *dataArray8 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < row5.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.tagName = [row5 by_ObjectAtIndex:index];
-        [dataArray8 addObject:dropMenuModel];
-    }
-    
-    
-    NSMutableArray *dataArray9 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < 1; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        [dataArray9 addObject:dropMenuModel];
-    }
-    
-    /** 设置构造右侧弹出筛选菜单每行的标题 */
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框"];
-    NSMutableArray *sections = [NSMutableArray array];
-    
-    for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.sectionHeaderTitle = sectionHeaderTitles[index];
-        if (index == 0) {
-            dropMenuModel.dataArray = dataArray4;
-            /** 单选 */
-            dropMenuModel.isMultiple = NO;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
-        } else if (index == 1) {
-            dropMenuModel.dataArray = dataArray5;
-            /** 多选 */
-            dropMenuModel.isMultiple = YES;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
-            
-        } else if (index == 2) {
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeInput;
-            dropMenuModel.dataArray = dataArray6;
-        }  else if (index == 3){
-            dropMenuModel.dataArray = dataArray7;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
-        } else if (index == 4) {
-            dropMenuModel.dataArray = dataArray8;
-            dropMenuModel.isMultiple = YES;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
-        } else if (index == 5) {
-            dropMenuModel.dataArray = dataArray9;
-            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeSingleInput;
-        }
-        [sections addObject:dropMenuModel];
-    }
-    NSMutableArray *titlesArray = [NSMutableArray array];
-    NSArray *types = @[
-                       @(GHDropMenuTypeFilter),
-                       ];
-    /** 菜单标题 */
-    for (NSInteger index = 0 ; index < 1; index++) {
-        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-//        dropMenuModel.title = titles[index];
-        NSNumber *typeNum = types[index];
-        dropMenuModel.dropMenuType = typeNum.integerValue;
-
-        dropMenuModel.dataArray = dataArray4;
-        dropMenuModel.sections = sections;
-        
-        dropMenuModel.identifier = index;
-        [titlesArray addObject:dropMenuModel];
-    }
-    return titlesArray;
-}
-@end
-
 #pragma mark - - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - - GHDropMenu 筛选菜单开始
 /** 按钮类型 */
 typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
@@ -867,7 +427,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     GHDropMenuShowTypeCommon = 1,
     GHDropMenuShowTypeOnlyFilter,
 };
-@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuItemDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate>
+
+@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate,GHDropMenuTitleItemDelegate>
 
 
 /** 顶部菜单 */
@@ -1250,7 +811,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     
 }
 #pragma mark - 点击顶部titleView 代理回调
-- (void)dropMenuItem:(GHDropMenuItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+- (void)dropMenuTitleItem: (GHDropMenuTitleItem *)item
+            dropMenuModel: (GHDropMenuModel *)dropMenuModel {
     dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;
     if (dropMenuModel.titleSeleted) {
@@ -1403,7 +965,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     if (collectionView == self.collectionView) {
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: indexPath.row];
         dropMenuModel.indexPath = indexPath;
-        GHDropMenuItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GHDropMenuItemID" forIndexPath:indexPath];
+        GHDropMenuTitleItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GHDropMenuTitleItemID" forIndexPath:indexPath];
         cell.dropMenuModel = dropMenuModel;
         cell.delegate = self;
         return cell;
@@ -1596,8 +1158,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.layer.borderColor = [UIColor clearColor].CGColor;
-        [_collectionView registerClass:[GHDropMenuItem class] forCellWithReuseIdentifier:@"GHDropMenuItemID"];
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellID"];
+        [_collectionView registerClass:[GHDropMenuTitleItem class] forCellWithReuseIdentifier:@"GHDropMenuTitleItemID"];
+
     }
     return _collectionView;
 }
