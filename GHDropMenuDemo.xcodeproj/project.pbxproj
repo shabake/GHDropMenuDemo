@@ -46,6 +46,11 @@
 		D6A4ED7721DF7B550053D14F /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7421DF7B550053D14F /* NSArray+Bounds.m */; };
 		D6A4ED7A21DF7C120053D14F /* GHDropMenuTitleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7921DF7C120053D14F /* GHDropMenuTitleItem.m */; };
 		D6A4ED7E21DF7CFB0053D14F /* GHDropMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7D21DF7CFB0053D14F /* GHDropMenuModel.m */; };
+		D6A4ED8121DF801D0053D14F /* GHDropMenuOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8021DF801D0053D14F /* GHDropMenuOptionCell.m */; };
+		D6A4ED8521DF819A0053D14F /* GHDropMenuFilterSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8421DF819A0053D14F /* GHDropMenuFilterSectionHeader.m */; };
+		D6A4ED8821DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8721DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m */; };
+		D6A4ED8B21DF84560053D14F /* GHDropMenuFilterInputItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8A21DF84560053D14F /* GHDropMenuFilterInputItem.m */; };
+		D6A4ED8E21DF84ED0053D14F /* GHDropMenuFilterTagItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +101,16 @@
 		D6A4ED7921DF7C120053D14F /* GHDropMenuTitleItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuTitleItem.m; sourceTree = "<group>"; };
 		D6A4ED7C21DF7CFB0053D14F /* GHDropMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuModel.h; sourceTree = "<group>"; };
 		D6A4ED7D21DF7CFB0053D14F /* GHDropMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuModel.m; sourceTree = "<group>"; };
+		D6A4ED7F21DF801D0053D14F /* GHDropMenuOptionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuOptionCell.h; sourceTree = "<group>"; };
+		D6A4ED8021DF801D0053D14F /* GHDropMenuOptionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuOptionCell.m; sourceTree = "<group>"; };
+		D6A4ED8321DF819A0053D14F /* GHDropMenuFilterSectionHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuFilterSectionHeader.h; sourceTree = "<group>"; };
+		D6A4ED8421DF819A0053D14F /* GHDropMenuFilterSectionHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuFilterSectionHeader.m; sourceTree = "<group>"; };
+		D6A4ED8621DF839F0053D14F /* GHDropMenuFilterSingleInputItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuFilterSingleInputItem.h; sourceTree = "<group>"; };
+		D6A4ED8721DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuFilterSingleInputItem.m; sourceTree = "<group>"; };
+		D6A4ED8921DF84560053D14F /* GHDropMenuFilterInputItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuFilterInputItem.h; sourceTree = "<group>"; };
+		D6A4ED8A21DF84560053D14F /* GHDropMenuFilterInputItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuFilterInputItem.m; sourceTree = "<group>"; };
+		D6A4ED8C21DF84ED0053D14F /* GHDropMenuFilterTagItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuFilterTagItem.h; sourceTree = "<group>"; };
+		D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuFilterTagItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +167,7 @@
 		D650CDB021C35E1F00EC004A /* GHDropMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D6A4ED8221DF81700053D14F /* View */,
 				D6A4ED7B21DF7CE50053D14F /* Model */,
 				D6A4ED6E21DF7B060053D14F /* Category */,
 				D6A4ED6D21DF7ADA0053D14F /* Cell */,
@@ -271,6 +287,14 @@
 			children = (
 				D6A4ED7821DF7C120053D14F /* GHDropMenuTitleItem.h */,
 				D6A4ED7921DF7C120053D14F /* GHDropMenuTitleItem.m */,
+				D6A4ED7F21DF801D0053D14F /* GHDropMenuOptionCell.h */,
+				D6A4ED8021DF801D0053D14F /* GHDropMenuOptionCell.m */,
+				D6A4ED8621DF839F0053D14F /* GHDropMenuFilterSingleInputItem.h */,
+				D6A4ED8721DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m */,
+				D6A4ED8921DF84560053D14F /* GHDropMenuFilterInputItem.h */,
+				D6A4ED8A21DF84560053D14F /* GHDropMenuFilterInputItem.m */,
+				D6A4ED8C21DF84ED0053D14F /* GHDropMenuFilterTagItem.h */,
+				D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -295,6 +319,15 @@
 				D6A4ED7D21DF7CFB0053D14F /* GHDropMenuModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D6A4ED8221DF81700053D14F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D6A4ED8321DF819A0053D14F /* GHDropMenuFilterSectionHeader.h */,
+				D6A4ED8421DF819A0053D14F /* GHDropMenuFilterSectionHeader.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,8 +430,10 @@
 			files = (
 				D6A4ED3821DA7E090053D14F /* GHBaseNavigationController.m in Sources */,
 				D6A4ECF821DA2E5C0053D14F /* GHMeituanFoodViewController.m in Sources */,
+				D6A4ED8121DF801D0053D14F /* GHDropMenuOptionCell.m in Sources */,
 				D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */,
 				D6A4ED3321DA6C720053D14F /* AppDelegate.m in Sources */,
+				D6A4ED8521DF819A0053D14F /* GHDropMenuFilterSectionHeader.m in Sources */,
 				D6A4ECE721D79F750053D14F /* GHSuspendHeader.m in Sources */,
 				D6A4ED3121DA6B950053D14F /* main.m in Sources */,
 				D650CD8321C35E0D00EC004A /* ViewController.m in Sources */,
@@ -407,12 +442,15 @@
 				D6A4ED7A21DF7C120053D14F /* GHDropMenuTitleItem.m in Sources */,
 				D6A4ED7721DF7B550053D14F /* NSArray+Bounds.m in Sources */,
 				D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */,
+				D6A4ED8821DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m in Sources */,
 				D6A4ED7621DF7B550053D14F /* NSString+Size.m in Sources */,
 				D6A4ECD721D7902F0053D14F /* GHComplexMenuViewController.m in Sources */,
 				D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */,
 				D6A4ECEE21D7B2E30053D14F /* GHSuspendItem.m in Sources */,
 				D6A4ED6321DCB8DA0053D14F /* GHCollectionReusableView.m in Sources */,
+				D6A4ED8B21DF84560053D14F /* GHDropMenuFilterInputItem.m in Sources */,
 				D6A4ED7521DF7B550053D14F /* UIView+Extension.m in Sources */,
+				D6A4ED8E21DF84ED0053D14F /* GHDropMenuFilterTagItem.m in Sources */,
 				D6A4ED7E21DF7CFB0053D14F /* GHDropMenuModel.m in Sources */,
 				D6A4ECE421D793720053D14F /* GHSuspendViewController.m in Sources */,
 			);

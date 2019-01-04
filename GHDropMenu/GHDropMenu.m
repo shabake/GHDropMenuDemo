@@ -12,424 +12,29 @@
 #import "UIView+Extension.h"
 #import "GHDropMenuModel.h"
 #import "GHDropMenuTitleItem.h"
+#import "GHDropMenuOptionCell.h"
+#import "GHDropMenuFilterSectionHeader.h"
+#import "GHDropMenuFilterSingleInputItem.h"
+#import "GHDropMenuFilterInputItem.h"
+#import "GHDropMenuFilterTagItem.h"
 
-#pragma mark - - - -- - - -- - - - GHDropMenuCell
-@interface  GHDropMenuCell : UITableViewCell
-@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
-@end
-@interface GHDropMenuCell()
-@property (nonatomic , strong) UILabel *title;
-@property (nonatomic , strong) UIView *line;
-@property (nonatomic , strong) UIImageView *imgView;
-
-@end
-@implementation GHDropMenuCell
-- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    _dropMenuModel = dropMenuModel;
-    self.title.text = dropMenuModel.title;
-    self.title.textColor = dropMenuModel.cellSeleted ? dropMenuModel.optionSeletedColor:dropMenuModel.optionNormalColor;
-    self.imgView.hidden = !dropMenuModel.cellSeleted;
-    self.title.font = dropMenuModel.optionFont > 0 ?dropMenuModel.optionFont :[UIFont systemFontOfSize:13];
-}
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self setupUI];
-    }
-    return self;
-}
-- (void)setupUI {
-    [self addSubview:self.title];
-    [self addSubview:self.line];
-    [self addSubview:self.imgView];
-
-}
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.title.frame = CGRectMake(20, 0, 200, self.frame.size.height);
-    self.line.frame = CGRectMake(20, self.frame.size.height - 1, self.frame.size.width - 40, 1);
-    self.imgView.frame = CGRectMake(self.frame.size.width - 20 - 15, (self.frame.size.height - 15 ) * 0.5, 15, 15);
-}
-- (UIImageView *)imgView {
-    if (_imgView == nil) {
-        _imgView = [[UIImageView alloc]init];
-        _imgView.image = [UIImage imageNamed:@"check_selected"];
-        _imgView.hidden = YES;
-    }
-    return _imgView;
-}
-- (UIView *)line {
-    if (_line == nil) {
-        _line = [[UIView alloc]init];
-        _line.backgroundColor = [UIColor darkGrayColor];
-        _line.alpha = .1;
-    }
-    return _line;
-}
-- (UILabel *)title {
-    if (_title == nil) {
-        _title = [[UILabel alloc]init];
-        _title.textAlignment = NSTextAlignmentLeft;
-        _title.font = [UIFont systemFontOfSize:13];
-    }
-    return _title;
-}
-
-#pragma mark - - - -- - - -- - - - GHDropMenuCell
-
-@end
-
-#pragma mark - - - - GHDropMenuFilterHeader
-@class GHDropMenuFilterHeader;
-@protocol GHDropMenuFilterHeaderDelegate <NSObject>
-- (void)dropMenuFilterHeader: (GHDropMenuFilterHeader *)header dropMenuModel: (GHDropMenuModel *)dropMenuModel;
-@end
-
-@interface GHDropMenuFilterHeader : UICollectionReusableView
-@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
-@property (nonatomic , weak) id <GHDropMenuFilterHeaderDelegate> delegate;
-
-@end
-@interface GHDropMenuFilterHeader()
-@property (nonatomic , strong) UILabel *title;
-@property (nonatomic , strong) UILabel *details;
-@property (nonatomic , strong) UIImageView *imageView;
-
-@end
-@implementation GHDropMenuFilterHeader
-
-- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    _dropMenuModel = dropMenuModel;
-    self.title.text = dropMenuModel.sectionHeaderTitle;
-    self.details.text = dropMenuModel.sectionHeaderDetails.length?dropMenuModel.sectionHeaderDetails:@"全部";
-    self.imageView.highlighted = dropMenuModel.sectionSeleted ? YES:NO;
-    self.details.hidden = (dropMenuModel.filterCellType == GHDropMenuFilterCellTypeInput  ||
-    dropMenuModel.filterCellType == GHDropMenuFilterCellTypeSingleInput )? YES:NO;
-    self.imageView.hidden = self.details.hidden ;
-    CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
-    self.title.frame = CGRectMake(10, 0, titleSize.width, self.frame.size.height);
-}
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        [self setupUI];
-        [self configuration];
-    }
-    return self;
-}
-- (void)configuration {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-    tap.numberOfTouchesRequired = 1;
-    tap.numberOfTapsRequired = 1;
-    [self addGestureRecognizer:tap];
-}
-- (void)tap:(UITapGestureRecognizer *)gesture {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuFilterHeader:dropMenuModel:)]) {
-        [self.delegate dropMenuFilterHeader:self dropMenuModel:self.dropMenuModel];
-    }
-}
-- (void)setupUI {
-    [self addSubview:self.title];
-    [self addSubview:self.details];
-    [self addSubview:self.imageView];
-
-}
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
-    CGSize detailsSize = [self.details.text sizeWithFont:[UIFont boldSystemFontOfSize:11] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
-
-    self.title.frame = CGRectMake(10, 0, titleSize.width, self.frame.size.height);
-    self.imageView.frame = CGRectMake(self.frame.size.width - 10 - 10, (self.frame.size.height - 5 ) * 0.5, 10, 5);
-    
-    self.details.frame = CGRectMake(self.frame.size.width - 10 - 15 - (self.frame.size.width - 10 - 15 - detailsSize.width), 0,self.frame.size.width - 10 - 15 - detailsSize.width, self.frame.size.height);
-}
-- (UIImageView *)imageView {
-    if (_imageView == nil) {
-        _imageView = [[UIImageView alloc]init];
-        _imageView.image = [UIImage imageNamed:@"expand_down"];
-        _imageView.highlightedImage = [UIImage imageNamed:@"expand_up"];
-    }
-    return _imageView;
-}
-- (UILabel *)details {
-    if (_details == nil) {
-        _details = [[UILabel alloc]init];
-        _details.textAlignment = NSTextAlignmentRight;
-        _details.userInteractionEnabled = YES;
-        _details.font = [UIFont boldSystemFontOfSize:11];
-        _details.textColor = [UIColor orangeColor];
-        _details.text = @"全部";
-    }
-    return _details;
-}
-- (UILabel *)title {
-    if (_title == nil) {
-        _title = [[UILabel alloc]init];
-        _title.textAlignment = NSTextAlignmentLeft;
-        _title.userInteractionEnabled = YES;
-        _title.font = [UIFont boldSystemFontOfSize:14];
-        _title.textColor = [UIColor darkGrayColor];
-    }
-    return _title;
-}
-#pragma mark - - - - - - - - GHDropMenuFilterHeader
-
-@end
-@class GHDropMenuFilterSingleInputItem;
-@protocol GHDropMenuFilterSingleInputItemDelegate <NSObject>
-- (void)dropMenuFilterSingleInputItem: (GHDropMenuFilterSingleInputItem *)item dropMenuModel: (GHDropMenuModel *)dropMenuModel;
-@end
-
-@interface GHDropMenuFilterSingleInputItem : UICollectionViewCell
-@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
-@property (nonatomic , weak) id <GHDropMenuFilterSingleInputItemDelegate> delegate;
-
-@end
-@interface GHDropMenuFilterSingleInputItem()
-@property (nonatomic , strong)UITextField *textField;
-@end
-@implementation GHDropMenuFilterSingleInputItem
-- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    _dropMenuModel = dropMenuModel;
-    self.textField.text = dropMenuModel.singleInput;
-}
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        [self setupUI];
-        [self configuration];
-    }
-    return self;
-}
-- (void)configuration {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.textField];
-}
-
-- (void)textChange: (NSNotification *)noti {
-    self.dropMenuModel.singleInput = self.textField.text;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuFilterSingleInputItem:dropMenuModel:)]) {
-        [self.delegate dropMenuFilterSingleInputItem:self dropMenuModel:self.dropMenuModel];
-    }
-}
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-- (void)setupUI {
-    [self addSubview:self.textField];
-    
-}
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    CGFloat width = (self.frame.size.width - 2 * 10 - 10) / 2;
-    self.textField.frame = CGRectMake(0, 0, width, self.frame.size.height);
-    
-}
-- (UITextField *)textField {
-    if (_textField == nil) {
-        _textField = [[UITextField alloc]init];
-        _textField.layer.cornerRadius = 10;
-        _textField.layer.masksToBounds = YES;
-        _textField.layer.borderWidth = 0.5;
-        _textField.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        _textField.textAlignment = NSTextAlignmentCenter;
-        _textField.font = [UIFont systemFontOfSize:13];
-        _textField.textColor = [UIColor darkGrayColor];
-        _textField.keyboardType = UIKeyboardTypeNumberPad;
-        _textField.tintColor = [UIColor orangeColor];
-        _textField.placeholder = @"请输入";
-    }
-    return _textField;
-}
-
-@end
-
-#pragma mark - - - - - - - - GHDropMenuFilterInputItem
-@class GHDropMenuFilterInputItem;
-@protocol GHDropMenuFilterInputItemDelegate <NSObject>
-- (void)dropMenuFilterInputItem: (GHDropMenuFilterInputItem *)item dropMenuModel: (GHDropMenuModel *)dropMenuModel;
-@end
-
-@interface GHDropMenuFilterInputItem : UICollectionViewCell
-@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
-@property (nonatomic , weak) id <GHDropMenuFilterInputItemDelegate> delegate;
-
-@end
-@interface GHDropMenuFilterInputItem()
-@property (nonatomic , strong)UITextField *leftTextField;
-@property (nonatomic , strong)UITextField *rightTextField;
-@property (nonatomic , strong)UIView *line;
-
-@end
-@implementation GHDropMenuFilterInputItem
-- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    _dropMenuModel = dropMenuModel;
-    self.leftTextField.text = dropMenuModel.minPrice;
-    self.rightTextField.text = dropMenuModel.maxPrice;
-}
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        [self setupUI];
-        [self configuration];
-    }
-    return self;
-}
-- (void)configuration {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.leftTextField];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:self.rightTextField];
-}
-
-- (void)textChange: (NSNotification *)noti {
-    
-    if (self.leftTextField.text.length) {
-        self.dropMenuModel.minPrice = self.leftTextField.text;
-    }
-    if (self.rightTextField.text.length) {
-        self.dropMenuModel.maxPrice = self.rightTextField.text;
-    }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuFilterInputItem:dropMenuModel:)]) {
-        [self.delegate dropMenuFilterInputItem:self dropMenuModel:self.dropMenuModel];
-    }
-}
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-- (void)setupUI {
-    [self addSubview:self.leftTextField];
-    [self addSubview:self.line];
-    [self addSubview:self.rightTextField];
-
-}
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    CGFloat width = (self.frame.size.width - 2 * 10 - 10) / 2;
-    self.leftTextField.frame = CGRectMake(0, 0, width, self.frame.size.height);
-    self.line.frame = CGRectMake(width + 10, (self.frame.size.height - 1) * 0.5, 10, 1);
-    self.rightTextField.frame = CGRectMake(self.line.frame.origin.x+ self.line.frame.size.width + 10, 0, width, self.frame.size.height);
-}
-- (UITextField *)rightTextField {
-    if (_rightTextField == nil) {
-        _rightTextField = [[UITextField alloc]init];
-        _rightTextField.layer.cornerRadius = 10;
-        _rightTextField.layer.masksToBounds = YES;
-        _rightTextField.layer.borderWidth = 0.5;
-        _rightTextField.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        _rightTextField.textAlignment = NSTextAlignmentCenter;
-        _rightTextField.font = [UIFont systemFontOfSize:13];
-        _rightTextField.textColor = [UIColor darkGrayColor];
-        _rightTextField.placeholder = @"请输入最高价";
-        _rightTextField.keyboardType = UIKeyboardTypeNumberPad;
-        _rightTextField.tintColor = [UIColor orangeColor];
-    }
-    return _rightTextField;
-}
-- (UITextField *)leftTextField {
-    if (_leftTextField == nil) {
-        _leftTextField = [[UITextField alloc]init];
-        _leftTextField.layer.cornerRadius = 10;
-        _leftTextField.layer.masksToBounds = YES;
-        _leftTextField.layer.borderWidth = 0.5;
-        _leftTextField.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        _leftTextField.textAlignment = NSTextAlignmentCenter;
-        _leftTextField.font = [UIFont systemFontOfSize:13];
-        _leftTextField.textColor = [UIColor darkGrayColor];
-        _leftTextField.placeholder = @"请输入最低价";
-        _leftTextField.keyboardType = UIKeyboardTypeNumberPad;
-        _leftTextField.tintColor = [UIColor orangeColor];
-    }
-    return _leftTextField;
-}
-- (UIView *)line {
-    if (_line == nil) {
-        _line = [[UIView alloc]init];
-        _line.backgroundColor = [UIColor darkGrayColor];
-        _line.alpha = 0.5;
-    }
-    return _line;
-}
-#pragma mark - - - - - - - - GHDropMenuFilterInputItem
-
-@end
-#pragma mark - - - - - - - - GHDropMenuFilterItem
-@class GHDropMenuFilterItem,GHDropMenuModel;
-@protocol GHDropMenuFilterItemDelegate <NSObject>
-- (void)dropMenuFilterItem: (GHDropMenuFilterItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel;
-@end
-
-@interface GHDropMenuFilterItem : UICollectionViewCell
-@property (nonatomic , strong) GHDropMenuModel *dropMenuModel;
-@property (nonatomic , weak) id <GHDropMenuFilterItemDelegate>delegate;
-@end
-@interface GHDropMenuFilterItem()
-@property (nonatomic , strong) UILabel *title;
-
-@end
-@implementation GHDropMenuFilterItem
-- (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
-    _dropMenuModel = dropMenuModel;
-    self.title.text = dropMenuModel.tagName;
-    self.title.backgroundColor = dropMenuModel.tagSeleted ? [UIColor orangeColor]:[UIColor whiteColor];
-    self.title.textColor = dropMenuModel.tagSeleted ?[UIColor whiteColor]:[UIColor darkGrayColor];
-}
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        [self setupUI];
-    }
-    return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.title.frame = CGRectMake(0, 0, self.frame.size.width , self.frame.size.height);
-
-}
-- (void)setupUI {
-    [self addSubview:self.title];
-
-}
-- (void)tap:(UITapGestureRecognizer *)gesture {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuFilterItem:dropMenuModel:)]) {
-        [self.delegate dropMenuFilterItem:self dropMenuModel:self.dropMenuModel];
-    }
-}
-
-- (UILabel *)title {
-    if (_title == nil) {
-        _title = [[UILabel alloc]init];
-        _title.textAlignment = NSTextAlignmentCenter;
-        _title.userInteractionEnabled = YES;
-        _title.text = @"1";
-        _title.layer.masksToBounds = YES;
-        _title.layer.cornerRadius = 10;
-        _title.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        _title.layer.borderWidth = 0.5;
-        _title.font = [UIFont systemFontOfSize:13];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        tap.numberOfTouchesRequired = 1;
-        tap.numberOfTapsRequired = 1;
-        [_title addGestureRecognizer:tap];
-        
-    }
-    return _title;
-}
-#pragma mark - - - - - - - - GHDropMenuFilterItem
-
-@end
 #pragma mark - - - - GHDropMenuTitle 自定义view
 
 #pragma mark - - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - - GHDropMenu 筛选菜单开始
 /** 按钮类型 */
-typedef NS_ENUM (NSUInteger,GHDropMenuButtonType ) {
+typedef NS_ENUM (NSUInteger,GHDropMenuButtonType) {
     /** 确定 */
     GHDropMenuButtonTypeSure = 1,
     /** 重置 */
     GHDropMenuButtonTypeReset,
 };
 
-typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
+typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     GHDropMenuShowTypeCommon = 1,
     GHDropMenuShowTypeOnlyFilter,
 };
 
-@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuFilterItemDelegate,GHDropMenuFilterHeaderDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate,GHDropMenuTitleItemDelegate>
-
+@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuFilterTagItemDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate,GHDropMenuTitleItemDelegate,GHDropMenuFilterSectionHeaderDelegate>
 
 /** 顶部菜单 */
 @property (nonatomic , strong) UICollectionView *collectionView;
@@ -745,12 +350,13 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     dropMenuTagModel.minPrice = dropMenuModel.minPrice;
     dropMenuTagModel.maxPrice = dropMenuModel.maxPrice;
 }
-- (void)dropMenuFilterHeader:(GHDropMenuFilterHeader *)header dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+- (void)dropMenuFilterSectionHeader:(GHDropMenuFilterSectionHeader *)header dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     dropMenuModel.sectionSeleted = !dropMenuModel.sectionSeleted;
     [self.filter reloadData];
 }
+
 #pragma mark - tag标签点击方法
-- (void)dropMenuFilterItem: (GHDropMenuFilterItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+- (void)dropMenuFilterTagItem:(GHDropMenuFilterTagItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
     GHDropMenuModel *dropMenuSectionModel = [dropMenuTitleModel.sections by_ObjectAtIndex: dropMenuModel.indexPath.section];
     /** 处理多选 单选*/
@@ -759,6 +365,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     [self actionSectionHeaderDetailsWithDropMenuModel:dropMenuModel dropMenuSectionModel:dropMenuSectionModel];
     [self.filter reloadData];
 }
+
 #pragma mark - 处理sectionHeaderDetails
 - (void)actionSectionHeaderDetailsWithDropMenuModel: (GHDropMenuModel *)dropMenuModel dropMenuSectionModel: (GHDropMenuModel *)dropMenuSectionModel {
     
@@ -847,7 +454,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     GHDropMenuModel *dropMenuModel = [dropMenuTitleModel.dataArray by_ObjectAtIndex: indexPath.row];
     dropMenuModel.indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:dropMenuTitleModel.indexPath.row];
 
-    GHDropMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHDropMenuCellID"];
+    GHDropMenuOptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHDropMenuOptionCellID"];
     cell.dropMenuModel = dropMenuModel;
     return cell;
 }
@@ -901,7 +508,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
     GHDropMenuModel *dropMenuSectionModel = [dropMenuTitleModel.sections by_ObjectAtIndex:indexPath.section];
     dropMenuSectionModel.indexPath = indexPath;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader] && self.filter == collectionView) {
-        GHDropMenuFilterHeader *header  = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"GHDropMenuFilterHeaderID" forIndexPath:indexPath];
+        GHDropMenuFilterSectionHeader *header  = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"GHDropMenuFilterSectionHeaderID" forIndexPath:indexPath];
         header.dropMenuModel = dropMenuSectionModel;
         header.delegate = self;
         return header;
@@ -970,8 +577,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         cell.delegate = self;
         return cell;
     } else if (collectionView == self.filter) {
-        NSString *identifier = [NSString stringWithFormat:@"GHDropMenuFilterItemID%ld%ld",(long)indexPath.section,(long)indexPath.row];
-        [self.filter registerClass:[GHDropMenuFilterItem class] forCellWithReuseIdentifier:identifier];
+        NSString *identifier = [NSString stringWithFormat:@"GHDropMenuFilterTagItemID%ld%ld",(long)indexPath.section,(long)indexPath.row];
+        [self.filter registerClass:[GHDropMenuFilterTagItem class] forCellWithReuseIdentifier:identifier];
 
         GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
         GHDropMenuModel *dropMenuSectionModel = [dropMenuTitleModel.sections by_ObjectAtIndex: indexPath.section];
@@ -980,7 +587,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         dropMenuTagModel.indexPath = indexPath;
         
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
-            GHDropMenuFilterItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+            GHDropMenuFilterTagItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
             cell.dropMenuModel = dropMenuTagModel;
             cell.delegate = self;
             return cell;
@@ -1109,7 +716,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         _tableView.bounces = NO;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[GHDropMenuCell class] forCellReuseIdentifier:@"GHDropMenuCellID"];
+        [_tableView registerClass:[GHDropMenuOptionCell class] forCellReuseIdentifier:@"GHDropMenuOptionCellID"];
     }
     return _tableView;
 }
@@ -1141,13 +748,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType ) {
         _filter.layer.shadowOpacity = 0.8;
         _filter.contentInset = UIEdgeInsetsMake(20, 10, 0, 10);
         _filter.backgroundColor = [UIColor whiteColor];
-        [_filter registerClass:[GHDropMenuFilterItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterItemID"];
+        [_filter registerClass:[GHDropMenuFilterTagItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterTagItemID"];
         [_filter registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellID"];
-        [_filter registerClass:[GHDropMenuFilterHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"GHDropMenuFilterHeaderID"];
+        [_filter registerClass:[GHDropMenuFilterSectionHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"GHDropMenuFilterSectionHeaderID"];
         [_filter registerClass:[GHDropMenuFilterInputItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterInputItemID"];
         [_filter registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"UICollectionReusableViewID"];
         [_filter registerClass:[GHDropMenuFilterSingleInputItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterSingleInputItemID"];
-
     }
     return _filter;
 }
