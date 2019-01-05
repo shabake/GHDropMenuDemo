@@ -62,12 +62,14 @@
            index:(NSInteger)index {
     if (self.button.selected && index == 3) {
         NSMutableArray *temp = [NSMutableArray array];
-        
+        GHDropMenuModel *changeModel = [dropMenu.titles by_ObjectAtIndex:3];
         [temp addObject:[dropMenu.titles by_ObjectAtIndex:0]];
         [temp addObject:[dropMenu.titles by_ObjectAtIndex:1]];
         [temp addObject:[dropMenu.titles by_ObjectAtIndex:2]];
 
-        [temp addObject:[[dropMenuModel creatRandomDropMenuData] by_ObjectAtIndex:3]];
+        GHDropMenuModel *changeNewModel = [[dropMenuModel creatRandomDropMenuData] by_ObjectAtIndex:3];
+        changeNewModel.title = changeModel.title;
+        [temp addObject:changeNewModel];
         dropMenu.recordSeleted = YES;
         dropMenuModel.titles = temp.copy;
         dropMenu.configuration = dropMenuModel;

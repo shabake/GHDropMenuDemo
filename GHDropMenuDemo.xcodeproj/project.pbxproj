@@ -10,28 +10,17 @@
 		D650CD8321C35E0D00EC004A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8221C35E0D00EC004A /* ViewController.m */; };
 		D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
 		D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */; };
-		D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
 		D6A4ECD721D7902F0053D14F /* GHComplexMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */; };
 		D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDC21D7909E0053D14F /* GHSlipMenuViewController.m */; };
 		D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDF21D791F70053D14F /* GHNormalMenuViewController.m */; };
-		D6A4ECE421D793720053D14F /* GHSuspendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE321D793720053D14F /* GHSuspendViewController.m */; };
 		D6A4ECE721D79F750053D14F /* GHSuspendHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */; };
 		D6A4ECEB21D7AD760053D14F /* GHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECEA21D7AD760053D14F /* GHBaseViewController.m */; };
 		D6A4ECEE21D7B2E30053D14F /* GHSuspendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECED21D7B2E30053D14F /* GHSuspendItem.m */; };
 		D6A4ECF821DA2E5C0053D14F /* GHMeituanFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECF721DA2E5C0053D14F /* GHMeituanFoodViewController.m */; };
-		D6A4ECFC21DA2E9F0053D14F /* GHDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECFA21DA2E9F0053D14F /* GHDebugViewController.m */; };
 		D6A4ED1221DA66FD0053D14F /* GHMeituanFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECF721DA2E5C0053D14F /* GHMeituanFoodViewController.m */; };
-		D6A4ED1421DA66FD0053D14F /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
 		D6A4ED1521DA66FD0053D14F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD7F21C35E0D00EC004A /* AppDelegate.m */; };
-		D6A4ED1621DA66FD0053D14F /* GHSuspendHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */; };
-		D6A4ED1721DA66FD0053D14F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8221C35E0D00EC004A /* ViewController.m */; };
 		D6A4ED1821DA66FD0053D14F /* GHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECEA21D7AD760053D14F /* GHBaseViewController.m */; };
 		D6A4ED1921DA66FD0053D14F /* GHDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECFA21DA2E9F0053D14F /* GHDebugViewController.m */; };
-		D6A4ED1A21DA66FD0053D14F /* GHNormalMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDF21D791F70053D14F /* GHNormalMenuViewController.m */; };
-		D6A4ED1C21DA66FD0053D14F /* GHComplexMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */; };
-		D6A4ED1E21DA66FD0053D14F /* GHSlipMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDC21D7909E0053D14F /* GHSlipMenuViewController.m */; };
-		D6A4ED1F21DA66FD0053D14F /* GHSuspendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECED21D7B2E30053D14F /* GHSuspendItem.m */; };
-		D6A4ED2021DA66FD0053D14F /* GHSuspendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE321D793720053D14F /* GHSuspendViewController.m */; };
 		D6A4ED2321DA66FD0053D14F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */; };
 		D6A4ED2421DA66FD0053D14F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
 		D6A4ED2C21DA6A570053D14F /* GHDropMenuDebug.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6A4ED2B21DA6A570053D14F /* GHDropMenuDebug.plist */; };
@@ -52,6 +41,9 @@
 		D6A4ED8B21DF84560053D14F /* GHDropMenuFilterInputItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8A21DF84560053D14F /* GHDropMenuFilterInputItem.m */; };
 		D6A4ED8E21DF84ED0053D14F /* GHDropMenuFilterTagItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */; };
 		D6A4ED9121DF97B50053D14F /* NSString+Arc4random.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED9021DF97B40053D14F /* NSString+Arc4random.m */; };
+		D6A4ED9621E087140053D14F /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
+		D6A4ED9721E0873B0053D14F /* GHSuspendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE321D793720053D14F /* GHSuspendViewController.m */; };
+		D6A4ED9821E087410053D14F /* GHSuspendHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -434,17 +426,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6A4ED9121DF97B50053D14F /* NSString+Arc4random.m in Sources */,
+				D6A4ED9721E0873B0053D14F /* GHSuspendViewController.m in Sources */,
 				D6A4ED3821DA7E090053D14F /* GHBaseNavigationController.m in Sources */,
 				D6A4ECF821DA2E5C0053D14F /* GHMeituanFoodViewController.m in Sources */,
 				D6A4ED8121DF801D0053D14F /* GHDropMenuOptionCell.m in Sources */,
-				D650CDB321C35E6D00EC004A /* GHDropMenu.m in Sources */,
 				D6A4ED3321DA6C720053D14F /* AppDelegate.m in Sources */,
 				D6A4ED8521DF819A0053D14F /* GHDropMenuFilterSectionHeader.m in Sources */,
 				D6A4ECE721D79F750053D14F /* GHSuspendHeader.m in Sources */,
+				D6A4ED9621E087140053D14F /* GHDropMenu.m in Sources */,
 				D6A4ED3121DA6B950053D14F /* main.m in Sources */,
 				D650CD8321C35E0D00EC004A /* ViewController.m in Sources */,
 				D6A4ECEB21D7AD760053D14F /* GHBaseViewController.m in Sources */,
-				D6A4ECFC21DA2E9F0053D14F /* GHDebugViewController.m in Sources */,
 				D6A4ED7A21DF7C120053D14F /* GHDropMenuTitleItem.m in Sources */,
 				D6A4ED7721DF7B550053D14F /* NSArray+Bounds.m in Sources */,
 				D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */,
@@ -458,7 +450,6 @@
 				D6A4ED7521DF7B550053D14F /* UIView+Extension.m in Sources */,
 				D6A4ED8E21DF84ED0053D14F /* GHDropMenuFilterTagItem.m in Sources */,
 				D6A4ED7E21DF7CFB0053D14F /* GHDropMenuModel.m in Sources */,
-				D6A4ECE421D793720053D14F /* GHSuspendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,18 +458,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6A4ED1221DA66FD0053D14F /* GHMeituanFoodViewController.m in Sources */,
-				D6A4ED1421DA66FD0053D14F /* GHDropMenu.m in Sources */,
 				D6A4ED1521DA66FD0053D14F /* AppDelegate.m in Sources */,
-				D6A4ED1621DA66FD0053D14F /* GHSuspendHeader.m in Sources */,
 				D6A4ED3221DA6BE30053D14F /* main.m in Sources */,
-				D6A4ED1721DA66FD0053D14F /* ViewController.m in Sources */,
 				D6A4ED1821DA66FD0053D14F /* GHBaseViewController.m in Sources */,
+				D6A4ED9821E087410053D14F /* GHSuspendHeader.m in Sources */,
 				D6A4ED1921DA66FD0053D14F /* GHDebugViewController.m in Sources */,
-				D6A4ED1A21DA66FD0053D14F /* GHNormalMenuViewController.m in Sources */,
-				D6A4ED1C21DA66FD0053D14F /* GHComplexMenuViewController.m in Sources */,
-				D6A4ED1E21DA66FD0053D14F /* GHSlipMenuViewController.m in Sources */,
-				D6A4ED1F21DA66FD0053D14F /* GHSuspendItem.m in Sources */,
-				D6A4ED2021DA66FD0053D14F /* GHSuspendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,14 @@
 //  gitHub:https://github.com/shabake/GHDropMenuDemo
 
 #import "GHDebugViewController.h"
+struct MyDate1 {
+    
+    int year;
+    int month;
+    NSString *day;
+    NSArray *a;
 
+};
 @interface GHDebugViewController ()
 
 @end
@@ -16,7 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    struct MyDate1 d1 = {2016, 1, @"2",@[@1,@2]};
+    NSLog(@"%d",d1.year);
+    NSLog(@"%@",d1.a);
+
     self.navigationItem.title = @"debug";
     self.view.backgroundColor = [UIColor whiteColor];
     

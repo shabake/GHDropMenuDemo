@@ -151,7 +151,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (void)setOptionNormalColor:(UIColor *)optionNormalColor {
     _optionNormalColor = optionNormalColor;
     for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
-        for (GHDropMenuModel *dropMenuOptionModel  in dropMenuTitleModel.dataArray) {
+        for (GHDropMenuModel *dropMenuOptionModel in dropMenuTitleModel.dataArray) {
             dropMenuOptionModel.optionNormalColor = optionNormalColor;
         }
     }
@@ -223,6 +223,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     [self.tableView reloadData];
     [self.collectionView reloadData];
 }
+
+#pragma mark - set方法 end
 - (instancetype)new {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"请使用方法 creatDropMenuWithConfiguration: or creatDropFilterMenuWidthConfiguration: 代替初始化" userInfo:nil];
 }
@@ -287,7 +289,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         [UIView animateWithDuration:0.1 animations:^{
             if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
                 self.filterCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
-
             } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle) {
                 self.titleCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
             }
@@ -433,7 +434,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;
     if (dropMenuModel.titleSeleted) {
-        NSLog(@"contents%@",self.contents);
         self.contents = dropMenuModel.dataArray.copy;
         for (GHDropMenuModel *model in self.titles) {
             if (model.identifier != dropMenuModel.identifier) {
@@ -664,7 +664,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     }
 }
 - (void)clickControl {
-    
     [self resetMenuStatus];
 }
 #pragma mark - 懒加载
@@ -720,7 +719,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         [_sure setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _sure.tag = GHDropMenuButtonTypeSure;
         [_sure addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-
     }
     return _sure;
 }
@@ -729,6 +727,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.tableY, 0, 0) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.bounces = NO;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[GHDropMenuOptionCell class] forCellReuseIdentifier:@"GHDropMenuOptionCellID"];

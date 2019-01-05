@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 NS_ASSUME_NONNULL_BEGIN
 /** 菜单类型 */
 typedef NS_ENUM (NSUInteger,GHDropMenuFilterCellType ) {
@@ -53,10 +54,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , copy) NSString *maxPrice;
 /** 是否是多选  NO 单选 YES 多选 */
 @property (nonatomic , assign) BOOL isMultiple;
-/** cell是否被选中 */
+/** 记录cell是否被选中 */
 @property (nonatomic , assign) BOOL cellSeleted;
-/** section是否被选中 */
+/** 记录section是否被选中 */
 @property (nonatomic , assign) BOOL sectionSeleted;
+/** 记录标签是否被选中 */
+@property (nonatomic , assign) BOOL tagSeleted;
+/** 记录标题是否被选中 */
+@property (nonatomic , assign) BOOL titleSeleted;
 /** 存放tag section数组 */
 @property (nonatomic , strong) NSArray *sections;
 /** tag id */
@@ -69,8 +74,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , copy) NSString *sectionHeaderDetails;
 /** 标签名称 */
 @property (nonatomic , copy) NSString *tagName;
-/** 标签选中状态 */
-@property (nonatomic , assign) BOOL tagSeleted;
 /** 菜单类型 */
 @property (nonatomic , assign) GHDropMenuType dropMenuType;
 /** 标题 */
@@ -79,14 +82,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , assign) NSInteger identifier;
 @property (nonatomic , strong) UIFont *titleFont;
 @property (nonatomic , assign) CGFloat menuHeight;
-/** 标题被选中 */
-@property (nonatomic , assign) BOOL titleSeleted;
 /** 标题数组 */
 @property (nonatomic , strong) NSArray *titles;
 /** 数据源数组 */
 @property (nonatomic , strong) NSArray *dataArray;
 @property (nonatomic , assign) CGRect frame;
-
 /** 记录indexPath */
 @property (nonatomic , strong) NSIndexPath *indexPath;
 
