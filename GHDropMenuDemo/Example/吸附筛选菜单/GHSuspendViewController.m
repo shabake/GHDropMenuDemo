@@ -12,6 +12,7 @@
 #import "GHSuspendItem.h"
 #import "GHCollectionReusableView.h"
 #import "GHDropMenuModel.h"
+#import "NSArray+Bounds.h"
 
 #define kHeaderHeight 400
 
@@ -22,7 +23,7 @@
 @property (nonatomic , strong) GHSuspendHeader *header;
 @property (nonatomic , strong) UICollectionView *collectionView ;
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout ;
-
+@property (nonatomic , strong) UIButton *button;
 @end
 
 @implementation GHSuspendViewController
@@ -34,20 +35,52 @@
     self.tableView.tableHeaderView = self.header;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(refresh)];
+    UIButton *button = [[UIButton alloc]init];
+    [button addTarget:self action:@selector(change:)
+     forControlEvents:UIControlEventTouchUpInside] ;
+    [button setTitle:@"模拟本地数据" forState:UIControlStateNormal];
+    [button setTitle:@"模拟网络数据" forState:UIControlStateSelected];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    self.button = button;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
 
 }
-- (void)refresh {
-
+- (void)change: (UIButton *)button {
+    button.selected = !button.selected;
     UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[self.tableView headerViewForSection:0];
-    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];    
+    
     GHDropMenu *dropMenu = view.subviews.lastObject;
-    dropMenu.titles = [configuration creatRandomDropMenuData];
+    [dropMenu resetMenuStatus];
+}
+- (void)refresh {
+    [self.tableView reloadData];
+}
 
+- (void)dropMenu:(GHDropMenu *)dropMenu
+   dropMenuModel:(GHDropMenuModel *)dropMenuModel
+           index:(NSInteger)index {
+    if (self.button.selected && index == 3) {
+        NSMutableArray *temp = [NSMutableArray array];
+        
+        [temp addObject:[dropMenu.titles by_ObjectAtIndex:0]];
+        [temp addObject:[dropMenu.titles by_ObjectAtIndex:1]];
+        [temp addObject:[dropMenu.titles by_ObjectAtIndex:2]];
+
+        [temp addObject:[[dropMenuModel creatRandomDropMenuData] by_ObjectAtIndex:3]];
+        dropMenu.recordSeleted = YES;
+        dropMenuModel.titles = temp.copy;
+        dropMenu.configuration = dropMenuModel;
+    } else {
+
+    }
 }
 - (void)back {
     /** 返回时候 需要将菜单收起 */
-    [self.dropMenu resetMenuStatus];
+    UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[self.tableView headerViewForSection:0];
+    
+    GHDropMenu *dropMenu = view.subviews.lastObject;
+    [dropMenu resetMenuStatus];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

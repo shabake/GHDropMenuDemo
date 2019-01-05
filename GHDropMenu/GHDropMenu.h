@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param dropMenuModel 默认配置
  */
 - (void)dropMenu: (GHDropMenu *)dropMenu
-dropMenuModel: (nullable GHDropMenuModel *)dropMenuModel;
+dropMenuModel: (nullable GHDropMenuModel *)dropMenuModel
+           index: (NSInteger)index;
 /**
  代理回调
 
@@ -53,6 +54,7 @@ tagArray: (nullable NSArray *)tagArray;
 
 typedef void(^DropMenuTitleBlock)(GHDropMenuModel *dropMenuModel);
 typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
+typedef void(^DropMenuFinishBlock)(void);
 
 @interface GHDropMenu : UIView
 /**
@@ -76,7 +78,7 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 + (instancetype)creatDropFilterMenuWidthConfiguration: (GHDropMenuModel *)configuration
          dropMenuTagArrayBlock: (DropMenuTagArrayBlock)dropMenuTagArrayBlock;
 
-@property (nonatomic , strong) NSArray *titles;
+@property (nonatomic , strong) NSMutableArray *titles;
 /** set方法 */
 @property (nonatomic , strong) GHDropMenuModel *configuration;
 
@@ -99,6 +101,8 @@ typedef void(^DropMenuTagArrayBlock)(NSArray *tagArray);
 @property (nonatomic , strong) UIColor *optionSeletedColor;
 /** 选项菜单y值 */
 @property (nonatomic , assign) CGFloat tableY;
+/** cell高度 不设置默认 44 */
+@property (nonatomic , assign) CGFloat cellHeight;
 @property (nonatomic , weak) id <GHDropMenuDelegate> delegate;
 @property (nonatomic , weak) id <GHDropMenuDataSource> dataSource;
 /** 动画时间 等于0 不开启动画 默认是0 */

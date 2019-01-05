@@ -23,7 +23,7 @@
     self.title.text = dropMenuModel.title;
     self.title.textColor = dropMenuModel.cellSeleted ? dropMenuModel.optionSeletedColor:dropMenuModel.optionNormalColor;
     self.imgView.hidden = !dropMenuModel.cellSeleted;
-    self.title.font = dropMenuModel.optionFont > 0 ?dropMenuModel.optionFont :[UIFont systemFontOfSize:13];
+    self.title.font = dropMenuModel.optionFont > 0 ?dropMenuModel.optionFont :[UIFont systemFontOfSize:15];
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -39,9 +39,10 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.title.frame = CGRectMake(20, 0, 200, self.frame.size.height);
     self.line.frame = CGRectMake(20, self.frame.size.height - 1, self.frame.size.width - 40, 1);
     self.imgView.frame = CGRectMake(self.frame.size.width - 20 - 15, (self.frame.size.height - 15 ) * 0.5, 15, 15);
+    self.title.frame = CGRectMake(20, 0, 300, self.frame.size.height);
+
 }
 - (UIImageView *)imgView {
     if (_imgView == nil) {

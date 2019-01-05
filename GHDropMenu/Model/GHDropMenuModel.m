@@ -16,23 +16,23 @@
     NSMutableArray *dataArray1 = [NSMutableArray array];
     for (NSInteger index = 0 ; index < 4; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [NSString arc4randomStringWithCount:10 minCount:4];
+        dropMenuModel.title = [NSString stringWithFormat:@"%@第1列第%ld行",[NSString arc4randomStringWithCount:10 minCount:4],(long)index];
         [dataArray1 addObject:dropMenuModel];
     }
     
     /** 构造第二列数据 */
     NSMutableArray *dataArray2 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < 6; index++) {
+    for (NSInteger index = 0 ; index < 5; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [NSString arc4randomStringWithCount:3 minCount:3];
+        dropMenuModel.title = [NSString stringWithFormat:@"%@第2列第%ld行",[NSString arc4randomStringWithCount:10 minCount:4],(long)index];
         [dataArray2 addObject:dropMenuModel];
     }
     
     /** 构造第三列数据 */
     NSMutableArray *dataArray3 = [NSMutableArray array];
-    for (NSInteger index = 0 ; index < 8; index++) {
+    for (NSInteger index = 0 ; index < 7; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [NSString arc4randomStringWithCount:4 minCount:5];
+        dropMenuModel.title = [NSString stringWithFormat:@"%@第3列第%ld行",[NSString arc4randomStringWithCount:10 minCount:4],(long)index];
         [dataArray3 addObject:dropMenuModel];
     }
     
@@ -40,7 +40,7 @@
     NSMutableArray *dataArray4 = [NSMutableArray array];
     for (NSInteger index = 0 ; index < 7; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        dropMenuModel.title = [NSString arc4randomStringWithCount:8 minCount:1];
+        dropMenuModel.title = [NSString stringWithFormat:@"%@第4列第%ld行",[NSString arc4randomStringWithCount:10 minCount:4],(long)index];
         [dataArray4 addObject:dropMenuModel];
     }
     
@@ -52,8 +52,8 @@
                        @(GHDropMenuTypeTitle),
                        ];
     /** 菜单标题 */
-    NSArray *titles = @[@"随机文字1",@"随机文字2",@"随机文字3",@"随机文字4"];
-    
+    NSArray *titles = @[@"智能排序",@"价格",@"品牌",@"时间1"];
+
     for (NSInteger index = 0 ; index < titles.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.title = titles[index];

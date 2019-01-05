@@ -91,10 +91,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , strong) NSIndexPath *indexPath;
 
 /** 构造筛选菜单数据 */
-- (NSArray *)creaDropMenuData;
-- (NSArray *)creaFilterDropMenuData;
-- (NSArray *)creatNormalDropMenuData;
-- (NSArray *)creatRandomDropMenuData;
+- (NSMutableArray *)creaDropMenuData;
+- (NSMutableArray *)creaFilterDropMenuData;
+- (NSMutableArray *)creatNormalDropMenuData;
+- (NSMutableArray *)creatRandomDropMenuData;
 
 @end
 

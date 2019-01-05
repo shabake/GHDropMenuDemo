@@ -41,7 +41,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 /** 弹出菜单 */
 @property (nonatomic , strong) UITableView *tableView;
 /** 弹出菜单内容数组 */
-@property (nonatomic , strong) NSMutableArray *contents;
+@property (nonatomic , strong) NSArray *contents;
 /** 菜单的高度 */
 @property (nonatomic , assign) CGFloat menuHeight;
 @property (nonatomic , strong) UIView *topLine;
@@ -96,11 +96,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     return dropMenu;
 }
 
+#pragma mark - set方法
 - (void)setDataSource:(id<GHDropMenuDataSource>)dataSource {
     _dataSource = dataSource;
+    
     if (dataSource == nil) {
         return;
     }
+
     NSArray *tempArray = nil;
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(columnTitlesInMeun:)]) {
         tempArray = [self.dataSource columnTitlesInMeun:self];
@@ -114,7 +117,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         dropMenuModel.identifier = index;
         [titles addObject:dropMenuModel];
     }
-    self.titles = titles.copy;
+    self.titles = titles;
 
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(menu:numberOfColumns:)]) {
         for (NSInteger index = 0; index < titles.count; index++) {
@@ -129,19 +132,21 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
             }
             dropMenuTitleModel.dataArray = dataArray;
         }
-
     }
     [self.collectionView reloadData];
 }
-- (void)setTitles:(NSArray *)titles {
-    _titles = titles.copy;
+- (void)setTitles:(NSMutableArray *)titles {
+    _titles = titles;
+    [self.tableView reloadData];
     [self.collectionView reloadData];
-
 }
 - (void)setTableY:(CGFloat)tableY {
     _tableY = tableY;
     self.tableView.y = tableY;
     self.titleCover.y = self.tableView.y;
+}
+- (void)setCellHeight:(CGFloat)cellHeight {
+    _cellHeight = cellHeight;
 }
 - (void)setOptionNormalColor:(UIColor *)optionNormalColor {
     _optionNormalColor = optionNormalColor;
@@ -215,10 +220,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (void)setConfiguration:(GHDropMenuModel *)configuration {
     _configuration = configuration;
     self.titles = configuration.titles.copy;
- 
+    [self.tableView reloadData];
     [self.collectionView reloadData];
-    self.currentIndex = 0;
-//    [self resetMenuStatus];
 }
 - (instancetype)new {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"请使用方法 creatDropMenuWithConfiguration: or creatDropFilterMenuWidthConfiguration: 代替初始化" userInfo:nil];
@@ -235,6 +238,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (void)defaultConfiguration {
     self.menuHeight = 44;
     self.currentIndex = 0;
+    self.cellHeight = 44;
 }
 
 #pragma mark - 消失
@@ -272,7 +276,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     }
     [UIView animateWithDuration:self.durationTime animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
-            self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, dropMenuTitleModel.dataArray.count * 44);
+            self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, dropMenuTitleModel.dataArray.count * self.cellHeight);
             self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, kGHScreenHeight - self.menuHeight - kGHSafeAreaTopHeight);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
@@ -288,6 +292,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                 self.titleCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
             }
         } completion:^(BOOL finished) {
+            
         }];
     }];
 }
@@ -300,7 +305,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 }
 #pragma mark - 创建UI 添加控件
 - (void)setupUI {
-
     [self addSubview:self.collectionView];
     [kKeyWindow addSubview:self.filterCover];
     [kKeyWindow addSubview:self.titleCover];
@@ -325,6 +329,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     for (GHDropMenuModel *dropMenuModel in self.titles) {
         dropMenuModel.titleSeleted = NO;
     }
+    
     [self.filter reloadData];
     [self.collectionView reloadData];
     [self dismiss];
@@ -428,7 +433,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;
     if (dropMenuModel.titleSeleted) {
-        /** 取出数组 展示*/
+        NSLog(@"contents%@",self.contents);
         self.contents = dropMenuModel.dataArray.copy;
         for (GHDropMenuModel *model in self.titles) {
             if (model.identifier != dropMenuModel.identifier) {
@@ -439,27 +444,35 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     } else {
         [self dismiss];
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:index:)]) {
+        [self.delegate dropMenu:self dropMenuModel:self.configuration index:self.currentIndex];
+    }
+
     [self.collectionView reloadData];
 }
 
 #pragma mark - tableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.cellHeight > 0 ?self.cellHeight:44;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.contents.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSIndexPath *seletedIndexPath = nil;
-    for (GHDropMenuModel *dropMenuModel in self.titles) {
-        if (dropMenuModel.titleSeleted) {
-            seletedIndexPath = dropMenuModel.indexPath;
-        }
-    }
-    GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: seletedIndexPath.row];
+    
+
+    GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
 
     GHDropMenuModel *dropMenuModel = [dropMenuTitleModel.dataArray by_ObjectAtIndex: indexPath.row];
     dropMenuModel.indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:dropMenuTitleModel.indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"GHDropMenuOptionCellID%ld%ld%ld",indexPath.section,indexPath.row,(long)dropMenuTitleModel.identifier];
 
-    GHDropMenuOptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHDropMenuOptionCellID"];
+    GHDropMenuOptionCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[GHDropMenuOptionCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
     cell.dropMenuModel = dropMenuModel;
     return cell;
 }
@@ -482,10 +495,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     
     if (self.dropMenuTitleBlock) {
         self.dropMenuTitleBlock(contentModel);
-    }
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:)]) {
-        [self.delegate dropMenu:self dropMenuModel:self.configuration];
     }
 
     [self resetMenuStatus];
@@ -720,7 +729,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.tableY, 0, 0) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.bounces = NO;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[GHDropMenuOptionCell class] forCellReuseIdentifier:@"GHDropMenuOptionCellID"];
@@ -777,12 +785,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     }
     return _collectionView;
 }
-- (NSMutableArray *)contents {
-    if (_contents == nil) {
-        _contents = [NSMutableArray array];
-    }
-    return _contents;
-}
+
 
 - (UIView *)bottomLine {
     if (_bottomLine == nil) {
