@@ -52,7 +52,9 @@
     if (text.length == 0) {
         return;
     }
+    text = [NSString stringWithFormat:@"%@ ",text];
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:text];
+
     [attString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, text.length)];
     UIImage *image = [UIImage imageNamed:imageName];
   
@@ -64,6 +66,7 @@
     attach.bounds = CGRectMake(0, 3, 10, 6);
     NSAttributedString *str = [NSAttributedString attributedStringWithAttachment:attach];
     self.attach = attach;
+    
     [attString insertAttributedString:str atIndex:attString.length];
     
     self.attributedText = attString;
