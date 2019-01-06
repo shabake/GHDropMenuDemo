@@ -151,8 +151,8 @@
     }];
     dropMenu.titleSeletedColor = [UIColor redColor];
     dropMenu.titleNormalColor = [UIColor orangeColor];
-    dropMenu.titleSeletedImageName = @"";
-    dropMenu.titleNormalImageName = @"";
+    dropMenu.titleSeletedImageName = @"up_normal";
+    dropMenu.titleNormalImageName = @"down_normal";
     dropMenu.titleFont = [UIFont systemFontOfSize:11];
     dropMenu.optionFont = [UIFont systemFontOfSize:20];
     dropMenu.optionSeletedColor = [UIColor redColor];

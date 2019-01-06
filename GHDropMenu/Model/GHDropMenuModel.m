@@ -100,6 +100,7 @@
     for (NSInteger index = 0 ; index < line3.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.title = [line3 by_ObjectAtIndex:index];
+        dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTagCollection;
         [dataArray3 addObject:dropMenuModel];
     }
     
@@ -253,11 +254,46 @@
         }
         [sections addObject:dropMenuModel];
     }
+    
+    NSArray *sectionHeader1Titles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框"];
+    NSMutableArray *section1s = [NSMutableArray array];
+    
+    for (NSInteger index = 0; index < sectionHeader1Titles.count; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        dropMenuModel.sectionHeaderTitle = sectionHeader1Titles[index];
+        
+        if (index == 0) {
+            dropMenuModel.dataArray = dataArray4;
+            /** 单选 */
+            dropMenuModel.isMultiple = NO;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 1) {
+            dropMenuModel.dataArray = dataArray5;
+            /** 多选 */
+            dropMenuModel.isMultiple = YES;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 2) {
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeInput;
+            dropMenuModel.dataArray = dataArray6;
+        } else if (index == 3){
+            dropMenuModel.dataArray = dataArray7;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 4) {
+            dropMenuModel.dataArray = dataArray8;
+            dropMenuModel.isMultiple = YES;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTag;
+        } else if (index == 5) {
+            dropMenuModel.dataArray = dataArray9;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeSingleInput;
+        }
+        [section1s addObject:dropMenuModel];
+    }
+    
     NSMutableArray *titlesArray = [NSMutableArray array];
     NSArray *types = @[
                        @(GHDropMenuTypeTitle),
                        @(GHDropMenuTypeTitle),
-                       @(GHDropMenuTypeTitle),
+                       @(GHDropMenuTypeOptionCollection),
                        @(GHDropMenuTypeFilter),
                        ];
     /** 菜单标题 */
@@ -273,10 +309,16 @@
         } else if (index == 1) {
             dropMenuModel.dataArray = dataArray2;
         } else if (index == 2) {
-            dropMenuModel.dataArray = dataArray3;
+//            dropMenuModel.dataArray = dataArray3;
+            dropMenuModel.sections = section1s;
+            dropMenuModel.sectionCount = 4.01;
+            dropMenuModel.menuWidth = [UIScreen mainScreen].bounds.size.width;
+
         } else if (index == 3) {
             dropMenuModel.dataArray = dataArray4;
             dropMenuModel.sections = sections;
+            dropMenuModel.sectionCount = 3.01;
+            dropMenuModel.menuWidth = [UIScreen mainScreen].bounds.size.width * 0.9;
         }
         dropMenuModel.identifier = index;
         [titlesArray addObject:dropMenuModel];

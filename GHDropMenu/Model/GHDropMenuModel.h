@@ -18,16 +18,23 @@ typedef NS_ENUM (NSUInteger,GHDropMenuFilterCellType ) {
     GHDropMenuFilterCellTypeInput,
     /** 输入 */
     GHDropMenuFilterCellTypeSingleInput,
+    /** 输入 */
+    GHDropMenuFilterCellTypeTagCollection,
 };
 /** 菜单类型 */
 typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
-    /** 标题 */
+    /** 标题菜单 */
     GHDropMenuTypeTitle = 1,
-    /** 筛选菜单 */
+    /** 侧滑筛选菜单 */
     GHDropMenuTypeFilter,
+    GHDropMenuTypeOptionCollection,
 };
 /** 筛选菜单模型 */
 @interface GHDropMenuModel : NSObject
+/** menu菜单的最大宽度 */
+@property (nonatomic , assign) CGFloat menuWidth;
+/** 每行多少个 */
+@property (nonatomic , assign) CGFloat sectionCount;
 @property (nonatomic , strong) UIColor *titleViewBackGroundColor;
 /** 选项正常文字颜色 */
 @property (nonatomic , strong) UIColor *optionNormalColor;

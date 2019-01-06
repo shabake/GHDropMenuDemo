@@ -20,10 +20,10 @@
   
     if (dropMenuModel.titleSeleted) {
         self.label.textColor = dropMenuModel.titleSeletedColor;
-        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:@"up_normal"];
+        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleSeletedImageName ];
     } else {
         self.label.textColor = dropMenuModel.titleNormalColor;//
-        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:@"down_normal"];
+        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleNormalImageName];
     }
 }
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -62,7 +62,7 @@
         _label.textAlignment = NSTextAlignmentCenter;
         _label.font = [UIFont systemFontOfSize:14];
         _label.tintColor = [UIColor whiteColor];
-        _label.layer.borderColor = [UIColor redColor].CGColor;
+        _label.layer.borderColor = [UIColor whiteColor].CGColor;
         _label.layer.borderWidth = 0.01f;
     }
     return _label;
