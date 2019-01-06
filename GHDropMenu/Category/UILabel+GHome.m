@@ -60,7 +60,7 @@
   
     self.numberOfLines = 0;
     CGSize size = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
-    
+
     NSTextAttachment *attach = [[NSTextAttachment alloc]init];
     attach.image = image;
     attach.bounds = CGRectMake(0, 3, 10, 6);
@@ -74,7 +74,10 @@
     
     CGFloat labelMaxWidth = [UIScreen mainScreen].bounds.size.width / 4;/** 最大宽度*/
     CGFloat labelWidth = (size.width+ 10) > labelMaxWidth ?labelMaxWidth :size.width + 10;
-    self.frame = CGRectMake((labelMaxWidth -labelWidth) * 0.5, (size.height -frame.origin.y) * 0.5, labelWidth, size.height);
+    NSLog(@"height%f",size.height);
+    NSLog(@"height%f",frame.size.height);
+
+    self.frame = CGRectMake((labelMaxWidth -labelWidth) * 0.5, 0, labelWidth, frame.size.height);
 }
 - (void)setText: (NSString *)text imageName: (NSString *)imageName{
     [self creatRichTextWithText:text frame:self.frame font:self.font imageName:imageName];

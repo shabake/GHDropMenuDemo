@@ -244,7 +244,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 
 #pragma mark - 消失
 - (void)dismiss {
-
     
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
     self.filterCover.backgroundColor = [UIColor clearColor];
@@ -271,7 +270,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         if (self.dropMenuShowType == GHDropMenuShowTypeOnlyFilter) {
             [self.layer setOpacity:0.0];
         }
-      
         [self.tableView reloadData];
     }];
 }
@@ -312,6 +310,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         self.sure.frame = CGRectMake(self.filter.frame.size.width * 0.5 +kGHScreenWidth * 0.1 , CGRectGetMaxY(self.filter.frame), self.filter.width * 0.5, kFilterButtonHeight);
         self.sure.alpha = 1;
         self.reset.alpha = 1;
+        
     }
     [UIView animateWithDuration:self.durationTime animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
@@ -339,7 +338,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                 self.titleCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
             }
         } completion:^(BOOL finished) {
-            
+
         }];
     }];
 }
@@ -575,6 +574,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         return CGSizeZero;
     }
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (self.filter == collectionView) {
         return CGSizeMake(kGHScreenWidth * 0.8, 44);
