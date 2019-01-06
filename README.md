@@ -95,6 +95,12 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 详见demo
 ```
 
+* 当需要返回上级页面的时候需要调用关闭菜单的方法
+```
+- (vold)closeMenu;
+```
+
+
 ### 接下来要做的
 - [ ] 优化代码
 - [ ] 增加类似boss直聘多级菜单选择
