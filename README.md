@@ -3,7 +3,8 @@
 ![](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)
 ![](https://img.shields.io/vscode-marketplace/d/repo.svg)
 ![](https://img.shields.io/cocoapods/l/packageName.svg)
-# GHDropMenuDemo
+
+# GHDropMenu 简单使用 无入侵 对原项目无污染
 
 `筛选菜单` `京东筛选菜单` `美团筛选菜单` `电商通用筛选菜单`
 
