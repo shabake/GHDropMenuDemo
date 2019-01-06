@@ -37,7 +37,7 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 }
 ```
 --- 
-### 2018.12.30更新
+### 2019.1.6 更新
 
 ```diff
 + 增加价格输入判断逻辑
