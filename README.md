@@ -37,7 +37,17 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 }
 ```
 --- 
+### 2018.12.30更新
 
+```diff
++ 增加价格输入判断逻辑
+	+ 小数点最多输入两位
+	+ 第一位不能输入小数点
+	+ 增加校验方法,当最小价格大于最大价格弹窗提示,并且清空用户输入
+	
+
+
+```
 ### 2018.12.30更新
 
 ```diff
