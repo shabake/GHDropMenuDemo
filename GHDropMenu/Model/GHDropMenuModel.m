@@ -419,7 +419,9 @@
         //        dropMenuModel.title = titles[index];
         NSNumber *typeNum = types[index];
         dropMenuModel.dropMenuType = typeNum.integerValue;
-        
+        dropMenuModel.sectionCount = 3.01f;
+        dropMenuModel.menuWidth = [UIScreen mainScreen].bounds.size.width * 0.9;
+
         dropMenuModel.dataArray = dataArray4;
         dropMenuModel.sections = sections;
         

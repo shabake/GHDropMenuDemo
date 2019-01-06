@@ -9,7 +9,7 @@
 
 ---
 
-![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-0da7858245c4693a.gif?imageMogr2/auto-orient/strip)
+![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-55dd0f6eafb19fd7.gif?imageMogr2/auto-orient/strip)
 
 ---
 ### 2019.1.1更新
@@ -61,10 +61,11 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 + 可以重新传入模型,重新刷新数据源
 + 选中内容通过代理的方式回调
 + 对原有项目无污染,直接拖进项目即可使用
-
++ dropMenu的title自适应宽度
++ 
 - 去掉titleView初始化动画
 - 修复无法点击bug
-- dropMenu的title自适应宽度
+
 
 ```
 
