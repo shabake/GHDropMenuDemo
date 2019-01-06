@@ -634,11 +634,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     }
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-
     if (self.collectionView == collectionView) {
         return self.titles.count;
     } else if (self.filter == collectionView) {
-        
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
         GHDropMenuModel *dropMenuSectionModel = [dropMenuModel.sections by_ObjectAtIndex: section];
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
@@ -647,7 +645,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                    dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput) {
             return 1;
         } else {
-            
             return dropMenuSectionModel.dataArray.count;
         }
     } else {
@@ -700,9 +697,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 }
 - (void)clickButton: (UIButton *)button {
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
-
     if (button.tag == GHDropMenuButtonTypeSure) {
-        [self resetMenuStatus];
         NSMutableArray *dataArray = [NSMutableArray array];
         for (GHDropMenuModel *dropMenuSectionModel in dropMenuTitleModel.sections) {
             for (GHDropMenuModel *dropMenuTagModel in dropMenuSectionModel.dataArray) {
@@ -715,6 +710,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                 }
             }
         }
+        [self resetMenuStatus];
+
         if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:tagArray:)]) {
             [self.delegate dropMenu:self tagArray:dataArray.copy];
         }
@@ -829,7 +826,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         _filter = [[UICollectionView alloc]initWithFrame:CGRectMake(kGHScreenWidth * 0.1, 0, kGHScreenWidth * 0.9, kGHScreenHeight - kFilterButtonHeight - kGHSafeAreaBottomHeight) collectionViewLayout:self.filterFlowLayout];
         _filter.delegate = self;
         _filter.dataSource = self;
-     
         _filter.contentInset = UIEdgeInsetsMake(20, 10, 0, 10);
         _filter.backgroundColor = [UIColor whiteColor];
         [_filter registerClass:[GHDropMenuFilterTagItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterTagItemID"];
@@ -841,16 +837,16 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     }
     return _filter;
 }
+
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, self.menuHeight) collectionViewLayout:self.flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.layer.borderColor = [UIColor clearColor].CGColor;
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellID"];
         [_collectionView registerClass:[GHDropMenuTitleItem class] forCellWithReuseIdentifier:@"GHDropMenuTitleItemID"];
-
     }
     return _collectionView;
 }
