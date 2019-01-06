@@ -41,7 +41,6 @@
     self.numberOfLines = 0;
     CGSize size = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
     self.frame = CGRectMake(frame.origin.x, frame.origin.y, size.width, size.height);
-    NSLog(@"width%f",size.width);
     self.width = size.width;
 }
 
@@ -50,6 +49,9 @@
                          font: (UIFont *)font
                     imageName: (NSString *)imageName {
 
+    if (text.length == 0) {
+        return;
+    }
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:text];
     [attString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, text.length)];
     UIImage *image = [UIImage imageNamed:imageName];
@@ -59,7 +61,7 @@
     
     NSTextAttachment *attach = [[NSTextAttachment alloc]init];
     attach.image = image;
-    attach.bounds = CGRectMake(0, 0, 10, 10);
+    attach.bounds = CGRectMake(0, 3, 10, 6);
     NSAttributedString *str = [NSAttributedString attributedStringWithAttachment:attach];
     self.attach = attach;
     [attString insertAttributedString:str atIndex:attString.length];
