@@ -13,7 +13,6 @@
 #import "GHCollectionReusableView.h"
 #import "GHDropMenuModel.h"
 #import "NSArray+Bounds.h"
-#import "GHSuspendSectionHeader.h"
 
 #define kHeaderHeight 400
 
@@ -82,7 +81,6 @@
     [super back];
     /** 返回时候 需要将菜单收起 */
     UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[self.tableView headerViewForSection:0];
-    
     GHDropMenu *dropMenu = view.subviews.lastObject;
     [dropMenu closeMenu];
 }
@@ -241,8 +239,6 @@
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView registerClass:[GHSuspendItem class] forCellWithReuseIdentifier:@"GHSuspendItemID"];
-        [_collectionView registerClass:[GHCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"GHCollectionReusableViewID"];
-        //GHCollectionReusableView
     }
     return _collectionView;
 }

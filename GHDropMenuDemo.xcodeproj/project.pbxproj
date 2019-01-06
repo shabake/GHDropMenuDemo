@@ -46,7 +46,6 @@
 		D6A4ED9821E087410053D14F /* GHSuspendHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */; };
 		D6D3396921E123F8005B86DB /* UILabel+GHome.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396821E123F8005B86DB /* UILabel+GHome.m */; };
 		D6D3396A21E1241F005B86DB /* UILabel+GHome.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396821E123F8005B86DB /* UILabel+GHome.m */; };
-		D6D3396D21E14A6B005B86DB /* GHSuspendSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396C21E14A6B005B86DB /* GHSuspendSectionHeader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,8 +110,6 @@
 		D6A4ED9021DF97B40053D14F /* NSString+Arc4random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Arc4random.m"; sourceTree = "<group>"; };
 		D6D3396721E123F8005B86DB /* UILabel+GHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+GHome.h"; sourceTree = "<group>"; };
 		D6D3396821E123F8005B86DB /* UILabel+GHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+GHome.m"; sourceTree = "<group>"; };
-		D6D3396B21E14A6B005B86DB /* GHSuspendSectionHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHSuspendSectionHeader.h; sourceTree = "<group>"; };
-		D6D3396C21E14A6B005B86DB /* GHSuspendSectionHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHSuspendSectionHeader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,8 +229,6 @@
 				D6A4ECED21D7B2E30053D14F /* GHSuspendItem.m */,
 				D6A4ED6121DCB8DA0053D14F /* GHCollectionReusableView.h */,
 				D6A4ED6221DCB8DA0053D14F /* GHCollectionReusableView.m */,
-				D6D3396B21E14A6B005B86DB /* GHSuspendSectionHeader.h */,
-				D6D3396C21E14A6B005B86DB /* GHSuspendSectionHeader.m */,
 			);
 			path = "吸附筛选菜单";
 			sourceTree = "<group>";
@@ -436,7 +431,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6D3396D21E14A6B005B86DB /* GHSuspendSectionHeader.m in Sources */,
 				D6A4ED9121DF97B50053D14F /* NSString+Arc4random.m in Sources */,
 				D6A4ED9721E0873B0053D14F /* GHSuspendViewController.m in Sources */,
 				D6A4ED3821DA7E090053D14F /* GHBaseNavigationController.m in Sources */,
