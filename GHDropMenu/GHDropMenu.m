@@ -241,6 +241,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     self.menuHeight = 44;
     self.currentIndex = 0;
     self.cellHeight = 44;
+    self.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - 消失
@@ -461,7 +462,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
 
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
 
@@ -776,7 +776,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, self.menuHeight) collectionViewLayout:self.flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.layer.borderColor = [UIColor clearColor].CGColor;
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellID"];
         [_collectionView registerClass:[GHDropMenuTitleItem class] forCellWithReuseIdentifier:@"GHDropMenuTitleItemID"];

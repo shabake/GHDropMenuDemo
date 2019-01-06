@@ -13,6 +13,7 @@
 #import "GHCollectionReusableView.h"
 #import "GHDropMenuModel.h"
 #import "NSArray+Bounds.h"
+#import "GHSuspendSectionHeader.h"
 
 #define kHeaderHeight 400
 
@@ -163,6 +164,15 @@
     dropMenu.delegate = self;
     UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"UITableViewHeaderFooterViewID"];
     view.frame = CGRectMake(0, 0, kGHScreenWidth, 44);
+    view.tintColor = [UIColor clearColor];
+    view.contentView.backgroundColor = [UIColor clearColor];
+  
+    view.backgroundView = ({
+        UIView * ssss = [[UIView alloc] initWithFrame:view.bounds];
+        ssss.backgroundColor = [UIColor whiteColor];
+        ssss;
+    });
+      
     [view addSubview: dropMenu];
     return view ;
 }

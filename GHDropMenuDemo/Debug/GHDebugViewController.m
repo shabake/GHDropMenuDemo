@@ -7,41 +7,28 @@
 //  gitHub:https://github.com/shabake/GHDropMenuDemo
 
 #import "GHDebugViewController.h"
-struct MyDate1 {
-    
-    int year;
-    int month;
-    NSString *day;
-    NSArray *a;
+#import "UILabel+GHome.h"
 
-};
 @interface GHDebugViewController ()
-
+@property (nonatomic , strong) UILabel *label;
 @end
 
 @implementation GHDebugViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    struct MyDate1 d1 = {2016, 1, @"2",@[@1,@2]};
-    NSLog(@"%d",d1.year);
-    NSLog(@"%@",d1.a);
-
     self.navigationItem.title = @"debug";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    CAShapeLayer *layer = [CAShapeLayer new];
-    UIBezierPath *path = [UIBezierPath new];
-    [path moveToPoint:CGPointMake(0, 100)];
-    [path addLineToPoint:CGPointMake(50, 100)];
-    [path addLineToPoint:CGPointMake(0, 64)];
-    [path closePath];
-    
-    layer.path = path.CGPath;
-    layer.lineWidth = 2.8;
-    layer.fillColor = [UIColor redColor].CGColor;
-    [self.view.layer addSublayer:layer];
+    UILabel *label = [[UILabel alloc]init];
+    self.label = label;
+    [label creatRichTextWithText:@"达阿达阿达阿达阿达阿达阿r" frame:CGRectMake(0, 100, 40, 30)  font:[UIFont systemFontOfSize:16] imageName:@"down_normal"];
+    [self.view addSubview:label];
 }
 
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.label setText:@"122" imageName:@"up_normal"];
+    
+}
 @end

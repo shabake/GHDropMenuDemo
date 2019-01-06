@@ -8,26 +8,23 @@
 
 #import "GHDropMenuTitleItem.h"
 #import "GHDropMenuModel.h"
+#import "UILabel+GHome.h"
 
 @interface GHDropMenuTitleItem()
 @property (nonatomic , strong) UILabel *label;
-@property (nonatomic , strong) UIImageView *imageView;
 @end
 @implementation GHDropMenuTitleItem
 
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
-    self.label.text = dropMenuModel.title;
-    self.label.font = dropMenuModel.titleFont;
+  
     if (dropMenuModel.titleSeleted) {
-        self.imageView.image = [UIImage imageNamed:dropMenuModel.titleSeletedImageName];
-        self.imageView.transform = CGAffineTransformMakeRotation(M_PI);
         self.label.textColor = dropMenuModel.titleSeletedColor;
+        
     } else {
-        self.imageView.image = [UIImage imageNamed:dropMenuModel.titleNormalImageName];
-        self.imageView.transform = CGAffineTransformMakeRotation(0);
         self.label.textColor = dropMenuModel.titleNormalColor;
     }
+    [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:@"down_normal"];
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
@@ -56,20 +53,12 @@
 }
 - (void)setupUI {
     [self addSubview:self.label];
-    [self addSubview:self.imageView];
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.imageView.frame = CGRectMake(self.label.frame.size.width + 3, (self.bounds.size.height - 8 ) *.5, 10, 8);
 }
 
-- (UIImageView *)imageView {
-    if (_imageView == nil) {
-        _imageView = [[UIImageView alloc]init];
-        _imageView.frame = CGRectMake(CGRectGetMaxX(self.label.frame), 0, 10, 8);
-    }
-    return _imageView;
-}
+
 - (UILabel *)label {
     if (_label == nil) {
         _label = [[UILabel alloc]init];

@@ -44,6 +44,9 @@
 		D6A4ED9621E087140053D14F /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
 		D6A4ED9721E0873B0053D14F /* GHSuspendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE321D793720053D14F /* GHSuspendViewController.m */; };
 		D6A4ED9821E087410053D14F /* GHSuspendHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */; };
+		D6D3396921E123F8005B86DB /* UILabel+GHome.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396821E123F8005B86DB /* UILabel+GHome.m */; };
+		D6D3396A21E1241F005B86DB /* UILabel+GHome.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396821E123F8005B86DB /* UILabel+GHome.m */; };
+		D6D3396D21E14A6B005B86DB /* GHSuspendSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396C21E14A6B005B86DB /* GHSuspendSectionHeader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +109,10 @@
 		D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuFilterTagItem.m; sourceTree = "<group>"; };
 		D6A4ED8F21DF97B40053D14F /* NSString+Arc4random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Arc4random.h"; sourceTree = "<group>"; };
 		D6A4ED9021DF97B40053D14F /* NSString+Arc4random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Arc4random.m"; sourceTree = "<group>"; };
+		D6D3396721E123F8005B86DB /* UILabel+GHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+GHome.h"; sourceTree = "<group>"; };
+		D6D3396821E123F8005B86DB /* UILabel+GHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+GHome.m"; sourceTree = "<group>"; };
+		D6D3396B21E14A6B005B86DB /* GHSuspendSectionHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHSuspendSectionHeader.h; sourceTree = "<group>"; };
+		D6D3396C21E14A6B005B86DB /* GHSuspendSectionHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHSuspendSectionHeader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +232,8 @@
 				D6A4ECED21D7B2E30053D14F /* GHSuspendItem.m */,
 				D6A4ED6121DCB8DA0053D14F /* GHCollectionReusableView.h */,
 				D6A4ED6221DCB8DA0053D14F /* GHCollectionReusableView.m */,
+				D6D3396B21E14A6B005B86DB /* GHSuspendSectionHeader.h */,
+				D6D3396C21E14A6B005B86DB /* GHSuspendSectionHeader.m */,
 			);
 			path = "吸附筛选菜单";
 			sourceTree = "<group>";
@@ -305,6 +314,8 @@
 				D6A4ED7121DF7B550053D14F /* NSString+Size.m */,
 				D6A4ED7321DF7B550053D14F /* UIView+Extension.h */,
 				D6A4ED7021DF7B550053D14F /* UIView+Extension.m */,
+				D6D3396721E123F8005B86DB /* UILabel+GHome.h */,
+				D6D3396821E123F8005B86DB /* UILabel+GHome.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -425,6 +436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D3396D21E14A6B005B86DB /* GHSuspendSectionHeader.m in Sources */,
 				D6A4ED9121DF97B50053D14F /* NSString+Arc4random.m in Sources */,
 				D6A4ED9721E0873B0053D14F /* GHSuspendViewController.m in Sources */,
 				D6A4ED3821DA7E090053D14F /* GHBaseNavigationController.m in Sources */,
@@ -438,6 +450,7 @@
 				D650CD8321C35E0D00EC004A /* ViewController.m in Sources */,
 				D6A4ECEB21D7AD760053D14F /* GHBaseViewController.m in Sources */,
 				D6A4ED7A21DF7C120053D14F /* GHDropMenuTitleItem.m in Sources */,
+				D6D3396921E123F8005B86DB /* UILabel+GHome.m in Sources */,
 				D6A4ED7721DF7B550053D14F /* NSArray+Bounds.m in Sources */,
 				D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */,
 				D6A4ED8821DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m in Sources */,
@@ -459,6 +472,7 @@
 			files = (
 				D6A4ED1221DA66FD0053D14F /* GHMeituanFoodViewController.m in Sources */,
 				D6A4ED1521DA66FD0053D14F /* AppDelegate.m in Sources */,
+				D6D3396A21E1241F005B86DB /* UILabel+GHome.m in Sources */,
 				D6A4ED3221DA6BE30053D14F /* main.m in Sources */,
 				D6A4ED1821DA66FD0053D14F /* GHBaseViewController.m in Sources */,
 				D6A4ED9821E087410053D14F /* GHSuspendHeader.m in Sources */,
