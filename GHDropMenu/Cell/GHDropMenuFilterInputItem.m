@@ -9,10 +9,12 @@
 #import "GHDropMenuFilterInputItem.h"
 #import "GHDropMenuModel.h"
 
-@interface GHDropMenuFilterInputItem()
+@interface GHDropMenuFilterInputItem()<UITextFieldDelegate>
 @property (nonatomic , strong)UITextField *leftTextField;
 @property (nonatomic , strong)UITextField *rightTextField;
 @property (nonatomic , strong)UIView *line;
+/** 是否存在小数点 */
+@property (nonatomic , assign) BOOL isHavePoint;
 @end
 @implementation GHDropMenuFilterInputItem
 
@@ -45,6 +47,87 @@
         [self.delegate dropMenuFilterInputItem:self dropMenuModel:self.dropMenuModel];
     }
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([textField.text rangeOfString:@"."].location == NSNotFound) {
+        self.isHavePoint = NO;
+    }
+    if ([string length] > 0) {
+        unichar single = [string characterAtIndex:0];//当前输入的字符
+        if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
+            //首字母不能为0和小数点
+            if([textField.text length] == 0){
+                if(single == '.') {
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+                
+            }
+
+            //输入的字符是否是小数点
+            if (single == '.') {
+                if(!self.isHavePoint)//text中还没有小数点
+                {
+                    self.isHavePoint = YES;
+                    return YES;
+                }else{
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }else{
+                if (self.isHavePoint) {//存在小数点
+                    //判断小数点的位数
+                    NSRange ran = [textField.text rangeOfString:@"."];
+                    if (range.location - ran.location <= 2) {
+                        return YES;
+                    } else{
+                        return NO;
+                    }
+                }else{
+                    return YES;
+                }
+            }
+        } else { //输入的数据格式不正确
+            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+            return NO;
+        }
+    } else {
+        return YES;
+    }
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.text.length >= 2) {
+        NSString *first = [textField.text substringToIndex:1];
+        /** 第一位用户输入 0 但不包含小数点 用户输入完成后讲0截取掉 */
+        if ([first isEqualToString:@"0"] && ![textField.text containsString:@"."]) {
+            textField.text = [textField.text substringFromIndex:1];//
+        }
+        /** 第一位用户输入 0 也输入了小数点 */
+        if ([first isEqualToString:@"0"] && [textField.text containsString:@"."]) {
+            if([textField.text rangeOfString:@"."].location != NSNotFound) {
+                NSRange range;
+                range = [textField.text rangeOfString:@"."];
+                /** 小数点在0的后面 */
+                if (range.location == 1) {
+                    
+                    /** 小数点不在0的后面 */
+                } else if (range.location != 1) {
+                    textField.text = nil;
+                }
+            } else {
+            }
+        }
+    }
+    if (self.leftTextField.text.length) {
+        self.dropMenuModel.minPrice = self.leftTextField.text;
+    }
+    if (self.rightTextField.text.length) {
+        self.dropMenuModel.maxPrice = self.rightTextField.text;
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuFilterEndInputItem:dropMenuModel:)]) {
+        [self.delegate dropMenuFilterEndInputItem:self dropMenuModel:self.dropMenuModel];
+    }
+}
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -74,6 +157,7 @@
         _rightTextField.placeholder = @"请输入最高价";
         _rightTextField.keyboardType = UIKeyboardTypeNumberPad;
         _rightTextField.tintColor = [UIColor orangeColor];
+        _rightTextField.delegate = self;
     }
     return _rightTextField;
 }
@@ -90,6 +174,7 @@
         _leftTextField.placeholder = @"请输入最低价";
         _leftTextField.keyboardType = UIKeyboardTypeNumberPad;
         _leftTextField.tintColor = [UIColor orangeColor];
+        _leftTextField.delegate = self;
     }
     return _leftTextField;
 }

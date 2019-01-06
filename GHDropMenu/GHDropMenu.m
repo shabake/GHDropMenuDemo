@@ -403,6 +403,17 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     dropMenuTagModel.singleInput = dropMenuModel.singleInput;
 }
 
+- (void)dropMenuFilterEndInputItem:(GHDropMenuFilterInputItem *)item dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    if (dropMenuModel.minPrice.length && dropMenuModel.maxPrice.length) {
+        if (dropMenuModel.minPrice.doubleValue > dropMenuModel.maxPrice.doubleValue) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"最小价格不能大于最大价格,请重新选择" delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+            [alert show];
+            dropMenuModel.minPrice = @"";
+            dropMenuModel.maxPrice = @"";
+            [self.filter reloadData];
+        }
+    }
+}
 - (void)dropMenuFilterInputItem:(GHDropMenuFilterInputItem *)item
                   dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     
