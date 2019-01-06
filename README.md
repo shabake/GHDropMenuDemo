@@ -68,8 +68,6 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 + dropMenu的title自适应宽度
 
 - 去掉titleView初始化动画
-- 修复无法点击bug
-
 
 ```
 
