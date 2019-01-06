@@ -96,7 +96,7 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 
 
 ### 接下来要做的
-- [ ] 优化代码
+- [ ] 优化代码,完善文档
 - [ ] 增加类似boss直聘多级菜单选择
 
 
