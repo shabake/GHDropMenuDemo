@@ -349,8 +349,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     self.topLine.frame = CGRectMake(0, 0, kGHScreenWidth, 1);
     self.bottomLine.frame = CGRectMake(0, self.menuHeight - 1, kGHScreenWidth, 1);
     self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
-
-
 }
 #pragma mark - 创建UI 添加控件
 - (void)setupUI {
@@ -374,6 +372,16 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     [self.filterCover addSubview:self.bottomView];
     [self.filterCover addSubview:self.sure];
     [self.filterCover addSubview:self.reset];
+}
+- (void)closeMenu {
+
+    [self.tableView removeFromSuperview];
+    [self.titleCover removeFromSuperview];
+    [self.filter removeFromSuperview];
+    [self.filterCover removeFromSuperview];
+    [self.sure removeFromSuperview];
+    [self.reset removeFromSuperview];
+    [self.collectionView removeFromSuperview];
 }
 /** 重置menu 状态 */
 - (void)resetMenuStatus {

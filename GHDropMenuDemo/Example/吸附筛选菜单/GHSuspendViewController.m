@@ -35,7 +35,7 @@
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.header;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     UIButton *button = [[UIButton alloc]init];
     [button addTarget:self action:@selector(change:)
      forControlEvents:UIControlEventTouchUpInside] ;
@@ -79,12 +79,12 @@
     }
 }
 - (void)back {
+    [super back];
     /** 返回时候 需要将菜单收起 */
     UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[self.tableView headerViewForSection:0];
     
     GHDropMenu *dropMenu = view.subviews.lastObject;
-    [dropMenu resetMenuStatus];
-    [self.navigationController popViewControllerAnimated:YES];
+    [dropMenu closeMenu];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

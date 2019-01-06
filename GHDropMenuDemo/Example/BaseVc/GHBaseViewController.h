@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GHBaseViewController : UIViewController
 @property (nonatomic , copy) NSString *navTitle;
+- (void)back;
 @end
 
 NS_ASSUME_NONNULL_END

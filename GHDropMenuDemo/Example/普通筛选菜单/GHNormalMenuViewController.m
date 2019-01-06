@@ -23,6 +23,10 @@
     
     [self style1];
 }
+- (void)back {
+    [super back];
+    [self.dropMenu closeMenu];
+}
 #pragma mark - 样式1
 - (void)style1 {
     
@@ -35,6 +39,7 @@
     dropMenu.durationTime = 0.5;
     dropMenu.delegate = self;
     dropMenu.dataSource = self;
+    self.dropMenu = dropMenu;
     [self.view addSubview:dropMenu];
 }
 

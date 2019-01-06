@@ -115,6 +115,8 @@ typedef void(^DropMenuFinishBlock)(void);
 
 - (void)show;
 
+/** 关闭菜单 */
+- (void)closeMenu;
 @end
 
 NS_ASSUME_NONNULL_END

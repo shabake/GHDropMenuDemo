@@ -23,6 +23,12 @@
     
     [self style1];
 }
+- (void)back {
+
+    [super back];
+    [self.dropMenu closeMenu];
+
+}
 #pragma mark - 样式1
 - (void)style1 {
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kGHScreenWidth, 44)];
@@ -45,7 +51,7 @@
     
     dropMenu.delegate = self;
     dropMenu.durationTime = 0.5;
-
+    self.dropMenu = dropMenu;
     [self.view addSubview:dropMenu];
 }
 
