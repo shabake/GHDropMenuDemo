@@ -12,7 +12,7 @@
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-55dd0f6eafb19fd7.gif?imageMogr2/auto-orient/strip)
 
 ---
-### 2019.1.1更新
+### 2019.1.5更新
 
 ```diff
 + 增加代理方法创建菜单
@@ -94,6 +94,12 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 ```
 详见demo
 ```
+
+### 接下来要做的
+- [] 优化代码
+- [] 增加类似boss直聘多级选择
+
+
 
 ### 在使用中如有任何问题欢迎骚扰我,如果对你有帮助请点帮我一个✨,小弟感激不尽:blush:
 
