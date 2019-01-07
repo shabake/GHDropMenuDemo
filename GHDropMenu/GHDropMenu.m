@@ -258,8 +258,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
             self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, 0);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.filterCover.frame = CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, kGHScreenHeight);
-            self.sure.alpha = 0;
-            self.reset.alpha = 0;
+     
         }  else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeOptionCollection) {
             self.filter.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
             self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, 0);
@@ -310,7 +309,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         self.sure.frame = CGRectMake(self.filter.frame.size.width * 0.5 +kGHScreenWidth * 0.1 , CGRectGetMaxY(self.filter.frame), self.filter.width * 0.5, kFilterButtonHeight);
         self.sure.alpha = 1;
         self.reset.alpha = 1;
-        
     }
     [UIView animateWithDuration:self.durationTime animations:^{
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {

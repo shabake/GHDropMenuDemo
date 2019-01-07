@@ -74,9 +74,7 @@
     
     CGFloat labelMaxWidth = [UIScreen mainScreen].bounds.size.width / 4;/** 最大宽度*/
     CGFloat labelWidth = (size.width+ 10) > labelMaxWidth ?labelMaxWidth :size.width + 10;
-    NSLog(@"height%f",size.height);
-    NSLog(@"height%f",frame.size.height);
-
+ 
     self.frame = CGRectMake((labelMaxWidth -labelWidth) * 0.5, 0, labelWidth, frame.size.height);
 }
 - (void)setText: (NSString *)text imageName: (NSString *)imageName{
