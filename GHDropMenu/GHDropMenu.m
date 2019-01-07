@@ -382,7 +382,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 }
 /** 重置menu 状态 */
 - (void)resetMenuStatus {
-
+    for (GHDropMenuModel *dropMenuModel in self.titles) {
+        dropMenuModel.titleSeleted = NO;
+    }
     [self.filter reloadData];
     [self.collectionView reloadData];
     [self dismiss];
