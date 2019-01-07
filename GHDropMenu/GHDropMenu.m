@@ -244,7 +244,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 
 #pragma mark - 消失
 - (void)dismiss {
-    
+
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
     self.filterCover.backgroundColor = [UIColor clearColor];
     self.titleCover.backgroundColor = [UIColor clearColor];
@@ -270,6 +270,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
             [self.layer setOpacity:0.0];
         }
         [self.tableView reloadData];
+        [self.collectionView reloadData];
+
     }];
 }
 #pragma mark - 弹出
@@ -498,16 +500,27 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     
     dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;
+    
     if (dropMenuModel.titleSeleted) {
         self.contents = dropMenuModel.dataArray.copy;
         for (GHDropMenuModel *model in self.titles) {
             if (model.identifier != dropMenuModel.identifier) {
                 model.titleSeleted = NO;
+            } else {
+                model.titleSeleted = YES;
             }
         }
         [self show];
     } else {
-        [self dismiss];
+        self.contents = dropMenuModel.dataArray.copy;
+//
+        for (GHDropMenuModel *model in self.titles) {
+            if (model.identifier != dropMenuModel.identifier) {
+                [self show];
+            } else {
+                [self dismiss];
+            }
+        }
     }
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:index:)]) {
@@ -561,7 +574,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         self.dropMenuTitleBlock(contentModel);
     }
 
-    [self resetMenuStatus];
+    [self dismiss];
 }
 #pragma mark - collectionViewDelegate
 

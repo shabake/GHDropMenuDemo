@@ -39,6 +39,7 @@
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
     /** 配置筛选菜单是否记录用户选中 默认NO */
     configuration.recordSeleted = NO;
+
     /** 设置数据源 */
     configuration.titles = [configuration creaDropMenuData];
     /** 创建dropMenu 配置模型 && frame */
@@ -48,7 +49,8 @@
     } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         [weakSelf getStrWith:tagArray];
     }];
-    
+    dropMenu.titleSeletedImageName = @"up_normal";
+    dropMenu.titleNormalImageName = @"down_normal";
     dropMenu.delegate = self;
     dropMenu.durationTime = 0.5;
     self.dropMenu = dropMenu;

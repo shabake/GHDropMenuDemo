@@ -39,6 +39,8 @@
     dropMenu.durationTime = 0.5;
     dropMenu.delegate = self;
     dropMenu.dataSource = self;
+    dropMenu.titleSeletedImageName = @"up_normal";
+    dropMenu.titleNormalImageName = @"down_normal";
     self.dropMenu = dropMenu;
     [self.view addSubview:dropMenu];
 }
