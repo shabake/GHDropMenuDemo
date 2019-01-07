@@ -416,7 +416,6 @@
     /** 菜单标题 */
     for (NSInteger index = 0 ; index < 1; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
-        //        dropMenuModel.title = titles[index];
         NSNumber *typeNum = types[index];
         dropMenuModel.dropMenuType = typeNum.integerValue;
         dropMenuModel.sectionCount = 3.01f;

@@ -58,7 +58,6 @@
     [attString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, text.length)];
     UIImage *image = [UIImage imageNamed:imageName];
   
-    self.numberOfLines = 0;
     CGSize size = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
 
     NSTextAttachment *attach = [[NSTextAttachment alloc]init];

@@ -20,7 +20,7 @@
   
     if (dropMenuModel.titleSeleted) {
         self.label.textColor = dropMenuModel.titleSeletedColor;
-        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleSeletedImageName ];
+        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleSeletedImageName];
     } else {
         self.label.textColor = dropMenuModel.titleNormalColor;//
         [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleNormalImageName];
