@@ -37,6 +37,8 @@
         [weakSelf getStrWith:tagArray];
         
     }];
+    dropMenu.titleSeletedImageName = @"up_normal";
+    dropMenu.titleNormalImageName = @"down_normal";
     dropMenu.delegate = self;
     dropMenu.durationTime = 0.5;
     self.dropMenu = dropMenu;
