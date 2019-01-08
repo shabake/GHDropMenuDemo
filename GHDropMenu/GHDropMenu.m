@@ -68,6 +68,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 @property (nonatomic , strong) DropMenuTagArrayBlock dropMenuTagArrayBlock;
 
 @property (nonatomic , assign) GHDropMenuShowType dropMenuShowType;
+/** 标记菜单是否展开 */
+@property (nonatomic , assign) BOOL isShow;
+
 
 @end
 @implementation GHDropMenu
@@ -240,6 +243,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     self.menuHeight = 44;
     self.currentIndex = 0;
     self.cellHeight = 44;
+    self.isShow = NO;
 }
 
 #pragma mark - 消失
@@ -269,6 +273,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         if (self.dropMenuShowType == GHDropMenuShowTypeOnlyFilter) {
             [self.layer setOpacity:0.0];
         }
+        self.isShow = NO;
         [self.tableView reloadData];
         [self.collectionView reloadData];
 
@@ -338,7 +343,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                 self.titleCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
             }
         } completion:^(BOOL finished) {
-
+            self.isShow = YES;
         }];
     }];
 }
@@ -500,7 +505,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     
     dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;
-
+    
     if (dropMenuModel.titleSeleted) {
         self.contents = dropMenuModel.dataArray.copy;
         for (GHDropMenuModel *model in self.titles) {
@@ -508,6 +513,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                 model.titleSeleted = NO;
             }
         }
+       
         [self show];
     } else {
         [self dismiss];
@@ -526,7 +532,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
+    GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
 
     GHDropMenuModel *dropMenuModel = [dropMenuTitleModel.dataArray by_ObjectAtIndex: indexPath.row];
     dropMenuModel.indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:dropMenuTitleModel.indexPath.row];
@@ -652,9 +658,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
     if (collectionView == self.collectionView) {
+        NSString *identifier = [NSString stringWithFormat:@"GHDropMenuTitleItemID%ld%ld",(long)indexPath.section,(long)indexPath.row];
+        [collectionView registerClass:[GHDropMenuTitleItem class] forCellWithReuseIdentifier:identifier];
         GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex:indexPath.row];
         dropMenuModel.indexPath = indexPath;
-        GHDropMenuTitleItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GHDropMenuTitleItemID" forIndexPath:indexPath];
+        GHDropMenuTitleItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         cell.dropMenuModel = dropMenuModel;
         cell.delegate = self;
         return cell;
