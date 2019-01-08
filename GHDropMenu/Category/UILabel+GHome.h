@@ -25,23 +25,26 @@ NS_ASSUME_NONNULL_BEGIN
                  font: (UIFont *)font
              maxWidth: (CGFloat)maxWidth;
 
-/**
- 计算文本的宽度
- 
- @param text 传入的内容
- @param font 内容字号
- */
 - (void)adaptWithText:(NSString *)text
                 frame:(CGRect)frame
                  font:(UIFont *)font;
 
 
+/**
+ 计算文本的宽度
+ 
+ @param text 传入的内容
+ @param font 内容字号
+ @param imageName 显示图片
+ @param maxWidth 最大宽度
+ 
+ */
 - (void)creatRichTextWithText: (NSString *)text
                         frame: (CGRect)frame
                          font: (UIFont *)font
-                    imageName: (NSString *)imageName;
+                    imageName: (NSString *)imageName
+                     maxWidth: (CGFloat)maxWidth;
 
-- (void)setText: (NSString *)text imageName: (NSString *)imageName;
 @end
 
 NS_ASSUME_NONNULL_END

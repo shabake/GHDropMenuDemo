@@ -18,12 +18,14 @@
 - (void)setDropMenuModel:(GHDropMenuModel *)dropMenuModel {
     _dropMenuModel = dropMenuModel;
   
+    CGFloat maxWidth = [UIScreen mainScreen].bounds.size.width / 4;
     if (dropMenuModel.titleSeleted) {
         self.label.textColor = dropMenuModel.titleSeletedColor;
-        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleSeletedImageName];
+        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44) font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleSeletedImageName maxWidth:maxWidth];
+
     } else {
         self.label.textColor = dropMenuModel.titleNormalColor;//
-        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44)  font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleNormalImageName];
+        [self.label creatRichTextWithText:dropMenuModel.title frame:CGRectMake(0, 0, 40, 44) font:[UIFont systemFontOfSize:16] imageName:dropMenuModel.titleNormalImageName maxWidth:maxWidth];
     }
 }
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -61,9 +63,8 @@
         _label.frame = CGRectMake(10, 0, 80, 44);
         _label.textAlignment = NSTextAlignmentCenter;
         _label.font = [UIFont systemFontOfSize:14];
-        _label.tintColor = [UIColor whiteColor];
-        _label.layer.borderColor = [UIColor whiteColor].CGColor;
-        _label.layer.borderWidth = 0.01f;
+        _label.numberOfLines = 1;
+        _label.lineBreakMode = NSLineBreakByTruncatingHead;  //结尾部分的内容以……方式省略，显示头的文字内容。
     }
     return _label;
 }

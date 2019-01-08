@@ -68,8 +68,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 @property (nonatomic , strong) DropMenuTagArrayBlock dropMenuTagArrayBlock;
 
 @property (nonatomic , assign) GHDropMenuShowType dropMenuShowType;
-/** 标记菜单是否展开 */
-@property (nonatomic , assign) BOOL isShow;
+
+@property (nonatomic , strong) NSIndexPath *currentTitleIndexPath;
+
 
 
 @end
@@ -241,9 +242,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 }
 - (void)defaultConfiguration {
     self.menuHeight = 44;
-    self.currentIndex = 0;
+    self.currentIndex = MAXFLOAT;
     self.cellHeight = 44;
-    self.isShow = NO;
 }
 
 #pragma mark - 消失
@@ -273,7 +273,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         if (self.dropMenuShowType == GHDropMenuShowTypeOnlyFilter) {
             [self.layer setOpacity:0.0];
         }
-        self.isShow = NO;
         [self.tableView reloadData];
         [self.collectionView reloadData];
 
@@ -343,7 +342,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                 self.titleCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
             }
         } completion:^(BOOL finished) {
-            self.isShow = YES;
         }];
     }];
 }
@@ -503,22 +501,33 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (void)dropMenuTitleItem: (GHDropMenuTitleItem *)item
             dropMenuModel: (GHDropMenuModel *)dropMenuModel {
     
-    dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
-    self.currentIndex = dropMenuModel.indexPath.row;
-    
-    if (dropMenuModel.titleSeleted) {
-        self.contents = dropMenuModel.dataArray.copy;
-        for (GHDropMenuModel *model in self.titles) {
-            if (model.identifier != dropMenuModel.identifier) {
-                model.titleSeleted = NO;
-            }
-        }
-       
-        [self show];
-    } else {
-        [self dismiss];
+    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
+        dropMenuTitleModel.titleSeleted = NO;
     }
+    self.currentIndex = dropMenuModel.indexPath.row;
+    self.contents = dropMenuModel.dataArray.copy;
 
+    if (dropMenuModel.indexPath.row != self.currentIndex) {
+        [self show];
+        self.currentIndex = dropMenuModel.indexPath.row;
+    } else {
+        if (dropMenuModel.titleSeleted) {
+            dropMenuModel.titleSeleted = NO;
+            [self dismiss];
+
+        } else {
+
+            GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
+            if ([dropMenuModel.title isEqualToString:dropMenuTitleModel.title]  && self.tableView.height !=0) {
+                dropMenuModel.titleSeleted = NO;
+                [self dismiss];
+            } else {
+                dropMenuModel.titleSeleted = YES;
+                [self show];
+            }
+
+        }
+    }
     [self.collectionView reloadData];
 }
 
@@ -566,7 +575,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         self.dropMenuTitleBlock(contentModel);
     }
 
-    [self resetMenuStatus];
+    [self dismiss];
 }
 #pragma mark - collectionViewDelegate
 

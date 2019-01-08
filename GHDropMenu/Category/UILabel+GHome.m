@@ -47,7 +47,8 @@
 - (void)creatRichTextWithText: (NSString *)text
                         frame: (CGRect)frame
                          font: (UIFont *)font
-                    imageName: (NSString *)imageName {
+                    imageName: (NSString *)imageName
+                     maxWidth: (CGFloat)maxWidth  {
 
     if (text.length == 0) {
         return;
@@ -72,11 +73,11 @@
     self.attributedText = attString;
     self.lineBreakMode = NSLineBreakByTruncatingMiddle;
     
-    CGFloat labelMaxWidth = [UIScreen mainScreen].bounds.size.width / 4;/** 最大宽度*/
-    CGFloat labelWidth = (ceil(size.width) + 10) > labelMaxWidth ?labelMaxWidth :ceil(size.width) + 10;
-    self.frame = CGRectMake((labelMaxWidth -labelWidth) * 0.5, 0, labelWidth, frame.size.height);
+    CGFloat labelWidth = (ceil(size.width) + 10) > maxWidth ? maxWidth - 10 :ceil(size.width) + 10;
+    if (labelWidth > maxWidth) {
+        labelWidth = labelWidth - 10;
+    }
+    self.frame = CGRectMake((maxWidth -labelWidth) * 0.5, 0, labelWidth , frame.size.height);
 }
-- (void)setText: (NSString *)text imageName: (NSString *)imageName{
-    [self creatRichTextWithText:text frame:self.frame font:self.font imageName:imageName];
-}
+
 @end
