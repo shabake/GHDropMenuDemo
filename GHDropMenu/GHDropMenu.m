@@ -500,31 +500,17 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     
     dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;
-    
+
     if (dropMenuModel.titleSeleted) {
         self.contents = dropMenuModel.dataArray.copy;
         for (GHDropMenuModel *model in self.titles) {
             if (model.identifier != dropMenuModel.identifier) {
                 model.titleSeleted = NO;
-            } else {
-                model.titleSeleted = YES;
             }
         }
         [self show];
     } else {
-        self.contents = dropMenuModel.dataArray.copy;
-//
-        for (GHDropMenuModel *model in self.titles) {
-            if (model.identifier != dropMenuModel.identifier) {
-                [self show];
-            } else {
-                [self dismiss];
-            }
-        }
-    }
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:dropMenuModel:index:)]) {
-        [self.delegate dropMenu:self dropMenuModel:self.configuration index:self.currentIndex];
+        [self dismiss];
     }
 
     [self.collectionView reloadData];
@@ -574,7 +560,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         self.dropMenuTitleBlock(contentModel);
     }
 
-    [self dismiss];
+    [self resetMenuStatus];
 }
 #pragma mark - collectionViewDelegate
 
@@ -666,7 +652,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
     if (collectionView == self.collectionView) {
-        GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: indexPath.row];
+        GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex:indexPath.row];
         dropMenuModel.indexPath = indexPath;
         GHDropMenuTitleItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GHDropMenuTitleItemID" forIndexPath:indexPath];
         cell.dropMenuModel = dropMenuModel;
