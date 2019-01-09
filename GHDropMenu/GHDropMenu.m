@@ -68,9 +68,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 @property (nonatomic , strong) DropMenuTagArrayBlock dropMenuTagArrayBlock;
 
 @property (nonatomic , assign) GHDropMenuShowType dropMenuShowType;
-
-@property (nonatomic , strong) NSIndexPath *currentTitleIndexPath;
-
+/** 标记菜单是否展开 */
+@property (nonatomic , assign) BOOL isShow;
 
 
 @end
@@ -106,7 +105,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     if (dataSource == nil) {
         return;
     }
-
+    
     NSArray *tempArray = nil;
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(columnTitlesInMeun:)]) {
         tempArray = [self.dataSource columnTitlesInMeun:self];
@@ -121,12 +120,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         [titles addObject:dropMenuModel];
     }
     self.titles = titles;
-
+    
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(menu:numberOfColumns:)]) {
         for (NSInteger index = 0; index < titles.count; index++) {
             GHDropMenuModel *dropMenuTitleModel = [titles by_ObjectAtIndex:index];
             NSArray *temp = [self.dataSource menu:self numberOfColumns:index];
-
+            
             NSMutableArray *dataArray = [NSMutableArray array];
             for (NSInteger j = 0; j < temp.count; j++) {
                 GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
@@ -242,13 +241,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 }
 - (void)defaultConfiguration {
     self.menuHeight = 44;
-    self.currentIndex = MAXFLOAT;
+    self.currentIndex = 0;
     self.cellHeight = 44;
+    self.isShow = NO;
 }
 
 #pragma mark - 消失
 - (void)dismiss {
-
+    
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
     self.filterCover.backgroundColor = [UIColor clearColor];
     self.titleCover.backgroundColor = [UIColor clearColor];
@@ -262,7 +262,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
             self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, 0);
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.filterCover.frame = CGRectMake(kGHScreenWidth, 0, kGHScreenWidth, kGHScreenHeight);
-     
+            
         }  else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeOptionCollection) {
             self.filter.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
             self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, 0);
@@ -273,9 +273,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         if (self.dropMenuShowType == GHDropMenuShowTypeOnlyFilter) {
             [self.layer setOpacity:0.0];
         }
+        self.isShow = NO;
         [self.tableView reloadData];
         [self.collectionView reloadData];
-
+        
     }];
 }
 #pragma mark - 弹出
@@ -295,7 +296,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeOptionCollection) {
         self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
         [kKeyWindow addSubview:self.filter];
-    
+        
         self.filter.frame =  CGRectMake(0, self.tableY, self.frame.size.width, 0);
         [kKeyWindow addSubview:self.sure];
         [kKeyWindow addSubview:self.reset];
@@ -303,7 +304,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         self.sure.frame = CGRectMake(kGHScreenWidth * .5, CGRectGetMaxY(self.filter.frame), kGHScreenWidth * 0.5, kFilterButtonHeight);
         self.sure.alpha = 1;
         self.reset.alpha = 1;
-
+        
     } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter) {
         [self dismiss];
         [kKeyWindow addSubview:self.filterCover];
@@ -320,7 +321,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeTitle /** 普通菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, dropMenuTitleModel.dataArray.count * self.cellHeight);
             self.titleCover.frame = CGRectMake(0, self.tableY, kGHScreenWidth, kGHScreenHeight - self.menuHeight - kGHSafeAreaTopHeight);
-
+            
         } else if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeFilter /** 筛选菜单 */) {
             self.tableView.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
             self.titleCover.frame = CGRectMake(0, self.tableY, self.frame.size.width, 0);
@@ -342,6 +343,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                 self.titleCover.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:102.0/255];
             }
         } completion:^(BOOL finished) {
+            self.isShow = YES;
         }];
     }];
 }
@@ -376,7 +378,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     [self.filterCover addSubview:self.reset];
 }
 - (void)closeMenu {
-
+    
     [self.tableView removeFromSuperview];
     [self.titleCover removeFromSuperview];
     [self.filter removeFromSuperview];
@@ -501,33 +503,22 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (void)dropMenuTitleItem: (GHDropMenuTitleItem *)item
             dropMenuModel: (GHDropMenuModel *)dropMenuModel {
     
-    for (GHDropMenuModel *dropMenuTitleModel in self.titles) {
-        dropMenuTitleModel.titleSeleted = NO;
-    }
+    dropMenuModel.titleSeleted = !dropMenuModel.titleSeleted;
     self.currentIndex = dropMenuModel.indexPath.row;
-    self.contents = dropMenuModel.dataArray.copy;
-
-    if (dropMenuModel.indexPath.row != self.currentIndex) {
-        [self show];
-        self.currentIndex = dropMenuModel.indexPath.row;
-    } else {
-        if (dropMenuModel.titleSeleted) {
-            dropMenuModel.titleSeleted = NO;
-            [self dismiss];
-
-        } else {
-
-            GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
-            if ([dropMenuModel.title isEqualToString:dropMenuTitleModel.title]  && self.tableView.height !=0) {
-                dropMenuModel.titleSeleted = NO;
-                [self dismiss];
-            } else {
-                dropMenuModel.titleSeleted = YES;
-                [self show];
+    
+    if (dropMenuModel.titleSeleted) {
+        self.contents = dropMenuModel.dataArray.copy;
+        for (GHDropMenuModel *model in self.titles) {
+            if (model.identifier != dropMenuModel.identifier) {
+                model.titleSeleted = NO;
             }
-
         }
+        
+        [self show];
+    } else {
+        [self dismiss];
     }
+    
     [self.collectionView reloadData];
 }
 
@@ -540,13 +531,13 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
-
+    
     GHDropMenuModel *dropMenuModel = [dropMenuTitleModel.dataArray by_ObjectAtIndex: indexPath.row];
     dropMenuModel.indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:dropMenuTitleModel.indexPath.row];
     NSString *cellIdentifier = [NSString stringWithFormat:@"GHDropMenuOptionCellID%ld%ld%ld",indexPath.section,indexPath.row,(long)dropMenuTitleModel.identifier];
-
+    
     GHDropMenuOptionCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[GHDropMenuOptionCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
@@ -555,7 +546,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
+    
     GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
     for (GHDropMenuModel *dropMenuContentModel in dropMenuModel.dataArray) {
         dropMenuContentModel.cellSeleted = NO;
@@ -574,8 +565,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     if (self.dropMenuTitleBlock) {
         self.dropMenuTitleBlock(contentModel);
     }
-
-    [self dismiss];
+    
+    [self resetMenuStatus];
 }
 #pragma mark - collectionViewDelegate
 
@@ -614,7 +605,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
-
+    
     if (collectionView == self.collectionView) {
         return CGSizeMake(kGHScreenWidth /self.titles.count, self.menuHeight - 0.01f);
     } else if (collectionView == self.filter) {
@@ -665,7 +656,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 }
 #pragma mark - - - 返回collectionView item
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     if (collectionView == self.collectionView) {
         NSString *identifier = [NSString stringWithFormat:@"GHDropMenuTitleItemID%ld%ld",(long)indexPath.section,(long)indexPath.row];
         [collectionView registerClass:[GHDropMenuTitleItem class] forCellWithReuseIdentifier:identifier];
@@ -678,7 +669,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     } else if (collectionView == self.filter) {
         NSString *identifier = [NSString stringWithFormat:@"GHDropMenuFilterTagItemID%ld%ld",(long)indexPath.section,(long)indexPath.row];
         [self.filter registerClass:[GHDropMenuFilterTagItem class] forCellWithReuseIdentifier:identifier];
-
+        
         GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
         GHDropMenuModel *dropMenuSectionModel = [dropMenuTitleModel.sections by_ObjectAtIndex: indexPath.section];
         GHDropMenuModel *dropMenuTagModel = [dropMenuSectionModel.dataArray by_ObjectAtIndex: indexPath.row];
@@ -725,7 +716,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
             }
         }
         [self resetMenuStatus];
-
+        
         if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenu:tagArray:)]) {
             [self.delegate dropMenu:self tagArray:dataArray.copy];
         }
