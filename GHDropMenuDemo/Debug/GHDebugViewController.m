@@ -22,13 +22,11 @@
     
     UILabel *label = [[UILabel alloc]init];
     self.label = label;
-    [label creatRichTextWithText:@"达阿达阿达阿达阿达阿达阿r" frame:CGRectMake(0, 100, 40, 30)  font:[UIFont systemFontOfSize:16] imageName:@"down_normal"];
     [self.view addSubview:label];
 }
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.label setText:@"122" imageName:@"up_normal"];
     
 }
 @end
