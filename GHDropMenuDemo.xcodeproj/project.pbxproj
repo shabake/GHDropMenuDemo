@@ -10,6 +10,10 @@
 		D650CD8321C35E0D00EC004A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CD8221C35E0D00EC004A /* ViewController.m */; };
 		D650CD8821C35E0E00EC004A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8721C35E0E00EC004A /* Assets.xcassets */; };
 		D650CD8B21C35E0E00EC004A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D650CD8921C35E0E00EC004A /* LaunchScreen.storyboard */; };
+		D663DE3821EE3A8000B48EBF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7021DF7B550053D14F /* UIView+Extension.m */; };
+		D663DE3921EE3AB200B48EBF /* NSArray+Bounds.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ED7421DF7B550053D14F /* NSArray+Bounds.m */; };
+		D663DE3C21EE402300B48EBF /* GHWaterFallLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D663DE3B21EE402300B48EBF /* GHWaterFallLabel.m */; };
+		D663DE3D21EE41AE00B48EBF /* GHWaterFallLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D663DE3B21EE402300B48EBF /* GHWaterFallLabel.m */; };
 		D6A4ECD721D7902F0053D14F /* GHComplexMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */; };
 		D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDC21D7909E0053D14F /* GHSlipMenuViewController.m */; };
 		D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECDF21D791F70053D14F /* GHNormalMenuViewController.m */; };
@@ -60,6 +64,8 @@
 		D650CDB121C35E6D00EC004A /* GHDropMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenu.h; sourceTree = "<group>"; };
 		D650CDB221C35E6D00EC004A /* GHDropMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenu.m; sourceTree = "<group>"; };
 		D650CDB721C4E76B00EC004A /* GHDropMenuHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuHeader.h; sourceTree = "<group>"; };
+		D663DE3A21EE402300B48EBF /* GHWaterFallLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHWaterFallLabel.h; sourceTree = "<group>"; };
+		D663DE3B21EE402300B48EBF /* GHWaterFallLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHWaterFallLabel.m; sourceTree = "<group>"; };
 		D6A4ECD521D7902F0053D14F /* GHComplexMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHComplexMenuViewController.h; sourceTree = "<group>"; };
 		D6A4ECD621D7902F0053D14F /* GHComplexMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHComplexMenuViewController.m; sourceTree = "<group>"; };
 		D6A4ECDB21D7909E0053D14F /* GHSlipMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHSlipMenuViewController.h; sourceTree = "<group>"; };
@@ -267,6 +273,8 @@
 				D6A4ECFB21DA2E9F0053D14F /* GHDebugViewController.h */,
 				D6A4ECFA21DA2E9F0053D14F /* GHDebugViewController.m */,
 				D6A4ED2B21DA6A570053D14F /* GHDropMenuDebug.plist */,
+				D663DE3A21EE402300B48EBF /* GHWaterFallLabel.h */,
+				D663DE3B21EE402300B48EBF /* GHWaterFallLabel.m */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -435,6 +443,7 @@
 				D6A4ED9721E0873B0053D14F /* GHSuspendViewController.m in Sources */,
 				D6A4ED3821DA7E090053D14F /* GHBaseNavigationController.m in Sources */,
 				D6A4ECF821DA2E5C0053D14F /* GHMeituanFoodViewController.m in Sources */,
+				D663DE3C21EE402300B48EBF /* GHWaterFallLabel.m in Sources */,
 				D6A4ED8121DF801D0053D14F /* GHDropMenuOptionCell.m in Sources */,
 				D6A4ED3321DA6C720053D14F /* AppDelegate.m in Sources */,
 				D6A4ED8521DF819A0053D14F /* GHDropMenuFilterSectionHeader.m in Sources */,
@@ -464,12 +473,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D663DE3921EE3AB200B48EBF /* NSArray+Bounds.m in Sources */,
 				D6A4ED1221DA66FD0053D14F /* GHMeituanFoodViewController.m in Sources */,
 				D6A4ED1521DA66FD0053D14F /* AppDelegate.m in Sources */,
 				D6D3396A21E1241F005B86DB /* UILabel+GHome.m in Sources */,
 				D6A4ED3221DA6BE30053D14F /* main.m in Sources */,
 				D6A4ED1821DA66FD0053D14F /* GHBaseViewController.m in Sources */,
 				D6A4ED9821E087410053D14F /* GHSuspendHeader.m in Sources */,
+				D663DE3821EE3A8000B48EBF /* UIView+Extension.m in Sources */,
+				D663DE3D21EE41AE00B48EBF /* GHWaterFallLabel.m in Sources */,
 				D6A4ED1921DA66FD0053D14F /* GHDebugViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
