@@ -182,8 +182,7 @@
     
     GHLabel *label = (GHLabel *)gesture.view;
     
-    
-    if (self.currentIndex != label.tag ) {
+    if (self.currentIndex != label.tag) {
         self.currentIndex = label.tag;
         if (label.isSeleted) {
             label.isSeleted = NO;
