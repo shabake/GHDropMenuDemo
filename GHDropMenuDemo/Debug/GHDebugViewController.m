@@ -37,9 +37,8 @@
    
     waterFallLabel.backgroundColor = [UIColor redColor];
     waterFallLabel.textBlock = ^(GHWaterFallLabel * _Nonnull waterFallLabe, NSString * _Nonnull text, NSInteger index) {
-        waterFallLabe.tags = self.tags;
+        NSLog(@"%@",text);
     };
-
 }
 
 - (NSMutableArray *)tags {

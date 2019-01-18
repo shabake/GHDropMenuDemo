@@ -13,7 +13,63 @@
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
+@interface GHLabel : UILabel
+@property (nonatomic , copy) UIColor *normalColor;
+@property (nonatomic , copy) UIColor *seletedColor;
+
+@property (nonatomic , assign) BOOL isSeleted;
+
+
+@end
+
+@implementation GHLabel
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self == [super initWithFrame:frame]) {
+        [self configuration];
+
+    }
+    return self;
+}
+
+- (instancetype)init {
+    if (self == [super init]) {
+        [self configuration];
+    }
+    return self;
+}
+
+- (void)configuration {
+    self.isSeleted = NO;
+    self.textColor = self.normalColor;
+}
+
+- (void)setNormalColor:(UIColor *)normalColor {
+    _normalColor = normalColor;
+    if (!self.isSeleted) {
+        self.textColor = normalColor;
+    }
+}
+
+- (void)setSeletedColor:(UIColor *)seletedColor {
+    _seletedColor = seletedColor;
+    if (self.isSeleted) {
+        self.textColor = seletedColor;
+    }
+}
+
+- (void)setIsSeleted:(BOOL)isSeleted {
+    _isSeleted = isSeleted;
+    
+    if (isSeleted) {
+        self.textColor = self.seletedColor;
+    } else {
+        self.textColor = self.normalColor;
+    }
+}
+@end
 @interface GHWaterFallLabel()
+
 /**
  存储tag的数组
  */
@@ -22,6 +78,10 @@
  存储坐标
  */
 @property (nonatomic , assign) CGPoint point;
+/**
+ 当前选中
+ */
+@property (nonatomic , assign) NSInteger currentIndex;
 
 @end
 @implementation GHWaterFallLabel
@@ -46,24 +106,26 @@
 - (void)setTags:(NSMutableArray *)tags {
     _tags = tags;
     
-    for (UILabel *label in self.labels) {
+    for (GHLabel *label in self.labels) {
         [label removeFromSuperview];
     }
 
     for (NSInteger index = 0; index < tags.count; index++) {
-        UILabel *tag = [[UILabel alloc]init];
+        GHLabel *tag = [[GHLabel alloc]init];
         tag.text = [self.tags by_ObjectAtIndex:index];
         [self.labels addObject:tag];
     }
     
     for (NSInteger index = 0;index < self.labels.count ;index++) {
         
-        UILabel *tag = [self.labels by_ObjectAtIndex:index];
+        GHLabel *tag = [self.labels by_ObjectAtIndex:index];
         tag.font = [UIFont systemFontOfSize:16];
         tag.layer.masksToBounds = YES;
         tag.layer.cornerRadius = 5;
         tag.textAlignment = NSTextAlignmentCenter;
-        tag.textColor = [UIColor whiteColor];
+        tag.normalColor = [UIColor whiteColor];
+        tag.seletedColor = [UIColor redColor];
+
         tag.backgroundColor = [UIColor orangeColor];
         tag.numberOfLines = 0 ;
         tag.tag = index;
@@ -80,12 +142,12 @@
         CGFloat w = tagSize.width + 30;
         CGFloat h = 30;
         
-        
         if (w > kScreenWidth - 20 /** 最大宽度*/) {
             w = kScreenWidth - 20;
             CGSize titleSize = [tag sizeThatFits:CGSizeMake(kScreenWidth - 20,MAXFRAG)];
             h = titleSize.height;
         }
+        
         if (CGRectGetMaxX(lastTag.frame) + w > kScreenWidth - 20 /** 当标签超过当前行 */) {
             y = lastTag.y + lastTag.height + 5;
             x = 10;
@@ -104,7 +166,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    UILabel *tag = self.labels.lastObject;
+    GHLabel *tag = self.labels.lastObject;
     CGFloat maxHeight = tag.y + tag.height + 5;
     
     self.contentSize = CGSizeMake(0, maxHeight);
@@ -118,7 +180,27 @@
 
 - (void)tap:(UITapGestureRecognizer *)gesture {
     
-    UILabel *label = (UILabel *)gesture.view;
+    GHLabel *label = (GHLabel *)gesture.view;
+    
+    
+    if (self.currentIndex != label.tag ) {
+        self.currentIndex = label.tag;
+        if (label.isSeleted) {
+            label.isSeleted = NO;
+        } else {
+            for (GHLabel *subLabel in self.labels) {
+                subLabel.isSeleted = NO;
+            }
+            label.isSeleted = YES;
+        }
+    } else {
+        self.currentIndex = MAXFLOAT;
+        if (label.isSeleted) {
+            label.isSeleted = NO;
+        } else {
+            label.isSeleted = YES;
+        }
+    }
     
     if (self.textBlock) {
         self.textBlock(self,label.text,label.tag);
