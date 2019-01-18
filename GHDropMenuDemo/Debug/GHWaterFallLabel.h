@@ -23,7 +23,7 @@ typedef void(^GHWaterFallLabelCallBackBlock)(GHWaterFallLabel *waterFallLabe,NSS
 /**
  流水布局view
  */
-@interface GHWaterFallLabel : UIView
+@interface GHWaterFallLabel : UIScrollView
 
 /**
  初始化方法
@@ -37,6 +37,8 @@ typedef void(^GHWaterFallLabelCallBackBlock)(GHWaterFallLabel *waterFallLabe,NSS
 @property (nonatomic , copy) GHWaterFallLabelCallBackBlock textBlock;
 /** 数据源数组 可以使用set方法追加标签 */
 @property (nonatomic , strong) NSMutableArray *tags;
+/** 设置最大高度 */
+@property (nonatomic , assign) CGFloat maxHeight;
 @end
 
 NS_ASSUME_NONNULL_END

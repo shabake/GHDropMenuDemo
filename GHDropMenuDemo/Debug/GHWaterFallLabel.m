@@ -33,7 +33,16 @@
     return waterFallLabel;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self == [super initWithFrame:frame]) {
+        [self configuration];
+    }
+    return self;
+}
 
+- (void)configuration {
+    self.maxHeight = 100;
+}
 - (void)setTags:(NSMutableArray *)tags {
     _tags = tags;
     
@@ -91,11 +100,15 @@
         [self addSubview:tag];
     }
 }
+
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
     UILabel *tag = self.labels.lastObject;
     CGFloat maxHeight = tag.y + tag.height + 5;
-
+    
+    self.contentSize = CGSizeMake(0, maxHeight);
+    
     if (maxHeight > kScreenHeight - self.point.y) {
         maxHeight = kScreenHeight- self.point.y;
     }
@@ -104,7 +117,9 @@
 }
 
 - (void)tap:(UITapGestureRecognizer *)gesture {
+    
     UILabel *label = (UILabel *)gesture.view;
+    
     if (self.textBlock) {
         self.textBlock(self,label.text,label.tag);
     }
