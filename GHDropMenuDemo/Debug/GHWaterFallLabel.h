@@ -10,13 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class GHWaterFallLabel;
-typedef void(^GHWaterFallLabelCallBackBlock)(NSString *text ,NSInteger index);
-typedef void(^GHWaterFallLabelHeightBlock)(GHWaterFallLabel *waterFallLabel, CGFloat height , CGPoint point);
+typedef void(^GHWaterFallLabelCallBackBlock)(GHWaterFallLabel *waterFallLabe,NSString *text ,NSInteger index);
 @interface GHWaterFallLabel : UIScrollView
-+ (instancetype)creatWaterFallLabelWithFrame: (CGRect)frame tags: (NSMutableArray *)tags;
+
 + (instancetype)creatWaterFallLabelWithPoint: (CGPoint)point tags: (NSMutableArray *)tags;
 
-@property (nonatomic , copy) GHWaterFallLabelHeightBlock heightBlock;
 @property (nonatomic , copy) GHWaterFallLabelCallBackBlock textBlock;
 @property (nonatomic , strong) NSMutableArray *tags;
 @end

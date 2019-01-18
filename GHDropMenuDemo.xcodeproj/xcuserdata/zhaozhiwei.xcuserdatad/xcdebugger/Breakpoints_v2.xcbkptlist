@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GHDropMenuDemo/Debug/GHDebugViewController.m"
-            timestampString = "569510689.435813"
+            timestampString = "569511800.95283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GHDropMenuDemo/Debug/GHDebugViewController.m"
-            timestampString = "569510689.435878"
+            filePath = "GHDropMenuDemo/Debug/GHWaterFallLabel.m"
+            timestampString = "569511800.953319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-layoutSubviews"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -25,44 +25,21 @@
     [super viewDidLoad];
     self.navigationItem.title = @"debug";
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.tags addObject:@"家"];
-    [self.tags addObject:@"同学"];
-    [self.tags addObject:@"一个"];
-    [self.tags addObject:@"Fl"];
-    [self.tags addObject:@"当wi"];
-    [self.tags addObject:@"现代"];
-    [self.tags addObject:@"现式框"];
-    [self.tags addObject:@"现代响"];
-    [self.tags addObject:@"现应"];
-    [self.tags addObject:@"现"];
-    [self.tags addObject:@"现响应"];
-    [self.tags addObject:@"现代框架"];
-    [self.tags addObject:@"现代响应"];
-    [self.tags addObject:@"现框架"];
-    [self.tags addObject:@"当w"];
-
-
-    [self.tags addObject:@"Fl建"];
-    [self.tags addObject:@"asdsa"];
     
-    GHWaterFallLabel *waterFallLabel = [GHWaterFallLabel creatWaterFallLabelWithPoint:CGPointMake(0, 0) tags:self.tags];
+    [self.tags addObject:@"呵呵啊"];
+    [self.tags addObject:@"嘻嘻"];
+    [self.tags addObject:@"哈"];
+    [self.tags addObject:@"哦"];
+    
+    GHWaterFallLabel *waterFallLabel = [GHWaterFallLabel creatWaterFallLabelWithPoint:CGPointMake(0, 64) tags:self.tags];
   
     [self.view addSubview:waterFallLabel];
    
     waterFallLabel.backgroundColor = [UIColor redColor];
-    waterFallLabel.heightBlock = ^(GHWaterFallLabel * _Nonnull waterFallLabel, CGFloat height, CGPoint point) {
+    waterFallLabel.textBlock = ^(GHWaterFallLabel * _Nonnull waterFallLabe, NSString * _Nonnull text, NSInteger index) {
+        waterFallLabe.tags = self.tags;
+    };
 
-        if (height > [UIScreen mainScreen].bounds.size.height - point.y) {
-            height = [UIScreen mainScreen].bounds.size.height - point.y;
-        }
-        waterFallLabel.height = height;
-    };
-    
-    waterFallLabel.textBlock = ^(NSString * _Nonnull text, NSInteger index) {
-      
-        self.waterFallLabel.tags = self.tags;
-    };
-    self.waterFallLabel = waterFallLabel;
 }
 
 

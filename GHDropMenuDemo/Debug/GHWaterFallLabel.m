@@ -11,6 +11,7 @@
 #import "NSArray+Bounds.h"
 
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface GHWaterFallLabel()
 @property (nonatomic , strong) NSMutableArray *labels;
@@ -29,9 +30,11 @@
 
 - (void)setTags:(NSMutableArray *)tags {
     _tags = tags;
+    
     for (UILabel *label in self.labels) {
         [label removeFromSuperview];
     }
+
     for (NSInteger index = 0; index < tags.count; index++) {
         UILabel *tag = [[UILabel alloc]init];
         tag.text = [self.tags by_ObjectAtIndex:index];
@@ -44,7 +47,7 @@
         tag.font = [UIFont systemFontOfSize:16];
         tag.layer.masksToBounds = YES;
         tag.layer.cornerRadius = 5;
-        tag.textAlignment = NSTextAlignmentLeft;
+        tag.textAlignment = NSTextAlignmentCenter;
         tag.textColor = [UIColor whiteColor];
         tag.backgroundColor = [UIColor orangeColor];
         tag.numberOfLines = 0 ;
@@ -61,15 +64,7 @@
         CGFloat x = 10 +CGRectGetMaxX(lastTag.frame);
         CGFloat w = tagSize.width + 30;
         CGFloat h = 30;
-        NSMutableAttributedString *text = [[NSMutableAttributedString alloc]initWithString:tag.text];
-        NSMutableParagraphStyle *mutstyle = [[NSMutableParagraphStyle alloc]init];
-        mutstyle.alignment = NSTextAlignmentCenter;
-        mutstyle.headIndent = 3;
-        mutstyle.firstLineHeadIndent = 3;
         
-        NSRange range = NSMakeRange(0, tag.text.length);
-        [text addAttribute:NSParagraphStyleAttributeName value:mutstyle range:range];
-        tag.attributedText = text;
         
         if (w > kScreenWidth - 20 /** 最大宽度*/) {
             w = kScreenWidth - 20;
@@ -95,18 +90,21 @@
     UILabel *tag = self.labels.lastObject;
     CGFloat maxHeight = tag.y + tag.height + 5;
 
-    if (self.heightBlock) {
-        self.heightBlock(self,maxHeight,self.point);
-    }
-    
     self.contentSize = CGSizeMake(kScreenWidth, maxHeight);
 
+    if (maxHeight > kScreenHeight - self.point.y) {
+        maxHeight = kScreenHeight- self.point.y;
+    }
+    
+    [UIView animateWithDuration:0.23 animations:^{
+        self.height = maxHeight;
+    }];
 }
 
 - (void)tap:(UITapGestureRecognizer *)gesture {
     UILabel *label = (UILabel *)gesture.view;
     if (self.textBlock) {
-        self.textBlock(label.text,label.tag);
+        self.textBlock(self,label.text,label.tag);
     }
 }
 
