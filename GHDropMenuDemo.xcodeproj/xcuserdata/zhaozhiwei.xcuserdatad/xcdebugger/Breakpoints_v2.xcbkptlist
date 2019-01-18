@@ -20,11 +20,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GHDropMenuDemo/Debug/GHDebugViewController.m"
-            timestampString = "569378183.565922"
+            timestampString = "569510689.435813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GHDropMenuDemo/Debug/GHDebugViewController.m"
+            timestampString = "569510689.435878"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>

@@ -14,15 +14,19 @@
 
 @interface GHWaterFallLabel()
 @property (nonatomic , strong) NSMutableArray *labels;
+@property (nonatomic , assign) CGPoint point;
 
 @end
 @implementation GHWaterFallLabel
 
-+ (instancetype)creatWaterFallLabelWithFrame: (CGRect)frame tags: (NSMutableArray *)tags{
-    GHWaterFallLabel *waterFallLabel = [[GHWaterFallLabel alloc]initWithFrame:frame];
++ (instancetype)creatWaterFallLabelWithPoint: (CGPoint)point tags: (NSMutableArray *)tags {
+    GHWaterFallLabel *waterFallLabel = [[GHWaterFallLabel alloc]initWithFrame:CGRectMake(point.x, point.y, kScreenWidth, 0)];
     waterFallLabel.tags = tags;
+    waterFallLabel.point = point;
     return waterFallLabel;
 }
+
+
 - (void)setTags:(NSMutableArray *)tags {
     _tags = tags;
     for (UILabel *label in self.labels) {
@@ -55,11 +59,11 @@
         UILabel *lastTag = [self.labels by_ObjectAtIndex:index -1];
         CGFloat y = 5;
         CGFloat x = 10 +CGRectGetMaxX(lastTag.frame);
-        CGFloat w = tagSize.width + 10;
+        CGFloat w = tagSize.width + 30;
         CGFloat h = 30;
         NSMutableAttributedString *text = [[NSMutableAttributedString alloc]initWithString:tag.text];
         NSMutableParagraphStyle *mutstyle = [[NSMutableParagraphStyle alloc]init];
-        mutstyle.alignment = NSTextAlignmentLeft;
+        mutstyle.alignment = NSTextAlignmentCenter;
         mutstyle.headIndent = 3;
         mutstyle.firstLineHeadIndent = 3;
         
@@ -72,8 +76,6 @@
             CGSize titleSize = [tag sizeThatFits:CGSizeMake(kScreenWidth - 20,MAXFRAG)];
             h = titleSize.height;
         }
-        
-        
         if (CGRectGetMaxX(lastTag.frame) + w > kScreenWidth - 20 /** 当标签超过当前行 */) {
             y = lastTag.y + lastTag.height + 5;
             x = 10;
@@ -86,19 +88,7 @@
         tag.frame = CGRectMake(x,y,w,h);
         
         [self addSubview:tag];
-        NSLog(@"index%ld",(long)index);
-
-//        if (index == self.labels.count - 1) {
-//            CGFloat maxHeight = tag.y + tag.height + 5;
-//            if (self.heightBlock) {
-//                self.heightBlock(self,maxHeight);
-//            }
-//            NSLog(@"最大高度%f",maxHeight);
-//        }
     }
-//    [self layoutIfNeeded];
-    NSLog(@"%s",__func__);
-
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -106,8 +96,11 @@
     CGFloat maxHeight = tag.y + tag.height + 5;
 
     if (self.heightBlock) {
-        self.heightBlock(self,maxHeight);
+        self.heightBlock(self,maxHeight,self.point);
     }
+    
+    self.contentSize = CGSizeMake(kScreenWidth, maxHeight);
+
 }
 
 - (void)tap:(UITapGestureRecognizer *)gesture {

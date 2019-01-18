@@ -27,57 +27,45 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.tags addObject:@"家"];
     [self.tags addObject:@"同学"];
-    [self.tags addObject:@"一个子控件都是定位或不定位"];
-    [self.tags addObject:@"Flutter Widget采用现代响应式框架构建"];
-    [self.tags addObject:@"当widget的状态发生变化时，widget会重新构建UI，Flutter会对比前后变化的不同， 以确定底层渲染树从一个状态转换到下一个状态所需的"];
-    [self.tags addObject:@"现代响应式"];
-    [self.tags addObject:@"现代响应式框"];
+    [self.tags addObject:@"一个"];
+    [self.tags addObject:@"Fl"];
+    [self.tags addObject:@"当wi"];
+    [self.tags addObject:@"现代"];
+    [self.tags addObject:@"现式框"];
     [self.tags addObject:@"现代响"];
+    [self.tags addObject:@"现应"];
+    [self.tags addObject:@"现"];
+    [self.tags addObject:@"现响应"];
+    [self.tags addObject:@"现代框架"];
     [self.tags addObject:@"现代响应"];
-    [self.tags addObject:@"现代响应式框架现代响应式框架现代响应式框架"];
-    [self.tags addObject:@"现响应式框架"];
-    [self.tags addObject:@"现代响应式框架"];
-    [self.tags addObject:@"现代响应"];
-    [self.tags addObject:@"现响应式框架"];
-    [self.tags addObject:@"当widget的状态发生变化时，widget会重新构建UI，Flutter会对状态发生变化时，widget会重新状态发生变化时，widg当widget的状态发生变化时，widget会重新构建UI，Flutter会对状态发生变化时，widget会重新状态发生变化时"];
+    [self.tags addObject:@"现框架"];
+    [self.tags addObject:@"当w"];
 
 
-    [self.tags addObject:@"Flutter Widget采用现代响应式框架构建"];
+    [self.tags addObject:@"Fl建"];
     [self.tags addObject:@"asdsa"];
     
-    GHWaterFallLabel *waterFallLabel = [GHWaterFallLabel creatWaterFallLabelWithFrame:CGRectMake(0, 64, kScreenWidth, 100) tags:self.tags];
-    waterFallLabel.backgroundColor = [UIColor redColor];
+    GHWaterFallLabel *waterFallLabel = [GHWaterFallLabel creatWaterFallLabelWithPoint:CGPointMake(0, 0) tags:self.tags];
+  
     [self.view addSubview:waterFallLabel];
+   
+    waterFallLabel.backgroundColor = [UIColor redColor];
+    waterFallLabel.heightBlock = ^(GHWaterFallLabel * _Nonnull waterFallLabel, CGFloat height, CGPoint point) {
 
-    waterFallLabel.heightBlock = ^(GHWaterFallLabel * _Nonnull waterFallLabel, CGFloat height) {
-        waterFallLabel.contentSize = CGSizeMake(kScreenWidth, height);
-
-        if (height > [UIScreen mainScreen].bounds.size.height - 64) {
-            height = [UIScreen mainScreen].bounds.size.height - 64;
+        if (height > [UIScreen mainScreen].bounds.size.height - point.y) {
+            height = [UIScreen mainScreen].bounds.size.height - point.y;
         }
         waterFallLabel.height = height;
-        NSLog(@"高度%f",height);
     };
+    
     waterFallLabel.textBlock = ^(NSString * _Nonnull text, NSInteger index) {
-        [self.tags addObject:@"asdsa"]; [self.tags addObject:@"Flutter Widget采用现代响应式框架构建"];
-        [self.tags addObject:@"asdsa"];
-        
-        [self.tags addObject:@"Flutter Widget采用现代响应式框架构建"];
-        [self.tags addObject:@"asdsa"];
+      
         self.waterFallLabel.tags = self.tags;
     };
     self.waterFallLabel = waterFallLabel;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.tags addObject:@"asdsa"]; [self.tags addObject:@"Flutter Widget采用现代响应式框架构建"];
-    [self.tags addObject:@"asdsa"];
-    
-    [self.tags addObject:@"Flutter Widget采用现代响应式框架构建"];
-    [self.tags addObject:@"asdsa"];
-    self.waterFallLabel.tags = self.tags;
-    
-}
+
 
 - (NSMutableArray *)tags {
     if (_tags == nil) {
