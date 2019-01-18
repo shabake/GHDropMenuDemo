@@ -12,7 +12,7 @@
 #import "NSArray+Bounds.h"
 #import "GHWaterFallLabel.h"
 
-@interface GHDebugViewController ()<UIScrollViewDelegate>
+@interface GHDebugViewController ()
 @property (nonatomic , strong) GHWaterFallLabel *waterFallLabel;
 @property (nonatomic , strong) NSMutableArray *tags;
 

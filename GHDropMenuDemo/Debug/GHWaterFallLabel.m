@@ -14,7 +14,13 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface GHWaterFallLabel()
+/**
+ 存储tag的数组
+ */
 @property (nonatomic , strong) NSMutableArray *labels;
+/**
+ 存储坐标
+ */
 @property (nonatomic , assign) CGPoint point;
 
 @end
@@ -90,15 +96,11 @@
     UILabel *tag = self.labels.lastObject;
     CGFloat maxHeight = tag.y + tag.height + 5;
 
-    self.contentSize = CGSizeMake(kScreenWidth, maxHeight);
-
     if (maxHeight > kScreenHeight - self.point.y) {
         maxHeight = kScreenHeight- self.point.y;
     }
     
-    [UIView animateWithDuration:0.23 animations:^{
-        self.height = maxHeight;
-    }];
+    self.height = maxHeight;
 }
 
 - (void)tap:(UITapGestureRecognizer *)gesture {
