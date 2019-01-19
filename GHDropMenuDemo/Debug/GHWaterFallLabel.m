@@ -83,6 +83,8 @@
  */
 @property (nonatomic , assign) NSInteger currentIndex;
 
+@property (nonatomic , strong) NSMutableArray *multipleArray;
+
 @end
 @implementation GHWaterFallLabel
 
@@ -102,6 +104,7 @@
 
 - (void)configuration {
     self.maxHeight = 100;
+    self.isMultiple = NO;
 }
 - (void)setTags:(NSMutableArray *)tags {
     _tags = tags;
@@ -182,24 +185,38 @@
     
     GHLabel *label = (GHLabel *)gesture.view;
     
-    if (self.currentIndex != label.tag) {
-        self.currentIndex = label.tag;
-        if (label.isSeleted) {
-            label.isSeleted = NO;
-        } else {
-            for (GHLabel *subLabel in self.labels) {
-                subLabel.isSeleted = NO;
+    if (self.isMultiple) {
+        label.isSeleted = !label.isSeleted;
+        [self.multipleArray removeAllObjects];
+        for (GHLabel *subLabel in self.labels) {
+            if (subLabel.isSeleted) {
+                [self.multipleArray addObject:subLabel.text];
             }
-            label.isSeleted = YES;
+        }
+        if (self.multipleBlock) {
+            self.multipleBlock(self, self.multipleArray.copy);
         }
     } else {
-        self.currentIndex = MAXFLOAT;
-        if (label.isSeleted) {
-            label.isSeleted = NO;
+        if (self.currentIndex != label.tag) {
+            self.currentIndex = label.tag;
+            if (label.isSeleted) {
+                label.isSeleted = NO;
+            } else {
+                for (GHLabel *subLabel in self.labels) {
+                    subLabel.isSeleted = NO;
+                }
+                label.isSeleted = YES;
+            }
         } else {
-            label.isSeleted = YES;
+            self.currentIndex = MAXFLOAT;
+            if (label.isSeleted) {
+                label.isSeleted = NO;
+            } else {
+                label.isSeleted = YES;
+            }
         }
     }
+  
     
     if (self.textBlock) {
         self.textBlock(self,label.text,label.tag);
@@ -213,4 +230,10 @@
     return _labels;
 }
 
+- (NSMutableArray *)multipleArray {
+    if (_multipleArray == nil) {
+        _multipleArray = [NSMutableArray array];
+    }
+    return _multipleArray;
+}
 @end

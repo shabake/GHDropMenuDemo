@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef void(^GHWaterFallLabelCallBackBlock)(GHWaterFallLabel *waterFallLabe,NSString *text ,NSInteger index);
 
+typedef void(^GHWaterFallLabelCallBackMultipleBlock)(GHWaterFallLabel *waterFallLabe,NSArray *array);
+
 /**
  流水布局view
  */
@@ -35,10 +37,17 @@ typedef void(^GHWaterFallLabelCallBackBlock)(GHWaterFallLabel *waterFallLabe,NSS
 + (instancetype)creatWaterFallLabelWithPoint: (CGPoint)point tags: (NSMutableArray *)tags;
 
 @property (nonatomic , copy) GHWaterFallLabelCallBackBlock textBlock;
+@property (nonatomic , copy) GHWaterFallLabelCallBackMultipleBlock multipleBlock;
+
+
 /** 数据源数组 可以使用set方法追加标签 */
 @property (nonatomic , strong) NSMutableArray *tags;
 /** 设置最大高度 */
 @property (nonatomic , assign) CGFloat maxHeight;
+/** 是否是多选 默认是NO 多选是YES */
+@property (nonatomic , assign) BOOL isMultiple;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
