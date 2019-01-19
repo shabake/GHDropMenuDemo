@@ -124,7 +124,7 @@
         tag.layer.cornerRadius = 5;
         tag.textAlignment = NSTextAlignmentCenter;
         tag.normalColor = [UIColor whiteColor];
-        tag.seletedColor = [UIColor redColor];
+        tag.seletedColor = [UIColor lightGrayColor];
 
         tag.backgroundColor = [UIColor orangeColor];
         tag.numberOfLines = 0 ;

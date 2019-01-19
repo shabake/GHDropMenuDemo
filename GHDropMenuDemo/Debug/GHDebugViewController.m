@@ -30,12 +30,16 @@
     [self.tags addObject:@"嘻嘻"];
     [self.tags addObject:@"哈"];
     [self.tags addObject:@"哦"];
-    
+    [self.tags addObject:@"嘻嘻"];
+    [self.tags addObject:@"哈"];
+    [self.tags addObject:@"哦"];
+    [self.tags addObject:@"嘻嘻"];
+    [self.tags addObject:@"哈"];
+    [self.tags addObject:@"哦"];
     GHWaterFallLabel *waterFallLabel = [GHWaterFallLabel creatWaterFallLabelWithPoint:CGPointMake(0, 64) tags:self.tags];
   
     [self.view addSubview:waterFallLabel];
    
-    waterFallLabel.backgroundColor = [UIColor redColor];
     waterFallLabel.textBlock = ^(GHWaterFallLabel * _Nonnull waterFallLabe, NSString * _Nonnull text, NSInteger index) {
         NSLog(@"%@",text);
     };
