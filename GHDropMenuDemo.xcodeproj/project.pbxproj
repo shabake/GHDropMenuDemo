@@ -48,6 +48,9 @@
 		D6A4ED9621E087140053D14F /* GHDropMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D650CDB221C35E6D00EC004A /* GHDropMenu.m */; };
 		D6A4ED9721E0873B0053D14F /* GHSuspendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE321D793720053D14F /* GHSuspendViewController.m */; };
 		D6A4ED9821E087410053D14F /* GHSuspendHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4ECE621D79F750053D14F /* GHSuspendHeader.m */; };
+		D6B85A8A21F36DF50082EE1D /* GHDropMenuWaterFallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B85A8921F36DF50082EE1D /* GHDropMenuWaterFallCell.m */; };
+		D6B85A8E21F376A30082EE1D /* GHWaterFallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B85A8D21F376A30082EE1D /* GHWaterFallViewController.m */; };
+		D6B85A9121F3786B0082EE1D /* GHWaterFallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B85A9021F3786B0082EE1D /* GHWaterFallCell.m */; };
 		D6D3396921E123F8005B86DB /* UILabel+GHome.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396821E123F8005B86DB /* UILabel+GHome.m */; };
 		D6D3396A21E1241F005B86DB /* UILabel+GHome.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396821E123F8005B86DB /* UILabel+GHome.m */; };
 /* End PBXBuildFile section */
@@ -114,6 +117,12 @@
 		D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuFilterTagItem.m; sourceTree = "<group>"; };
 		D6A4ED8F21DF97B40053D14F /* NSString+Arc4random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Arc4random.h"; sourceTree = "<group>"; };
 		D6A4ED9021DF97B40053D14F /* NSString+Arc4random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Arc4random.m"; sourceTree = "<group>"; };
+		D6B85A8821F36DF50082EE1D /* GHDropMenuWaterFallCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHDropMenuWaterFallCell.h; sourceTree = "<group>"; };
+		D6B85A8921F36DF50082EE1D /* GHDropMenuWaterFallCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHDropMenuWaterFallCell.m; sourceTree = "<group>"; };
+		D6B85A8C21F376A30082EE1D /* GHWaterFallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHWaterFallViewController.h; sourceTree = "<group>"; };
+		D6B85A8D21F376A30082EE1D /* GHWaterFallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHWaterFallViewController.m; sourceTree = "<group>"; };
+		D6B85A8F21F3786B0082EE1D /* GHWaterFallCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHWaterFallCell.h; sourceTree = "<group>"; };
+		D6B85A9021F3786B0082EE1D /* GHWaterFallCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHWaterFallCell.m; sourceTree = "<group>"; };
 		D6D3396721E123F8005B86DB /* UILabel+GHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+GHome.h"; sourceTree = "<group>"; };
 		D6D3396821E123F8005B86DB /* UILabel+GHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+GHome.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,6 +196,7 @@
 		D6A4ECD121D790160053D14F /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				D6B85A8B21F376820082EE1D /* 流水布局菜单 */,
 				D6A4ECE821D7AD670053D14F /* BaseVc */,
 				D6A4ECF221DA2DFF0053D14F /* 美团外卖筛选菜单 */,
 				D6A4ECE121D793560053D14F /* 吸附筛选菜单 */,
@@ -302,6 +312,8 @@
 				D6A4ED8A21DF84560053D14F /* GHDropMenuFilterInputItem.m */,
 				D6A4ED8C21DF84ED0053D14F /* GHDropMenuFilterTagItem.h */,
 				D6A4ED8D21DF84ED0053D14F /* GHDropMenuFilterTagItem.m */,
+				D6B85A8821F36DF50082EE1D /* GHDropMenuWaterFallCell.h */,
+				D6B85A8921F36DF50082EE1D /* GHDropMenuWaterFallCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -339,6 +351,17 @@
 				D6A4ED8421DF819A0053D14F /* GHDropMenuFilterSectionHeader.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D6B85A8B21F376820082EE1D /* 流水布局菜单 */ = {
+			isa = PBXGroup;
+			children = (
+				D6B85A8C21F376A30082EE1D /* GHWaterFallViewController.h */,
+				D6B85A8D21F376A30082EE1D /* GHWaterFallViewController.m */,
+				D6B85A8F21F3786B0082EE1D /* GHWaterFallCell.h */,
+				D6B85A9021F3786B0082EE1D /* GHWaterFallCell.m */,
+			);
+			path = "流水布局菜单";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,6 +469,7 @@
 				D663DE3C21EE402300B48EBF /* GHWaterFallLabel.m in Sources */,
 				D6A4ED8121DF801D0053D14F /* GHDropMenuOptionCell.m in Sources */,
 				D6A4ED3321DA6C720053D14F /* AppDelegate.m in Sources */,
+				D6B85A9121F3786B0082EE1D /* GHWaterFallCell.m in Sources */,
 				D6A4ED8521DF819A0053D14F /* GHDropMenuFilterSectionHeader.m in Sources */,
 				D6A4ECE721D79F750053D14F /* GHSuspendHeader.m in Sources */,
 				D6A4ED9621E087140053D14F /* GHDropMenu.m in Sources */,
@@ -455,6 +479,7 @@
 				D6A4ED7A21DF7C120053D14F /* GHDropMenuTitleItem.m in Sources */,
 				D6D3396921E123F8005B86DB /* UILabel+GHome.m in Sources */,
 				D6A4ED7721DF7B550053D14F /* NSArray+Bounds.m in Sources */,
+				D6B85A8E21F376A30082EE1D /* GHWaterFallViewController.m in Sources */,
 				D6A4ECE021D791F70053D14F /* GHNormalMenuViewController.m in Sources */,
 				D6A4ED8821DF839F0053D14F /* GHDropMenuFilterSingleInputItem.m in Sources */,
 				D6A4ED7621DF7B550053D14F /* NSString+Size.m in Sources */,
@@ -462,6 +487,7 @@
 				D6A4ECDD21D7909E0053D14F /* GHSlipMenuViewController.m in Sources */,
 				D6A4ECEE21D7B2E30053D14F /* GHSuspendItem.m in Sources */,
 				D6A4ED6321DCB8DA0053D14F /* GHCollectionReusableView.m in Sources */,
+				D6B85A8A21F36DF50082EE1D /* GHDropMenuWaterFallCell.m in Sources */,
 				D6A4ED8B21DF84560053D14F /* GHDropMenuFilterInputItem.m in Sources */,
 				D6A4ED7521DF7B550053D14F /* UIView+Extension.m in Sources */,
 				D6A4ED8E21DF84ED0053D14F /* GHDropMenuFilterTagItem.m in Sources */,

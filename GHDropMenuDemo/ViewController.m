@@ -11,6 +11,7 @@
 #import "GHSlipMenuViewController.h"
 #import "GHNormalMenuViewController.h"
 #import "GHSuspendViewController.h"
+#import "GHWaterFallViewController.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) UITableView *tableView;
@@ -58,6 +59,11 @@
         vc.navTitle = navTitle;
 
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 4) {
+        GHWaterFallViewController *vc = [[GHWaterFallViewController alloc]init];
+        vc.navTitle = navTitle;
+        
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 - (UITableView *)tableView {
@@ -73,7 +79,7 @@
 
 - (NSArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = [NSArray arrayWithObjects:@"复杂筛选菜单",@"只有侧滑筛选菜单",@"普通筛选菜单",@"悬浮筛选菜单(tableView)", nil];
+        _dataArray = [NSArray arrayWithObjects:@"复杂筛选菜单",@"只有侧滑筛选菜单",@"普通筛选菜单",@"悬浮筛选菜单(tableView)",@"流水菜单",nil];
     }
     return _dataArray;
 }

@@ -17,6 +17,7 @@
 #import "GHDropMenuFilterSingleInputItem.h"
 #import "GHDropMenuFilterInputItem.h"
 #import "GHDropMenuFilterTagItem.h"
+#import "GHDropMenuWaterFallCell.h"
 
 #pragma mark - - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - - GHDropMenu 筛选菜单开始
 /** 按钮类型 */
@@ -524,7 +525,14 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 
 #pragma mark - tableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.cellHeight > 0 ?self.cellHeight:44;
+    GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
+    
+    if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeWaterFall) {
+        GHDropMenuWaterFallCell *cell = (GHDropMenuWaterFallCell *)[tableView.dataSource tableView:self.tableView cellForRowAtIndexPath:indexPath];
+        return [cell getCellHeight];
+    } else {
+        return 44;
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.contents.count;
@@ -536,15 +544,27 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     
     GHDropMenuModel *dropMenuModel = [dropMenuTitleModel.dataArray by_ObjectAtIndex: indexPath.row];
     dropMenuModel.indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:dropMenuTitleModel.indexPath.row];
-    NSString *cellIdentifier = [NSString stringWithFormat:@"GHDropMenuOptionCellID%ld%ld%ld",indexPath.section,indexPath.row,(long)dropMenuTitleModel.identifier];
     
-    GHDropMenuOptionCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[GHDropMenuOptionCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    if (dropMenuTitleModel.dropMenuType == GHDropMenuTypeWaterFall) {
+        GHDropMenuWaterFallCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GHDropMenuWaterFallCellID"];
+        cell.tags = dropMenuModel.waterFallTags;
+        return cell;
+  
+    } else {
+        NSString *cellIdentifier = [NSString stringWithFormat:@"GHDropMenuOptionCellID%ld%ld%ld",indexPath.section,indexPath.row,(long)dropMenuTitleModel.identifier];
+        
+        GHDropMenuOptionCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[GHDropMenuOptionCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        }
+        cell.dropMenuModel = dropMenuModel;
+        return cell;
     }
-    cell.dropMenuModel = dropMenuModel;
-    return cell;
+    return [UITableViewCell new];
+
 }
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     GHDropMenuModel *dropMenuModel = [self.titles by_ObjectAtIndex: self.currentIndex];
@@ -805,6 +825,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[GHDropMenuOptionCell class] forCellReuseIdentifier:@"GHDropMenuOptionCellID"];
+        [_tableView registerClass:[GHDropMenuWaterFallCell class] forCellReuseIdentifier:@"GHDropMenuWaterFallCellID"];
     }
     return _tableView;
 }

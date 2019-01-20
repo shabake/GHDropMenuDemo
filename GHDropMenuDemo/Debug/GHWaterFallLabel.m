@@ -27,7 +27,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         [self configuration];
-
     }
     return self;
 }
@@ -88,6 +87,24 @@
 @end
 @implementation GHWaterFallLabel
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self == [super initWithFrame:frame]) {
+        [self configuration];
+
+    }
+    return self;
+}
+- (instancetype)init {
+    if (self == [super init]) {
+        [self configuration];
+
+    }
+    return self;
+}
+- (void)setPoint:(CGPoint)point {
+    self.frame = CGRectMake(point.x, point.y, kScreenWidth, 0);
+    
+}
 + (instancetype)creatWaterFallLabelWithPoint: (CGPoint)point tags: (NSMutableArray *)tags {
     GHWaterFallLabel *waterFallLabel = [[GHWaterFallLabel alloc]initWithFrame:CGRectMake(point.x, point.y, kScreenWidth, 0)];
     waterFallLabel.tags = tags;
@@ -95,12 +112,6 @@
     return waterFallLabel;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        [self configuration];
-    }
-    return self;
-}
 
 - (void)configuration {
     self.maxHeight = 100;
@@ -179,6 +190,12 @@
     }
     
     self.height = maxHeight;
+    
+    self.maxHeight = maxHeight;
+    
+    if (self.heightBlock) {
+        self.heightBlock(maxHeight);
+    }
 }
 
 - (void)tap:(UITapGestureRecognizer *)gesture {
@@ -236,4 +253,43 @@
     }
     return _multipleArray;
 }
+
+- (CGFloat)getHeightWithArray: (NSArray *)array {
+    CGFloat height = 0;
+    for (NSInteger index = 0;index < array.count ;index++) {
+        
+        GHLabel *tag = [array by_ObjectAtIndex:index];
+        
+        CGSize tagSize = [tag sizeThatFits:CGSizeMake(MAXFLOAT,16)];
+        // 取出上一个tag
+        UILabel *lastTag = [array by_ObjectAtIndex:index -1];
+        CGFloat y = 5;
+        CGFloat x = 10 +CGRectGetMaxX(lastTag.frame);
+        CGFloat w = tagSize.width + 30;
+        CGFloat h = 30;
+        
+        if (w > kScreenWidth - 20 /** 最大宽度*/) {
+            w = kScreenWidth - 20;
+            CGSize titleSize = [tag sizeThatFits:CGSizeMake(kScreenWidth - 20,MAXFRAG)];
+            h = titleSize.height;
+        }
+        
+        if (CGRectGetMaxX(lastTag.frame) + w > kScreenWidth - 20 /** 当标签超过当前行 */) {
+            y = lastTag.y + lastTag.height + 5;
+            x = 10;
+            
+        } else {
+            if (index > 0) {
+                y = lastTag.y ;
+            }
+        }
+        
+        tag.frame = CGRectMake(x,y,w,h);
+        if (index == array.count - 1) {
+            height = tag.y + tag.height;
+        }
+    }
+    return height;
+}
+
 @end

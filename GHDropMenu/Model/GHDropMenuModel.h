@@ -28,9 +28,11 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
     /** 侧滑筛选菜单 */
     GHDropMenuTypeFilter,
     GHDropMenuTypeOptionCollection,
+    GHDropMenuTypeWaterFall,
 };
 /** 筛选菜单模型 */
 @interface GHDropMenuModel : NSObject
+@property (nonatomic , strong) NSArray *waterFallTags;
 /** menu菜单的最大宽度 */
 @property (nonatomic , assign) CGFloat menuWidth;
 /** 每行多少个 */

@@ -18,9 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
  @param index 当前tag
  
  */
-typedef void(^GHWaterFallLabelCallBackBlock)(GHWaterFallLabel *waterFallLabe,NSString *text ,NSInteger index);
+typedef void(^GHWaterFallLabelCallBackBlock)(GHWaterFallLabel *waterFallLabel,NSString *text ,NSInteger index);
 
 typedef void(^GHWaterFallLabelCallBackMultipleBlock)(GHWaterFallLabel *waterFallLabe,NSArray *array);
+typedef void(^GHWaterFallLabelCallHeightBlock)(CGFloat height);
 
 /**
  流水布局view
@@ -36,12 +37,15 @@ typedef void(^GHWaterFallLabelCallBackMultipleBlock)(GHWaterFallLabel *waterFall
  */
 + (instancetype)creatWaterFallLabelWithPoint: (CGPoint)point tags: (NSMutableArray *)tags;
 
+- (void)setPoint: (CGPoint)point;
 @property (nonatomic , copy) GHWaterFallLabelCallBackBlock textBlock;
 @property (nonatomic , copy) GHWaterFallLabelCallBackMultipleBlock multipleBlock;
+@property (nonatomic , copy) GHWaterFallLabelCallHeightBlock heightBlock;
 
 
 /** 数据源数组 可以使用set方法追加标签 */
 @property (nonatomic , strong) NSMutableArray *tags;
+- (CGFloat)getHeightWithArray: (NSArray *)array;
 /** 设置最大高度 */
 @property (nonatomic , assign) CGFloat maxHeight;
 /** 是否是多选 默认是NO 多选是YES */

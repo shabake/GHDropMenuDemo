@@ -36,6 +36,7 @@
     [self.tags addObject:@"嘻嘻"];
     [self.tags addObject:@"哈"];
     [self.tags addObject:@"哦"];
+    
     GHWaterFallLabel *waterFallLabel = [GHWaterFallLabel creatWaterFallLabelWithPoint:CGPointMake(0, 64) tags:self.tags];
     waterFallLabel.isMultiple = YES;
     [self.view addSubview:waterFallLabel];
