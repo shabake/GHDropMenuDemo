@@ -12,7 +12,7 @@
 
 @interface GHSlipMenuViewController ()<GHDropMenuDelegate>
 @property (nonatomic , strong)GHDropMenu *dropMenu;
-
+@property (nonatomic , strong)GHDropMenuModel *configuration;
 @end
 
 @implementation GHSlipMenuViewController
@@ -22,18 +22,20 @@
     [super viewDidLoad];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(clickItem)];
-}
-
-
-- (void)clickItem {
+    
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
     
     configuration.titles = [configuration creaFilterDropMenuData];
     /** 配置筛选菜单是否记录用户选中 默认NO */
     configuration.recordSeleted = NO;
-    
+    self.configuration = configuration;
+}
+
+
+- (void)clickItem {
+  
     weakself(self);
-    GHDropMenu *dropMenu = [GHDropMenu creatDropFilterMenuWidthConfiguration:configuration dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
+    GHDropMenu *dropMenu = [GHDropMenu creatDropFilterMenuWidthConfiguration:self.configuration dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
         [weakSelf getStrWith:tagArray];
         
     }];
@@ -43,11 +45,10 @@
     dropMenu.durationTime = 0.5;
     self.dropMenu = dropMenu;
     [dropMenu show];
-
 }
 
 
-#pragma mark - 代理方法;
+#pragma mark - 代理方法
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuTitleModel:(GHDropMenuModel *)dropMenuTitleModel {
     self.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuTitleModel.title];
 }
