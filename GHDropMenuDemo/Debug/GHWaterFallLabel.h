@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  block回掉
 
- @param waterFallLabe 本身
+ @param GHWaterFallLabel 本身
  @param text 当前文本
  @param index 当前tag
  

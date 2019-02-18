@@ -45,6 +45,7 @@
         _waterFallLabel = [[GHWaterFallLabel alloc]init];
         [_waterFallLabel setPoint:CGPointMake(0, 0)];
         _waterFallLabel.tags =self.dataArray;
+        _waterFallLabel.isMultiple = YES;
         _waterFallLabel.heightBlock = ^(CGFloat height) {
 
         };
