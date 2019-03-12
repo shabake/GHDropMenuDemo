@@ -53,8 +53,6 @@
 		D6B85A9121F3786B0082EE1D /* GHWaterFallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B85A9021F3786B0082EE1D /* GHWaterFallCell.m */; };
 		D6D3396921E123F8005B86DB /* UILabel+GHome.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396821E123F8005B86DB /* UILabel+GHome.m */; };
 		D6D3396A21E1241F005B86DB /* UILabel+GHome.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D3396821E123F8005B86DB /* UILabel+GHome.m */; };
-		D6DC22202203E563002267CB /* UIView+LXShadowPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DC221E2203E562002267CB /* UIView+LXShadowPath.m */; };
-		D6DC22212203E653002267CB /* UIView+LXShadowPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DC221E2203E562002267CB /* UIView+LXShadowPath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,8 +125,6 @@
 		D6B85A9021F3786B0082EE1D /* GHWaterFallCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GHWaterFallCell.m; sourceTree = "<group>"; };
 		D6D3396721E123F8005B86DB /* UILabel+GHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+GHome.h"; sourceTree = "<group>"; };
 		D6D3396821E123F8005B86DB /* UILabel+GHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+GHome.m"; sourceTree = "<group>"; };
-		D6DC221E2203E562002267CB /* UIView+LXShadowPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LXShadowPath.m"; sourceTree = "<group>"; };
-		D6DC221F2203E563002267CB /* UIView+LXShadowPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LXShadowPath.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,8 +174,6 @@
 				D6A4ED3021DA6B950053D14F /* main.m */,
 				D650CD8121C35E0D00EC004A /* ViewController.h */,
 				D650CD8221C35E0D00EC004A /* ViewController.m */,
-				D6DC221F2203E563002267CB /* UIView+LXShadowPath.h */,
-				D6DC221E2203E562002267CB /* UIView+LXShadowPath.m */,
 			);
 			path = GHDropMenuDemo;
 			sourceTree = "<group>";
@@ -469,7 +463,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6A4ED9121DF97B50053D14F /* NSString+Arc4random.m in Sources */,
-				D6DC22202203E563002267CB /* UIView+LXShadowPath.m in Sources */,
 				D6A4ED9721E0873B0053D14F /* GHSuspendViewController.m in Sources */,
 				D6A4ED3821DA7E090053D14F /* GHBaseNavigationController.m in Sources */,
 				D6A4ECF821DA2E5C0053D14F /* GHMeituanFoodViewController.m in Sources */,
@@ -511,7 +504,6 @@
 				D6A4ED1521DA66FD0053D14F /* AppDelegate.m in Sources */,
 				D6D3396A21E1241F005B86DB /* UILabel+GHome.m in Sources */,
 				D6A4ED3221DA6BE30053D14F /* main.m in Sources */,
-				D6DC22212203E653002267CB /* UIView+LXShadowPath.m in Sources */,
 				D6A4ED1821DA66FD0053D14F /* GHBaseViewController.m in Sources */,
 				D6A4ED9821E087410053D14F /* GHSuspendHeader.m in Sources */,
 				D663DE3821EE3A8000B48EBF /* UIView+Extension.m in Sources */,

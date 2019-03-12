@@ -720,6 +720,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (void)tap:(UITapGestureRecognizer *)gesture {
     [self resetMenuStatus];
 }
+
 - (void)clickButton: (UIButton *)button {
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex:self.currentIndex];
     if (button.tag == GHDropMenuButtonTypeSure) {

@@ -11,8 +11,8 @@
 #import "GHDropMenuModel.h"
 
 @interface GHSlipMenuViewController ()<GHDropMenuDelegate>
-@property (nonatomic , strong)GHDropMenu *dropMenu;
-@property (nonatomic , strong)GHDropMenuModel *configuration;
+@property (nonatomic , strong) GHDropMenu *dropMenu;
+@property (nonatomic , strong) GHDropMenuModel *configuration;
 @end
 
 @implementation GHSlipMenuViewController
@@ -31,7 +31,6 @@
     self.configuration = configuration;
 }
 
-
 - (void)clickItem {
   
     weakself(self);
@@ -47,11 +46,11 @@
     [dropMenu show];
 }
 
-
 #pragma mark - 代理方法
 - (void)dropMenu:(GHDropMenu *)dropMenu dropMenuTitleModel:(GHDropMenuModel *)dropMenuTitleModel {
     self.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuTitleModel.title];
 }
+
 - (void)dropMenu:(GHDropMenu *)dropMenu tagArray:(NSArray *)tagArray {
     [self getStrWith:tagArray];
 }

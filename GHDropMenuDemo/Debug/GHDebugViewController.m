@@ -11,7 +11,6 @@
 #import "UIView+Extension.h"
 #import "NSArray+Bounds.h"
 #import "GHWaterFallLabel.h"
-#import "UIView+LXShadowPath.h"
 
 @interface GHDebugViewController ()
 @property (nonatomic , strong) GHWaterFallLabel *waterFallLabel;
