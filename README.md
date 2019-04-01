@@ -8,6 +8,8 @@
 
 `筛选菜单` `京东筛选菜单` `美团筛选菜单` `电商通用筛选菜单`
 
+中文文档 | English
+
 ---
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-55dd0f6eafb19fd7.gif?imageMogr2/auto-orient/strip)
