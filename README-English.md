@@ -4,9 +4,9 @@
 ![](https://img.shields.io/vscode-marketplace/d/repo.svg)
 ![](https://img.shields.io/cocoapods/l/packageName.svg)
 
-# GHDropMenu 简单使用 无入侵 对原项目无污染
+# GHDropMenu Simple use, no intrusion, no pollution to the original project
 
-`筛选菜单` `京东筛选菜单` `美团筛选菜单` `电商通用筛选菜单`
+`Filter menu` `Jingdong screening menu` `MeiTuan screening menu` `E-commerce general screening menu`
 
 中文文档 | English
 
@@ -29,65 +29,65 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
     dropMenu.dataSource = self;
     [self.view addSubview:dropMenu];
 ```
-#### 实现数据源方法:
+#### Implement data source method:
 ```Objective-C
-// 返回筛选菜单标题的个数
+// Returns the number of filter menu titles
 - (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu {
 }
 
-// 返回每列筛选菜单的选项
+// Returns options for each column of the filter menu
 - (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns {
 }
 ```
 --- 
-### 2019.1.6 更新
+### 2019.1.6 Update
 
 ```diff
-+ 增加价格输入判断逻辑
-	* 小数点最多输入两位
-	* 第一位不能输入小数点
-	* 增加校验方法,当最小价格大于最大价格弹窗提示并且清空用户输入
++ Increase price input judgment logic
+	* Enter two digits at the decimal point
+	* The first digit cannot be entered in the decimal point
+	* Increase the check method when the minimum price is greater than the maximum price pop-up prompt and clear user input
 	
 
 
 ```
-### 2018.12.30更新
+### 2018.12.30 Update
 
 ```diff
-+ 增加吸附效果的筛选菜单
-+ 分别可选tableView悬浮菜单和collectionView悬浮菜单
-+ 增加单独侧滑菜单筛选
-+ 适配x,xs,xr,xsmax
-+ 去掉刚开始创建的动画
-+ 自定义筛选标题,自定义筛选内容,自定义筛选标签,自定义筛选头部内容
-+ 数组越界处理
-+ 价格输入筛选
-+ 实现tag标签,单选,多选,取消选中效果
-+ 保留上次选中选项
-+ 动画展开,移除
-+ 可以重新传入模型,重新刷新数据源
-+ 选中内容通过代理的方式回调
-+ 对原有项目无污染,直接拖进项目即可使用
-+ dropMenu的title自适应宽度
++ Filter menu to increase adsorption
++ Optional tableView floating menu and collectionView floating menu respectively
++ Add separate skid menu filter
++ fit x, xs, xr, xsmax
++ Remove the animation you just created
++ Custom filter headers, custom filter content, custom filter tags, custom filter header content
++ array out of bounds processing
++ Price input screening
++ Implement tag tag, single-select, multi-select, uncheck effect
++ Keep last selected option
++ Animation expand, remove
++ can re-incoming the model and refreshing the data source
++ Select the content to call back through the proxy
++ No pollution to the original project, you can use it directly into the project.
++ dropMenu's title adaptive width
 
-- 去掉titleView初始化动画
+- Remove the titleView initialization animation
 
 ```
 
 
-### 使用方法
-* GHDropMenu文件夹 拖入项目中
+### Instructions
+* GHDropMenufolder Dragged into the project
 * 导入 `GHDropMenu.h `
 
 ```Objective-C
-    /** 配置筛选菜单模型 */
+    /** Configuring the filter menu model */
     GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
-    /** 配置筛选菜单是否记录用户选中 默认NO */
+    /** Configure Filter Menu to record user selection Default NO */
     configuration.recordSeleted = NO;
-    /** 设置数据源 */
+    /** Set the data source*/
     configuration.titles = [configuration creaDropMenuData];
     
-    /** 创建dropMenu 配置模型 &&frame */
+    /** Create dropMenu configuration model &&frame */
     GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
     dropMenu.delegate = self;
     
@@ -95,27 +95,27 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
     
 ```
 
-* 需要构造json数据
+* Need to construct json data
 ```
-详见demo
+See demo
 ```
 
-* 当需要返回上级页面的时候需要调用关闭菜单的方法
+* When you need to return to the previous page, you need to call the method of closing the menu.
 ```
 - (vold)closeMenu;
 ```
 
 
-### 接下来要做的
-- [ ] 优化代码,完善文档
-- [ ] 增加类似boss直聘多级菜单选择
+### Nest
+- [ ] Optimize your code and improve your documentation
+- [ ] Add a similar multi-level menu selection for boss
 
 
 
-### 在使用中如有任何问题欢迎骚扰我,如果对你有帮助请点帮我一个✨,小弟感激不尽:blush:
+### If you have any questions during use, please harass me. If you are helpful, please help me with a little help. The younger is grateful:blush:
 
-### 邮箱 `45329453@qq.com `
+### Email `45329453@qq.com `
 
-[关注我的博客 没事写点小东西](https://www.jianshu.com/u/884a67907187)
+[Pay attention to my blog, nothing to write small things](https://www.jianshu.com/u/884a67907187)
 
 ---
