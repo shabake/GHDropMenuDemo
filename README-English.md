@@ -8,7 +8,7 @@
 
 `Filter menu` `Jingdong screening menu` `MeiTuan screening menu` `E-commerce general screening menu`
 
-中文文档 | English
+[中文文档](https://github.com/shabake/GHDropMenuDemo) | [English](https://github.com/shabake/GHDropMenuDemo/blob/master/README-English.md)
 
 ---
 
