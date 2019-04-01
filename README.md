@@ -8,7 +8,7 @@
 
 `筛选菜单` `京东筛选菜单` `美团筛选菜单` `电商通用筛选菜单`
 
-中文文档 | English
+[中文文档](https://github.com/shabake/GHDropMenuDemo/blob/master/README-English.md) | [English](https://github.com/shabake/GHDropMenuDemo/blob/master/README-English.md)
 
 ---
 
