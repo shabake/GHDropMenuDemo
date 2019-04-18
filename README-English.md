@@ -8,8 +8,7 @@
 
 `Filter menu` `Jingdong screening menu` `MeiTuan screening menu` `E-commerce general screening menu`
 
-[Chinese](https://github.com/shabake/GHDropMenuDemo) | [English](https://github.com/shabake/GHDropMenuDemo/blob/master/README-English.md)
-
+[Chinese](https://github.com/shabake/GHDropMenuDemo) | English
 ---
 
 ![Untitled.gif](https://upload-images.jianshu.io/upload_images/1419035-55dd0f6eafb19fd7.gif?imageMogr2/auto-orient/strip)
