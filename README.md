@@ -18,27 +18,13 @@
 
 #### 使用方法:
 
-```Objective-C
-GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
-        weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
-    } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
-        [weakSelf getStrWith:tagArray];
-    }];
-    dropMenu.durationTime = 0.5;
-    dropMenu.delegate = self;
-    dropMenu.dataSource = self;
-    [self.view addSubview:dropMenu];
-```
-#### 实现数据源方法:
-```Objective-C
-// 返回筛选菜单标题的个数
-- (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu {
-}
 
-// 返回每列筛选菜单的选项
-- (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns {
-}
-```
+![12.png](https://upload-images.jianshu.io/upload_images/1419035-46b3260c4c3c49a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### 实现数据源方法:
+
+![2.png](https://upload-images.jianshu.io/upload_images/1419035-8bef7e6a81c99d5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 --- 
 ### 2019.1.6 更新
 
@@ -79,20 +65,7 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 * GHDropMenu文件夹 拖入项目中
 * 导入 `GHDropMenu.h `
 
-```Objective-C
-    /** 配置筛选菜单模型 */
-    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
-    /** 配置筛选菜单是否记录用户选中 默认NO */
-    configuration.recordSeleted = NO;
-    /** 设置数据源 */
-    configuration.titles = [configuration creaDropMenuData];
-    
-    /** 创建dropMenu 配置模型 &&frame */
-    GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-    dropMenu.delegate = self;
-    
-    [self.view addSubview:dropMenu];
-    
+![3.png](https://upload-images.jianshu.io/upload_images/1419035-4725c4ae4bbea0f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ```
 
 * 需要构造json数据
