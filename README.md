@@ -18,7 +18,6 @@
 
 #### 使用方法:
 
-
 ![12.png](https://upload-images.jianshu.io/upload_images/1419035-46b3260c4c3c49a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 #### 实现数据源方法:
@@ -34,7 +33,6 @@
 	* 第一位不能输入小数点
 	* 增加校验方法,当最小价格大于最大价格弹窗提示并且清空用户输入
 	
-
 
 ```
 ### 2018.12.30更新
@@ -62,26 +60,22 @@
 
 
 ### 使用方法
-* GHDropMenu文件夹 拖入项目中
-* 导入 `GHDropMenu.h `
+* `GHDropMenu`文件夹 拖入项目中
+* 导入 `GHDropMenu.h`
 
 ![3.png](https://upload-images.jianshu.io/upload_images/1419035-4725c4ae4bbea0f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-* 需要构造json数据
-```
-详见demo
-```
+* 需要构造`json`数据
+
 
 * 当需要返回上级页面的时候需要调用关闭菜单的方法
-```
-- (vold)closeMenu;
-```
+![4.png](https://upload-images.jianshu.io/upload_images/1419035-178dc3d875136ed4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 ### 接下来要做的
 - [ ] 优化代码,完善文档
-- [ ] 增加类似boss直聘多级菜单选择
+- [ ] 增加类似`boss`直聘多级菜单选择
 
 
 
