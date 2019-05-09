@@ -17,28 +17,10 @@
 
 #### 使用方法:
 
-```Objective-C
-GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRectMake(0, kGHSafeAreaTopHeight,kGHScreenWidth, 44) dropMenuTitleBlock:^(GHDropMenuModel * _Nonnull dropMenuModel) {
-        weakSelf.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",dropMenuModel.title];
-    } dropMenuTagArrayBlock:^(NSArray * _Nonnull tagArray) {
-        [weakSelf getStrWith:tagArray];
-    }];
-    dropMenu.durationTime = 0.5;
-    dropMenu.delegate = self;
-    dropMenu.dataSource = self;
-    [self.view addSubview:dropMenu];
-```
-#### Implement data source method:
-```Objective-C
-// Returns the number of filter menu titles
-- (NSArray *)columnTitlesInMeun:(GHDropMenu *)menu {
-}
+![12.png](https://upload-images.jianshu.io/upload_images/1419035-46b3260c4c3c49a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-// Returns options for each column of the filter menu
-- (NSArray *)menu:(GHDropMenu *)menu numberOfColumns:(NSInteger)columns {
-}
-```
---- 
+#### Implement data source method:
+![2.png](https://upload-images.jianshu.io/upload_images/1419035-8bef7e6a81c99d5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ### 2019.1.6 Update
 
 ```diff
@@ -78,31 +60,13 @@ GHDropMenu *dropMenu = [GHDropMenu creatDropMenuWithConfiguration:nil frame:CGRe
 * GHDropMenufolder Dragged into the project
 * 导入 `GHDropMenu.h `
 
-```Objective-C
-    /** Configuring the filter menu model */
-    GHDropMenuModel *configuration = [[GHDropMenuModel alloc]init];
-    /** Configure Filter Menu to record user selection Default NO */
-    configuration.recordSeleted = NO;
-    /** Set the data source*/
-    configuration.titles = [configuration creaDropMenuData];
-    
-    /** Create dropMenu configuration model &&frame */
-    GHDropMenu *dropMenu = [[GHDropMenu alloc]creatDropMenuWithConfiguration:configuration frame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-    dropMenu.delegate = self;
-    
-    [self.view addSubview:dropMenu];
-    
-```
+![3.png](https://upload-images.jianshu.io/upload_images/1419035-4725c4ae4bbea0f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 * Need to construct json data
-```
-See demo
-```
+
 
 * When you need to return to the previous page, you need to call the method of closing the menu.
-```
-- (vold)closeMenu;
-```
+![4.png](https://upload-images.jianshu.io/upload_images/1419035-178dc3d875136ed4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 ### Nest
