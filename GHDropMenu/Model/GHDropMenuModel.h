@@ -20,6 +20,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuFilterCellType ) {
     GHDropMenuFilterCellTypeSingleInput,
     /** 输入 */
     GHDropMenuFilterCellTypeTagCollection,
+    /** 时间选择 */
+    GHDropMenuFilterCellTypeTimeChose,
 };
 /** 菜单类型 */
 typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
@@ -98,6 +100,10 @@ typedef NS_ENUM (NSUInteger,GHDropMenuType ) {
 @property (nonatomic , assign) CGRect frame;
 /** 记录indexPath */
 @property (nonatomic , strong) NSIndexPath *indexPath;
+/** 开始时间 */
+@property (nonatomic , copy) NSString *beginTime;
+/** 结束时间 */
+@property (nonatomic , copy) NSString *endTime;
 
 /** 构造筛选菜单数据 */
 - (NSMutableArray *)creaDropMenuData;

@@ -26,11 +26,13 @@
     self.details.text = dropMenuModel.sectionHeaderDetails.length?dropMenuModel.sectionHeaderDetails:@"全部";
     self.imageView.highlighted = dropMenuModel.sectionSeleted ? YES:NO;
     self.details.hidden = (dropMenuModel.filterCellType == GHDropMenuFilterCellTypeInput  ||
-                           dropMenuModel.filterCellType == GHDropMenuFilterCellTypeSingleInput )? YES:NO;
+                           dropMenuModel.filterCellType == GHDropMenuFilterCellTypeSingleInput ||
+                             dropMenuModel.filterCellType == GHDropMenuFilterCellTypeTimeChose )? YES:NO;
     self.imageView.hidden = self.details.hidden ;
     CGSize titleSize = [self.title.text sizeWithFont:[UIFont boldSystemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, self.frame.size.height)];
     self.title.frame = CGRectMake(10, 0, titleSize.width, self.frame.size.height);
 }
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         [self setupUI];

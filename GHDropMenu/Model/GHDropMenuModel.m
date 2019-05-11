@@ -376,8 +376,14 @@
         [dataArray9 addObject:dropMenuModel];
     }
     
+    NSMutableArray *dataArray10 = [NSMutableArray array];
+    for (NSInteger index = 0 ; index < 1; index++) {
+        GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
+        [dataArray10 addObject:dropMenuModel];
+    }
+    
     /** 设置构造右侧弹出筛选菜单每行的标题 */
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框"];
+    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框",@"时间选择"];
     NSMutableArray *sections = [NSMutableArray array];
     
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
@@ -407,6 +413,9 @@
         } else if (index == 5) {
             dropMenuModel.dataArray = dataArray9;
             dropMenuModel.filterCellType = GHDropMenuFilterCellTypeSingleInput;
+        } else if (index == 6) {
+            dropMenuModel.dataArray = dataArray10;
+            dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTimeChose;
         }
         [sections addObject:dropMenuModel];
     }

@@ -18,6 +18,8 @@
 #import "GHDropMenuFilterInputItem.h"
 #import "GHDropMenuFilterTagItem.h"
 #import "GHDropMenuWaterFallCell.h"
+#import "GHDropMenuFilterTimeChoseItem.h"
+#import "GHCustomAlertView.h"
 
 #pragma mark - - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - -- - - - GHDropMenu 筛选菜单开始
 /** 按钮类型 */
@@ -33,7 +35,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     GHDropMenuShowTypeOnlyFilter,
 };
 
-@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuFilterTagItemDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate,GHDropMenuTitleItemDelegate,GHDropMenuFilterSectionHeaderDelegate>
+@interface GHDropMenu()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDataSource,UITableViewDelegate,GHDropMenuFilterTagItemDelegate,GHDropMenuFilterInputItemDelegate,GHDropMenuFilterSingleInputItemDelegate,GHDropMenuTitleItemDelegate,GHDropMenuFilterSectionHeaderDelegate,GHDropMenuFilterTimeChoseItemDelegate>
 
 /** 顶部菜单 */
 @property (nonatomic , strong) UICollectionView *collectionView;
@@ -419,6 +421,25 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         }
     }
 }
+
+- (void)dropMenuFilterTimeChoseItem:(GHDropMenuFilterTimeChoseItem *)item type:(GHDropMenuFilterTimeChoseItemType)type dropMenuModel:(GHDropMenuModel *)dropMenuModel {
+    GHCustomAlertView *alert = [[GHCustomAlertView alloc]init];
+    alert.alertHeight = 220;
+    alert.alertTitle = type == GHDropMenuFilterTimeChoseItemTypeBeginTime ?@"选择开始时间":@"选择结束时间";
+    alert.positionType = GHCustomAlertViewPositionType_bottom;
+    alert.timeBlock = ^(NSString *time) {
+        if (type == GHDropMenuFilterTimeChoseItemTypeBeginTime) {
+            dropMenuModel.beginTime = time;
+        } else {
+            dropMenuModel.endTime = time;
+        }
+    };
+    alert.dimissFinish = ^{
+        [self.filter reloadData];
+    };
+    [alert show];
+}
+
 - (void)dropMenuFilterInputItem:(GHDropMenuFilterInputItem *)item
                   dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     
@@ -633,7 +654,8 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTag) {
             return CGSizeMake((dropMenuModel.menuWidth - (dropMenuModel.sectionCount + 1) * 10) /dropMenuModel.sectionCount , 30.01f);
         } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput ||
-                   dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput) {
+                   dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput ||
+                   dropMenuSectionModel.filterCellType ==GHDropMenuFilterCellTypeTimeChose) {
             return CGSizeMake(dropMenuModel.menuWidth - (dropMenuModel.sectionCount -1) * 10,30.01f);
         } else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTagCollection) {
             return CGSizeMake((dropMenuModel.menuWidth - (dropMenuModel.sectionCount + 1) * 10) / (dropMenuModel.sectionCount + 1), 30.01f);
@@ -709,7 +731,12 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
             cell.dropMenuModel = dropMenuTagModel;
             cell.delegate = self;
             return cell;
-        }  else  {
+        }  else if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTimeChose) {
+            GHDropMenuFilterTimeChoseItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GHDropMenuFilterTimeChoseItemID" forIndexPath:indexPath];
+            cell.dropMenuModel = dropMenuTagModel;
+            cell.delegate = self;
+            return cell;
+        } else  {
             return [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellID" forIndexPath:indexPath];
         }
     } else {
@@ -861,6 +888,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         [_filter registerClass:[GHDropMenuFilterInputItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterInputItemID"];
         [_filter registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"UICollectionReusableViewID"];
         [_filter registerClass:[GHDropMenuFilterSingleInputItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterSingleInputItemID"];
+        [_filter registerClass:[GHDropMenuFilterTimeChoseItem class] forCellWithReuseIdentifier:@"GHDropMenuFilterTimeChoseItemID"];
     }
     return _filter;
 }
