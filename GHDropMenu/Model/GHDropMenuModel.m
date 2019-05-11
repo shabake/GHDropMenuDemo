@@ -383,13 +383,13 @@
     }
     
     /** 设置构造右侧弹出筛选菜单每行的标题 */
-    NSArray *sectionHeaderTitles = @[@"单选",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框",@"时间选择"];
+    NSArray *sectionHeaderTitles = @[@"时间选择",@"多选",@"价格",@"多数据单选",@"多数据多选",@"输入框",@"单选"];
     NSMutableArray *sections = [NSMutableArray array];
     
     for (NSInteger index = 0; index < sectionHeaderTitles.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.sectionHeaderTitle = sectionHeaderTitles[index];
-        if (index == 0) {
+        if (index == 6) {
             dropMenuModel.dataArray = dataArray4;
             /** 单选 */
             dropMenuModel.isMultiple = NO;
@@ -413,7 +413,7 @@
         } else if (index == 5) {
             dropMenuModel.dataArray = dataArray9;
             dropMenuModel.filterCellType = GHDropMenuFilterCellTypeSingleInput;
-        } else if (index == 6) {
+        } else if (index == 0) {
             dropMenuModel.dataArray = dataArray10;
             dropMenuModel.filterCellType = GHDropMenuFilterCellTypeTimeChose;
         }
