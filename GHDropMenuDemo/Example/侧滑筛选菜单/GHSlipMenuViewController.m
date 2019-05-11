@@ -73,6 +73,12 @@
             if (dropMenuTagModel.singleInput.length) {
                 [string appendFormat:@"%@",dropMenuTagModel.singleInput];
             }
+            if (dropMenuTagModel.beginTime.length) {
+                [string appendFormat:@"开始时间%@",dropMenuTagModel.beginTime];
+            }
+            if (dropMenuTagModel.endTime.length) {
+                [string appendFormat:@"结束时间%@",dropMenuTagModel.endTime];
+            }
         }
     }
     self.navigationItem.title = [NSString stringWithFormat:@"筛选结果: %@",string];

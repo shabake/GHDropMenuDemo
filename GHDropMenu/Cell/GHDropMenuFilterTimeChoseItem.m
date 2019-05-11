@@ -21,7 +21,6 @@
     _dropMenuModel = dropMenuModel;
     self.leftTextField.text = dropMenuModel.beginTime;
     self.rightTextField.text = dropMenuModel.endTime;
-    NSLog(@"刷新 ");
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {

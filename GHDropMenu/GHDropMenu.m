@@ -402,6 +402,7 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self resetMenuStatus];
 }
+
 - (void)dropMenuFilterSingleInputItem:(GHDropMenuFilterSingleInputItem *)item
                         dropMenuModel:(GHDropMenuModel *)dropMenuModel {
     GHDropMenuModel *dropMenuTitleModel = [self.titles by_ObjectAtIndex: self.currentIndex];
@@ -518,7 +519,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
         }
         self.currentIndexPath = nil;
     }
-    
 }
 
 #pragma mark - 点击顶部titleView 代理回调
@@ -584,7 +584,6 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
     return [UITableViewCell new];
 
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -758,7 +757,9 @@ typedef NS_ENUM (NSUInteger,GHDropMenuShowType) {
                     [dataArray addObject:dropMenuTagModel];
                 }
                 if (dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeInput ||
-                    dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput) {
+                    dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeSingleInput ||
+                    dropMenuSectionModel.filterCellType == GHDropMenuFilterCellTypeTimeChose) {
+                    
                     [dataArray addObject:dropMenuTagModel];
                 }
             }

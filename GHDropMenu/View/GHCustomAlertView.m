@@ -24,6 +24,7 @@
     self.title.text = alertTitle;
     self.title.width = [self sizeWithText:alertTitle font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 36)].width;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         [self setupDefault];
@@ -161,14 +162,17 @@
     }
     return _cancel;
 }
+
 - (UILabel *)title {
     if (_title == nil) {
-        _title = [[UILabel alloc]initWithFrame:CGRectMake((kGHScreenWidth - 60 ) *0.5, 4, 60, 36)];
+        _title = [[UILabel alloc]initWithFrame:CGRectMake((kGHScreenWidth - 200 ) *0.5, 4, 200, 36)];
         _title.text = self.alertTitle;
         _title.font = [UIFont systemFontOfSize:16];
+        _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;
 }
+
 - (UIView *)line {
     if (_line == nil) {
         _line = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kGHScreenWidth, 0.5)];
@@ -192,24 +196,6 @@
         [_picker setDate:[NSDate date]];
         _picker.datePickerMode = UIDatePickerModeDate;
         [_picker addTarget:self action:@selector(dateChange:)forControlEvents:UIControlEventValueChanged];
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        
-        NSDate *currentDate = [NSDate date];
-        
-        NSDateComponents *comps = [[NSDateComponents alloc] init];
-        
-        [comps setDay:10];//设置最大时间为：当前时间推后10天
-        
-        NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
-        
-        [comps setDay:0];//设置最小时间为：当前时间
-        
-        NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
-        
-        [_picker setMaximumDate:maxDate];
-        
-        [_picker setMinimumDate:minDate];
-
     }
     return _picker;
 }
