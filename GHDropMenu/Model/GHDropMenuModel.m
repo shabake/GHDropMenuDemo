@@ -335,6 +335,11 @@
     for (NSInteger index = 0 ; index < row1.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.tagName = [row1 by_ObjectAtIndex:index];
+        if (index == 0) {
+            dropMenuModel.tagSeleted = YES;
+        } else {
+            dropMenuModel.tagSeleted = NO;
+        }
         [dataArray4 addObject:dropMenuModel];
     }
     /** 构造右侧弹出筛选菜单第二行数据 */
@@ -343,6 +348,11 @@
     for (NSInteger index = 0 ; index < row2.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.tagName = [row2 by_ObjectAtIndex:index];
+        if (index == 0) {
+            dropMenuModel.tagSeleted = YES;
+        } else {
+            dropMenuModel.tagSeleted = NO;
+        }
         [dataArray5 addObject:dropMenuModel];
     }
     
@@ -358,6 +368,11 @@
     for (NSInteger index = 0 ; index < row4.count; index++) {
         GHDropMenuModel *dropMenuModel = [[GHDropMenuModel alloc]init];
         dropMenuModel.tagName = [row4 by_ObjectAtIndex:index];
+        if (index == 0) {
+            dropMenuModel.tagSeleted = YES;
+        } else {
+            dropMenuModel.tagSeleted = NO;
+        }
         [dataArray7 addObject:dropMenuModel];
     }
     
