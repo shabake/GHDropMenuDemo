@@ -11,7 +11,6 @@
 #import "GHSlipMenuViewController.h"
 #import "GHNormalMenuViewController.h"
 #import "GHSuspendViewController.h"
-#import "GHWaterFallViewController.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) UITableView *tableView;
@@ -58,11 +57,6 @@
         GHSuspendViewController *vc = [[GHSuspendViewController alloc]init];
         vc.navTitle = navTitle;
 
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == 4) {
-        GHWaterFallViewController *vc = [[GHWaterFallViewController alloc]init];
-        vc.navTitle = navTitle;
-        
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "GHDebugViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,20 +19,11 @@
     
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
-#ifdef DEVELOPMENT0
     /** 如果发现项目打开空白,请把Target切换成GHDropMenuDemo后,编译 */
     ViewController *vc = [[ViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     window.rootViewController = nav;
-    
-#elif DEVELOPMENT1
-    /** 调试模式 */
-    GHDebugViewController *debugVc = [[GHDebugViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:debugVc];
-    window.rootViewController = nav;
-#else
 
-#endif
     self.window = window;
     [window makeKeyAndVisible];
     return YES;
