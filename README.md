@@ -6,6 +6,8 @@
 
 # GHDropMenu 简单使用 无入侵 对原项目无污染
 
+想要[Flutter版筛选菜单](https://github.com/shabake/GHDropMenuDemo_flutter)点击这里
+
 `筛选菜单` `京东筛选菜单` `美团筛选菜单` `电商通用筛选菜单`
 
 中文文档 | [English](https://github.com/shabake/GHDropMenuDemo/blob/master/README-English.md)
